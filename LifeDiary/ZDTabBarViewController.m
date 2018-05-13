@@ -33,7 +33,7 @@
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
-    [self wsf_settingController:meViewController tabBarTitle:@"我" tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
+    [self wsf_settingController:meNavigationController tabBarTitle:@"我" tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
      ];
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
@@ -56,6 +56,7 @@
  @param selectedImageName tabbar选中时的图片
  */
 - (void)wsf_settingController:(UIViewController *)controller tabBarTitle:(NSString *)title tabBarItemImageName:(NSString *)imageName tabBarItemSelectedImageName:(NSString *)selectedImageName{
+    
     controller.tabBarItem.title = title;
     // 设置 tabbarItem 静态图片(不被系统默认渲染,显示图像原始颜色)
     UIImage *image = [UIImage imageNamed:imageName];
