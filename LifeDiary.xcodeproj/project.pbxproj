@@ -17,11 +17,6 @@
 		044F020B20A80DB500406D65 /* LifeDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F020A20A80DB500406D65 /* LifeDiaryUITests.m */; };
 		044F028420A80F7E00406D65 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028320A80F7E00406D65 /* QuartzCore.framework */; };
 		044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028520A80F8D00406D65 /* libsqlite3.0.tbd */; };
-		044F029320A80FFB00406D65 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028920A80FFB00406D65 /* FMDatabase.m */; };
-		044F029420A80FFB00406D65 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */; };
-		044F029520A80FFB00406D65 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028D20A80FFB00406D65 /* FMDatabasePool.m */; };
-		044F029620A80FFB00406D65 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */; };
-		044F029720A80FFB00406D65 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F029220A80FFB00406D65 /* FMResultSet.m */; };
 		044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B020A811D500406D65 /* ZDMessageViewController.m */; };
 		044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B320A811E800406D65 /* ZDFindViewController.m */; };
 		044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B620A811F200406D65 /* ZDMeViewController.m */; };
@@ -33,6 +28,11 @@
 		044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C820A8124200406D65 /* ZDAllViewController.m */; };
 		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
+		04B8368F20A871870050D568 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368520A871870050D568 /* FMDatabase.m */; };
+		04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368720A871870050D568 /* FMDatabaseAdditions.m */; };
+		04B8369120A871870050D568 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368920A871870050D568 /* FMDatabasePool.m */; };
+		04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368B20A871870050D568 /* FMDatabaseQueue.m */; };
+		04B8369320A871870050D568 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368E20A871870050D568 /* FMResultSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,17 +71,6 @@
 		044F020C20A80DB500406D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		044F028320A80F7E00406D65 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		044F028520A80F8D00406D65 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		044F028820A80FFB00406D65 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		044F028920A80FFB00406D65 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		044F028A20A80FFB00406D65 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		044F028C20A80FFB00406D65 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		044F028D20A80FFB00406D65 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		044F028E20A80FFB00406D65 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		044F029020A80FFB00406D65 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		044F029120A80FFB00406D65 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		044F029220A80FFB00406D65 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		044F02AF20A811D500406D65 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
 		044F02B020A811D500406D65 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
 		044F02B220A811E800406D65 /* ZDFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDFindViewController.h; sourceTree = "<group>"; };
@@ -104,6 +93,17 @@
 		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
 		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
 		044F02CE20A8149300406D65 /* ZDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTabBarViewController.m; sourceTree = "<group>"; };
+		04B8368420A871870050D568 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		04B8368520A871870050D568 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		04B8368620A871870050D568 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		04B8368720A871870050D568 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		04B8368820A871870050D568 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		04B8368920A871870050D568 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		04B8368A20A871870050D568 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		04B8368B20A871870050D568 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		04B8368C20A871870050D568 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		04B8368D20A871870050D568 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		04B8368E20A871870050D568 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +205,7 @@
 		044F021820A80E6D00406D65 /* ThirdCodes */ = {
 			isa = PBXGroup;
 			children = (
-				044F028720A80FFB00406D65 /* fmdb */,
+				04B8368320A871870050D568 /* fmdb */,
 			);
 			name = ThirdCodes;
 			sourceTree = "<group>";
@@ -217,25 +217,6 @@
 				044F028320A80F7E00406D65 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		044F028720A80FFB00406D65 /* fmdb */ = {
-			isa = PBXGroup;
-			children = (
-				044F028820A80FFB00406D65 /* FMDatabase.h */,
-				044F028920A80FFB00406D65 /* FMDatabase.m */,
-				044F028A20A80FFB00406D65 /* FMDatabaseAdditions.h */,
-				044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */,
-				044F028C20A80FFB00406D65 /* FMDatabasePool.h */,
-				044F028D20A80FFB00406D65 /* FMDatabasePool.m */,
-				044F028E20A80FFB00406D65 /* FMDatabaseQueue.h */,
-				044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */,
-				044F029020A80FFB00406D65 /* FMDB.h */,
-				044F029120A80FFB00406D65 /* FMResultSet.h */,
-				044F029220A80FFB00406D65 /* FMResultSet.m */,
-			);
-			name = fmdb;
-			path = ../../fmdb;
 			sourceTree = "<group>";
 		};
 		044F029B20A8104E00406D65 /* Controller */ = {
@@ -415,6 +396,24 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		04B8368320A871870050D568 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				04B8368420A871870050D568 /* FMDatabase.h */,
+				04B8368520A871870050D568 /* FMDatabase.m */,
+				04B8368620A871870050D568 /* FMDatabaseAdditions.h */,
+				04B8368720A871870050D568 /* FMDatabaseAdditions.m */,
+				04B8368820A871870050D568 /* FMDatabasePool.h */,
+				04B8368920A871870050D568 /* FMDatabasePool.m */,
+				04B8368A20A871870050D568 /* FMDatabaseQueue.h */,
+				04B8368B20A871870050D568 /* FMDatabaseQueue.m */,
+				04B8368C20A871870050D568 /* FMDB.h */,
+				04B8368D20A871870050D568 /* FMResultSet.h */,
+				04B8368E20A871870050D568 /* FMResultSet.m */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -553,24 +552,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
-				044F029520A80FFB00406D65 /* FMDatabasePool.m in Sources */,
 				044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
+				04B8368F20A871870050D568 /* FMDatabase.m in Sources */,
 				044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */,
+				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
-				044F029620A80FFB00406D65 /* FMDatabaseQueue.m in Sources */,
+				04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */,
 				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
 				044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */,
 				044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */,
 				044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */,
 				044F01E720A80DB500406D65 /* main.m in Sources */,
-				044F029320A80FFB00406D65 /* FMDatabase.m in Sources */,
-				044F029720A80FFB00406D65 /* FMResultSet.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
 				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
 				044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */,
-				044F029420A80FFB00406D65 /* FMDatabaseAdditions.m in Sources */,
+				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
+				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
