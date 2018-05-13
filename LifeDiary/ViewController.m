@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ZDTabBarViewController.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor grayColor];
+    UIImageView *animationImageView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    animationImageView.image = [UIImage imageNamed:@"animationImageView"];
+    [self.view addSubview:animationImageView];
+    
+    
+    //jump to main VC after 2.0s
+    [NSTimer scheduledTimerWithTimeInterval:2.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        ZDTabBarViewController *tabBarVC = [[ZDTabBarViewController alloc]init];
+        [self presentViewController:tabBarVC animated:YES completion:nil];
+    }];
+
 }
 
 

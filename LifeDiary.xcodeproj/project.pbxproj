@@ -15,6 +15,24 @@
 		044F01F520A80DB500406D65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044F01F320A80DB500406D65 /* LaunchScreen.storyboard */; };
 		044F020020A80DB500406D65 /* LifeDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01FF20A80DB500406D65 /* LifeDiaryTests.m */; };
 		044F020B20A80DB500406D65 /* LifeDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F020A20A80DB500406D65 /* LifeDiaryUITests.m */; };
+		044F028420A80F7E00406D65 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028320A80F7E00406D65 /* QuartzCore.framework */; };
+		044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028520A80F8D00406D65 /* libsqlite3.0.tbd */; };
+		044F029320A80FFB00406D65 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028920A80FFB00406D65 /* FMDatabase.m */; };
+		044F029420A80FFB00406D65 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */; };
+		044F029520A80FFB00406D65 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028D20A80FFB00406D65 /* FMDatabasePool.m */; };
+		044F029620A80FFB00406D65 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */; };
+		044F029720A80FFB00406D65 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F029220A80FFB00406D65 /* FMResultSet.m */; };
+		044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B020A811D500406D65 /* ZDMessageViewController.m */; };
+		044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B320A811E800406D65 /* ZDFindViewController.m */; };
+		044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B620A811F200406D65 /* ZDMeViewController.m */; };
+		044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B920A8120800406D65 /* ZDUserInfoViewController.m */; };
+		044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02BC20A8121300406D65 /* ZDRecycleViewController.m */; };
+		044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02BF20A8121C00406D65 /* ZDExpireViewController.m */; };
+		044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C220A8122700406D65 /* ZDDepleteViewController.m */; };
+		044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C520A8123500406D65 /* ZDAboutViewController.m */; };
+		044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C820A8124200406D65 /* ZDAllViewController.m */; };
+		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
+		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +69,41 @@
 		044F020620A80DB500406D65 /* LifeDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F020A20A80DB500406D65 /* LifeDiaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeDiaryUITests.m; sourceTree = "<group>"; };
 		044F020C20A80DB500406D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		044F028320A80F7E00406D65 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		044F028520A80F8D00406D65 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		044F028820A80FFB00406D65 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		044F028920A80FFB00406D65 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		044F028A20A80FFB00406D65 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		044F028C20A80FFB00406D65 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		044F028D20A80FFB00406D65 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		044F028E20A80FFB00406D65 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		044F029020A80FFB00406D65 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		044F029120A80FFB00406D65 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		044F029220A80FFB00406D65 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		044F02AF20A811D500406D65 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
+		044F02B020A811D500406D65 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
+		044F02B220A811E800406D65 /* ZDFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDFindViewController.h; sourceTree = "<group>"; };
+		044F02B320A811E800406D65 /* ZDFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDFindViewController.m; sourceTree = "<group>"; };
+		044F02B520A811F200406D65 /* ZDMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeViewController.h; sourceTree = "<group>"; };
+		044F02B620A811F200406D65 /* ZDMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeViewController.m; sourceTree = "<group>"; };
+		044F02B820A8120800406D65 /* ZDUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDUserInfoViewController.h; sourceTree = "<group>"; };
+		044F02B920A8120800406D65 /* ZDUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUserInfoViewController.m; sourceTree = "<group>"; };
+		044F02BB20A8121300406D65 /* ZDRecycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDRecycleViewController.h; sourceTree = "<group>"; };
+		044F02BC20A8121300406D65 /* ZDRecycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRecycleViewController.m; sourceTree = "<group>"; };
+		044F02BE20A8121C00406D65 /* ZDExpireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDExpireViewController.h; sourceTree = "<group>"; };
+		044F02BF20A8121C00406D65 /* ZDExpireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDExpireViewController.m; sourceTree = "<group>"; };
+		044F02C120A8122700406D65 /* ZDDepleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDDepleteViewController.h; sourceTree = "<group>"; };
+		044F02C220A8122700406D65 /* ZDDepleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDepleteViewController.m; sourceTree = "<group>"; };
+		044F02C420A8123500406D65 /* ZDAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAboutViewController.h; sourceTree = "<group>"; };
+		044F02C520A8123500406D65 /* ZDAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAboutViewController.m; sourceTree = "<group>"; };
+		044F02C720A8124200406D65 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
+		044F02C820A8124200406D65 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
+		044F02CA20A8124900406D65 /* ZDAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddViewController.h; sourceTree = "<group>"; };
+		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
+		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
+		044F02CE20A8149300406D65 /* ZDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */,
+				044F028420A80F7E00406D65 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +140,7 @@
 				044F01FE20A80DB500406D65 /* LifeDiaryTests */,
 				044F020920A80DB500406D65 /* LifeDiaryUITests */,
 				044F01E320A80DB500406D65 /* Products */,
+				044F028220A80F7E00406D65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +157,16 @@
 		044F01E420A80DB500406D65 /* LifeDiary */ = {
 			isa = PBXGroup;
 			children = (
+				044F021820A80E6D00406D65 /* ThirdCodes */,
 				044F01E820A80DB500406D65 /* AppDelegate.h */,
 				044F01E920A80DB500406D65 /* AppDelegate.m */,
 				044F01EB20A80DB500406D65 /* ViewController.h */,
 				044F01EC20A80DB500406D65 /* ViewController.m */,
+				044F02CD20A8149300406D65 /* ZDTabBarViewController.h */,
+				044F02CE20A8149300406D65 /* ZDTabBarViewController.m */,
+				044F029B20A8104E00406D65 /* Controller */,
+				044F02A620A8112200406D65 /* View */,
+				044F02A720A8112D00406D65 /* Model */,
 				044F01EE20A80DB500406D65 /* Main.storyboard */,
 				044F01F120A80DB500406D65 /* Assets.xcassets */,
 				044F01F320A80DB500406D65 /* LaunchScreen.storyboard */,
@@ -138,6 +200,219 @@
 				044F020C20A80DB500406D65 /* Info.plist */,
 			);
 			path = LifeDiaryUITests;
+			sourceTree = "<group>";
+		};
+		044F021820A80E6D00406D65 /* ThirdCodes */ = {
+			isa = PBXGroup;
+			children = (
+				044F028720A80FFB00406D65 /* fmdb */,
+			);
+			name = ThirdCodes;
+			sourceTree = "<group>";
+		};
+		044F028220A80F7E00406D65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				044F028520A80F8D00406D65 /* libsqlite3.0.tbd */,
+				044F028320A80F7E00406D65 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		044F028720A80FFB00406D65 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				044F028820A80FFB00406D65 /* FMDatabase.h */,
+				044F028920A80FFB00406D65 /* FMDatabase.m */,
+				044F028A20A80FFB00406D65 /* FMDatabaseAdditions.h */,
+				044F028B20A80FFB00406D65 /* FMDatabaseAdditions.m */,
+				044F028C20A80FFB00406D65 /* FMDatabasePool.h */,
+				044F028D20A80FFB00406D65 /* FMDatabasePool.m */,
+				044F028E20A80FFB00406D65 /* FMDatabaseQueue.h */,
+				044F028F20A80FFB00406D65 /* FMDatabaseQueue.m */,
+				044F029020A80FFB00406D65 /* FMDB.h */,
+				044F029120A80FFB00406D65 /* FMResultSet.h */,
+				044F029220A80FFB00406D65 /* FMResultSet.m */,
+			);
+			name = fmdb;
+			path = ../../fmdb;
+			sourceTree = "<group>";
+		};
+		044F029B20A8104E00406D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044F029C20A8105C00406D65 /* Message */,
+				044F029D20A8106200406D65 /* Find */,
+				044F029E20A8107200406D65 /* Me */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		044F029C20A8105C00406D65 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				044F02AF20A811D500406D65 /* ZDMessageViewController.h */,
+				044F02B020A811D500406D65 /* ZDMessageViewController.m */,
+				044F029F20A810BE00406D65 /* All */,
+				044F02A020A810C400406D65 /* Add */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		044F029D20A8106200406D65 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				044F02B220A811E800406D65 /* ZDFindViewController.h */,
+				044F02B320A811E800406D65 /* ZDFindViewController.m */,
+			);
+			name = Find;
+			sourceTree = "<group>";
+		};
+		044F029E20A8107200406D65 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				044F02B520A811F200406D65 /* ZDMeViewController.h */,
+				044F02B620A811F200406D65 /* ZDMeViewController.m */,
+				044F02A520A810FA00406D65 /* UserInfo */,
+				044F02A320A810E600406D65 /* Recycle */,
+				044F02A420A810ED00406D65 /* Expire */,
+				044F02A220A810DE00406D65 /* Deplete */,
+				044F02A120A810D500406D65 /* About */,
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
+		044F029F20A810BE00406D65 /* All */ = {
+			isa = PBXGroup;
+			children = (
+				044F02C720A8124200406D65 /* ZDAllViewController.h */,
+				044F02C820A8124200406D65 /* ZDAllViewController.m */,
+			);
+			name = All;
+			sourceTree = "<group>";
+		};
+		044F02A020A810C400406D65 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				044F02CA20A8124900406D65 /* ZDAddViewController.h */,
+				044F02CB20A8124900406D65 /* ZDAddViewController.m */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		044F02A120A810D500406D65 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				044F02C420A8123500406D65 /* ZDAboutViewController.h */,
+				044F02C520A8123500406D65 /* ZDAboutViewController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		044F02A220A810DE00406D65 /* Deplete */ = {
+			isa = PBXGroup;
+			children = (
+				044F02C120A8122700406D65 /* ZDDepleteViewController.h */,
+				044F02C220A8122700406D65 /* ZDDepleteViewController.m */,
+			);
+			name = Deplete;
+			sourceTree = "<group>";
+		};
+		044F02A320A810E600406D65 /* Recycle */ = {
+			isa = PBXGroup;
+			children = (
+				044F02BB20A8121300406D65 /* ZDRecycleViewController.h */,
+				044F02BC20A8121300406D65 /* ZDRecycleViewController.m */,
+			);
+			name = Recycle;
+			sourceTree = "<group>";
+		};
+		044F02A420A810ED00406D65 /* Expire */ = {
+			isa = PBXGroup;
+			children = (
+				044F02BE20A8121C00406D65 /* ZDExpireViewController.h */,
+				044F02BF20A8121C00406D65 /* ZDExpireViewController.m */,
+			);
+			name = Expire;
+			sourceTree = "<group>";
+		};
+		044F02A520A810FA00406D65 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				044F02B820A8120800406D65 /* ZDUserInfoViewController.h */,
+				044F02B920A8120800406D65 /* ZDUserInfoViewController.m */,
+			);
+			name = UserInfo;
+			sourceTree = "<group>";
+		};
+		044F02A620A8112200406D65 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				044F02A820A8113600406D65 /* Message */,
+				044F02A920A8113E00406D65 /* Find */,
+				044F02AA20A8114700406D65 /* Me */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		044F02A720A8112D00406D65 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				044F02AC20A8116F00406D65 /* Message */,
+				044F02AD20A8117500406D65 /* Find */,
+				044F02AE20A8117E00406D65 /* Me */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		044F02A820A8113600406D65 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				044F02AB20A8115D00406D65 /* Add */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		044F02A920A8113E00406D65 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Find;
+			sourceTree = "<group>";
+		};
+		044F02AA20A8114700406D65 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
+		044F02AB20A8115D00406D65 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		044F02AC20A8116F00406D65 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		044F02AD20A8117500406D65 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Find;
+			sourceTree = "<group>";
+		};
+		044F02AE20A8117E00406D65 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Me;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +477,7 @@
 		044F01DA20A80DB500406D65 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ZD;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = JACK;
 				TargetAttributes = {
@@ -277,8 +553,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
+				044F029520A80FFB00406D65 /* FMDatabasePool.m in Sources */,
+				044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */,
+				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */,
+				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
+				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
+				044F029620A80FFB00406D65 /* FMDatabaseQueue.m in Sources */,
+				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
+				044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */,
+				044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */,
+				044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */,
 				044F01E720A80DB500406D65 /* main.m in Sources */,
+				044F029320A80FFB00406D65 /* FMDatabase.m in Sources */,
+				044F029720A80FFB00406D65 /* FMResultSet.m in Sources */,
+				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
+				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
+				044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */,
+				044F029420A80FFB00406D65 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +808,7 @@
 				044F021120A80DB500406D65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		044F021220A80DB500406D65 /* Build configuration list for PBXNativeTarget "LifeDiaryTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +817,7 @@
 				044F021420A80DB500406D65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		044F021520A80DB500406D65 /* Build configuration list for PBXNativeTarget "LifeDiaryUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +826,7 @@
 				044F021720A80DB500406D65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
