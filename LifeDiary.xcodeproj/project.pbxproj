@@ -36,11 +36,15 @@
 		04B8369620A874750050D568 /* ZDGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8369520A874750050D568 /* ZDGoods.m */; };
 		04B8369920A874EA0050D568 /* ZDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8369820A874EA0050D568 /* ZDUser.m */; };
 		04B8369C20A875610050D568 /* ZDMessageDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8369B20A875610050D568 /* ZDMessageDataBase.m */; };
-		04B8369F20A87A160050D568 /* ZDMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8369E20A87A160050D568 /* ZDMessageCell.m */; };
 		04B836A320A87DE90050D568 /* ZDAllDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836A220A87DE90050D568 /* ZDAllDataBase.m */; };
 		04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836A620A87ED40050D568 /* ZDAllCell.m */; };
-		04B836B020A885900050D568 /* ZDTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836AF20A885900050D568 /* ZDTopCell.m */; };
 		04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */; };
+		04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD721420A9A21100A14ADF /* ZDMessageCell.m */; };
+		04BD721E20A9B04300A14ADF /* ZDMeTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */; };
+		04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */; };
+		04BD722420A9B0FE00A14ADF /* ZDAddTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722320A9B0FE00A14ADF /* ZDAddTopCell.m */; };
+		04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */; };
+		04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,16 +122,24 @@
 		04B8369820A874EA0050D568 /* ZDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUser.m; sourceTree = "<group>"; };
 		04B8369A20A875610050D568 /* ZDMessageDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageDataBase.h; sourceTree = "<group>"; };
 		04B8369B20A875610050D568 /* ZDMessageDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageDataBase.m; sourceTree = "<group>"; };
-		04B8369D20A87A160050D568 /* ZDMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageCell.h; sourceTree = "<group>"; };
-		04B8369E20A87A160050D568 /* ZDMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCell.m; sourceTree = "<group>"; };
 		04B836A120A87DE90050D568 /* ZDAllDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllDataBase.h; sourceTree = "<group>"; };
 		04B836A220A87DE90050D568 /* ZDAllDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllDataBase.m; sourceTree = "<group>"; };
 		04B836A520A87ED40050D568 /* ZDAllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
 		04B836A620A87ED40050D568 /* ZDAllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllCell.m; sourceTree = "<group>"; };
-		04B836AE20A885900050D568 /* ZDTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTopCell.h; sourceTree = "<group>"; };
-		04B836AF20A885900050D568 /* ZDTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTopCell.m; sourceTree = "<group>"; };
 		04B836B120A886C20050D568 /* UITableView+UITableView_reload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+UITableView_reload.h"; sourceTree = "<group>"; };
 		04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+UITableView_reload.m"; sourceTree = "<group>"; };
+		04BD721320A9A21100A14ADF /* ZDMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageCell.h; sourceTree = "<group>"; };
+		04BD721420A9A21100A14ADF /* ZDMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCell.m; sourceTree = "<group>"; };
+		04BD721C20A9B04300A14ADF /* ZDMeTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeTopCell.h; sourceTree = "<group>"; };
+		04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeTopCell.m; sourceTree = "<group>"; };
+		04BD721F20A9B0F000A14ADF /* ZDAddDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddDefaultCell.h; sourceTree = "<group>"; };
+		04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddDefaultCell.m; sourceTree = "<group>"; };
+		04BD722220A9B0FE00A14ADF /* ZDAddTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddTopCell.h; sourceTree = "<group>"; };
+		04BD722320A9B0FE00A14ADF /* ZDAddTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddTopCell.m; sourceTree = "<group>"; };
+		04BD722520A9B20C00A14ADF /* ZDCellAddedDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCellAddedDatePickerView.h; sourceTree = "<group>"; };
+		04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedDatePickerView.m; sourceTree = "<group>"; };
+		04BD722820A9B23600A14ADF /* ZDCellAddedTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCellAddedTextFieldView.h; sourceTree = "<group>"; };
+		04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedTextFieldView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,10 +385,10 @@
 		044F02A820A8113600406D65 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				04BD721320A9A21100A14ADF /* ZDMessageCell.h */,
+				04BD721420A9A21100A14ADF /* ZDMessageCell.m */,
 				04B836A420A87EAD0050D568 /* All */,
 				044F02AB20A8115D00406D65 /* Add */,
-				04B8369D20A87A160050D568 /* ZDMessageCell.h */,
-				04B8369E20A87A160050D568 /* ZDMessageCell.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -391,8 +403,8 @@
 		044F02AA20A8114700406D65 /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				04B836AE20A885900050D568 /* ZDTopCell.h */,
-				04B836AF20A885900050D568 /* ZDTopCell.m */,
+				04BD721C20A9B04300A14ADF /* ZDMeTopCell.h */,
+				04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -400,6 +412,14 @@
 		044F02AB20A8115D00406D65 /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				04BD721F20A9B0F000A14ADF /* ZDAddDefaultCell.h */,
+				04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */,
+				04BD722220A9B0FE00A14ADF /* ZDAddTopCell.h */,
+				04BD722320A9B0FE00A14ADF /* ZDAddTopCell.m */,
+				04BD722520A9B20C00A14ADF /* ZDCellAddedDatePickerView.h */,
+				04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */,
+				04BD722820A9B23600A14ADF /* ZDCellAddedTextFieldView.h */,
+				04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */,
 			);
 			name = Add;
 			sourceTree = "<group>";
@@ -608,15 +628,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */,
-				04B836B020A885900050D568 /* ZDTopCell.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
 				044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */,
+				04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				04B8368F20A871870050D568 /* FMDatabase.m in Sources */,
 				044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */,
 				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
 				04B836A320A87DE90050D568 /* ZDAllDataBase.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
+				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
 				04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */,
 				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
@@ -628,12 +649,15 @@
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
 				04B8369620A874750050D568 /* ZDGoods.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
-				04B8369F20A87A160050D568 /* ZDMessageCell.m in Sources */,
+				04BD722420A9B0FE00A14ADF /* ZDAddTopCell.m in Sources */,
 				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
 				04B8369C20A875610050D568 /* ZDMessageDataBase.m in Sources */,
 				044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */,
+				04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */,
+				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
 				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
+				04BD721E20A9B04300A14ADF /* ZDMeTopCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,11 +806,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -794,11 +821,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

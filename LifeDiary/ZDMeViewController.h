@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDTopCell.h"
+#import "ZDMeTopCell.h"
+
 
 @interface ZDMeViewController : UIViewController
 @property(nonatomic,strong) UITableView *meTableView;
 @property(nonatomic,strong) UITableViewCell *meCell;
-@property(nonatomic,strong) ZDTopCell *topCell;
+@property(nonatomic,strong) ZDMeTopCell *topCell;
 @property(nonatomic,copy) NSArray *cellDataArray;
 @end

@@ -1,14 +1,14 @@
 //
-//  ZDTopCell.m
+//  ZDAddDefaultCell.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/13.
+//  Created by JACK on 2018/5/14.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDTopCell.h"
+#import "ZDAddDefaultCell.h"
 
-@implementation ZDTopCell
+@implementation ZDAddDefaultCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

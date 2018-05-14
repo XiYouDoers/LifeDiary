@@ -7,7 +7,11 @@
 //
 
 #import "ZDMeViewController.h"
-
+#import "ZDUserInfoViewController.h"
+#import "ZDRecycleViewController.h"
+#import "ZDExpireViewController.h"
+#import "ZDDepleteViewController.h"
+#import "ZDAboutViewController.h"
 
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -28,8 +32,8 @@
     _meTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _meTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_meTableView];
-    [_meTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"meCell"];
-    [_meTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"meCell"];
+    [_meTableView registerClass:[ZDMeTopCell class] forCellReuseIdentifier:@"meTopCell"];
+    [_meTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"meDefaultCell"];
     
     _cellDataArray = [NSArray arrayWithObjects:@"回收站",@"耗尽物品",@"过期物品",@"关于", nil];
     // Do any additional setup after loading the view.
@@ -51,15 +55,17 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
         return 1;
-    }else {
-    return 3;
+    }else if(section==1) {
+        return 3;
+    }else{
+        return 1;
     }
 }
 /**
  TableView中section的数量
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 /**
  cell的高度
@@ -67,9 +73,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section==0) {
-        return 150;
+        return 90;
+    }else if(indexPath.section==0){
+        return 50;
     }else{
-        return 80;
+        return 50;
     }
     
 }
@@ -79,23 +87,46 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section==0) {
-         return _meCell;
-    }else{
-    _meCell = [tableView dequeueReusableCellWithIdentifier:@"meCell"];
+    if (indexPath.section==0&&indexPath.row==0) {
+            _topCell = [tableView dequeueReusableCellWithIdentifier:@"meTopCell"];
+            _topCell.nameLabel.text = @"LifeDiary";
+            _topCell.personalitySignatureLabel.text = @"没有个性，何来签名";
+            return _topCell;
+    }else if (indexPath.section==1){
+    _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
     _meCell.textLabel.text = [_cellDataArray objectAtIndex:indexPath.row];
           return _meCell;
+    }else{
+        _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
+        _meCell.textLabel.text = @"关于";
+        return _meCell;
     }
-   
-  
-    
 }
 /**
  cell点击方法
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section==0&&indexPath.row==0) {
+        ZDUserInfoViewController *userInfoViewController = [[ZDUserInfoViewController alloc]init];
+        [self.navigationController pushViewController:userInfoViewController animated:YES];
+    }else if(indexPath.section==1){
+        if (indexPath.row==0) {
+            ZDRecycleViewController *recycleViewController = [[ZDRecycleViewController alloc]init];
+            [self.navigationController pushViewController:recycleViewController animated:YES];
+        }else if(indexPath.row==1) {
+            ZDExpireViewController *expireViewController = [[ZDExpireViewController alloc]init];
+            [self.navigationController pushViewController:expireViewController animated:YES];
+        }else if(indexPath.row==2) {
+            ZDDepleteViewController *depleteViewController = [[ZDDepleteViewController alloc]init];
+            [self.navigationController pushViewController:depleteViewController animated:YES];
+        }
+    }else{
+        //indexPath.section==2&&indexPath.row==0
+            ZDAboutViewController *aboutViewController = [[ZDAboutViewController alloc]init];
+            [self.navigationController pushViewController:aboutViewController animated:YES];
+    }
+
     
 }
 
