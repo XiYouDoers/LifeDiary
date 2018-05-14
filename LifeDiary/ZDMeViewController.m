@@ -88,16 +88,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section==0&&indexPath.row==0) {
-            _topCell = [tableView dequeueReusableCellWithIdentifier:@"meTopCell"];
-            _topCell.nameLabel.text = @"LifeDiary";
-            _topCell.personalitySignatureLabel.text = @"没有个性，何来签名";
+        _topCell = [tableView dequeueReusableCellWithIdentifier:@"meTopCell"];
+        _topCell.nameLabel.text = @"LifeDiary";
+        _topCell.personalitySignatureLabel.text = @"没有个性，何来签名";
+        _topCell.headPictureImageView.image = [UIImage imageNamed:@"headPictureImage"];
             return _topCell;
     }else if (indexPath.section==1){
     _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
+    _meCell.selectionStyle = UITableViewCellEditingStyleNone;
     _meCell.textLabel.text = [_cellDataArray objectAtIndex:indexPath.row];
           return _meCell;
     }else{
         _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
+        _meCell.selectionStyle = UITableViewCellEditingStyleNone;
+
         _meCell.textLabel.text = @"关于";
         return _meCell;
     }

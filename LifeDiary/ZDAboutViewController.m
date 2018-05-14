@@ -9,13 +9,18 @@
 #import "ZDAboutViewController.h"
 
 @interface ZDAboutViewController ()
-
+@property(nonatomic,strong) UILabel *projectInfoLabel;
+@property(nonatomic,strong) UIImageView *projectPictureImageView;
 @end
 
 @implementation ZDAboutViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:237.0/255 green:237.0/255 blue:243.0/255 alpha:1];
+    
+    _projectInfoLabel = [[UILabel alloc]init];
     // Do any additional setup after loading the view.
 }
 

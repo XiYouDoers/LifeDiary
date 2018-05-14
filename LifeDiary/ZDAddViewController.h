@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDAddTableHeaderView.h"
+#import "ZDAddDefaultCell.h"
 
 @interface ZDAddViewController : UIViewController
-
+@property(nonatomic,strong) ZDAddTableHeaderView *addTableHeaderView;
+@property(nonatomic,strong) UITableView *addTableView;
+@property(nonatomic,strong) ZDAddDefaultCell *addDefaultCell;
 @end

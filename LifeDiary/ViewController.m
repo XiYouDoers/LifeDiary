@@ -21,7 +21,7 @@
     UIImageView *animationImageView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     animationImageView.image = [UIImage imageNamed:@"animationImageView"];
     [self.view addSubview:animationImageView];
-    
+    self.navigationController.navigationBar.hidden = YES;
     
     //jump to main VC after 2.0s
     [NSTimer scheduledTimerWithTimeInterval:2.0 repeats:NO block:^(NSTimer * _Nonnull timer) {

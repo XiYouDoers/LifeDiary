@@ -35,19 +35,19 @@ static ZDAllDataBase *_allDataBase = nil;
 - (void)initDataBase{
     // 获得Documents目录路径
     
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    // 文件路径
-    
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"messageModel.sqlite"];
-    
+//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//    
+//    // 文件路径
+//    
+//    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"messageModel.sqlite"];
+//    
     // 实例化FMDataBase对象
     
-    _db = [FMDatabase databaseWithPath:filePath];
+    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/allFmdb.db"];
     
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE goods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
+    NSString *goodsSql = @"CREATE TABLE goods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
     [_db executeUpdate:goodsSql];
     
     [_db close];
