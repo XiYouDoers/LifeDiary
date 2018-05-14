@@ -45,6 +45,9 @@
 		04BD722420A9B0FE00A14ADF /* ZDAddTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722320A9B0FE00A14ADF /* ZDAddTopCell.m */; };
 		04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */; };
 		04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */; };
+		04BD723020A9BA7C00A14ADF /* ZDRecycleDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722F20A9BA7C00A14ADF /* ZDRecycleDataBase.m */; };
+		04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */; };
+		04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +143,12 @@
 		04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedDatePickerView.m; sourceTree = "<group>"; };
 		04BD722820A9B23600A14ADF /* ZDCellAddedTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCellAddedTextFieldView.h; sourceTree = "<group>"; };
 		04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedTextFieldView.m; sourceTree = "<group>"; };
+		04BD722E20A9BA7100A14ADF /* ZDRecycleDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDRecycleDataBase.h; sourceTree = "<group>"; };
+		04BD722F20A9BA7C00A14ADF /* ZDRecycleDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRecycleDataBase.m; sourceTree = "<group>"; };
+		04BD723120A9BA8800A14ADF /* ZDExpireDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDExpireDataBase.h; sourceTree = "<group>"; };
+		04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDExpireDataBase.m; sourceTree = "<group>"; };
+		04BD723420A9BA9300A14ADF /* ZDDepleteDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDDepleteDataBase.h; sourceTree = "<group>"; };
+		04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDepleteDataBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,6 +459,9 @@
 		044F02AE20A8117E00406D65 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				04BD722B20A9BA1A00A14ADF /* Recycle */,
+				04BD722C20A9BA2600A14ADF /* Expire */,
+				04BD722D20A9BA3200A14ADF /* Deplete */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -488,6 +500,33 @@
 				04B836A620A87ED40050D568 /* ZDAllCell.m */,
 			);
 			name = All;
+			sourceTree = "<group>";
+		};
+		04BD722B20A9BA1A00A14ADF /* Recycle */ = {
+			isa = PBXGroup;
+			children = (
+				04BD722E20A9BA7100A14ADF /* ZDRecycleDataBase.h */,
+				04BD722F20A9BA7C00A14ADF /* ZDRecycleDataBase.m */,
+			);
+			name = Recycle;
+			sourceTree = "<group>";
+		};
+		04BD722C20A9BA2600A14ADF /* Expire */ = {
+			isa = PBXGroup;
+			children = (
+				04BD723120A9BA8800A14ADF /* ZDExpireDataBase.h */,
+				04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */,
+			);
+			name = Expire;
+			sourceTree = "<group>";
+		};
+		04BD722D20A9BA3200A14ADF /* Deplete */ = {
+			isa = PBXGroup;
+			children = (
+				04BD723420A9BA9300A14ADF /* ZDDepleteDataBase.h */,
+				04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */,
+			);
+			name = Deplete;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,6 +674,7 @@
 				04B8368F20A871870050D568 /* FMDatabase.m in Sources */,
 				044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */,
 				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
+				04BD723020A9BA7C00A14ADF /* ZDRecycleDataBase.m in Sources */,
 				04B836A320A87DE90050D568 /* ZDAllDataBase.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
@@ -649,10 +689,12 @@
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
 				04B8369620A874750050D568 /* ZDGoods.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
+				04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */,
 				04BD722420A9B0FE00A14ADF /* ZDAddTopCell.m in Sources */,
 				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
 				04B8369C20A875610050D568 /* ZDMessageDataBase.m in Sources */,
 				044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */,
+				04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */,
 				04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */,
 				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
