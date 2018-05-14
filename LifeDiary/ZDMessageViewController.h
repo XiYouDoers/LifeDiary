@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDMessageCell.h"
 
 @interface ZDMessageViewController : UIViewController
-
+@property(nonatomic,strong) NSMutableArray *dataMutableArray;
+@property(nonatomic,strong) UITableView *messageTableView;
+@property(nonatomic,strong) ZDMessageCell *messageCell;
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDAllCell.h"
 
 @interface ZDAllViewController : UIViewController
-
+@property(nonatomic,strong) NSMutableArray *dataMutableArray;
+@property(nonatomic,strong) UITableView *allTableView;
+@property(nonatomic,strong) ZDAllCell *allCell;
 @end
