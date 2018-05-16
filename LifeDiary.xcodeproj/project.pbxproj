@@ -49,6 +49,7 @@
 		04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */; };
 		04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */; };
 		04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */; };
+		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,8 @@
 		04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUnderLineTextField.m; sourceTree = "<group>"; };
 		04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddTableHeaderView.h; sourceTree = "<group>"; };
 		04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddTableHeaderView.m; sourceTree = "<group>"; };
+		04CF7C4820AC6C2400060741 /* ZDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDViewController.h; sourceTree = "<group>"; };
+		04CF7C4920AC6C2400060741 /* ZDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +285,8 @@
 			children = (
 				044F02AF20A811D500406D65 /* ZDMessageViewController.h */,
 				044F02B020A811D500406D65 /* ZDMessageViewController.m */,
+				04CF7C4820AC6C2400060741 /* ZDViewController.h */,
+				04CF7C4920AC6C2400060741 /* ZDViewController.m */,
 				044F029F20A810BE00406D65 /* All */,
 				044F02A020A810C400406D65 /* Add */,
 			);
@@ -674,6 +679,7 @@
 				04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */,
 				04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
+				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
 				044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */,
 				04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
@@ -857,7 +863,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -872,7 +878,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,6 +8,7 @@
 
 #import "ZDAllViewController.h"
 #import "ZDAllDataBase.h"
+#import "ZDRecycleDataBase.h"
 
 @interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -21,11 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    self.navigationItem.title = @"全部物品";
+    _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
-    _allTableView.scrollEnabled=NO;
     _allTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
@@ -74,8 +74,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
      _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell"];
-    
-    ZDGoods *goods = _dataMutableArray[indexPath.row];
+    ZDGoods *goods = [[ZDGoods alloc]init];
+    goods = _dataMutableArray[indexPath.row];
     
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
@@ -94,7 +94,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
+/**
+ cell是否可以左滑删除
 
+ */
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+/**
+ cell的删除方法
+
+ */
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+     if (editingStyle == UITableViewCellEditingStyleDelete) {
+         
+         ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
+    // 从数据库中删除
+         [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
+    // 回收站中添加
+         [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
+         self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+         [self.allTableView reloadData];
+
+     }
+}
 
 /*
 #pragma mark - Navigation

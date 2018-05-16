@@ -29,10 +29,9 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
                                              
                                              
-    _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _messageTableView.dataSource = self;
     _messageTableView.delegate = self;
-    _messageTableView.scrollEnabled=NO;
     _messageTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _messageTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_messageTableView];

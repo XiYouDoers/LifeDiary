@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ZDGoods : NSObject
+@property(nonatomic,strong) NSNumber *identifier;
 @property(nonatomic,strong) NSString *name;
 @property(nonatomic,strong) NSString *remark;
 @property(nonatomic,strong) NSData *imageData;

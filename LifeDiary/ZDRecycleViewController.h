@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDAllCell.h"
 
 @interface ZDRecycleViewController : UIViewController
+@property(nonatomic,strong) NSMutableArray *dataMutableArray;
+@property(nonatomic,strong) UITableView *recycleTableView;
+@property(nonatomic,strong) ZDAllCell *allCell;
 
 @end

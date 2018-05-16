@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>{
     NSArray *_cellTabArray;
 }
@@ -29,7 +30,6 @@
     _addTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _addTableView.dataSource = self;
     _addTableView.delegate = self;
-    _addTableView.scrollEnabled=NO;
     _addTableHeaderView  = [[ZDAddTableHeaderView alloc]init];
     _addTableHeaderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,150);
     
@@ -55,15 +55,14 @@
     [_addTableHeaderView.nameTextField resignFirstResponder];
     [_addTableHeaderView.remarkTextField resignFirstResponder];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [_addTableHeaderView.nameTextField resignFirstResponder];
-    [_addTableHeaderView.remarkTextField resignFirstResponder];
-}
 
 - (void)finsh{
     ZDGoods *newGoods = [[ZDGoods alloc]init];
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;
+    int index = arc4random_uniform(9);
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
+    newGoods.imageData = UIImagePNGRepresentation(image);
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
     
     [self.navigationController popViewControllerAnimated:YES];

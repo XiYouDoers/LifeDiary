@@ -35,19 +35,19 @@ static ZDRecycleDataBase *_messageDataBase = nil;
 - (void)initDataBase{
     // 获得Documents目录路径
     
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    // 文件路径
-    
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"recyleModel.sqlite"];
+//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//    
+//    // 文件路径
+//    
+//    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"recyleModel.sqlite"];
     
     // 实例化FMDataBase对象
     
-    _db = [FMDatabase databaseWithPath:filePath];
+    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/recycleGoodsFmdb.db"];
     
     [_db open];
     // 初始化数据表
-    NSString *recyleGoodsSql = @"CREATE TABLE recyleGoods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,recyleGoods_name VARCHAR(255),recyleGoods_remark VARCHAR(255),recyleGoods_imageData blob,recyleGoods_dateOfStart VARCHAR(255),recyleGoods_dateOfEnd VARCHAR(255),recyleGoods_saveTime VARCHAR(255))";
+    NSString *recyleGoodsSql = @"CREATE TABLE IF NOT EXISTS recyleGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,recyleGoods_identifier VARCHAR(255),recyleGoods_name VARCHAR(255),recyleGoods_remark VARCHAR(255),recyleGoods_imageData blob,recyleGoods_dateOfStart VARCHAR(255),recyleGoods_dateOfEnd VARCHAR(255),recyleGoods_saveTime VARCHAR(255))";
     [_db executeUpdate:recyleGoodsSql];
     
     [_db close];
@@ -55,39 +55,51 @@ static ZDRecycleDataBase *_messageDataBase = nil;
 }
 #pragma mark - 接口
 
-- (void)addRecycleGoods:(ZDGoods *)recyleGoods{
+- (void)addGoods:(ZDGoods *)recyleGoods{
     [_db open];
     
-    [_db executeUpdate:@"INSERT INTO recyleGoods(recyleGoods_name,recyleGoods_remark,recyleGoods_imageData,recyleGoods_dateOfStart,recyleGoods_dateOfEnd,recyleGoods_saveTime)VALUES(?,?,?,?,?,?)",recyleGoods.name,recyleGoods.remark,recyleGoods.imageData,recyleGoods.dateOfStart,recyleGoods.dateOfEnd,recyleGoods.saveTime];
+    NSNumber *maxID = @(0);
+    
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM recyleGoods "];
+    //获取数据库中最大的ID
+    while ([res next]) {
+        if ([maxID integerValue] < [[res stringForColumn:@"recyleGoods_identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"recyleGoods_identifier"] integerValue] ) ;
+        }
+        
+    }
+    maxID = @([maxID integerValue] + 1);
+    [_db executeUpdate:@"INSERT INTO recyleGoods(recyleGoods_identifier,recyleGoods_name,recyleGoods_remark,recyleGoods_imageData,recyleGoods_dateOfStart,recyleGoods_dateOfEnd,recyleGoods_saveTime)VALUES(?,?,?,?,?,?,?)",maxID,recyleGoods.name,recyleGoods.remark,recyleGoods.imageData,recyleGoods.dateOfStart,recyleGoods.dateOfEnd,recyleGoods.saveTime];
     
     
     [_db close];
     
 }
 
-- (void)deleteRecycleGoods:(ZDGoods *)recycleGoods{
+- (void)deleteGoods:(ZDGoods *)recycleGoods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM person WHERE goods_name = ?",recycleGoods.name];
+    [_db executeUpdate:@"DELETE FROM recyleGoods WHERE recyleGoods_identifier = ?",recycleGoods.identifier];
     
     [_db close];
 }
-- (NSMutableArray *)getAllRecycleGoods{
+- (NSMutableArray *)getAllGoods{
     [_db open];
     
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     
-    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods"];
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM recyleGoods"];
     
     while ([res next]) {
         ZDGoods *recycleGoods = [[ZDGoods alloc] init];
-        recycleGoods.name = [res stringForColumn:@"person_name"];
-        recycleGoods.remark = [res stringForColumn:@"person_remark"];
-        recycleGoods.imageData = [res dataForColumn:@"person_imageData"];
-        recycleGoods.dateOfStart = [res stringForColumn:@"person_dateOfStart"];
-        recycleGoods.dateOfEnd = [res stringForColumn:@"person_dateOfEnd"];
-        recycleGoods.saveTime = [res stringForColumn:@"person_saveTime"];
-        
+        recycleGoods.identifier = @([[res stringForColumn:@"recyleGoods_identifier"] integerValue]);
+        recycleGoods.name = [res stringForColumn:@"recyleGoods_name"];
+        recycleGoods.remark = [res stringForColumn:@"recyleGoods_remark"];
+        recycleGoods.imageData = [res dataForColumn:@"recyleGoods_imageData"];
+        recycleGoods.dateOfStart = [res stringForColumn:@"recyleGoods_dateOfStart"];
+        recycleGoods.dateOfEnd = [res stringForColumn:@"recyleGoods_dateOfEnd"];
+        recycleGoods.saveTime = [res stringForColumn:@"recyleGoods_saveTime"];
+        [dataArray addObject:recycleGoods];
     }
     
     [_db close];

@@ -33,7 +33,7 @@
         
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
-        _pictureImageView.frame = CGRectMake(5, 5, WIDTH/2-10, HEIGHT-10);
+        _pictureImageView.frame = CGRectMake(5, 5, WIDTH/2-10, self.frame.size.height-10);
         [self addSubview:_pictureImageView];
         
         //_dateOfstartLabel

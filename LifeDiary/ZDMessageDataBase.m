@@ -10,29 +10,62 @@
 #import "FMDB.h"
 
 static ZDMessageDataBase *_messageDataBase = nil;
-@implementation ZDMessageDataBase{
-    FMDatabase *_db;
+@interface ZDMessageDataBase()<NSCopying,NSMutableCopying>{
+    FMDatabase  *_db;
+    
 }
+
+@end
+
+@implementation ZDMessageDataBase
 + (instancetype) sharedDataBase{
-    if (_messageDataBase ==nil) {
+    if (_messageDataBase == nil) {
+         @synchronized(self) {
         _messageDataBase = [[ZDMessageDataBase alloc]init];
         
         [_messageDataBase initDataBase];
+         }
+        
     }
     return _messageDataBase;
 }
 +(instancetype)allocWithZone:(struct _NSZone *)zone{
     
     if (_messageDataBase == nil) {
-        
+         @synchronized(self) {
         _messageDataBase = [super allocWithZone:zone];
+         }
         
     }
     
     return _messageDataBase;
     
 }
+-(id)copy{
+    
+    return self;
+    
+}
+
+-(id)mutableCopy{
+    
+    return self;
+    
+}
+
+-(id)copyWithZone:(NSZone *)zone{
+    
+    return self;
+    
+}
+
+-(id)mutableCopyWithZone:(NSZone *)zone{
+    
+    return self;
+    
+}
 - (void)initDataBase{
+
     // 获得Documents目录路径
 //    
 //    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -47,7 +80,7 @@ static ZDMessageDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE goods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
+    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
     [_db executeUpdate:goodsSql];
     
     [_db close];
@@ -57,6 +90,17 @@ static ZDMessageDataBase *_messageDataBase = nil;
 
 - (void)addGoods:(ZDGoods *)goods{
     [_db open];
+//    NSNumber *maxID = @(0);
+//    
+//    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods "];
+//    //获取数据库中最大的ID
+//    while ([res next]) {
+//        if ([maxID integerValue] < [[res stringForColumn:@"goods_id"] integerValue]) {
+//            maxID = @([[res stringForColumn:@"goods_id"] integerValue] ) ;
+//        }
+//        
+//    }
+//    maxID = @([maxID integerValue] + 1);
     
     [_db executeUpdate:@"INSERT INTO goods(goods_name,goods_remark,goods_imageData,goods_dateOfStart,goods_dateOfEnd,goods_saveTime)VALUES(?,?,?,?,?,?)",goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime];
     
@@ -81,12 +125,14 @@ static ZDMessageDataBase *_messageDataBase = nil;
     
     while ([res next]) {
         ZDGoods *goods = [[ZDGoods alloc] init];
-        goods.name = [res stringForColumn:@"person_name"];
-        goods.remark = [res stringForColumn:@"person_remark"];
-        goods.imageData = [res dataForColumn:@"person_imageData"];
-        goods.dateOfStart = [res stringForColumn:@"person_dateOfStart"];
-        goods.dateOfEnd = [res stringForColumn:@"person_dateOfEnd"];
-        goods.saveTime = [res stringForColumn:@"person_saveTime"];
+
+        goods.name = [res stringForColumn:@"goods_name"];
+        goods.remark = [res stringForColumn:@"goods_remark"];
+        goods.imageData = [res dataForColumn:@"goods_imageData"];
+        goods.dateOfStart = [res stringForColumn:@"goods_dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"goods_dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"goodssaveTime"];
+        [dataArray addObject:goods];
 
     }
     

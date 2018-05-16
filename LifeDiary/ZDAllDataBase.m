@@ -14,18 +14,21 @@ static ZDAllDataBase *_allDataBase = nil;
     FMDatabase *_db;
 }
 + (instancetype) sharedDataBase{
-    if (_allDataBase ==nil) {
+    if (_allDataBase == nil) {
+        @synchronized(self) {
         _allDataBase = [[ZDAllDataBase alloc]init];
         
         [_allDataBase initDataBase];
+        }
     }
     return _allDataBase;
 }
 +(instancetype)allocWithZone:(struct _NSZone *)zone{
     
     if (_allDataBase == nil) {
-        
+        @synchronized(self) {
         _allDataBase = [super allocWithZone:zone];
+        }
         
     }
     
@@ -43,11 +46,11 @@ static ZDAllDataBase *_allDataBase = nil;
 //    
     // 实例化FMDataBase对象
     
-    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/allFmdb.db"];
+    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/allGoodsFmdb.db"];
     
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE goods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
+    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,allGoods_identifier VARCHAR(255),allGoods_name VARCHAR(255),allGoods_remark VARCHAR(255),allGoods_imageData blob,allGoods_dateOfStart VARCHAR(255),allGoods_dateOfEnd VARCHAR(255),allGoods_saveTime VARCHAR(255))";
     [_db executeUpdate:goodsSql];
     
     [_db close];
@@ -58,7 +61,18 @@ static ZDAllDataBase *_allDataBase = nil;
 - (void)addGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"INSERT INTO goods(goods_name,goods_remark,goods_imageData,goods_dateOfStart,goods_dateOfEnd,goods_saveTime)VALUES(?,?,?,?,?,?)",goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime];
+    NSNumber *maxID = @(0);
+    
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM allGoods "];
+    //获取数据库中最大的ID
+    while ([res next]) {
+        if ([maxID integerValue] < [[res stringForColumn:@"allGoods_identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"allGoods_identifier"] integerValue] ) ;
+        }
+        
+    }
+    maxID = @([maxID integerValue] + 1);
+    [_db executeUpdate:@"INSERT INTO allGoods(allGoods_identifier,allGoods_name,allGoods_remark,allGoods_imageData,allGoods_dateOfStart,allGoods_dateOfEnd,allGoods_saveTime)VALUES(?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime];
     
     
     [_db close];
@@ -68,7 +82,7 @@ static ZDAllDataBase *_allDataBase = nil;
 - (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM person WHERE goods_name = ?",goods.name];
+    [_db executeUpdate:@"DELETE FROM allGoods WHERE allGoods_identifier = ?",goods.identifier];
     
     [_db close];
 }
@@ -77,17 +91,18 @@ static ZDAllDataBase *_allDataBase = nil;
     
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     
-    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods"];
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM allGoods"];
     
     while ([res next]) {
         ZDGoods *goods = [[ZDGoods alloc] init];
-        goods.name = [res stringForColumn:@"person_name"];
-        goods.remark = [res stringForColumn:@"person_remark"];
-        goods.imageData = [res dataForColumn:@"person_imageData"];
-        goods.dateOfStart = [res stringForColumn:@"person_dateOfStart"];
-        goods.dateOfEnd = [res stringForColumn:@"person_dateOfEnd"];
-        goods.saveTime = [res stringForColumn:@"person_saveTime"];
-        
+        goods.identifier = @([[res stringForColumn:@"allGoods_identifier"] integerValue]);
+        goods.name = [res stringForColumn:@"allGoods_name"];
+        goods.remark = [res stringForColumn:@"allGoods_remark"];
+        goods.imageData = [res dataForColumn:@"allGoods_imageData"];
+        goods.dateOfStart = [res stringForColumn:@"allGoods_dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"allGoods_dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"allGoods_saveTime"];
+        [dataArray addObject:goods];
     }
     
     [_db close];
