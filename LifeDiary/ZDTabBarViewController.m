@@ -5,13 +5,15 @@
 //  Created by JACK on 2018/5/13.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-
+#define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
+#define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #import "ZDTabBarViewController.h"
 #import "ZDMessageViewController.h"
 #import "ZDFindViewController.h"
 #import "ZDMeViewController.h"
 
-@interface ZDTabBarViewController ()
+@interface ZDTabBarViewController (){
+}
 
 @end
 
@@ -39,6 +41,7 @@
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
     [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
     
+    
     // Do any additional setup after loading the view.
 }
 
@@ -55,7 +58,7 @@
  @param imageName tabbar静态图片
  @param selectedImageName tabbar选中时的图片
  */
-- (void)wsf_settingController:(UIViewController *)controller tabBarTitle:(NSString *)title tabBarItemImageName:(NSString *)imageName tabBarItemSelectedImageName:(NSString *)selectedImageName{
+- (void)wsf_settingController:(UINavigationController *)controller tabBarTitle:(NSString *)title tabBarItemImageName:(NSString *)imageName tabBarItemSelectedImageName:(NSString *)selectedImageName{
     
     controller.tabBarItem.title = title;
     // 设置 tabbarItem 静态图片(不被系统默认渲染,显示图像原始颜色)
@@ -68,13 +71,17 @@
     
     [controller.tabBarItem setSelectedImage:selectedImage];
     // 设置 tabbarItem 选中状态下的文字颜色(不被系统默认渲染,显示文字自定义颜色)
-    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
+
+    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObject:LIGHTGREEN forKey:NSForegroundColorAttributeName];
     [controller.tabBarItem setTitleTextAttributes:selectedDictionary forState:UIControlStateSelected];
     //设置tabbarItem 未选中状态下的文字颜色
-    NSDictionary *normalDictionary = [NSDictionary dictionaryWithObject:[UIColor grayColor] forKey:NSForegroundColorAttributeName];
+    NSDictionary *normalDictionary = [NSDictionary dictionaryWithObject:[UIColor lightGrayColor] forKey:NSForegroundColorAttributeName];
     [controller.tabBarItem setTitleTextAttributes:normalDictionary forState:UIControlStateNormal];
     
-    
+    //改变navigationBar中间title的颜色
+    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE}];
+    //改变navigationBar.barButtonItem的颜色
+    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];
 }
 /*
  #pragma mark - Navigation

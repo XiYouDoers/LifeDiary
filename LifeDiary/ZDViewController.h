@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ 具有滑动隐藏tabBar功能的UIViewController
+ */
 @interface ZDViewController : UIViewController
 
 @end

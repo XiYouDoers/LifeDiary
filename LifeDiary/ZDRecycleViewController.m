@@ -14,6 +14,7 @@
     UIBarButtonItem *_allSelectedBarButtonItem;
     bool _rightBarButtonItemIsSeleted;
     NSMutableArray *_deletedCellArray;
+    UIButton *_deleteButton;
 }
 
 
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"回收站";
     
+
     
     
     self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
@@ -46,12 +48,33 @@
     _rightBarButtonItemIsSeleted = NO;
     _deletedCellArray = [NSMutableArray array];
     
+    //_deleteButton
+    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+    [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+    [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_deleteButton setBackgroundColor:[UIColor redColor]];
+    [_deleteButton addTarget:self action:@selector(deleteSelectedCells) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_deleteButton];
+    
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect = self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
     
     
 }
@@ -69,6 +92,11 @@
     
     //设置左边按钮
     self.navigationItem.leftBarButtonItem = _allSelectedBarButtonItem;
+    //下移删除button
+    [UIView animateWithDuration:0.5 animations:^{
+        _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+    }];
+        
     }else{
         _rightBarButtonItemIsSeleted = NO;
         //取消table进入编辑状态
@@ -81,6 +109,10 @@
             [self.recycleTableView deselectRowAtIndexPath:indexPath animated:YES];
         }
         self.navigationItem.leftBarButtonItem = nil;
+        //上移删除button
+        [UIView animateWithDuration:0.5 animations:^{
+            _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+        }];
     }
 
 }
@@ -90,8 +122,23 @@
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         [self.recycleTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
-        
     }
+    _deletedCellArray = [NSMutableArray arrayWithArray:self.dataMutableArray];
+}
+- (void)deleteSelectedCells{
+    for (ZDGoods *goods in _deletedCellArray) {
+        [[ZDRecycleDataBase sharedDataBase]deleteGoods:goods];
+    }
+    self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+    [self.recycleTableView reloadData];
+
+    //下移删除button
+    [UIView animateWithDuration:0.5 animations:^{
+        _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+    }];
+    //删除后回归原状态
+    [self manageCell:_allSelectedBarButtonItem];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,7 +146,7 @@
 }
 // 改变选中时最左边对勾的背景颜色
 - (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
     NSArray *subviews = cell.subviews;
     for (id obj in subviews) {
         if ([obj isKindOfClass:[UIControl class]]) {
@@ -127,10 +174,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self shallowCellSelectedImageView:indexPath];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [_deletedCellArray addObject:cell];
+    [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
+/**
+ cell取消选中时执行的方法
+ 
+ */
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
+    
+    [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
+    
+}
+
 /**
  section中cell的数量
  */

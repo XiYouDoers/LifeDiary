@@ -17,7 +17,6 @@
 		044F020B20A80DB500406D65 /* LifeDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F020A20A80DB500406D65 /* LifeDiaryUITests.m */; };
 		044F028420A80F7E00406D65 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028320A80F7E00406D65 /* QuartzCore.framework */; };
 		044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028520A80F8D00406D65 /* libsqlite3.0.tbd */; };
-		044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B020A811D500406D65 /* ZDMessageViewController.m */; };
 		044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B320A811E800406D65 /* ZDFindViewController.m */; };
 		044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B620A811F200406D65 /* ZDMeViewController.m */; };
 		044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B920A8120800406D65 /* ZDUserInfoViewController.m */; };
@@ -25,7 +24,6 @@
 		044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02BF20A8121C00406D65 /* ZDExpireViewController.m */; };
 		044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C220A8122700406D65 /* ZDDepleteViewController.m */; };
 		044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C520A8123500406D65 /* ZDAboutViewController.m */; };
-		044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C820A8124200406D65 /* ZDAllViewController.m */; };
 		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
 		04B8368F20A871870050D568 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368520A871870050D568 /* FMDatabase.m */; };
@@ -50,6 +48,8 @@
 		04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */; };
 		04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */; };
 		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
+		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
+		04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C5820AC71DC00060741 /* ZDAllViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +88,6 @@
 		044F020C20A80DB500406D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		044F028320A80F7E00406D65 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		044F028520A80F8D00406D65 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		044F02AF20A811D500406D65 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
-		044F02B020A811D500406D65 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
 		044F02B220A811E800406D65 /* ZDFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDFindViewController.h; sourceTree = "<group>"; };
 		044F02B320A811E800406D65 /* ZDFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDFindViewController.m; sourceTree = "<group>"; };
 		044F02B520A811F200406D65 /* ZDMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeViewController.h; sourceTree = "<group>"; };
@@ -104,8 +102,6 @@
 		044F02C220A8122700406D65 /* ZDDepleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDepleteViewController.m; sourceTree = "<group>"; };
 		044F02C420A8123500406D65 /* ZDAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAboutViewController.h; sourceTree = "<group>"; };
 		044F02C520A8123500406D65 /* ZDAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAboutViewController.m; sourceTree = "<group>"; };
-		044F02C720A8124200406D65 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
-		044F02C820A8124200406D65 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
 		044F02CA20A8124900406D65 /* ZDAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddViewController.h; sourceTree = "<group>"; };
 		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
 		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
@@ -155,6 +151,10 @@
 		04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddTableHeaderView.m; sourceTree = "<group>"; };
 		04CF7C4820AC6C2400060741 /* ZDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDViewController.h; sourceTree = "<group>"; };
 		04CF7C4920AC6C2400060741 /* ZDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDViewController.m; sourceTree = "<group>"; };
+		04CF7C4E20AC6F5700060741 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
+		04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
+		04CF7C5720AC71DC00060741 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
+		04CF7C5820AC71DC00060741 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,8 +283,8 @@
 		044F029C20A8105C00406D65 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				044F02AF20A811D500406D65 /* ZDMessageViewController.h */,
-				044F02B020A811D500406D65 /* ZDMessageViewController.m */,
+				04CF7C4E20AC6F5700060741 /* ZDMessageViewController.h */,
+				04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */,
 				04CF7C4820AC6C2400060741 /* ZDViewController.h */,
 				04CF7C4920AC6C2400060741 /* ZDViewController.m */,
 				044F029F20A810BE00406D65 /* All */,
@@ -319,8 +319,8 @@
 		044F029F20A810BE00406D65 /* All */ = {
 			isa = PBXGroup;
 			children = (
-				044F02C720A8124200406D65 /* ZDAllViewController.h */,
-				044F02C820A8124200406D65 /* ZDAllViewController.m */,
+				04CF7C5720AC71DC00060741 /* ZDAllViewController.h */,
+				04CF7C5820AC71DC00060741 /* ZDAllViewController.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -678,9 +678,9 @@
 			files = (
 				04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */,
 				04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */,
+				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
 				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
-				044F02C920A8124200406D65 /* ZDAllViewController.m in Sources */,
 				04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				04B8368F20A871870050D568 /* FMDatabase.m in Sources */,
@@ -690,10 +690,10 @@
 				04B836A320A87DE90050D568 /* ZDAllDataBase.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
+				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
 				04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */,
 				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
-				044F02B120A811D500406D65 /* ZDMessageViewController.m in Sources */,
 				044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */,
 				044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */,
 				04B8369920A874EA0050D568 /* ZDUser.m in Sources */,

@@ -24,6 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    backBtnItem.title = @"我";
+    self.navigationItem.backBarButtonItem = backBtnItem;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     _meTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
@@ -41,6 +45,18 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect=self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
     
     
 }

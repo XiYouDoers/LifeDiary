@@ -7,6 +7,7 @@
 //
 
 #import "ZDExpireViewController.h"
+#import "ZDExpireDataBase.h"
 
 @interface ZDExpireViewController ()
 
@@ -16,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"耗尽物品";
+    
+;
     // Do any additional setup after loading the view.
 }
 
@@ -23,7 +28,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    _dataMutableArray = [NSMutableArray array];
+//    _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect = self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
+    
+    
+}
 /*
 #pragma mark - Navigation
 

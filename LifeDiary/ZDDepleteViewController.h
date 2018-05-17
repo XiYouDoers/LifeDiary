@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ZDDepleteViewController : UIViewController
+@property(nonatomic,strong) NSMutableArray *dataMutableArray;
 
 @end

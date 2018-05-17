@@ -21,8 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //_allTableView
     self.navigationItem.title = @"全部物品";
+
     _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
@@ -30,12 +31,25 @@
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
+    
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+    //隐藏tabBar
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect = self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
     
     
 }
@@ -79,7 +93,7 @@
     
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
-    _allCell.imageView.image = [UIImage imageWithData:goods.imageData];
+    _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
     _allCell.dateOfstartLabel.text = goods.dateOfStart;
     _allCell.dateOfEndLabel.text = goods.dateOfEnd;
     _allCell.saveTimeLabel.text = goods.saveTime;

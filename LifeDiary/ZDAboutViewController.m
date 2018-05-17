@@ -18,12 +18,32 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.navigationItem.title = @"关于";
+    
+
+    
     self.view.backgroundColor = [UIColor colorWithRed:237.0/255 green:237.0/255 blue:243.0/255 alpha:1];
     
     _projectInfoLabel = [[UILabel alloc]init];
     // Do any additional setup after loading the view.
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect = self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

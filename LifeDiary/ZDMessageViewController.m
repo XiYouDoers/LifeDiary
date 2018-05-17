@@ -2,10 +2,10 @@
 //  ZDMessageViewController.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/13.
+//  Created by JACK on 2018/5/16.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-
+#define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #import "ZDMessageViewController.h"
 #import "ZDMessageDataBase.h"
 #import "ZDAllViewController.h"
@@ -23,12 +23,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //backBarButtonItem
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    backBtnItem.title = @"消息";
+    self.navigationItem.backBarButtonItem = backBtnItem;
+    //leftBarButtonItem
+//    UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftBarButton.layer setMasksToBounds:YES];
+//    [leftBarButton.layer setCornerRadius:3.0]; //设置矩圆角半径
+//    [leftBarButton.layer setBorderWidth:1.0];   //边框宽度
+//    [leftBarButton setTitle:@"全部" forState:UIControlStateNormal];
+//    [leftBarButton setTitleColor:LIGHTBLUE forState:UIControlStateNormal];
+//    [leftBarButton addTarget:self action:@selector(openAll) forControlEvents:UIControlEventTouchUpInside];
+//    [leftBarButton sizeToFit];
+//    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
+//    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
-    
+    //rightBarButtonItem
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
-                                             
-                                             
+    
+    //_messageTableView
     _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _messageTableView.dataSource = self;
     _messageTableView.delegate = self;
@@ -43,18 +57,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDMessageDataBase sharedDataBase]getAllGoods];
     
-
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect=self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
+    
+   
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     
 }
 - (void)openAll{
+    
     ZDAllViewController *allViewController = [[ZDAllViewController alloc]init];
     [self.navigationController pushViewController:allViewController animated:YES];
 }
@@ -110,13 +138,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

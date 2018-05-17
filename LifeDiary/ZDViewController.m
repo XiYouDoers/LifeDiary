@@ -22,34 +22,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect  tabRect=self.tabBarController.tabBar.frame;
-        tabRect.origin.y=[[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
-    }completion:^(BOOL finished) {
-        
-    }];
-}
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect  tabRect=self.tabBarController.tabBar.frame;
-        tabRect.origin.y=[[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
-    }completion:^(BOOL finished) {
-        
-    }];
-}
+
 //tabbar动态隐藏
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
