@@ -8,23 +8,25 @@
 #define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #import "ZDMessageViewController.h"
 #import "ZDMessageDataBase.h"
+#import "ZDAllDataBase.h"
 #import "ZDAllViewController.h"
 #import "ZDAddViewController.h"
 
-
 @interface ZDMessageViewController ()<UITableViewDelegate,UITableViewDataSource>{
-    
 }
-
-
+@property(nonatomic,strong) UISegmentedControl *segmentControl;
 @end
 
 @implementation ZDMessageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     //backBarButtonItem
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    [backBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     backBtnItem.title = @"消息";
     self.navigationItem.backBarButtonItem = backBtnItem;
     //leftBarButtonItem
@@ -38,9 +40,25 @@
 //    [leftBarButton sizeToFit];
 //    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
 //    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
+    UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
+    [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = allBarButtonItem;
+
+  
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     //rightBarButtonItem
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
+    UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"╋" style:UIBarButtonItemStylePlain target:self action:@selector(addGoods)];
+    [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+
+    self.navigationItem.rightBarButtonItem = addBarButtonItem;
+//    //_segmentControl
+//    _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"当前",@"全部" ]];
+//    _segmentControl.frame = CGRectMake(60, 100, 100, 32);
+//    self.navigationItem.titleView = _segmentControl;
+//    _segmentControl.selectedSegmentIndex=0;
+//    _segmentControl.tintColor=[UIColor blueColor];
+//    [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
     
     //_messageTableView
     _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
@@ -50,6 +68,19 @@
     _messageTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_messageTableView];
     [_messageTableView registerClass:[ZDMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    
+//    //_allTableView
+//    _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+//    _allTableView.dataSource = self;
+//    _allTableView.delegate = self;
+//    _allTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
+//    _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
+//    [self.view addSubview:_allTableView];
+//    [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
+//   
+    
+
+
     // Do any additional setup after loading the view.
 }
 
@@ -57,13 +88,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)doSomethingInSegment:(UISegmentedControl *)Seg
+{
+    NSInteger Index = Seg.selectedSegmentIndex;
+    switch (Index) {
+        case 0:
+            _messageTableView.hidden = NO;
+            _allTableView.hidden = YES;
+            [_messageTableView reloadData];
+            
+            break;
+        case 1:
+            _messageTableView.hidden = YES;
+            _allTableView.hidden = NO;
+            [_allTableView reloadData];
 
+            break;
+    }
+}
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    _dataMutableArray = [NSMutableArray array];
-    _dataMutableArray = [[ZDMessageDataBase sharedDataBase]getAllGoods];
     
-    [UIView animateWithDuration:0.5f animations:^{
+    _messageDataMutableArray = [NSMutableArray array];
+    _messageDataMutableArray = [[ZDMessageDataBase sharedDataBase]getAllGoods];
+    
+    _AllDataMutableArray = [NSMutableArray array];
+    _AllDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+    //显示tabBar
         CGRect  tabRect=self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -71,10 +122,6 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
-    
    
 }
 - (void)viewDidDisappear:(BOOL)animated{
@@ -94,7 +141,14 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataMutableArray.count;
+    if (tableView==_messageTableView) {
+        return _messageDataMutableArray.count;
+    }else if (tableView==_allTableView){
+        return _AllDataMutableArray.count;
+    }else{
+        return 0;
+    }
+    
 }
 /**
  TableView中section的数量
@@ -114,19 +168,37 @@
  cell数据源
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    _messageCell = [tableView dequeueReusableCellWithIdentifier:@"messageCell"];
-    
-    ZDGoods *goods = _dataMutableArray[indexPath.row];
-    
-    _messageCell.nameLabel.text = goods.name;
-    _messageCell.remarkLabel.text = goods.remark;
-    _messageCell.imageView.image = [UIImage imageWithData:goods.imageData];
-    _messageCell.dateOfstartLabel.text = goods.dateOfStart;
-    _messageCell.dateOfEndLabel.text = goods.dateOfEnd;
-    _messageCell.saveTimeLabel.text = goods.saveTime;
-    
-    return _messageCell;
+    if (tableView == _messageTableView) {
+        _messageCell = [tableView dequeueReusableCellWithIdentifier:@"messageCell"];
+        
+        ZDGoods *goods = _messageDataMutableArray[indexPath.row];
+        
+        _messageCell.nameLabel.text = goods.name;
+        _messageCell.remarkLabel.text = goods.remark;
+        _messageCell.imageView.image = [UIImage imageWithData:goods.imageData];
+        _messageCell.dateOfstartLabel.text = goods.dateOfStart;
+        _messageCell.dateOfEndLabel.text = goods.dateOfEnd;
+        _messageCell.saveTimeLabel.text = goods.saveTime;
+        
+        return _messageCell;
+
+    }else if (tableView == _allTableView){
+        _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell"];
+        
+        ZDGoods *goods = _AllDataMutableArray[indexPath.row];
+        
+        _allCell.nameLabel.text = goods.name;
+        _allCell.remarkLabel.text = goods.remark;
+        _allCell.imageView.image = [UIImage imageWithData:goods.imageData];
+        _allCell.dateOfstartLabel.text = goods.dateOfStart;
+        _allCell.dateOfEndLabel.text = goods.dateOfEnd;
+        _allCell.saveTimeLabel.text = goods.saveTime;
+        
+        return _allCell;
+
+    }else{
+        return nil;
+    }
     
 }
 /**

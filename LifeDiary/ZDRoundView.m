@@ -1,18 +1,23 @@
 //
-//  ZDCellAddedTextFieldView.m
+//  ZDRoundView.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/14.
+//  Created by JACK on 2018/5/17.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDCellAddedTextFieldView.h"
+#import "ZDRoundView.h"
 
-@implementation ZDCellAddedTextFieldView
+@implementation ZDRoundView
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+    
+
+}
 - (id)init{
     self = [super init];
     if (self) {
-        
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

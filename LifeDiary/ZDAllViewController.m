@@ -5,10 +5,12 @@
 //  Created by JACK on 2018/5/13.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
 #import "ZDAllViewController.h"
 #import "ZDAllDataBase.h"
 #import "ZDRecycleDataBase.h"
+#import "ZDRoundView.h"
 
 @interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -39,7 +41,6 @@
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     //隐藏tabBar
-    [UIView animateWithDuration:0.5f animations:^{
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -47,9 +48,7 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
+
     
     
 }
@@ -106,7 +105,11 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (selectedCell.selected==YES) {
+        selectedCell.selected = !selectedCell.selected;
+       
+    }
 }
 /**
  cell是否可以左滑删除

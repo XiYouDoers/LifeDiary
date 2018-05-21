@@ -10,8 +10,8 @@
 #import "ZDRecycleDataBase.h"
 
 @interface ZDRecycleViewController ()<UITableViewDelegate,UITableViewDataSource>{
-    UIButton *_manageButton;
     UIBarButtonItem *_allSelectedBarButtonItem;
+    UIBarButtonItem *_manageCellBarButtonItem;
     bool _rightBarButtonItemIsSeleted;
     NSMutableArray *_deletedCellArray;
     UIButton *_deleteButton;
@@ -28,8 +28,8 @@
     
 
     
-    
-    self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
+    _manageCellBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
+    self.navigationItem.rightBarButtonItem =  _manageCellBarButtonItem;
     
     _allSelectedBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(allSelectedCell)];
  
@@ -42,6 +42,7 @@
     _recycleTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_recycleTableView];
     [_recycleTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"recycleCell"];
+    
     //允许table在编辑的时候多选
     self.recycleTableView.allowsMultipleSelectionDuringEditing = YES;
     
@@ -64,7 +65,7 @@
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
     
-    [UIView animateWithDuration:0.5f animations:^{
+
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -72,9 +73,7 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
+
     
     
 }
@@ -83,6 +82,7 @@
     
 }
 - (void)manageCell:(UIBarButtonItem *)sender{
+    
     if (_rightBarButtonItemIsSeleted == NO) {
    _rightBarButtonItemIsSeleted = YES;
     //table进入编辑状态
@@ -121,6 +121,7 @@
     for (int i = 0; i < self.dataMutableArray.count; i++) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        [self shallowCellSelectedImageView:indexPath];
         [self.recycleTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
     _deletedCellArray = [NSMutableArray arrayWithArray:self.dataMutableArray];
@@ -137,7 +138,7 @@
         _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
     }];
     //删除后回归原状态
-    [self manageCell:_allSelectedBarButtonItem];
+    [self manageCell:_manageCellBarButtonItem];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -154,7 +155,8 @@
             for (id subview in [obj subviews]) {
                 if ([subview isKindOfClass:[UIImageView class]]) {
                     
-                    [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
+//                    [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
+                    [subview setValue:[UIColor redColor] forKey:@"tintColor"];
                     break;
                 }
                 
@@ -172,7 +174,7 @@
 
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     [self shallowCellSelectedImageView:indexPath];
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
@@ -212,20 +214,20 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    _allCell = [tableView dequeueReusableCellWithIdentifier:@"recycleCell"];
+    _recycleCell = [tableView dequeueReusableCellWithIdentifier:@"recycleCell"];
     //去除选中时渲染的蓝色背景
-    _allCell.selectedBackgroundView = [[UIView alloc] init];
+    _recycleCell.selectedBackgroundView = [[UIView alloc] init];
     ZDGoods *goods = [[ZDGoods alloc]init];
     goods = _dataMutableArray[indexPath.row];
     
-    _allCell.nameLabel.text = goods.name;
-    _allCell.remarkLabel.text = goods.remark;
-    _allCell.imageView.image = [UIImage imageWithData:goods.imageData];
-    _allCell.dateOfstartLabel.text = goods.dateOfStart;
-    _allCell.dateOfEndLabel.text = goods.dateOfEnd;
-    _allCell.saveTimeLabel.text = goods.saveTime;
+    _recycleCell.nameLabel.text = goods.name;
+    _recycleCell.remarkLabel.text = goods.remark;
+    _recycleCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    _recycleCell.dateOfstartLabel.text = goods.dateOfStart;
+    _recycleCell.dateOfEndLabel.text = goods.dateOfEnd;
+    _recycleCell.saveTimeLabel.text = goods.saveTime;
     
-    return _allCell;
+    return _recycleCell;
     
 }
 

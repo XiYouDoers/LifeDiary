@@ -30,7 +30,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [UIView animateWithDuration:0.5f animations:^{
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -38,9 +37,7 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
+
     
     
 }

@@ -2,7 +2,7 @@
 //  ZDUnderLineTextField.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/14.
+//  Created by JACK on 2018/5/17.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
@@ -13,8 +13,7 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [[UIColor lightGrayColor] set];//设置下划线颜色 这里是红色 可以自定义
-    
+    [[UIColor lightGrayColor] set];//设置下划线颜色     
     CGFloat y = CGRectGetHeight(self.frame);
     CGContextMoveToPoint(context, 0, y);
     CGContextAddLineToPoint(context, CGRectGetWidth(self.frame), y);
@@ -24,11 +23,11 @@
     CGContextStrokePath(context);
 }
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

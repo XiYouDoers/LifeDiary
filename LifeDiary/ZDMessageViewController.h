@@ -8,9 +8,13 @@
 
 #import "ZDViewController.h"
 #import "ZDMessageCell.h"
+#import "ZDAllCell.h"
 
 @interface ZDMessageViewController : ZDViewController
-@property(nonatomic,strong) NSMutableArray *dataMutableArray;
+@property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
+@property(nonatomic,strong) NSMutableArray *AllDataMutableArray;
 @property(nonatomic,strong) UITableView *messageTableView;
+@property(nonatomic,strong) UITableView *allTableView;
 @property(nonatomic,strong) ZDMessageCell *messageCell;
+@property(nonatomic,strong) ZDAllCell *allCell;
 @end

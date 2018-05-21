@@ -9,16 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ZDAddTableHeaderView.h"
 #import "ZDAddDefaultCell.h"
-#import "ZDCellAddedDatePickerView.h"
-#import "ZDCellAddedTextFieldView.h"
-
+#import "ZDPickerViewCell.h"
 
 @interface ZDAddViewController : UIViewController
 @property(nonatomic,strong) ZDAddTableHeaderView *addTableHeaderView;
 @property(nonatomic,strong) UITableView *addTableView;
 @property(nonatomic,strong) ZDAddDefaultCell *addDefaultCell;
-@property(nonatomic,strong) ZDCellAddedDatePickerView *CellForIndexZeroAddedDatePickerView;
-@property(nonatomic,strong) ZDCellAddedDatePickerView *CellForIndexTwoAddedDatePickerView;
-@property(nonatomic,strong) ZDCellAddedTextFieldView *cellForIndexTwoAddedTextFieldView;
-@property(nonatomic,strong) ZDCellAddedTextFieldView *cellForIndexThreeAddedTextFieldView;
+@property(nonatomic,strong) ZDPickerViewCell *pickerViewCell;
 @end

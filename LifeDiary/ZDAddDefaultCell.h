@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ZDAddDefaultCell : UITableViewCell
-@property(nonatomic,strong) UIImageView *addImageView;
+
+@property(nonatomic,strong) UIImageView *tabImageView;
 @property(nonatomic,strong) UILabel *tabLabel;
+@property(nonatomic,strong) UITextField *textField;
+@property(nonatomic,strong) UIDatePicker *datePicker;
+
 @end

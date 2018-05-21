@@ -15,6 +15,10 @@
 
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>{
     NSArray *_cellTabArray;
+    NSDateFormatter *_dateFormatter;
+    NSDateFormatter *_saveTimeFormatter;
+    NSDateFormatter *_countFormatter;
+    NSArray *_pickerViewDataArray;
 }
 
 
@@ -25,7 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"添加物品";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finsh)];
+    
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    _saveTimeFormatter = [[NSDateFormatter alloc] init];
+    [_saveTimeFormatter setDateFormat:@"y-MM-dd"];
+
+    _countFormatter = [[NSDateFormatter alloc]init];
+    [_countFormatter setDateFormat:@"yyy"];
+    
+    UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
+    [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem =  finishBtnItem;
     
     _addTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _addTableView.dataSource = self;
@@ -38,15 +54,17 @@
     _addTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_addTableView];
     [_addTableView registerClass:[ZDAddDefaultCell class] forCellReuseIdentifier:@"addDefaultCell"];
+    [_addTableView registerClass:[ZDPickerViewCell class] forCellReuseIdentifier:@"pickerViewCell"];
     
     
+    _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
     //隐藏tabBar
-    [UIView animateWithDuration:0.5f animations:^{
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -54,30 +72,53 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [_addTableHeaderView.nameTextField resignFirstResponder];
     [_addTableHeaderView.remarkTextField resignFirstResponder];
 }
 
-- (void)finsh{
+- (void)finish{
+    
     ZDGoods *newGoods = [[ZDGoods alloc]init];
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;
     int index = arc4random_uniform(9);
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
     newGoods.imageData = UIImagePNGRepresentation(image);
-    [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
     
+    NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
+    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
+    newGoods.dateOfStart = cellForZero.textField.text;
+    
+    NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
+    ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
+    newGoods.dateOfEnd = cellForOne.textField.text;
+    
+    NSIndexPath *indexpathForTwo = [NSIndexPath indexPathForRow:2 inSection:0];
+    ZDAddDefaultCell *cellForTwo = [_addTableView cellForRowAtIndexPath:indexpathForTwo];
+    newGoods.saveTime = cellForTwo.textField.text;
+    
+//    NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
+//    ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
+//    newGoods. = cellForThree.textField.text;
+    
+    if (![newGoods.dateOfStart isEqualToString:@""] && ![newGoods.dateOfEnd isEqualToString:@""] && ![newGoods.saveTime isEqualToString:@""]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"日期冲突，请修改" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        // 弹出对话框
+        [self presentViewController:alert animated:true completion:nil];
+    }else{
+    [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
     [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)selectWhichStyle{
     
@@ -109,37 +150,20 @@
 /**
  *  调用照相机
  */
-
-- (void)openCamera
-
-{
+- (void)openCamera{
     
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    
     picker.delegate = self;
-    
     picker.allowsEditing = YES; //可编辑
-    
     //判断是否可以打开照相机
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        
-    {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         
         //摄像头
-        
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
         [self presentViewController:picker animated:YES completion:nil];
-        
-    }
-    
-    else
-        
-    {
+    }else{
         
         NSLog(@"没有摄像头");
-        
     }
     
 }
@@ -150,44 +174,26 @@
  *  打开相册
  */
 
--(void)openPhotoLibrary
-
-{
+-(void)openPhotoLibrary{
     
     // Supported orientations has no common orientation with the application, and [PUUIAlbumListViewController shouldAutorotate] is returning YES
     
-    
-    
     // 进入相册
-    
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-        
-    {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-        
         imagePicker.allowsEditing = YES;
-        
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
         imagePicker.delegate = self;
-        
         [self presentViewController:imagePicker animated:YES completion:^{
             
             NSLog(@"打开相册");
-            
         }];
         
-    }
-    
-    else
-        
-    {
+    }else{
         
         NSLog(@"不能打开相册");
-        
     }
-    
 }
 
 
@@ -196,38 +202,23 @@
 
 // 拍照完成回调
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
 
-{
-    
-
-    
-    
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
-        
-    {
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         
         //图片存入相册
-        
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
-        
     }
-    
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
 //进入拍摄页面点击取消按钮
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-
-{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 /**
  section中cell的数量
@@ -254,17 +245,73 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //单独实现row=3的cell
+    if (indexPath.row==3) {
+       _pickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"pickerViewCell"];
+        _pickerViewCell.pickerViewDataArray = _pickerViewDataArray;
+        [_pickerViewCell.pickerView reloadAllComponents];
+        _pickerViewCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
+        _pickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
+        return _pickerViewCell;
+    }
+
+    
     _addDefaultCell = [tableView dequeueReusableCellWithIdentifier:@"addDefaultCell"];
+    if (indexPath.row == 0) {
+        
+        _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexZeroDateChanged:) forControlEvents:UIControlEventValueChanged];
+    }else if (indexPath.row==1){
+        
+        _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
+    }else if (indexPath.row == 2){
+        
+        NSDate *maxDate = [_dateFormatter dateFromString:@"4-12-31"];
+        _addDefaultCell.datePicker.maximumDate = maxDate;
+        _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexTwoDateChanged:) forControlEvents:UIControlEventValueChanged];
+    }
     _addDefaultCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
+    _addDefaultCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
     return _addDefaultCell;
     
 }
+- (void)indexZeroDateChanged:(UIDatePicker *)datePicker{
+    
+    NSDate *date = datePicker.date;
+    NSString  *string = [[NSString alloc]init];
+    string = [_dateFormatter stringFromDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = string;
+}
+- (void)indexOneDateChanged:(UIDatePicker *)datePicker{
+    
+    NSDate *date = datePicker.date;
+    NSString  *string = [[NSString alloc]init];
+    string = [_dateFormatter stringFromDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = string;
+}
+- (void)indexTwoDateChanged:(UIDatePicker *)datePicker{
+    
+    NSDate *date = datePicker.date;
+    NSString  *string = [[NSString alloc]init];
+    string = [_saveTimeFormatter stringFromDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = string;
+    
+}
+
 /**
  cell点击方法
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
 }
 /*
 #pragma mark - Navigation

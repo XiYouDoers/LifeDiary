@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"耗尽物品";
     
 ;
@@ -33,7 +33,6 @@
 //    _dataMutableArray = [NSMutableArray array];
 //    _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
     
-    [UIView animateWithDuration:0.5f animations:^{
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -41,9 +40,7 @@
         }completion:^(BOOL finished) {
             
         }];
-    }completion:^(BOOL finished) {
-        
-    }];
+
     
     
 }

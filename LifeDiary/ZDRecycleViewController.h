@@ -12,6 +12,6 @@
 @interface ZDRecycleViewController : UIViewController
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *recycleTableView;
-@property(nonatomic,strong) ZDAllCell *allCell;
+@property(nonatomic,strong) ZDAllCell *recycleCell;
 
 @end

@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE65C20ADABC800A30442 /* MASCompositeConstraint.m */; };
+		040CE67620ADABC800A30442 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE65F20ADABC800A30442 /* MASConstraint.m */; };
+		040CE67720ADABC800A30442 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66120ADABC800A30442 /* MASConstraintMaker.m */; };
+		040CE67820ADABC800A30442 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66320ADABC800A30442 /* MASLayoutConstraint.m */; };
+		040CE67920ADABC800A30442 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66720ADABC800A30442 /* MASViewAttribute.m */; };
+		040CE67A20ADABC800A30442 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66920ADABC800A30442 /* MASViewConstraint.m */; };
+		040CE67B20ADABC800A30442 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66B20ADABC800A30442 /* NSArray+MASAdditions.m */; };
+		040CE67C20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE66E20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		040CE67D20ADABC800A30442 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE67020ADABC800A30442 /* View+MASAdditions.m */; };
+		040CE67E20ADABC800A30442 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE67320ADABC800A30442 /* ViewController+MASAdditions.m */; };
+		040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */; };
+		040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68320ADC34000A30442 /* ZDRoundView.m */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
 		044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E920A80DB500406D65 /* AppDelegate.m */; };
 		044F01ED20A80DB500406D65 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01EC20A80DB500406D65 /* ViewController.m */; };
@@ -19,13 +31,13 @@
 		044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F028520A80F8D00406D65 /* libsqlite3.0.tbd */; };
 		044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B320A811E800406D65 /* ZDFindViewController.m */; };
 		044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B620A811F200406D65 /* ZDMeViewController.m */; };
-		044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02B920A8120800406D65 /* ZDUserInfoViewController.m */; };
 		044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02BC20A8121300406D65 /* ZDRecycleViewController.m */; };
 		044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02BF20A8121C00406D65 /* ZDExpireViewController.m */; };
 		044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C220A8122700406D65 /* ZDDepleteViewController.m */; };
 		044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C520A8123500406D65 /* ZDAboutViewController.m */; };
 		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
+		04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */; };
 		04B8368F20A871870050D568 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368520A871870050D568 /* FMDatabase.m */; };
 		04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368720A871870050D568 /* FMDatabaseAdditions.m */; };
 		04B8369120A871870050D568 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368920A871870050D568 /* FMDatabasePool.m */; };
@@ -38,18 +50,18 @@
 		04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836A620A87ED40050D568 /* ZDAllCell.m */; };
 		04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */; };
 		04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD721420A9A21100A14ADF /* ZDMessageCell.m */; };
-		04BD721E20A9B04300A14ADF /* ZDMeTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */; };
 		04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */; };
-		04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */; };
-		04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */; };
 		04BD723020A9BA7C00A14ADF /* ZDRecycleDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD722F20A9BA7C00A14ADF /* ZDRecycleDataBase.m */; };
 		04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */; };
 		04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */; };
-		04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */; };
 		04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */; };
+		04C76C2820AE84750094A5B0 /* ZDMeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */; };
 		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
 		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
 		04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C5820AC71DC00060741 /* ZDAllViewController.m */; };
+		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
+		04D8B64620B133A300055018 /* ZDDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64520B133A300055018 /* ZDDateCell.m */; };
+		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +82,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040CE65B20ADABC800A30442 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		040CE65C20ADABC800A30442 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		040CE65D20ADABC800A30442 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		040CE65E20ADABC800A30442 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		040CE65F20ADABC800A30442 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		040CE66020ADABC800A30442 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		040CE66120ADABC800A30442 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		040CE66220ADABC800A30442 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		040CE66320ADABC800A30442 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		040CE66420ADABC800A30442 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		040CE66520ADABC800A30442 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		040CE66620ADABC800A30442 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		040CE66720ADABC800A30442 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		040CE66820ADABC800A30442 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		040CE66920ADABC800A30442 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		040CE66A20ADABC800A30442 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		040CE66B20ADABC800A30442 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		040CE66C20ADABC800A30442 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		040CE66D20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		040CE66E20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		040CE66F20ADABC800A30442 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		040CE67020ADABC800A30442 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		040CE67120ADABC800A30442 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		040CE67220ADABC800A30442 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		040CE67320ADABC800A30442 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		040CE67F20ADC2CC00A30442 /* ZDUnderLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDUnderLineTextField.h; sourceTree = "<group>"; };
+		040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUnderLineTextField.m; sourceTree = "<group>"; };
+		040CE68220ADC34000A30442 /* ZDRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDRoundView.h; sourceTree = "<group>"; };
+		040CE68320ADC34000A30442 /* ZDRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRoundView.m; sourceTree = "<group>"; };
 		044F01E220A80DB500406D65 /* LifeDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F01E620A80DB500406D65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		044F01E820A80DB500406D65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,8 +133,6 @@
 		044F02B320A811E800406D65 /* ZDFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDFindViewController.m; sourceTree = "<group>"; };
 		044F02B520A811F200406D65 /* ZDMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeViewController.h; sourceTree = "<group>"; };
 		044F02B620A811F200406D65 /* ZDMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeViewController.m; sourceTree = "<group>"; };
-		044F02B820A8120800406D65 /* ZDUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDUserInfoViewController.h; sourceTree = "<group>"; };
-		044F02B920A8120800406D65 /* ZDUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUserInfoViewController.m; sourceTree = "<group>"; };
 		044F02BB20A8121300406D65 /* ZDRecycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDRecycleViewController.h; sourceTree = "<group>"; };
 		044F02BC20A8121300406D65 /* ZDRecycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRecycleViewController.m; sourceTree = "<group>"; };
 		044F02BE20A8121C00406D65 /* ZDExpireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDExpireViewController.h; sourceTree = "<group>"; };
@@ -106,6 +145,8 @@
 		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
 		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
 		044F02CE20A8149300406D65 /* ZDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTabBarViewController.m; sourceTree = "<group>"; };
+		04934B2220AFE1B700FE1E17 /* ZDPhotoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPhotoManagerViewController.h; sourceTree = "<group>"; };
+		04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPhotoManagerViewController.m; sourceTree = "<group>"; };
 		04B8368420A871870050D568 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		04B8368520A871870050D568 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		04B8368620A871870050D568 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -131,30 +172,30 @@
 		04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+UITableView_reload.m"; sourceTree = "<group>"; };
 		04BD721320A9A21100A14ADF /* ZDMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageCell.h; sourceTree = "<group>"; };
 		04BD721420A9A21100A14ADF /* ZDMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCell.m; sourceTree = "<group>"; };
-		04BD721C20A9B04300A14ADF /* ZDMeTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeTopCell.h; sourceTree = "<group>"; };
-		04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeTopCell.m; sourceTree = "<group>"; };
 		04BD721F20A9B0F000A14ADF /* ZDAddDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddDefaultCell.h; sourceTree = "<group>"; };
 		04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddDefaultCell.m; sourceTree = "<group>"; };
-		04BD722520A9B20C00A14ADF /* ZDCellAddedDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCellAddedDatePickerView.h; sourceTree = "<group>"; };
-		04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedDatePickerView.m; sourceTree = "<group>"; };
-		04BD722820A9B23600A14ADF /* ZDCellAddedTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCellAddedTextFieldView.h; sourceTree = "<group>"; };
-		04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCellAddedTextFieldView.m; sourceTree = "<group>"; };
 		04BD722E20A9BA7100A14ADF /* ZDRecycleDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDRecycleDataBase.h; sourceTree = "<group>"; };
 		04BD722F20A9BA7C00A14ADF /* ZDRecycleDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRecycleDataBase.m; sourceTree = "<group>"; };
 		04BD723120A9BA8800A14ADF /* ZDExpireDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDExpireDataBase.h; sourceTree = "<group>"; };
 		04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDExpireDataBase.m; sourceTree = "<group>"; };
 		04BD723420A9BA9300A14ADF /* ZDDepleteDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDDepleteDataBase.h; sourceTree = "<group>"; };
 		04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDepleteDataBase.m; sourceTree = "<group>"; };
-		04BD723720A9BFB500A14ADF /* ZDUnderLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDUnderLineTextField.h; sourceTree = "<group>"; };
-		04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUnderLineTextField.m; sourceTree = "<group>"; };
 		04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddTableHeaderView.h; sourceTree = "<group>"; };
 		04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddTableHeaderView.m; sourceTree = "<group>"; };
+		04C76C2620AE84750094A5B0 /* ZDMeTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeTableHeaderView.h; sourceTree = "<group>"; };
+		04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeTableHeaderView.m; sourceTree = "<group>"; };
 		04CF7C4820AC6C2400060741 /* ZDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDViewController.h; sourceTree = "<group>"; };
 		04CF7C4920AC6C2400060741 /* ZDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDViewController.m; sourceTree = "<group>"; };
 		04CF7C4E20AC6F5700060741 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
 		04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
 		04CF7C5720AC71DC00060741 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
 		04CF7C5820AC71DC00060741 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
+		04D8B64120B12CE200055018 /* ZDMeDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeDefaultCell.h; sourceTree = "<group>"; };
+		04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeDefaultCell.m; sourceTree = "<group>"; };
+		04D8B64420B133A200055018 /* ZDDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDDateCell.h; sourceTree = "<group>"; };
+		04D8B64520B133A300055018 /* ZDDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDateCell.m; sourceTree = "<group>"; };
+		04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPickerViewCell.h; sourceTree = "<group>"; };
+		04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPickerViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +225,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040CE65920ADABC700A30442 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				040CE65B20ADABC800A30442 /* MASCompositeConstraint.h */,
+				040CE65C20ADABC800A30442 /* MASCompositeConstraint.m */,
+				040CE65D20ADABC800A30442 /* MASConstraint+Private.h */,
+				040CE65E20ADABC800A30442 /* MASConstraint.h */,
+				040CE65F20ADABC800A30442 /* MASConstraint.m */,
+				040CE66020ADABC800A30442 /* MASConstraintMaker.h */,
+				040CE66120ADABC800A30442 /* MASConstraintMaker.m */,
+				040CE66220ADABC800A30442 /* MASLayoutConstraint.h */,
+				040CE66320ADABC800A30442 /* MASLayoutConstraint.m */,
+				040CE66420ADABC800A30442 /* Masonry.h */,
+				040CE66520ADABC800A30442 /* MASUtilities.h */,
+				040CE66620ADABC800A30442 /* MASViewAttribute.h */,
+				040CE66720ADABC800A30442 /* MASViewAttribute.m */,
+				040CE66820ADABC800A30442 /* MASViewConstraint.h */,
+				040CE66920ADABC800A30442 /* MASViewConstraint.m */,
+				040CE66A20ADABC800A30442 /* NSArray+MASAdditions.h */,
+				040CE66B20ADABC800A30442 /* NSArray+MASAdditions.m */,
+				040CE66C20ADABC800A30442 /* NSArray+MASShorthandAdditions.h */,
+				040CE66D20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				040CE66E20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				040CE66F20ADABC800A30442 /* View+MASAdditions.h */,
+				040CE67020ADABC800A30442 /* View+MASAdditions.m */,
+				040CE67120ADABC800A30442 /* View+MASShorthandAdditions.h */,
+				040CE67220ADABC800A30442 /* ViewController+MASAdditions.h */,
+				040CE67320ADABC800A30442 /* ViewController+MASAdditions.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
 		044F01D920A80DB500406D65 = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +329,7 @@
 		044F021820A80E6D00406D65 /* ThirdCodes */ = {
 			isa = PBXGroup;
 			children = (
+				040CE65920ADABC700A30442 /* Masonry */,
 				04B8368320A871870050D568 /* fmdb */,
 			);
 			name = ThirdCodes;
@@ -373,8 +447,6 @@
 		044F02A520A810FA00406D65 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				044F02B820A8120800406D65 /* ZDUserInfoViewController.h */,
-				044F02B920A8120800406D65 /* ZDUserInfoViewController.m */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -420,8 +492,8 @@
 		044F02AA20A8114700406D65 /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				04BD721C20A9B04300A14ADF /* ZDMeTopCell.h */,
-				04BD721D20A9B04300A14ADF /* ZDMeTopCell.m */,
+				04C76C2620AE84750094A5B0 /* ZDMeTableHeaderView.h */,
+				04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -431,14 +503,18 @@
 			children = (
 				04BD721F20A9B0F000A14ADF /* ZDAddDefaultCell.h */,
 				04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */,
+				04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */,
+				04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */,
+				04D8B64420B133A200055018 /* ZDDateCell.h */,
+				04D8B64520B133A300055018 /* ZDDateCell.m */,
 				04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */,
 				04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */,
-				04BD722520A9B20C00A14ADF /* ZDCellAddedDatePickerView.h */,
-				04BD722620A9B20C00A14ADF /* ZDCellAddedDatePickerView.m */,
-				04BD722820A9B23600A14ADF /* ZDCellAddedTextFieldView.h */,
-				04BD722920A9B23600A14ADF /* ZDCellAddedTextFieldView.m */,
-				04BD723720A9BFB500A14ADF /* ZDUnderLineTextField.h */,
-				04BD723820A9BFB500A14ADF /* ZDUnderLineTextField.m */,
+				040CE67F20ADC2CC00A30442 /* ZDUnderLineTextField.h */,
+				040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */,
+				040CE68220ADC34000A30442 /* ZDRoundView.h */,
+				040CE68320ADC34000A30442 /* ZDRoundView.m */,
+				04934B2220AFE1B700FE1E17 /* ZDPhotoManagerViewController.h */,
+				04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */,
 			);
 			name = Add;
 			sourceTree = "<group>";
@@ -472,6 +548,8 @@
 				04BD722B20A9BA1A00A14ADF /* Recycle */,
 				04BD722C20A9BA2600A14ADF /* Expire */,
 				04BD722D20A9BA3200A14ADF /* Deplete */,
+				04D8B64120B12CE200055018 /* ZDMeDefaultCell.h */,
+				04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -676,18 +754,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04BD723920A9BFB500A14ADF /* ZDUnderLineTextField.m in Sources */,
+				040CE67620ADABC800A30442 /* MASConstraint.m in Sources */,
+				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
 				04B836A720A87ED40050D568 /* ZDAllCell.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
+				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
+				040CE67B20ADABC800A30442 /* NSArray+MASAdditions.m in Sources */,
 				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
-				04BD722720A9B20C00A14ADF /* ZDCellAddedDatePickerView.m in Sources */,
+				040CE67D20ADABC800A30442 /* View+MASAdditions.m in Sources */,
+				040CE67720ADABC800A30442 /* MASConstraintMaker.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
+				04D8B64620B133A300055018 /* ZDDateCell.m in Sources */,
+				040CE67C20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				04C76C2820AE84750094A5B0 /* ZDMeTableHeaderView.m in Sources */,
 				04B8368F20A871870050D568 /* FMDatabase.m in Sources */,
 				044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */,
+				040CE67820ADABC800A30442 /* MASLayoutConstraint.m in Sources */,
 				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
 				04BD723020A9BA7C00A14ADF /* ZDRecycleDataBase.m in Sources */,
 				04B836A320A87DE90050D568 /* ZDAllDataBase.m in Sources */,
+				04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
 				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
@@ -696,22 +783,25 @@
 				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
 				044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */,
 				044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */,
+				040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */,
 				04B8369920A874EA0050D568 /* ZDUser.m in Sources */,
+				040CE67920ADABC800A30442 /* MASViewAttribute.m in Sources */,
 				04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */,
 				044F01E720A80DB500406D65 /* main.m in Sources */,
+				04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */,
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
 				04B8369620A874750050D568 /* ZDGoods.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
 				04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */,
 				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
+				040CE67E20ADABC800A30442 /* ViewController+MASAdditions.m in Sources */,
 				04B8369C20A875610050D568 /* ZDMessageDataBase.m in Sources */,
-				044F02BA20A8120800406D65 /* ZDUserInfoViewController.m in Sources */,
 				04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */,
-				04BD722A20A9B23600A14ADF /* ZDCellAddedTextFieldView.m in Sources */,
+				040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */,
 				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
+				040CE67A20ADABC800A30442 /* MASViewConstraint.m in Sources */,
 				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
-				04BD721E20A9B04300A14ADF /* ZDMeTopCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

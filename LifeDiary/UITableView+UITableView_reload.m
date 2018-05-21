@@ -56,7 +56,7 @@
         
     } else {
    
-        UILabel *noViewLabel = [[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-50,[UIScreen mainScreen].bounds.size.height/2-10, 100, 20)];
+        UILabel *noViewLabel = [[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-50,[UIScreen mainScreen].bounds.size.height/2-40, 100, 20)];
         noViewLabel.text = @"空空如也...";
         noViewLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:noViewLabel];
