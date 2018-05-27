@@ -50,7 +50,7 @@ static ZDAllDataBase *_allDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,allGoods_identifier VARCHAR(255),allGoods_name VARCHAR(255),allGoods_remark VARCHAR(255),allGoods_imageData blob,allGoods_dateOfStart VARCHAR(255),allGoods_dateOfEnd VARCHAR(255),allGoods_saveTime VARCHAR(255))";
+    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,allGoods_identifier VARCHAR(255),allGoods_name VARCHAR(255),allGoods_remark VARCHAR(255),allGoods_imageData blob,allGoods_dateOfStart VARCHAR(255),allGoods_dateOfEnd VARCHAR(255),allGoods_saveTime VARCHAR(255),allGoods_sum VARCHAR(255),allGoods_ratio double)";
     [_db executeUpdate:goodsSql];
     
     [_db close];
@@ -71,10 +71,13 @@ static ZDAllDataBase *_allDataBase = nil;
         }
         
     }
+
     maxID = @([maxID integerValue] + 1);
-    [_db executeUpdate:@"INSERT INTO allGoods(allGoods_identifier,allGoods_name,allGoods_remark,allGoods_imageData,allGoods_dateOfStart,allGoods_dateOfEnd,allGoods_saveTime)VALUES(?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime];
     
+    NSNumber *ratioNumber = @(goods.ratio);
+    [_db executeUpdate:@"INSERT INTO allGoods(allGoods_identifier,allGoods_name,allGoods_remark,allGoods_imageData,allGoods_dateOfStart,allGoods_dateOfEnd,allGoods_saveTime,allGoods_sum,allGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber];
     
+ 
     [_db close];
     
 }
@@ -102,6 +105,9 @@ static ZDAllDataBase *_allDataBase = nil;
         goods.dateOfStart = [res stringForColumn:@"allGoods_dateOfStart"];
         goods.dateOfEnd = [res stringForColumn:@"allGoods_dateOfEnd"];
         goods.saveTime = [res stringForColumn:@"allGoods_saveTime"];
+        goods.sum = [res stringForColumn:@"allGoods_sum"];
+        goods.ratio = [res doubleForColumn:@"allGoods_ratio"];
+  
         [dataArray addObject:goods];
     }
     

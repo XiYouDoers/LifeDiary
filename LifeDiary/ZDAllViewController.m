@@ -13,7 +13,7 @@
 #import "ZDRoundView.h"
 
 @interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource>{
-    
+    NSDateFormatter *_dateFormatter;
 }
 
 
@@ -23,6 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
     //_allTableView
     self.navigationItem.title = @"全部物品";
 
@@ -38,6 +42,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     //隐藏tabBar
@@ -65,6 +70,7 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
     return _dataMutableArray.count;
 }
 /**
@@ -93,9 +99,15 @@
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
     _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    _allCell.dateOfstartLabel.text = goods.dateOfStart;
-    _allCell.dateOfEndLabel.text = goods.dateOfEnd;
-    _allCell.saveTimeLabel.text = goods.saveTime;
+    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
+    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
+    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
+    //计算出保质期的时间戳
+    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
+    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
+    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
+    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
+    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
     
     return _allCell;
     

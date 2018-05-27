@@ -16,4 +16,11 @@
 @property(nonatomic,strong) UILabel *dateOfstartLabel;
 @property(nonatomic,strong) UILabel *dateOfEndLabel;
 @property(nonatomic,strong) UILabel *saveTimeLabel;
+
+/**
+ setting arc's startAngle and endAngle
+
+ @param ratio   a rate of remainder/all
+ */
+- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;
 @end

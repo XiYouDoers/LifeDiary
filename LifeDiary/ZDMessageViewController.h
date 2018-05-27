@@ -12,7 +12,7 @@
 
 @interface ZDMessageViewController : ZDViewController
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
-@property(nonatomic,strong) NSMutableArray *AllDataMutableArray;
+
 @property(nonatomic,strong) UITableView *messageTableView;
 @property(nonatomic,strong) UITableView *allTableView;
 @property(nonatomic,strong) ZDMessageCell *messageCell;

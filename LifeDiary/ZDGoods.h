@@ -16,4 +16,6 @@
 @property(nonatomic,strong) NSString *dateOfStart;
 @property(nonatomic,strong) NSString *dateOfEnd;
 @property(nonatomic,strong) NSString *saveTime;
+@property(nonatomic,strong) NSString *sum;
+@property(nonatomic,assign) float ratio;
 @end

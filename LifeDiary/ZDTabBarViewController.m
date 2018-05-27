@@ -6,7 +6,7 @@
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 #define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
-#define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
+#define LIGHTBLUE [UIColor colorWithRed:0.0 green:116.0/255 blue:245.0/255 alpha:1]
 #import "ZDTabBarViewController.h"
 #import "ZDMessageViewController.h"
 #import "ZDFindViewController.h"
@@ -79,9 +79,11 @@
     [controller.tabBarItem setTitleTextAttributes:normalDictionary forState:UIControlStateNormal];
     
     //改变navigationBar中间title的颜色
+    
     [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE}];
     //改变navigationBar.barButtonItem的颜色
-    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];
+    
+//    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];
 }
 /*
  #pragma mark - Navigation

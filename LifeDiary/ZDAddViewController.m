@@ -105,20 +105,72 @@
     ZDAddDefaultCell *cellForTwo = [_addTableView cellForRowAtIndexPath:indexpathForTwo];
     newGoods.saveTime = cellForTwo.textField.text;
     
-//    NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
-//    ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
-//    newGoods. = cellForThree.textField.text;
+    NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
+    ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
+    newGoods.sum = cellForThree.textField.text;
     
-    if (![newGoods.dateOfStart isEqualToString:@""] && ![newGoods.dateOfEnd isEqualToString:@""] && ![newGoods.saveTime isEqualToString:@""]) {
+
+    
+    if ([newGoods.dateOfStart isEqualToString:@""] && [newGoods.dateOfEnd isEqualToString:@""] && [newGoods.saveTime isEqualToString:@""]) {
+        //当生产日期，截止日期，保质期全不为空，报错
+        [self wrongIntput];
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"日期冲突，请修改" preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-        // 弹出对话框
-        [self presentViewController:alert animated:true completion:nil];
     }else{
+        
+        NSDate *dateNow = [[NSDate alloc]init];
+        NSCalendar *calender = [NSCalendar currentCalendar];
+        NSCalendarUnit unitsave = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
+    //计算出另一个日期
+        if([newGoods.dateOfStart isEqualToString:@""]){
+
+            NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
+            NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
+            NSDateComponents *dateComponentsOfStart =[calender components:unitsave fromDate:dateOfSaveTime toDate:dateOfEnd options:0];
+            NSString *stringOfStart = [NSString stringWithFormat:@"%ld-%ld-%ld",dateComponentsOfStart.year,dateComponentsOfStart.month,dateComponentsOfStart.day];
+            newGoods.dateOfStart = stringOfStart;
+        }else if([newGoods.dateOfEnd isEqualToString:@""]){
+//            NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
+//            NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
+//
+//            NSDateComponents *dateComponentsOfEnd = [calender ];
+//            NSString *stringOfEnd = [NSString stringWithFormat:@"%ld年%ld月%ld日",dateComponentsOfEnd.year,dateComponentsOfEnd.month,dateComponentsOfEnd.day];
+//            newGoods.dateOfEnd = stringOfEnd;
+        }else{
+            //newGoods.saveTime==nil
+            NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
+            NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
+            NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
+            NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
+            //如果开始日期大于等于结束日期，则报错
+            if (timeIntervalOfStart - timeIntervalOfEnd>=0.00000000) {
+                [self wrongIntput];
+                return ;
+            }
+            //将均正确的任意两个日期进行计算，得出另一个日期
+            NSDateComponents *dateComponentsOfSaveTime = [calender components:unitsave fromDate:dateOfStart toDate:dateOfEnd options:0];
+
+            NSString *stringOfSaveTime = [NSString stringWithFormat:@"%ld-%ld-%ld",dateComponentsOfSaveTime.year,dateComponentsOfSaveTime.month,dateComponentsOfSaveTime.day];
+            newGoods.saveTime = stringOfSaveTime;
+            
+        }
+        
+    // 计算出圆弧的角度比率
+        NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
+        NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
+        
+        NSInteger secondsOfNowToEnd = [dateOfEnd timeIntervalSinceDate:dateNow];
+        NSInteger secondsOfStartToEnd = [dateOfEnd timeIntervalSinceDate:dateOfStart];
+        double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd-0.5;
+        newGoods.ratio = ratio;
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
     [self.navigationController popViewControllerAnimated:YES];
     }
+}
+- (void)wrongIntput{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"日期冲突，请修改" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    // 弹出对话框
+    [self presentViewController:alert animated:true completion:nil];
 }
 - (void)selectWhichStyle{
     

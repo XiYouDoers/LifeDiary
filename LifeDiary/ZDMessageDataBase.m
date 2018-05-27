@@ -80,7 +80,7 @@ static ZDMessageDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255))";
+    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,goods_identifier VARCHAR(255),goods_name VARCHAR(255),goods_remark VARCHAR(255),goods_imageData blob,goods_dateOfStart VARCHAR(255),goods_dateOfEnd VARCHAR(255),goods_saveTime VARCHAR(255),goods_sum VARCHAR(255),goods_ratio VARCHAR(255))";
     [_db executeUpdate:goodsSql];
     
     [_db close];
@@ -90,19 +90,20 @@ static ZDMessageDataBase *_messageDataBase = nil;
 
 - (void)addGoods:(ZDGoods *)goods{
     [_db open];
-//    NSNumber *maxID = @(0);
-//    
-//    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods "];
-//    //获取数据库中最大的ID
-//    while ([res next]) {
-//        if ([maxID integerValue] < [[res stringForColumn:@"goods_id"] integerValue]) {
-//            maxID = @([[res stringForColumn:@"goods_id"] integerValue] ) ;
-//        }
-//        
-//    }
-//    maxID = @([maxID integerValue] + 1);
+    NSNumber *maxID = @(0);
     
-    [_db executeUpdate:@"INSERT INTO goods(goods_name,goods_remark,goods_imageData,goods_dateOfStart,goods_dateOfEnd,goods_saveTime)VALUES(?,?,?,?,?,?)",goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime];
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods "];
+    //获取数据库中最大的ID
+    while ([res next]) {
+        if ([maxID integerValue] < [[res stringForColumn:@"goods_id"] integerValue]) {
+            maxID = @([[res stringForColumn:@"goods_id"] integerValue] ) ;
+        }
+        
+    }
+    maxID = @([maxID integerValue] + 1);
+    
+    
+    [_db executeUpdate:@"INSERT INTO goods(goods_identifier,goods_name,goods_remark,goods_imageData,goods_dateOfStart,goods_dateOfEnd,goods_saveTime,goods_sum,goods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum,goods.ratio];
     
     
     [_db close];
@@ -112,7 +113,7 @@ static ZDMessageDataBase *_messageDataBase = nil;
 - (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM person WHERE goods_name = ?",goods.name];
+    [_db executeUpdate:@"DELETE FROM person WHERE goods_identifier = ?",goods.identifier];
     
     [_db close];
 }
@@ -122,26 +123,23 @@ static ZDMessageDataBase *_messageDataBase = nil;
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods"];
-    
     while ([res next]) {
+        
         ZDGoods *goods = [[ZDGoods alloc] init];
-
+        goods.identifier = @([[res stringForColumn:@"goods_identifier"]integerValue]);
         goods.name = [res stringForColumn:@"goods_name"];
         goods.remark = [res stringForColumn:@"goods_remark"];
         goods.imageData = [res dataForColumn:@"goods_imageData"];
         goods.dateOfStart = [res stringForColumn:@"goods_dateOfStart"];
         goods.dateOfEnd = [res stringForColumn:@"goods_dateOfEnd"];
-        goods.saveTime = [res stringForColumn:@"goodssaveTime"];
+        goods.saveTime = [res stringForColumn:@"goods_saveTime"];
+        goods.sum = [res stringForColumn:@"goods_sum"];
+        goods.ratio = ([[res stringForColumn:@"goods_ratio"]doubleValue]);
         [dataArray addObject:goods];
 
     }
     
     [_db close];
-    
-    
-    
     return dataArray;
-    
-    
 }
 @end

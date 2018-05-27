@@ -10,7 +10,10 @@
 #import "ZDMessageCell.h"
 #import "Masonry.h"
 
-@implementation ZDMessageCell
+@implementation ZDMessageCell{
+    CAShapeLayer *_outsideArc;
+    CAShapeLayer *_insideArc;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -86,21 +89,55 @@
             make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
             make.right.mas_offset(-10);
         }];
+        [_saveTimeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            //更新约束
+        }];
 
-        CAShapeLayer *solidLine;
-        solidLine =  [CAShapeLayer layer];
+        _outsideArc =  [CAShapeLayer layer];
+        _outsideArc.fillColor = [UIColor clearColor].CGColor;
         //圆弧的宽度
-        solidLine.lineWidth = 3.5f;
-        //圆弧的颜色
-        solidLine.strokeColor = [UIColor orangeColor].CGColor;
-        //背景填充色
-        solidLine.fillColor = [UIColor clearColor].CGColor;
+        _outsideArc.lineWidth = 3.5f;
+        [self.layer addSublayer:_outsideArc];
         
-        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-50, 50) radius:16 startAngle:(1.5*M_PI) endAngle:0*M_PI clockwise:true];
-        solidLine.path = [path CGPath];
-        [self.layer addSublayer:solidLine];
+        _insideArc = [CAShapeLayer layer];
+        //圆弧边框的宽度
+        _insideArc.lineWidth = 0.f;
+        [self.layer addSublayer:_insideArc];
+
     }
     return self;
+}
+- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval{
+    
+    UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 40) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];
+
+    _outsideArc.path = [pathOfOutsideArc CGPath];
+    //外面圆弧的strokeColor
+    if (ratio<0.25) {
+        _outsideArc.strokeColor = [UIColor redColor].CGColor;
+    }else if(ratio<0.5){
+        _outsideArc.strokeColor = [UIColor yellowColor].CGColor;
+    }else if(ratio<0.75){
+        _outsideArc.strokeColor = [UIColor orangeColor].CGColor;
+    }else{
+        _outsideArc.strokeColor = [UIColor greenColor].CGColor;
+    }
+    
+    UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 40) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
+    _insideArc.path = [pathOfInsideArc CGPath];
+    int months = timeInterval/3600/24/30;
+    //里面圆弧的fillColor
+    if (months<6) {
+        _insideArc.fillColor = [UIColor redColor].CGColor;
+    }else if(months<12){
+        _insideArc.fillColor = [UIColor yellowColor].CGColor;
+    }else if(months<24){
+        _insideArc.fillColor = [UIColor orangeColor].CGColor;
+    }else{
+        _insideArc.fillColor = [UIColor greenColor].CGColor;
+    }
+    
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
