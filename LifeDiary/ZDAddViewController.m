@@ -13,7 +13,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-@interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>{
+@interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
     NSArray *_cellTabArray;
     NSDateFormatter *_dateFormatter;
     NSDateFormatter *_saveTimeFormatter;
@@ -48,6 +48,8 @@
     _addTableView.delegate = self;
     _addTableHeaderView  = [[ZDAddTableHeaderView alloc]init];
     _addTableHeaderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,150);
+    _addTableHeaderView.nameTextField.delegate = self;
+    _addTableHeaderView.remarkTextField.delegate = self;
     
     [_addTableHeaderView.headPictureSetButton addTarget:self action:@selector(selectWhichStyle) forControlEvents:UIControlEventTouchUpInside];
     _addTableView.tableHeaderView = _addTableHeaderView;
@@ -80,10 +82,21 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     [_addTableHeaderView.nameTextField resignFirstResponder];
     [_addTableHeaderView.remarkTextField resignFirstResponder];
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if (textField  == _addTableHeaderView.nameTextField) {
+        
+    [_addTableHeaderView.remarkTextField becomeFirstResponder];
+    }else if(textField  == _addTableHeaderView.remarkTextField) {
+        
+     [_addTableHeaderView.nameTextField becomeFirstResponder];
+    }
+    return YES;
+}
 - (void)finish{
     
     ZDGoods *newGoods = [[ZDGoods alloc]init];
@@ -129,12 +142,12 @@
             NSString *stringOfStart = [NSString stringWithFormat:@"%ld-%ld-%ld",dateComponentsOfStart.year,dateComponentsOfStart.month,dateComponentsOfStart.day];
             newGoods.dateOfStart = stringOfStart;
         }else if([newGoods.dateOfEnd isEqualToString:@""]){
-//            NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
-//            NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
-//
-//            NSDateComponents *dateComponentsOfEnd = [calender ];
-//            NSString *stringOfEnd = [NSString stringWithFormat:@"%ld年%ld月%ld日",dateComponentsOfEnd.year,dateComponentsOfEnd.month,dateComponentsOfEnd.day];
-//            newGoods.dateOfEnd = stringOfEnd;
+            NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
+            NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
+            NSDateComponents *dateComponentsOfSaveTime = [calender components: unitsave fromDate:dateOfSaveTime];
+            NSDate *dateOfEnd = [calender dateByAddingComponents:dateComponentsOfSaveTime toDate:dateOfStart options:0];
+            NSString *stringOfEnd = [_dateFormatter stringFromDate:dateOfEnd];
+            newGoods.dateOfEnd = stringOfEnd;
         }else{
             //newGoods.saveTime==nil
             NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
@@ -157,7 +170,6 @@
     // 计算出圆弧的角度比率
         NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
         NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
-        
         NSInteger secondsOfNowToEnd = [dateOfEnd timeIntervalSinceDate:dateNow];
         NSInteger secondsOfStartToEnd = [dateOfEnd timeIntervalSinceDate:dateOfStart];
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd-0.5;

@@ -29,6 +29,7 @@
         _nameTextField.frame = CGRectMake(0,  frame.size.height/3-30+60+10, frame.size.width, 20);
         _nameTextField.textAlignment = NSTextAlignmentCenter;
         _nameTextField.text = @"LifeDiary";
+        _nameTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
         [self addSubview:_nameTextField];
         
         //_personalitySignatureTextField
@@ -38,6 +39,7 @@
         _personalitySignatureTextField.text = @"没有个性，何来签名";
         _personalitySignatureTextField.font = [UIFont systemFontOfSize:12];
         _personalitySignatureTextField.textColor = [UIColor whiteColor];
+        _personalitySignatureTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
         [self addSubview:_personalitySignatureTextField];
     }
     return self;

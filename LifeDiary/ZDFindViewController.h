@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDCollectionViewCell.h"
+
 
 @interface ZDFindViewController : UIViewController
+@property(nonatomic,strong) UICollectionView *collectionView;
+@property(nonatomic,strong) ZDCollectionViewCell *collectionViewCell;
 
 @end

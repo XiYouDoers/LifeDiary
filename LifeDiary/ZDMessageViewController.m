@@ -5,6 +5,7 @@
 //  Created by JACK on 2018/5/16.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
+
 #define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #define HEIGHT_REFRESH 64+50.f
 #import "ZDMessageViewController.h"
@@ -26,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     self.view.backgroundColor = [UIColor whiteColor];
     _formatter = [[NSDateFormatter alloc]init];
@@ -81,24 +81,24 @@
 
 
 
--(void)doSomethingInSegment:(UISegmentedControl *)Seg
-{
-    NSInteger Index = Seg.selectedSegmentIndex;
-    switch (Index) {
-        case 0:
-            _messageTableView.hidden = NO;
-            _allTableView.hidden = YES;
-            [_messageTableView reloadData];
-            
-            break;
-        case 1:
-            _messageTableView.hidden = YES;
-            _allTableView.hidden = NO;
-            [_allTableView reloadData];
-
-            break;
-    }
-}
+//-(void)doSomethingInSegment:(UISegmentedControl *)Seg
+//{
+//    NSInteger Index = Seg.selectedSegmentIndex;
+//    switch (Index) {
+//        case 0:
+//            _messageTableView.hidden = NO;
+//            _allTableView.hidden = YES;
+//            [_messageTableView reloadData];
+//            
+//            break;
+//        case 1:
+//            _messageTableView.hidden = YES;
+//            _allTableView.hidden = NO;
+//            [_allTableView reloadData];
+//
+//            break;
+//    }
+//}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
@@ -175,9 +175,10 @@
         _messageCell.nameLabel.text = goods.name;
         _messageCell.remarkLabel.text = goods.remark;
         _messageCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    _messageCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始： %@",goods.dateOfStart];
-        _messageCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止： %@",goods.dateOfEnd];
-        _messageCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期： %@",goods.saveTime];
+    _messageCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始：%@",goods.dateOfStart];
+        _messageCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止：%@",goods.dateOfEnd];
+        _messageCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期：%@",goods.saveTime];
+    _messageCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
     NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
     NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];

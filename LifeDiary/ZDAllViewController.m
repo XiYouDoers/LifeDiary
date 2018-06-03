@@ -5,8 +5,7 @@
 //  Created by JACK on 2018/5/13.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define WIDTH [UIScreen mainScreen].bounds.size.width
-#define HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "ZDAllViewController.h"
 #import "ZDAllDataBase.h"
 #import "ZDRecycleDataBase.h"
@@ -102,6 +101,7 @@
     _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
     _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
     _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
+     _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
     NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
     NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];

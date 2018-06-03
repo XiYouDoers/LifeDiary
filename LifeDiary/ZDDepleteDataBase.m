@@ -33,17 +33,19 @@ static ZDDepleteDataBase *_messageDataBase = nil;
     
 }
 - (void)initDataBase{
-    // 获得Documents目录路径
     
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filepath = [[NSString alloc]init];
+    //判断是否为模拟器
+    if(TARGET_IPHONE_SIMULATOR){
+        filepath = @"/Users/jack/Public/iOS/depleteGoodsFmdb.db";
+        
+    }else{
+        // 获得Documents目录路径
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        filepath = [documentsPath stringByAppendingPathComponent:@"depleteModel.sqlite"];
+    }
     
-    // 文件路径
-    
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"depleteModel.sqlite"];
-    
-    // 实例化FMDataBase对象
-    
-    _db = [FMDatabase databaseWithPath:filePath];
+    _db = [FMDatabase databaseWithPath:filepath];
     
     [_db open];
     // 初始化数据表

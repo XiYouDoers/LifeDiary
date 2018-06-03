@@ -33,21 +33,23 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     
 }
 - (void)initDataBase{
-    // 获得Documents目录路径
     
-//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//    
-//    // 文件路径
-//    
-//    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"recyleModel.sqlite"];
+    NSString *filepath = [[NSString alloc]init];
+    //判断是否为模拟器
+    if(TARGET_IPHONE_SIMULATOR){
+        filepath = @"/Users/jack/Public/iOS/recycleGoodsFmdb.db";
+        
+    }else{
+        // 获得Documents目录路径
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        filepath = [documentsPath stringByAppendingPathComponent:@"recycleModel.sqlite"];
+    }
     
-    // 实例化FMDataBase对象
-    
-    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/recycleGoodsFmdb.db"];
+    _db = [FMDatabase databaseWithPath:filepath];
     
     [_db open];
     // 初始化数据表
-    NSString *recyleGoodsSql = @"CREATE TABLE IF NOT EXISTS recyleGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,recyleGoods_identifier VARCHAR(255),recyleGoods_name VARCHAR(255),recyleGoods_remark VARCHAR(255),recyleGoods_imageData blob,recyleGoods_dateOfStart VARCHAR(255),recyleGoods_dateOfEnd VARCHAR(255),recyleGoods_saveTime VARCHAR(255))";
+    NSString *recyleGoodsSql = @"CREATE TABLE IF NOT EXISTS recyleGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,recyleGoods_identifier VARCHAR(255),recyleGoods_name VARCHAR(255),recyleGoods_remark VARCHAR(255),recyleGoods_imageData blob,recyleGoods_dateOfStart VARCHAR(255),recyleGoods_dateOfEnd VARCHAR(255),recyleGoods_saveTime VARCHAR(255),recyleGoods_sum VARCHAR(255),recyleGoods_ratio double)";
     [_db executeUpdate:recyleGoodsSql];
     
     [_db close];
@@ -69,7 +71,8 @@ static ZDRecycleDataBase *_messageDataBase = nil;
         
     }
     maxID = @([maxID integerValue] + 1);
-    [_db executeUpdate:@"INSERT INTO recyleGoods(recyleGoods_identifier,recyleGoods_name,recyleGoods_remark,recyleGoods_imageData,recyleGoods_dateOfStart,recyleGoods_dateOfEnd,recyleGoods_saveTime)VALUES(?,?,?,?,?,?,?)",maxID,recyleGoods.name,recyleGoods.remark,recyleGoods.imageData,recyleGoods.dateOfStart,recyleGoods.dateOfEnd,recyleGoods.saveTime];
+    NSNumber *ratioNumber = @(recyleGoods.ratio);
+    [_db executeUpdate:@"INSERT INTO recyleGoods(recyleGoods_identifier,recyleGoods_name,recyleGoods_remark,recyleGoods_imageData,recyleGoods_dateOfStart,recyleGoods_dateOfEnd,recyleGoods_saveTime,recyleGoods_sum,recyleGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,recyleGoods.name,recyleGoods.remark,recyleGoods.imageData,recyleGoods.dateOfStart,recyleGoods.dateOfEnd,recyleGoods.saveTime,recyleGoods.sum,ratioNumber];
     
     
     [_db close];
@@ -99,6 +102,8 @@ static ZDRecycleDataBase *_messageDataBase = nil;
         recycleGoods.dateOfStart = [res stringForColumn:@"recyleGoods_dateOfStart"];
         recycleGoods.dateOfEnd = [res stringForColumn:@"recyleGoods_dateOfEnd"];
         recycleGoods.saveTime = [res stringForColumn:@"recyleGoods_saveTime"];
+        recycleGoods.sum = [res stringForColumn:@"recyleGoods_sum"];
+        recycleGoods.ratio = [res doubleForColumn:@"recyleGoods_saveTime"];
         [dataArray addObject:recycleGoods];
     }
     

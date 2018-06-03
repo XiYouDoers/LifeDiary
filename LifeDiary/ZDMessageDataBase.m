@@ -73,7 +73,7 @@ static ZDMessageDataBase *_messageDataBase = nil;
 //    // 文件路径
 //    
 //    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"messageModel.sqlite"];
-    
+//    _db = [FMDatabase databaseWithPath:filePath];
     // 实例化FMDataBase对象
     
     _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/messageFmdb.db"];

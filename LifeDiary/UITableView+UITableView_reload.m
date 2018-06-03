@@ -49,17 +49,19 @@
     
 }
 - (void)xy_havingData:(BOOL)havingData {
-    
+    //占位图问题未解决
     if (havingData) {
         
         self.backgroundView = nil;
         
     } else {
+        UIView *backgroundView =[[ UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
    
         UILabel *noViewLabel = [[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-50,[UIScreen mainScreen].bounds.size.height/2-40, 100, 20)];
         noViewLabel.text = @"空空如也...";
         noViewLabel.textColor = [UIColor lightGrayColor];
-        [self addSubview:noViewLabel];
+        [backgroundView addSubview:noViewLabel];
+        self.backgroundView = backgroundView;
         
     }
     

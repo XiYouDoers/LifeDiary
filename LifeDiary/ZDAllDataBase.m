@@ -6,6 +6,8 @@
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
+
+
 #import "ZDAllDataBase.h"
 #import "FMDB.h"
 
@@ -35,19 +37,25 @@ static ZDAllDataBase *_allDataBase = nil;
     return _allDataBase;
     
 }
+
 - (void)initDataBase{
-    // 获得Documents目录路径
     
-//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//    
-//    // 文件路径
-//    
-//    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"messageModel.sqlite"];
-//    
+    NSString *filepath = [[NSString alloc]init];
+    if(TARGET_IPHONE_SIMULATOR){
+
+        filepath = @"/Users/jack/Public/iOS/allGoodsFmdb.db";
+    }else{
+        // 获得Documents目录路径
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        filepath = [documentsPath stringByAppendingPathComponent:@"messageModel.sqlite"];
+    }
+    
+    _db = [FMDatabase databaseWithPath:filepath];
+
+    
     // 实例化FMDataBase对象
-    
-    _db = [FMDatabase databaseWithPath:@"/Users/jack/Public/iOS/allGoodsFmdb.db"];
-    
+
+
     [_db open];
     // 初始化数据表
     NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,allGoods_identifier VARCHAR(255),allGoods_name VARCHAR(255),allGoods_remark VARCHAR(255),allGoods_imageData blob,allGoods_dateOfStart VARCHAR(255),allGoods_dateOfEnd VARCHAR(255),allGoods_saveTime VARCHAR(255),allGoods_sum VARCHAR(255),allGoods_ratio double)";

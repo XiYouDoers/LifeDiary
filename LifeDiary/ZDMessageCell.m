@@ -87,10 +87,18 @@
             make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
             make.bottom.mas_offset(-10);
             make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
-            make.right.mas_offset(-10);
+            make.width.mas_equalTo(WIDTH/3);
         }];
-        [_saveTimeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            //更新约束
+        
+        //_sumLabel
+        _sumLabel = [[UILabel alloc]init];
+        _sumLabel.textColor = [UIColor blueColor];
+        [self addSubview:_sumLabel];
+        [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
+            make.bottom.mas_offset(-10);
+            make.left.equalTo(_saveTimeLabel.mas_right).mas_offset(10);
+            make.right.mas_offset(-10);
         }];
 
         _outsideArc =  [CAShapeLayer layer];
@@ -122,7 +130,7 @@
     }else{
         _outsideArc.strokeColor = [UIColor greenColor].CGColor;
     }
-    
+
     UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 40) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
     _insideArc.path = [pathOfInsideArc CGPath];
     int months = timeInterval/3600/24/30;

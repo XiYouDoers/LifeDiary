@@ -14,7 +14,7 @@
 #import "ZDMeTableHeaderView.h"
 #import "ZDPhotoManagerViewController.h"
 
-@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate>{
     
 }
 @property(nonatomic,copy) NSArray *cellLabelDataArray;
@@ -40,6 +40,8 @@
     _meTableView.sectionFooterHeight = 12.f;
     
     _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 220)];
+    _tableHeaderView.nameTextField.delegate = self;
+    _tableHeaderView.personalitySignatureTextField.delegate = self;
     [_tableHeaderView.headPictureButton addTarget:self action:@selector(changeHeadPicture) forControlEvents:UIControlEventTouchUpInside];
     
 
@@ -75,6 +77,16 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [_tableHeaderView.nameTextField resignFirstResponder];
+    [_tableHeaderView.personalitySignatureTextField resignFirstResponder];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 - (void)changeHeadPicture{
     

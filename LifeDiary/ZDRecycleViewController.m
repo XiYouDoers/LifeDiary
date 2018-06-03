@@ -222,9 +222,10 @@
     _recycleCell.nameLabel.text = goods.name;
     _recycleCell.remarkLabel.text = goods.remark;
     _recycleCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    _recycleCell.dateOfstartLabel.text = goods.dateOfStart;
-    _recycleCell.dateOfEndLabel.text = goods.dateOfEnd;
-    _recycleCell.saveTimeLabel.text = goods.saveTime;
+    _recycleCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
+    _recycleCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
+    _recycleCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
+    _recycleCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     
     return _recycleCell;
     

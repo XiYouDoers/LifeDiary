@@ -12,7 +12,7 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
+    self.returnKeyType = UIReturnKeyNext;//变为换行按钮
     [[UIColor lightGrayColor] set];//设置下划线颜色     
     CGFloat y = CGRectGetHeight(self.frame);
     CGContextMoveToPoint(context, 0, y);
