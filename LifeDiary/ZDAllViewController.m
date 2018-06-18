@@ -11,7 +11,7 @@
 #import "ZDRecycleDataBase.h"
 #import "ZDRoundView.h"
 
-@interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     NSDateFormatter *_dateFormatter;
 }
 
@@ -32,11 +32,12 @@
     _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
-    _allTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
     
+
+    self.allTableView.tableHeaderView = self.searchView;
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -65,12 +66,98 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (UIView *)searchView
+{
+    if (!_searchView) {
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        _searchView.backgroundColor = [UIColor whiteColor];
+        
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        _searchBar.backgroundColor = [UIColor clearColor];
+        _searchBar.showsCancelButton = NO;
+        _searchBar.tintColor = [UIColor orangeColor];
+        _searchBar.placeholder = @"搜索物品";
+        _searchBar.delegate = self;
+
+        for (UIView *subView in _searchBar.subviews) {
+            if ([subView isKindOfClass:[UIView  class]]) {
+                [[subView.subviews objectAtIndex:0] removeFromSuperview];
+                if ([[subView.subviews objectAtIndex:0] isKindOfClass:[UITextField class]]) {
+                    
+                    
+                    UITextField *textField = [subView.subviews objectAtIndex:0];
+                    textField.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
+                    
+                    //设置输入框边框的颜色
+                    //                    textField.layer.borderColor = [UIColor blackColor].CGColor;
+                    //                    textField.layer.borderWidth = 1;
+                    
+                    //设置输入字体颜色
+                    //                    textField.textColor = [UIColor lightGrayColor];
+                    
+                    //设置默认文字颜色
+                    UIColor *color = [UIColor grayColor];
+                    [textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"搜索物品"
+                                                                                        attributes:@{NSForegroundColorAttributeName:color}]];
+                    //修改默认的放大镜图片
+//                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
+//                    imageView.backgroundColor = [UIColor clearColor];
+//                    imageView.image = [UIImage imageNamed:@"gww_search_ misplaces"];
+//                    textField.leftView = imageView;
+                }
+            }
+        }
+        
+        
+        [_searchView addSubview:_searchBar];
+        
+        
+        _cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-70, 0, 60, 44)];
+        _cancleBtn.backgroundColor = [UIColor clearColor];
+        _cancleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [_cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_cancleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+        _cancleBtn.hidden= YES;
+        [_searchView addSubview:_cancleBtn];
+        
+        [_cancleBtn addTarget:self action:@selector(cancleBtnTouched) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _searchView;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self.searchBar resignFirstResponder];
+    // do sth about get search result
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar becomeFirstResponder];
+    searchBar.frame = CGRectMake(0, 0, WIDTH-80, 44);
+    _cancleBtn.hidden = NO;
+
+}
+
+- (void)cancleBtnTouched
+{
+    [self.searchBar resignFirstResponder];
+    self.searchBar.frame = CGRectMake(0, 0, WIDTH, 44);
+    _cancleBtn.hidden = YES;
+}
+
 /**
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-
-    return _dataMutableArray.count;
+    
+    if (self.resultMutableArray.count) {
+        return [self.resultMutableArray count];
+    }else{
+        return [self.dataMutableArray count];
+    }
 }
 /**
  TableView中section的数量
@@ -93,7 +180,13 @@
     
      _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell"];
     ZDGoods *goods = [[ZDGoods alloc]init];
+    if (self.resultMutableArray==nil) {
+
     goods = _dataMutableArray[indexPath.row];
+    }else{
+        
+    goods = _resultMutableArray[indexPath.row];
+    }
     
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;

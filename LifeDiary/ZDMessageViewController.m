@@ -26,8 +26,8 @@
 @implementation ZDMessageViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];

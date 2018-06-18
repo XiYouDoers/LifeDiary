@@ -11,32 +11,23 @@
 #import "ZDAllDataBase.h"
 #import "FMDB.h"
 
-static ZDAllDataBase *_allDataBase = nil;
+
 @implementation ZDAllDataBase{
     FMDatabase *_db;
 }
 + (instancetype) sharedDataBase{
-    if (_allDataBase == nil) {
-        @synchronized(self) {
-        _allDataBase = [[ZDAllDataBase alloc]init];
+    
+    static ZDAllDataBase *allDataBase = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        allDataBase = [[ZDAllDataBase alloc]init];
         
-        [_allDataBase initDataBase];
-        }
-    }
-    return _allDataBase;
-}
-+(instancetype)allocWithZone:(struct _NSZone *)zone{
-    
-    if (_allDataBase == nil) {
-        @synchronized(self) {
-        _allDataBase = [super allocWithZone:zone];
-        }
+        [allDataBase initDataBase];
         
-    }
-    
-    return _allDataBase;
-    
+    });
+    return allDataBase;
 }
+
 
 - (void)initDataBase{
     
