@@ -64,6 +64,7 @@
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
 		04D8B64620B133A300055018 /* ZDDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64520B133A300055018 /* ZDDateCell.m */; };
 		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
+		04F9DD8720DE3501004475F5 /* ZDSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */; };
 		04FF835720B94C9800EECE24 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832B20B94C9800EECE24 /* MJRefreshAutoFooter.m */; };
 		04FF835820B94C9800EECE24 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832D20B94C9800EECE24 /* MJRefreshBackFooter.m */; };
 		04FF835920B94C9800EECE24 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832F20B94C9800EECE24 /* MJRefreshComponent.m */; };
@@ -223,6 +224,8 @@
 		04D8B64520B133A300055018 /* ZDDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDateCell.m; sourceTree = "<group>"; };
 		04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPickerViewCell.h; sourceTree = "<group>"; };
 		04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPickerViewCell.m; sourceTree = "<group>"; };
+		04F9DD8520DE3501004475F5 /* ZDSearchViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSearchViewModel.h; sourceTree = "<group>"; };
+		04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSearchViewModel.m; sourceTree = "<group>"; };
 		04FF832A20B94C9800EECE24 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		04FF832B20B94C9800EECE24 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		04FF832C20B94C9800EECE24 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -642,6 +645,8 @@
 			children = (
 				04B836A120A87DE90050D568 /* ZDAllDataBase.h */,
 				04B836A220A87DE90050D568 /* ZDAllDataBase.m */,
+				04F9DD8520DE3501004475F5 /* ZDSearchViewModel.h */,
+				04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -977,6 +982,7 @@
 				04FF836920B94C9800EECE24 /* UIScrollView+MJRefresh.m in Sources */,
 				04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */,
 				040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */,
+				04F9DD8720DE3501004475F5 /* ZDSearchViewModel.m in Sources */,
 				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
 				04FF836720B94C9800EECE24 /* NSBundle+MJRefresh.m in Sources */,
