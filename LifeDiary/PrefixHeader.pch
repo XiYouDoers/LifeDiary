@@ -13,9 +13,13 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #endif /* PrefixHeader_pch */
-
+#ifdef __OBJC__
+#import "Masonry.h"
+#endif
 //宏定义屏幕长、宽
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
-
+#define BACKGROUNDCOLOR [UIColor colorWithRed:242/255.0 green:243/255.0 blue:220/255.0 alpha:1]
+#define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
+#define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
 

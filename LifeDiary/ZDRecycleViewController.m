@@ -10,6 +10,7 @@
 #import "ZDRecycleDataBase.h"
 
 @interface ZDRecycleViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    
     UIBarButtonItem *_allSelectedBarButtonItem;
     UIBarButtonItem *_manageCellBarButtonItem;
     bool _rightBarButtonItemIsSeleted;
@@ -25,8 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"回收站";
-    
-
     
     _manageCellBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
     self.navigationItem.rightBarButtonItem =  _manageCellBarButtonItem;
@@ -61,6 +60,7 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];

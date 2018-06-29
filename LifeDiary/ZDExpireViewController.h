@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDAllCell.h"
 
 @interface ZDExpireViewController : UIViewController
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
-
+@property(nonatomic,strong) UITableView *expireTableView;
+@property(nonatomic,strong) ZDAllCell *expireCell;
 @end

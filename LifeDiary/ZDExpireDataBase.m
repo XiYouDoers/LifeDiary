@@ -49,7 +49,7 @@ static ZDExpireDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *expireGoodsSql = @"CREATE TABLE expireGoods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,expireGoods_name VARCHAR(255),expireGoods_remark VARCHAR(255),expireGoods_imageData blob,expireGoods_dateOfStart VARCHAR(255),expireGoods_dateOfEnd VARCHAR(255),expireGoods_saveTime VARCHAR(255))";
+    NSString *expireGoodsSql = @"CREATE TABLE IF NOT EXISTS expireGoods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,expireGoods_identifier VARCHAR(255),expireGoods_name VARCHAR(255),expireGoods_remark VARCHAR(255),expireGoods_imageData blob,expireGoods_dateOfStart VARCHAR(255),expireGoods_dateOfEnd VARCHAR(255),expireGoods_saveTime VARCHAR(255),expireGoods_sum VARCHAR(255),expireGoods_ratio double)";
     [_db executeUpdate:expireGoodsSql];
     
     [_db close];
@@ -57,39 +57,55 @@ static ZDExpireDataBase *_messageDataBase = nil;
 }
 #pragma mark - 接口
 
-- (void)addExpireGoods:(ZDGoods *)expireGoods{
+- (void)addGoods:(ZDGoods *)expireGoods{
     [_db open];
     
-    [_db executeUpdate:@"INSERT INTO expireGoods(expireGoods_name,expireGoods_remark,expireGoods_imageData,expireGoods_dateOfStart,expireGoods_dateOfEnd,expireGoods_saveTime)VALUES(?,?,?,?,?,?)",expireGoods.name,expireGoods.remark,expireGoods.imageData,expireGoods.dateOfStart,expireGoods.dateOfEnd,expireGoods.saveTime];
+    NSNumber *maxID = @(0);
+    
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM expireGoods "];
+    //获取数据库中最大的ID
+    while ([res next]) {
+        if ([maxID integerValue] < [[res stringForColumn:@"expireGoods_identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"expireGoods_identifier"] integerValue] ) ;
+        }
+        
+    }
+    maxID = @([maxID integerValue] + 1);
+    NSNumber *ratioNumber = @(expireGoods.ratio);
+    [_db executeUpdate:@"INSERT INTO expireGoods(expireGoods_identifier,expireGoods_name,expireGoods_remark,expireGoods_imageData,expireGoods_dateOfStart,expireGoods_dateOfEnd,expireGoods_saveTime,expireGoods_sum,expireGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,expireGoods.name,expireGoods.remark,expireGoods.imageData,expireGoods.dateOfStart,expireGoods.dateOfEnd,expireGoods.saveTime,expireGoods.sum,ratioNumber];
     
     
     [_db close];
+
     
 }
 
-- (void)deleteExpireGoods:(ZDGoods *)expireGoods{
+- (void)deleteGoods:(ZDGoods *)expireGoods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM person WHERE goods_name = ?",expireGoods.name];
+    [_db executeUpdate:@"DELETE FROM expireGoods WHERE expireGoods_identifier = ?",expireGoods.identifier];
     
     [_db close];
 }
-- (NSMutableArray *)getAllExpireGoods{
+- (NSMutableArray *)getAllGoods{
     [_db open];
     
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     
-    FMResultSet *res = [_db executeQuery:@"SELECT * FROM goods"];
+    FMResultSet *res = [_db executeQuery:@"SELECT * FROM expireGoods"];
     
     while ([res next]) {
         ZDGoods *expireGoods = [[ZDGoods alloc] init];
-        expireGoods.name = [res stringForColumn:@"person_name"];
-        expireGoods.remark = [res stringForColumn:@"person_remark"];
-        expireGoods.imageData = [res dataForColumn:@"person_imageData"];
-        expireGoods.dateOfStart = [res stringForColumn:@"person_dateOfStart"];
-        expireGoods.dateOfEnd = [res stringForColumn:@"person_dateOfEnd"];
-        expireGoods.saveTime = [res stringForColumn:@"person_saveTime"];
-        
+        expireGoods.identifier = @([[res stringForColumn:@"expireGoods_identifier"] integerValue]);
+        expireGoods.name = [res stringForColumn:@"expireGoods_name"];
+        expireGoods.remark = [res stringForColumn:@"expireGoods_remark"];
+        expireGoods.imageData = [res dataForColumn:@"expireGoods_imageData"];
+        expireGoods.dateOfStart = [res stringForColumn:@"expireGoods_dateOfStart"];
+        expireGoods.dateOfEnd = [res stringForColumn:@"expireGoods_dateOfEnd"];
+        expireGoods.saveTime = [res stringForColumn:@"expireGoods_saveTime"];
+        expireGoods.sum = [res stringForColumn:@"expireGoods_sum"];
+        expireGoods.ratio = [res doubleForColumn:@"expireGoods_saveTime"];
+        [dataArray addObject:expireGoods];
     }
     
     [_db close];

@@ -18,6 +18,8 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
+        
+
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];
         _tabImageView.frame = CGRectMake(10, 13, 19, 19);

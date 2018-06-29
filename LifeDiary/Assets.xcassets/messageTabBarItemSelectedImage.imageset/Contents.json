@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "messageTabBarItemSelectedImage.png",
+      "filename" : "消息.png",
       "scale" : "1x"
     },
     {

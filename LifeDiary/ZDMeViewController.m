@@ -13,13 +13,17 @@
 #import "ZDAboutViewController.h"
 #import "ZDMeTableHeaderView.h"
 #import "ZDPhotoManagerViewController.h"
+#import "ZDGoods.h"
 
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate>{
+    NSUserDefaults *_userDefaults;
     
 }
 @property(nonatomic,copy) NSArray *cellLabelDataArray;
 @property(nonatomic,copy) NSArray *cellImageDataArray;
-@property(nonatomic,copy) ZDMeTableHeaderView *tableHeaderView;
+@property(nonatomic,strong) ZDMeTableHeaderView *tableHeaderView;
+
+
 @end
 
 @implementation ZDMeViewController
@@ -30,31 +34,22 @@
     backBtnItem.title = @"我";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.hidden = YES;
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    
     _meTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
     _meTableView.scrollEnabled=NO;
     _meTableView.sectionHeaderHeight = 0.01f;
     _meTableView.sectionFooterHeight = 12.f;
-    
-    _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 220)];
-    _tableHeaderView.nameTextField.delegate = self;
-    _tableHeaderView.personalitySignatureTextField.delegate = self;
-    [_tableHeaderView.headPictureButton addTarget:self action:@selector(changeHeadPicture) forControlEvents:UIControlEventTouchUpInside];
-    
-
-    _meTableView.tableHeaderView= _tableHeaderView;
+    _meTableView.tableHeaderView= self.tableHeaderView;
     _meTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_meTableView];
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
-    
-    
-    
+
     _cellLabelDataArray = [NSArray arrayWithObjects:@"回收站",@"耗尽物品",@"过期物品",@"关于", nil];
-    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete", nil];
-    // Do any additional setup after loading the view.
+    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete", nil];    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -74,8 +69,29 @@
     
     
 }
+- (ZDMeTableHeaderView *)tableHeaderView{
+    if (!_tableHeaderView) {
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 220)];
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+        if ([_userDefaults stringForKey:@"user_name"]) {
+            _tableHeaderView.nameTextField.text = [_userDefaults stringForKey:@"user_name"];
+        }else{
+            _tableHeaderView.nameTextField.text = @"LifeDiary";
+        }
+        if ([_userDefaults stringForKey:@"user_personalitySignature"]) {
+            _tableHeaderView.personalitySignatureTextField.text = [_userDefaults stringForKey:@"user_personalitySignature"];
+        }else{
+            _tableHeaderView.personalitySignatureTextField.text = @"没有个性，何来签名";
+        }
+        _tableHeaderView.nameTextField.delegate = self;
+        _tableHeaderView.personalitySignatureTextField.delegate = self;
+        [_tableHeaderView.headPictureButton addTarget:self action:@selector(willChangeHeadPicture) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _tableHeaderView;
+}
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self saveToUserDeafault];
     
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -86,12 +102,20 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    [self saveToUserDeafault];
     return YES;
 }
-- (void)changeHeadPicture{
+
+- (void)saveToUserDeafault{
+    [_userDefaults setObject:_tableHeaderView.nameTextField.text forKey:@"user_name"];
+    [_userDefaults setObject:_tableHeaderView.personalitySignatureTextField.text forKey:@"user_personalitySignature"];
+    [_userDefaults synchronize];
+}
+- (void)willChangeHeadPicture{
     
-    ZDPhotoManagerViewController *ff = [[ZDPhotoManagerViewController alloc]initWithController:self Button:_tableHeaderView.headPictureButton];
-    [ff selectedWay];
+    ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]initWithController:self Button:_tableHeaderView.headPictureButton];
+
+    [photoManagerVC selectedWay];
 }
 
 

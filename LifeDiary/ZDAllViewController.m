@@ -12,6 +12,7 @@
 #import "ZDRoundView.h"
 
 
+
 @interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     NSDateFormatter *_dateFormatter;
 }
@@ -23,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
     
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -43,9 +46,10 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+    _resultMutableArray = [NSMutableArray array];
+
     //隐藏tabBar
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
@@ -54,9 +58,6 @@
         }completion:^(BOOL finished) {
              
         }];
-
-    
-    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -67,6 +68,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - searchbar
 - (UIView *)searchView
 {
     if (!_searchView) {
@@ -140,6 +143,7 @@
     searchBar.frame = CGRectMake(0, 0, WIDTH-80, 44);
     _cancleBtn.hidden = NO;
 
+
 }
 
 - (void)cancleBtnTouched
@@ -148,7 +152,7 @@
     self.searchBar.frame = CGRectMake(0, 0, WIDTH, 44);
     _cancleBtn.hidden = YES;
 }
-
+#pragma mark - tableView代理方法
 /**
  section中cell的数量
  */
@@ -173,6 +177,83 @@
     return 150;
     
 }
+//搜框中输入关键字的事件响应
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    //需要事先清理存放搜索结果的数组
+    [self.resultMutableArray removeAllObjects];
+    
+    //加个多线程，否则数量量大的时候，有明显的卡顿现象
+    //这里最好放在数据库里面再进行搜索，效率会更快一些
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(0, 0);
+    dispatch_async(globalQueue, ^{
+        if (searchText!=nil && searchText.length>0) {
+            
+            //遍历需要搜索的所有内容w，其中self.dataArray为存放总数据的数组
+            for (ZDGoods *goods in self.dataMutableArray) {
+                NSString *tempStr = goods.name;
+//
+                //----------->把所有的搜索结果转成成拼音
+//                NSString *pinyin = [self transformToPinyin:searchText];
+
+                if ([tempStr rangeOfString:searchText options:NSCaseInsensitiveSearch].length >0 ) {
+                    //把搜索结果存放self.resultArray数组
+                    [self.resultMutableArray addObject:goods];
+                }
+            }
+
+        }else{
+            self.resultMutableArray = nil;
+        }
+        //回到主线程
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.allTableView reloadData];
+        });
+    });
+}
+- (NSString *)transformToPinyin:(NSString *)aString
+{
+    //转成了可变字符串
+    NSMutableString *str = [NSMutableString stringWithString:aString];
+    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformMandarinLatin,NO);
+    //再转换为不带声调的拼音
+    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformStripDiacritics,NO);
+    NSArray *pinyinArray = [str componentsSeparatedByString:@" "];
+    NSMutableString *allString = [NSMutableString new];
+    
+    int count = 0;
+    
+    for (int  i = 0; i < pinyinArray.count; i++)
+    {
+        
+        for(int i = 0; i < pinyinArray.count;i++)
+        {
+            if (i == count) {
+                [allString appendString:@"#"];//区分第几个字母
+            }
+            [allString appendFormat:@"%@",pinyinArray[i]];
+            
+        }
+        [allString appendString:@","];
+        count ++;
+        
+    }
+    
+    NSMutableString *initialStr = [NSMutableString new];//拼音首字母
+    
+    for (NSString *s in pinyinArray)
+    {
+        if (s.length > 0)
+        {
+            
+            [initialStr appendString:  [s substringToIndex:1]];
+        }
+    }
+    
+    [allString appendFormat:@"#%@",initialStr];
+    [allString appendFormat:@",#%@",aString];
+    
+    return allString;
+}
 
 /**
  cell数据源
@@ -181,12 +262,12 @@
     
      _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell"];
     ZDGoods *goods = [[ZDGoods alloc]init];
-    if (self.resultMutableArray==nil) {
+    if (self.resultMutableArray.count) {
 
-    goods = _dataMutableArray[indexPath.row];
-    }else{
-        
     goods = _resultMutableArray[indexPath.row];
+    }else{
+    
+    goods = _dataMutableArray[indexPath.row];
     }
     
     _allCell.nameLabel.text = goods.name;
@@ -214,7 +295,6 @@
     ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     if (selectedCell.selected==YES) {
         selectedCell.selected = !selectedCell.selected;
-       
     }
 }
 /**
@@ -226,15 +306,33 @@
 }
 /**
  cell的删除方法
-
  */
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
      if (editingStyle == UITableViewCellEditingStyleDelete) {
-         
-         ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
+         ZDGoods *deletedGoods = [[ZDGoods alloc]init];
+         if (self.resultMutableArray.count) {
+             //计算在搜索结果中要删除的cell在总数据序列
+            deletedGoods = self.resultMutableArray[indexPath.row];
+             for(ZDGoods *goods in self.dataMutableArray){
+                 if (deletedGoods==goods) {
+                     NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
+                    deletedGoods = self.dataMutableArray[index];
+                 }
+             }
+         }else{
+          deletedGoods = self.dataMutableArray[indexPath.row];
+         }
+
     // 从数据库中删除
          [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
+         //从搜索列表中删除
+         for (ZDGoods *goods in  self.resultMutableArray) {
+             if (goods==deletedGoods) {
+                 NSLog(@"deletedGoods");
+                 [_resultMutableArray removeObject:deletedGoods];
+             }
+         }
     // 回收站中添加
          [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
          self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];

@@ -5,7 +5,7 @@
 //  Created by JACK on 2018/5/13.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
+
 #define LIGHTBLUE [UIColor colorWithRed:0.0 green:116.0/255 blue:245.0/255 alpha:1]
 #import "ZDTabBarViewController.h"
 #import "ZDMessageViewController.h"
@@ -39,7 +39,7 @@
      ];
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
-    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance]setBarTintColor:BACKGROUNDCOLOR];
     [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:53.0/255 green:143.0/255 blue:203.0/255 alpha:1]];
     
     // Do any additional setup after loading the view.
@@ -72,7 +72,7 @@
     [controller.tabBarItem setSelectedImage:selectedImage];
     // 设置 tabbarItem 选中状态下的文字颜色(不被系统默认渲染,显示文字自定义颜色)
 
-    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObject:LIGHTGREEN forKey:NSForegroundColorAttributeName];
+    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObject:LIGHTBLUE forKey:NSForegroundColorAttributeName];
     [controller.tabBarItem setTitleTextAttributes:selectedDictionary forState:UIControlStateSelected];
     //设置tabbarItem 未选中状态下的文字颜色
     NSDictionary *normalDictionary = [NSDictionary dictionaryWithObject:[UIColor lightGrayColor] forKey:NSForegroundColorAttributeName];

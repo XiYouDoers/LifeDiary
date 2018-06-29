@@ -6,26 +6,21 @@
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-
-
 #import "ZDAllDataBase.h"
 #import "FMDB.h"
 
-
+static ZDAllDataBase *_allDataBase = nil;
 @implementation ZDAllDataBase{
     FMDatabase *_db;
 }
 + (instancetype) sharedDataBase{
-    
-    static ZDAllDataBase *allDataBase = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        allDataBase = [[ZDAllDataBase alloc]init];
-        
-        [allDataBase initDataBase];
-        
-    });
-    return allDataBase;
+    if (_allDataBase == nil) {
+        @synchronized(self) {
+        _allDataBase = [[ZDAllDataBase alloc]init];
+        [_allDataBase initDataBase];
+        }
+    }
+    return _allDataBase;
 }
 
 

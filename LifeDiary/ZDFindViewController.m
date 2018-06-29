@@ -29,8 +29,7 @@ static NSString *const footerId = @"footerId";
    
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
     _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-//    _collectionView.collectionViewLayout = _rgcardViewLayout;
-    _collectionView.backgroundColor = PURPLE;
+    _collectionView.backgroundColor = BACKGROUNDCOLOR;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页

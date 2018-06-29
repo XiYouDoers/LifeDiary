@@ -39,6 +39,7 @@
     _countFormatter = [[NSDateFormatter alloc]init];
     [_countFormatter setDateFormat:@"yyy"];
     
+    self.view.backgroundColor = BACKGROUNDCOLOR;
     UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
     [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem =  finishBtnItem;
@@ -46,6 +47,7 @@
     _addTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _addTableView.dataSource = self;
     _addTableView.delegate = self;
+//    _addTableView.sectionHeaderHeight = 16.0f;
     _addTableHeaderView  = [[ZDAddTableHeaderView alloc]init];
     _addTableHeaderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,150);
     _addTableHeaderView.nameTextField.delegate = self;
@@ -210,7 +212,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - 拍照和相册
 /**
  *  调用照相机
  */
@@ -261,9 +263,6 @@
 }
 
 
-
-#pragma mark - UIImagePickerControllerDelegate
-
 // 拍照完成回调
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
@@ -284,6 +283,7 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark - tableView代理方法
 /**
  section中cell的数量
  */
@@ -341,6 +341,13 @@
     return _addDefaultCell;
     
 }
+/**
+ cell点击方法
+ 
+ */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
 - (void)indexZeroDateChanged:(UIDatePicker *)datePicker{
     
     NSDate *date = datePicker.date;
@@ -370,13 +377,7 @@
     
 }
 
-/**
- cell点击方法
- 
- */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-}
 /*
 #pragma mark - Navigation
 

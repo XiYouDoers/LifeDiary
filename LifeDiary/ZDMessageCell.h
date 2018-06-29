@@ -13,9 +13,7 @@
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *remarkLabel;
 @property(nonatomic,strong) UIImageView *pictureImageView;
-@property(nonatomic,strong) UILabel *dateOfstartLabel;
-@property(nonatomic,strong) UILabel *dateOfEndLabel;
-@property(nonatomic,strong) UILabel *saveTimeLabel;
+@property(nonatomic,strong) UILabel *remainderTimeLabel;
 @property(nonatomic,strong) UILabel *sumLabel;
 
 /**

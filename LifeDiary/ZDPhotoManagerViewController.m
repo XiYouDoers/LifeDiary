@@ -106,21 +106,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
 
-    
-    
-    
     //
-    
-    
-    
     //无法回调
-    
-    
     //
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         
         //图片存入相册
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        NSLog(@"setImage");
         [_button setImage:image forState:UIControlStateNormal];
     }
     [self dismissViewControllerAnimated:YES completion:nil];

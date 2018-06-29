@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-//#import "RACSubject.h"
+#import "RACSubject.h"
 
 @interface ZDSearchViewModel : NSObject<UITableViewDelegate,
 UITableViewDataSource>

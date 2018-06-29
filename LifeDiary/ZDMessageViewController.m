@@ -6,11 +6,13 @@
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
+
 #define HEIGHT_REFRESH 64+50.f
 #import "ZDMessageViewController.h"
 #import "ZDMessageDataBase.h"
 #import "ZDAllDataBase.h"
+#import "ZDExpireDataBase.h"
+#import "ZDDepleteDataBase.h"
 #import "ZDAllViewController.h"
 #import "ZDAddViewController.h"
 #import "MJRefresh.h"
@@ -28,23 +30,20 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
-//    //_segmentControl
-//    _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"当前",@"全部" ]];
-//    _segmentControl.frame = CGRectMake(60, 100, 100, 32);
-//    self.navigationItem.titleView = _segmentControl;
-//    _segmentControl.selectedSegmentIndex=0;
-//    _segmentControl.tintColor=[UIColor blueColor];
-//    [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
     
+    self.view.backgroundColor = BACKGROUNDCOLOR;
+
     //_messageTableView
-    _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _messageTableView.dataSource = self;
     _messageTableView.delegate = self;
-//    _messageTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
+    _messageTableView.backgroundColor = BACKGROUNDCOLOR;
+    _messageTableView.sectionHeaderHeight = 5;
+    _messageTableView.sectionFooterHeight = 5;
+    _messageTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0.0f,0.0f,_messageTableView.bounds.size.width,0.01f)];
     _messageTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_messageTableView];
     [_messageTableView registerClass:[ZDMessageCell class] forCellReuseIdentifier:@"messageCell"];
@@ -55,7 +54,10 @@
 
     // Do any additional setup after loading the view.
 }
-
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 - (void)setNavigationBar{
     //backBarButtonItem
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
@@ -79,26 +81,6 @@
 }
 
 
-
-
-//-(void)doSomethingInSegment:(UISegmentedControl *)Seg
-//{
-//    NSInteger Index = Seg.selectedSegmentIndex;
-//    switch (Index) {
-//        case 0:
-//            _messageTableView.hidden = NO;
-//            _allTableView.hidden = YES;
-//            [_messageTableView reloadData];
-//            
-//            break;
-//        case 1:
-//            _messageTableView.hidden = YES;
-//            _allTableView.hidden = NO;
-//            [_allTableView reloadData];
-//
-//            break;
-//    }
-//}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
@@ -107,17 +89,55 @@
     _allDataMutableArray = [NSMutableArray array];
     _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     NSDate *dateNow = [[NSDate alloc]init];
+//    NSLog(@"%@ %@ %@ %@",_allDataMutableArray,_allDataMutableArray,[[ZDAllDataBase sharedDataBase]getAllGoods],[[ZDAllDataBase sharedDataBase]getAllGoods]);
     for (ZDGoods *goods in _allDataMutableArray) {
+
+        //判断是否加入耗尽数据库
+        if ([goods.sum isEqualToString:@"0"]) {
+            int key=0;
+            //根据identifier判断是否存在于全部数据库中
+            for (ZDGoods *expireGoods in _allDataMutableArray) {
+
+                if (goods == expireGoods) {
+                    key=1;
+                }
+            }
+            NSLog(@"key=%d",key);
+            if (key) {
+                //耗尽数据库中添加物品
+                [[ZDExpireDataBase sharedDataBase]addGoods:goods];
+                //全部物品数据库中删除物品
+                [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
+                _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+            }
+        }
         NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
         NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-        if (seconds<100) {
+          //判断是否加入过期数据库
+        if (seconds<=0){
+    
+            int key=0;
+             //根据identifier判断是否存在于全部数据库中
+            for (ZDGoods *depleteGoods in [[ZDAllDataBase sharedDataBase]getAllGoods]) {
+                if (goods==depleteGoods) {
+                    key=1;
+                }
+            }
+            if (key) {
+                //过期数据库中添加物品
+                [[ZDDepleteDataBase sharedDataBase]addGoods:goods];
+                //全部物品数据库中删除物品
+                [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
+                 _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+            }
+        }else if (seconds<100 ) {
             [_messageDataMutableArray addObject:goods];
         }
-    }
+
+        
+        
     [self.messageTableView reloadData];
 
- 
-    
         //显示tabBar
         CGRect  tabRect=self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
@@ -126,8 +146,7 @@
         }completion:^(BOOL finished) {
             
         }];
-    
-   
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -142,26 +161,28 @@
     ZDAddViewController *addViewController = [[ZDAddViewController alloc]init];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
+#pragma mark - tableView代理方法
 /**
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return _messageDataMutableArray.count;
+    return 1;
     
 }
 /**
  TableView中section的数量
  */
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
-    return 1;
+    return _messageDataMutableArray.count;
 }
 /**
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 300;
 }
 
 /**
@@ -171,13 +192,15 @@
 
         _messageCell = [tableView dequeueReusableCellWithIdentifier:@"messageCell"];
         
-        ZDGoods *goods = _messageDataMutableArray[indexPath.row];
+        ZDGoods *goods = _messageDataMutableArray[indexPath.section];
         _messageCell.nameLabel.text = goods.name;
         _messageCell.remarkLabel.text = goods.remark;
         _messageCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    _messageCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始：%@",goods.dateOfStart];
-        _messageCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止：%@",goods.dateOfEnd];
-        _messageCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期：%@",goods.saveTime];
+    
+    NSDate *dateNow = [[NSDate alloc]init];
+    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+    NSInteger seconds = [reswDate timeIntervalSinceDate:dateNow]/(60*60*24);
+        _messageCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
     _messageCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
     NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
@@ -190,6 +213,7 @@
 
         
 }
+
 /**
  cell点击方法
  
@@ -200,6 +224,7 @@
         selectedCell.selected = !selectedCell.selected;
     }
 }
+#pragma mark - 下拉刷新
 - (void)addRefreshHeaderGif{
     //MJRefreshGifHeader
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
@@ -247,10 +272,7 @@
     header.stateLabel.textColor = [UIColor lightGrayColor];
     header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 /*
  #pragma mark - Navigation
  

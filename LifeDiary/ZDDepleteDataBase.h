@@ -20,12 +20,12 @@
  *  添加Goods
  *
  */
-- (void)addDepleteGoods:(ZDGoods *)depleteGoods;
+- (void)addGoods:(ZDGoods *)depleteGoods;
 /**
  *  删除Goods
  *
  */
-- (void)deleteDepleteGoods:(ZDGoods *)depleteGoods;
-- (NSMutableArray *)getAllDepleteGoods;
+- (void)deleteGoods:(ZDGoods *)depleteGoods;
+- (NSMutableArray *)getAllGoods;
 
 @end

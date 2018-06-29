@@ -5,10 +5,8 @@
 //  Created by JACK on 2018/5/14.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define WIDTH [UIScreen mainScreen].bounds.size.width
-#define HEIGHT [UIScreen mainScreen].bounds.size.height
 #import "ZDMessageCell.h"
-#import "Masonry.h"
+
 
 @implementation ZDMessageCell{
     CAShapeLayer *_outsideArc;
@@ -24,81 +22,64 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+
+        
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
         _pictureImageView.layer.cornerRadius = 5;
         _pictureImageView.layer.masksToBounds = true;
         [self addSubview:_pictureImageView];
         [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(@10);
-            make.left.mas_offset(@10);
-            make.bottom.mas_offset(@-10);
-            make.right.mas_offset(-WIDTH/5*3);
+            make.top.mas_offset(50);
+            make.left.mas_offset(0);
+            make.bottom.mas_offset(-50);
+            make.right.mas_offset(0);
             
         }];
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
+        _remarkLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_nameLabel];
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_offset(10);
-            make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
-            make.right.mas_offset(-10);
-            make.height.mas_equalTo(20);
+            make.left.mas_equalTo(20);
+            make.width.mas_equalTo(150);
+            make.height.mas_equalTo(30);
             
         }];
         //_remarkLabel
         _remarkLabel = [[UILabel alloc]init];
+        _remarkLabel.textAlignment = NSTextAlignmentRight;
+        _remarkLabel.numberOfLines = 0;
         _remarkLabel.font = [UIFont systemFontOfSize:11];
         _remarkLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:_remarkLabel];
         [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_nameLabel.mas_bottom).mas_offset(@10);
-            make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
+            make.top.mas_equalTo(5);
             make.right.mas_offset(-10);
-            make.height.mas_equalTo(20);
+            make.size.mas_equalTo(CGSizeMake(150, 40));
         }];
         
-        //_dateOfstartLabel
-        _dateOfstartLabel = [[UILabel alloc]init];
-        _dateOfstartLabel.textColor = [UIColor lightGrayColor];
-        [self addSubview:_dateOfstartLabel];
-        [_dateOfstartLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_remarkLabel.mas_bottom).mas_offset(5);
-            make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
-            make.right.mas_offset(-10);
-            make.height.mas_equalTo(20);
-        }];
-        
-        //_dateOfEndLabel
-        _dateOfEndLabel = [[UILabel alloc]init];
-        _dateOfEndLabel.textColor = [UIColor redColor];
-        [self addSubview:_dateOfEndLabel];
-        [_dateOfEndLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_dateOfstartLabel.mas_bottom).mas_offset(5);
-            make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
-            make.right.mas_offset(-10);
-            make.height.mas_equalTo(20);
-        }];
-        //_saveTimeLabel
-        _saveTimeLabel = [[UILabel alloc]init];
-        _saveTimeLabel.textColor = [UIColor blueColor];
-        [self addSubview:_saveTimeLabel];
-        [_saveTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
+
+        // _remainderTimeLabel
+        _remainderTimeLabel = [[UILabel alloc]init];
+        _remainderTimeLabel.textColor = LIGHTGREEN;
+        [self addSubview:_remainderTimeLabel];
+        [_remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
             make.bottom.mas_offset(-10);
-            make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
-            make.width.mas_equalTo(WIDTH/3);
+            make.left.mas_equalTo(10);
+            make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
         }];
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
-        _sumLabel.textColor = [UIColor blueColor];
+        _sumLabel.textColor = LIGHTBLUE ;
         [self addSubview:_sumLabel];
         [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
             make.bottom.mas_offset(-10);
-            make.left.equalTo(_saveTimeLabel.mas_right).mas_offset(10);
-            make.right.mas_offset(-10);
+            make.left.mas_equalTo(_remainderTimeLabel.mas_right).with.offset(20);
+            make.size.mas_equalTo(CGSizeMake(WIDTH/4, 30));
         }];
 
         _outsideArc =  [CAShapeLayer layer];
@@ -117,7 +98,7 @@
 }
 - (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval{
     
-    UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 40) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];
+    UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 300-25) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];
 
     _outsideArc.path = [pathOfOutsideArc CGPath];
     //外面圆弧的strokeColor
@@ -131,7 +112,7 @@
         _outsideArc.strokeColor = [UIColor greenColor].CGColor;
     }
 
-    UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 40) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
+    UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 300-25) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
     _insideArc.path = [pathOfInsideArc CGPath];
     int months = timeInterval/3600/24/30;
     //里面圆弧的fillColor

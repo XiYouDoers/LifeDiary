@@ -10,6 +10,7 @@
 
 @interface ZDUser : NSObject
 @property(nonatomic,strong) NSString *name;
-@property(nonatomic,strong) NSString *headPictureData;
 @property(nonatomic,strong) NSString *personalitySignature;
+@property(nonatomic,strong) NSData *headPictureData;
+
 @end
