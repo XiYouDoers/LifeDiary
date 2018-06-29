@@ -199,7 +199,7 @@
     
     NSDate *dateNow = [[NSDate alloc]init];
     NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-    NSInteger seconds = [reswDate timeIntervalSinceDate:dateNow]/(60*60*24);
+    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
         _messageCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
     _messageCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
