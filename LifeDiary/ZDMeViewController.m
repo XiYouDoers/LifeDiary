@@ -34,7 +34,6 @@
     backBtnItem.title = @"我";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
     
     
     _meTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];

@@ -219,10 +219,10 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-     ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    if (selectedCell.selected) {
-        selectedCell.selected = !selectedCell.selected;
-    }
+//     ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+//    if (selectedCell.selected) {
+//        selectedCell.selected = !selectedCell.selected;
+//    }
 }
 #pragma mark - 下拉刷新
 - (void)addRefreshHeaderGif{

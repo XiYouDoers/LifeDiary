@@ -174,7 +174,7 @@
         NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
         NSInteger secondsOfNowToEnd = [dateOfEnd timeIntervalSinceDate:dateNow];
         NSInteger secondsOfStartToEnd = [dateOfEnd timeIntervalSinceDate:dateOfStart];
-        double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd-0.5;
+        double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
     [self.navigationController popViewControllerAnimated:YES];

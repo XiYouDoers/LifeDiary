@@ -5,10 +5,7 @@
 //  Created by JACK on 2018/5/13.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define WIDTH [UIScreen mainScreen].bounds.size.width
-#define HEIGHT [UIScreen mainScreen].bounds.size.height
-#define PURPLE [UIColor colorWithRed:98.0/255 green:54.0/255 blue:88.0/255 alpha:1]
-#define LIGHTBLUE [UIColor colorWithRed:67.0/255 green:148.0/255 blue:204.0/255 alpha:1]
+
 #import "ZDFindViewController.h"
 #import "RGCardViewLayout.h"
 
@@ -33,9 +30,9 @@ static NSString *const footerId = @"footerId";
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
-    _collectionView.pagingEnabled = YES;
+//    _collectionView.pagingEnabled = YES;
     // 隐藏水平滚动条
-//    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsHorizontalScrollIndicator = NO;
     // 取消弹簧效果
     _collectionView.bounces = NO;
     [self.view addSubview:_collectionView];
@@ -57,7 +54,7 @@ static NSString *const footerId = @"footerId";
  */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 4;
+    return 6;
 }
 /**
  ItemsInSection

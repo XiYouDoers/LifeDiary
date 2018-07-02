@@ -23,12 +23,12 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
 
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
         _pictureImageView.layer.cornerRadius = 5;
         _pictureImageView.layer.masksToBounds = true;
-        _pictureImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_pictureImageView];
         [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_offset(50);
