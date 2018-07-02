@@ -22,4 +22,4 @@
 #define BACKGROUNDCOLOR [UIColor colorWithRed:242/255.0 green:243/255.0 blue:220/255.0 alpha:1]
 #define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
-
+#define RED [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]

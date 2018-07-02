@@ -28,6 +28,7 @@
         _pictureImageView = [[UIImageView alloc]init];
         _pictureImageView.layer.cornerRadius = 5;
         _pictureImageView.layer.masksToBounds = true;
+        _pictureImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_pictureImageView];
         [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_offset(50);
@@ -63,7 +64,7 @@
 
         // _remainderTimeLabel
         _remainderTimeLabel = [[UILabel alloc]init];
-        _remainderTimeLabel.textColor = LIGHTGREEN;
+        _remainderTimeLabel.textColor = RED;
         [self addSubview:_remainderTimeLabel];
         [_remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
