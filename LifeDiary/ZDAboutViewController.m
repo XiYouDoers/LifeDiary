@@ -61,7 +61,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
         [UIView animateWithDuration:0.5f animations:^{
@@ -72,6 +72,10 @@
 
     
     
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

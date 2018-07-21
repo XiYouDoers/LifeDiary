@@ -8,6 +8,9 @@
 
 #import "ZDFindViewController.h"
 #import "RGCardViewLayout.h"
+#import "ZDFindDataManager.h"
+#import <WebKit/WebKit.h>
+#import "ZDLinkViewController.h"
 
 @interface ZDFindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
@@ -21,7 +24,20 @@ static NSString *const footerId = @"footerId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.navigationController.navigationBar.barTintColor =[ UIColor lightGrayColor];
+self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
+    ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
+
+    [findDataManger getData_sucessBlock:^(ZDOrderModel *model) {
+
+        ZDBodyModel *bodyModel = [[ZDBodyModel alloc]init];
+        bodyModel = model.showapi_res_body;
+        ZDPagebeanModel *pagebeanModel = [[ZDPagebeanModel alloc]init];
+        pagebeanModel = bodyModel.pagebean;
+        _contentlistArray = [[NSMutableArray<ZDContentlistModel > alloc]initWithArray:pagebeanModel.contentlist];
+
+    } faliure:^{
+        
+    }];
     
    
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
@@ -30,7 +46,7 @@ static NSString *const footerId = @"footerId";
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
-//    _collectionView.pagingEnabled = YES;
+    _collectionView.pagingEnabled = YES;
     // 隐藏水平滚动条
     _collectionView.showsHorizontalScrollIndicator = NO;
     // 取消弹簧效果
@@ -46,7 +62,22 @@ static NSString *const footerId = @"footerId";
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [UIView animateWithDuration:0.5f animations:^{
+//        CGRect  tabRect=self.tabBarController.tabBar.frame;
+//        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
+//        [UIView animateWithDuration:0.5f animations:^{
+//            self.tabBarController.tabBar.frame = tabRect;
+//        }completion:^(BOOL finished) {
+//
+//        }];
+//    }completion:^(BOOL finished) {
+//
+//    }];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 /**
  numberOfSections
@@ -77,33 +108,23 @@ static NSString *const footerId = @"footerId";
 }
 - (void)configureCell:(ZDCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    UIView  *subview = [cell.contentView viewWithTag:20];
-    [subview removeFromSuperview];
+//    UIView  *subview = [cell.contentView viewWithTag:20];
+//    [subview removeFromSuperview];
+    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
+    contentlist = _contentlistArray[indexPath.section];
+    NSData *data = [[NSData alloc]initWithContentsOfURL:contentlist.images.u];
     
-    switch (indexPath.section) {
-        case 0:
-            cell.imageView.image =  [UIImage imageNamed:@"practice1"];
-            cell.nameLabel.text = @"Glaciers";
-            break;
-        case 1:
-            cell.imageView.image =  [UIImage imageNamed:@"practice2"];
-            cell.nameLabel.text = @"Parrots";
-            break;
-        case 2:
-            cell.imageView.image =  [UIImage imageNamed:@"practice3"];
-            cell.nameLabel.text = @"Whales";
-            break;
-        case 3:
-            cell.imageView.image =  [UIImage imageNamed:@"practice4"];
-            cell.nameLabel.text = @"Lake View";
-            break;
-        case 4:
-            cell.imageView.image =  [UIImage imageNamed:@"practice5"];
-            break;
-        default:
-            break;
+    if (data) {
+        
+        cell.imageView.image =  [UIImage imageWithData:data];
+    }else{
+        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"practice%ld",indexPath.section]];
     }
-
+    
+    cell.nameLabel.text = contentlist.title;
+    cell.sourceLabel.text = contentlist.media_name;
+            
+    
 
 }
 //定义每个UICollectionView 的 margin
@@ -114,8 +135,19 @@ static NSString *const footerId = @"footerId";
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
+    contentlist = _contentlistArray[indexPath.section];
+    
     UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor whiteColor];
+    ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
+    WKWebView *webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
+    [linkVC.view addSubview:webView];
+    NSURL* url = [NSURL URLWithString:contentlist.url];//创建URL
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
+    [webView loadRequest:request];//加载
+    
+    [self.navigationController pushViewController:linkVC animated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

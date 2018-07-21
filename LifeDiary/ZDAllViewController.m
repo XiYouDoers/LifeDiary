@@ -25,12 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"ffff");
-    
-        NSLog(@"ffff");
-    
-    
-        NSLog(@"ffff");
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
     

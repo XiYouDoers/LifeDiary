@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ZDLinkViewController : UIViewController
-
+@property(nonatomic,strong) UIView *navView;
 @end

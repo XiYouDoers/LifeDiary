@@ -89,7 +89,7 @@
     _allDataMutableArray = [NSMutableArray array];
     _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     NSDate *dateNow = [[NSDate alloc]init];
-//    NSLog(@"%@ %@ %@ %@",_allDataMutableArray,_allDataMutableArray,[[ZDAllDataBase sharedDataBase]getAllGoods],[[ZDAllDataBase sharedDataBase]getAllGoods]);
+  
     for (ZDGoods *goods in _allDataMutableArray) {
 
         //判断是否加入耗尽数据库
@@ -111,8 +111,9 @@
                 _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
             }
         }
+
         NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-        NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+        NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
           //判断是否加入过期数据库
         if (seconds<=0){
     
@@ -133,20 +134,18 @@
         }else if (seconds<100 ) {
             [_messageDataMutableArray addObject:goods];
         }
-
         
-        
-    [self.messageTableView reloadData];
-
-        //显示tabBar
-        CGRect  tabRect=self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
     }
+    
+     [self.messageTableView reloadData];
+    //显示tabBar
+    CGRect  tabRect=self.tabBarController.tabBar.frame;
+    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.tabBarController.tabBar.frame = tabRect;
+    }completion:^(BOOL finished) {
+        
+    }];
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -182,7 +181,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 300;
+    return 400;
 }
 
 /**

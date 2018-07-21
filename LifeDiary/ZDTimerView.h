@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ZDTimerView : UIView
-
+@property(nonatomic,assign) NSInteger count;
+@property(nonatomic,strong) NSTimer *timer;
+@property(nonatomic,strong) UIButton *timeButton;
 @end

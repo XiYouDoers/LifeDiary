@@ -19,6 +19,9 @@
 		040CE67E20ADABC800A30442 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE67320ADABC800A30442 /* ViewController+MASAdditions.m */; };
 		040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */; };
 		040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68320ADC34000A30442 /* ZDRoundView.m */; };
+		0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438384E20FF6B21002C2561 /* ZDFindDataManager.m */; };
+		0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385420FF6CF5002C2561 /* ZDOrderModel.m */; };
+		0438385820FF7EF8002C2561 /* ZDLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385720FF7EF8002C2561 /* ZDLinkViewController.m */; };
 		043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */; };
 		043BD6DF20BFEFE50067F06E /* RGCardViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
@@ -58,6 +61,7 @@
 		04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723220A9BA8D00A14ADF /* ZDExpireDataBase.m */; };
 		04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */; };
 		04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */; };
+		04C5DC852101FA44003835E3 /* ZDTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5DC842101FA44003835E3 /* ZDTimerView.m */; };
 		04C76C2820AE84750094A5B0 /* ZDMeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */; };
 		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
 		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
@@ -136,6 +140,12 @@
 		040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUnderLineTextField.m; sourceTree = "<group>"; };
 		040CE68220ADC34000A30442 /* ZDRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDRoundView.h; sourceTree = "<group>"; };
 		040CE68320ADC34000A30442 /* ZDRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRoundView.m; sourceTree = "<group>"; };
+		0438384D20FF6B21002C2561 /* ZDFindDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFindDataManager.h; sourceTree = "<group>"; };
+		0438384E20FF6B21002C2561 /* ZDFindDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDFindDataManager.m; sourceTree = "<group>"; };
+		0438385320FF6CF5002C2561 /* ZDOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDOrderModel.h; sourceTree = "<group>"; };
+		0438385420FF6CF5002C2561 /* ZDOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDOrderModel.m; sourceTree = "<group>"; };
+		0438385620FF7EF8002C2561 /* ZDLinkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDLinkViewController.h; sourceTree = "<group>"; };
+		0438385720FF7EF8002C2561 /* ZDLinkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDLinkViewController.m; sourceTree = "<group>"; };
 		043BD6DA20BFED1F0067F06E /* ZDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCollectionViewCell.h; sourceTree = "<group>"; };
 		043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCollectionViewCell.m; sourceTree = "<group>"; };
 		043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGCardViewLayout.h; sourceTree = "<group>"; };
@@ -214,6 +224,8 @@
 		04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDepleteDataBase.m; sourceTree = "<group>"; };
 		04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddTableHeaderView.h; sourceTree = "<group>"; };
 		04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddTableHeaderView.m; sourceTree = "<group>"; };
+		04C5DC832101FA44003835E3 /* ZDTimerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDTimerView.h; sourceTree = "<group>"; };
+		04C5DC842101FA44003835E3 /* ZDTimerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDTimerView.m; sourceTree = "<group>"; };
 		04C76C2620AE84750094A5B0 /* ZDMeTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeTableHeaderView.h; sourceTree = "<group>"; };
 		04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeTableHeaderView.m; sourceTree = "<group>"; };
 		04CF7C4820AC6C2400060741 /* ZDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDViewController.h; sourceTree = "<group>"; };
@@ -454,6 +466,8 @@
 			children = (
 				044F02B220A811E800406D65 /* ZDFindViewController.h */,
 				044F02B320A811E800406D65 /* ZDFindViewController.m */,
+				0438385620FF7EF8002C2561 /* ZDLinkViewController.h */,
+				0438385720FF7EF8002C2561 /* ZDLinkViewController.m */,
 			);
 			name = Find;
 			sourceTree = "<group>";
@@ -531,6 +545,8 @@
 				044F02A820A8113600406D65 /* Message */,
 				044F02A920A8113E00406D65 /* Find */,
 				044F02AA20A8114700406D65 /* Me */,
+				04C5DC832101FA44003835E3 /* ZDTimerView.h */,
+				04C5DC842101FA44003835E3 /* ZDTimerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -619,6 +635,10 @@
 		044F02AD20A8117500406D65 /* Find */ = {
 			isa = PBXGroup;
 			children = (
+				0438384D20FF6B21002C2561 /* ZDFindDataManager.h */,
+				0438384E20FF6B21002C2561 /* ZDFindDataManager.m */,
+				0438385320FF6CF5002C2561 /* ZDOrderModel.h */,
+				0438385420FF6CF5002C2561 /* ZDOrderModel.m */,
 			);
 			name = Find;
 			sourceTree = "<group>";
@@ -973,11 +993,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LifeDiary/Pods-LifeDiary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -993,14 +1015,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				040CE67620ADABC800A30442 /* MASConstraint.m in Sources */,
+				0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */,
 				04FF835C20B94C9800EECE24 /* MJRefreshAutoGifFooter.m in Sources */,
 				043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
 				04FF836320B94C9800EECE24 /* MJRefreshNormalHeader.m in Sources */,
+				04C5DC852101FA44003835E3 /* ZDTimerView.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
 				04FF836A20B94C9800EECE24 /* UIView+MJExtension.m in Sources */,
+				0438385820FF7EF8002C2561 /* ZDLinkViewController.m in Sources */,
 				040CE67B20ADABC800A30442 /* NSArray+MASAdditions.m in Sources */,
 				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
 				04FF835B20B94C9800EECE24 /* MJRefreshHeader.m in Sources */,
@@ -1018,6 +1043,7 @@
 				04FF836120B94C9800EECE24 /* MJRefreshBackStateFooter.m in Sources */,
 				040CE67820ADABC800A30442 /* MASLayoutConstraint.m in Sources */,
 				04FF835920B94C9800EECE24 /* MJRefreshComponent.m in Sources */,
+				0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */,
 				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
 				04FF835820B94C9800EECE24 /* MJRefreshBackFooter.m in Sources */,
 				046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */,
@@ -1217,7 +1243,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
-				GCC_PREFIX_HEADER = /Users/jack/Desktop/LifeDiary/LifeDiary/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1234,7 +1260,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
-				GCC_PREFIX_HEADER = /Users/jack/Desktop/LifeDiary/LifeDiary/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

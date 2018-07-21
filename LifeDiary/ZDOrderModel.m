@@ -8,6 +8,13 @@
 
 #import "ZDOrderModel.h"
 
+@implementation ZDImagesModel
+@end
+@implementation ZDContentlistModel
+@end
+@implementation ZDPagebeanModel
+@end
+@implementation ZDBodyModel
+@end
 @implementation ZDOrderModel
-
 @end

@@ -65,6 +65,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
     [self.expireTableView reloadData];
@@ -77,6 +78,10 @@
         }completion:^(BOOL finished) {
             
         }];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)deleteExpireGoodsFromAllGoods:(id )sender{
     NSLog(@"%@",sender);

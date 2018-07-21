@@ -65,23 +65,20 @@
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     // Do any additional setup after loading the view.
 }
-- (void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     //隐藏tabBar
-        CGRect  tabRect = self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
+    CGRect  tabRect = self.tabBarController.tabBar.frame;
+    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.tabBarController.tabBar.frame = tabRect;
+    }completion:^(BOOL finished) {
+        
+    }];
+    
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -125,10 +122,12 @@
     newGoods.sum = cellForThree.textField.text;
     
 
-    
-    if ([newGoods.dateOfStart isEqualToString:@""] && [newGoods.dateOfEnd isEqualToString:@""] && [newGoods.saveTime isEqualToString:@""]) {
+    bool value1 = ![newGoods.dateOfStart isEqualToString:@""];
+    bool value2 = ![newGoods.dateOfEnd isEqualToString:@""];
+    bool value3 = ![newGoods.saveTime isEqualToString:@""];
+    if (!((value1 && value2)||(value1 && value3)||(value2 && value3))) {
         //当生产日期，截止日期，保质期全不为空，报错
-        [self wrongIntput];
+        [self displayWrongIntput];
         
     }else{
         
@@ -158,7 +157,7 @@
             NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
             //如果开始日期大于等于结束日期，则报错
             if (timeIntervalOfStart - timeIntervalOfEnd>=0.00000000) {
-                [self wrongIntput];
+                [self displayWrongIntput];
                 return ;
             }
             //将均正确的任意两个日期进行计算，得出另一个日期
@@ -180,7 +179,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     }
 }
-- (void)wrongIntput{
+- (void)displayWrongIntput{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"日期冲突，请修改" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     // 弹出对话框

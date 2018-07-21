@@ -6,7 +6,7 @@
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#define LIGHTBLUE [UIColor colorWithRed:0.0 green:116.0/255 blue:245.0/255 alpha:1]
+
 #import "ZDTabBarViewController.h"
 #import "ZDMessageViewController.h"
 #import "ZDFindViewController.h"
@@ -40,7 +40,7 @@
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
     [[UITabBar appearance]setBarTintColor:BACKGROUNDCOLOR];
-    [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:53.0/255 green:143.0/255 blue:203.0/255 alpha:1]];
+    [[UINavigationBar appearance]setBarTintColor:NAVIGATIONCOLOR];
     
     // Do any additional setup after loading the view.
 }

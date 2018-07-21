@@ -31,8 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    self.view.backgroundColor = [UIColor grayColor];
     backBtnItem.title = @"我";
     self.navigationItem.backBarButtonItem = backBtnItem;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     
@@ -68,9 +71,10 @@
     
     
 }
+
 - (ZDMeTableHeaderView *)tableHeaderView{
     if (!_tableHeaderView) {
-        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 220)];
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -20, WIDTH, HEIGHT/5*2)];
         _userDefaults = [NSUserDefaults standardUserDefaults];
         if ([_userDefaults stringForKey:@"user_name"]) {
             _tableHeaderView.nameTextField.text = [_userDefaults stringForKey:@"user_name"];
@@ -88,6 +92,7 @@
     }
     return _tableHeaderView;
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self saveToUserDeafault];

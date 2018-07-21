@@ -70,6 +70,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDDepleteDataBase sharedDataBase]getAllGoods];
     [self.depleteTableView reloadData];
@@ -80,6 +81,10 @@
     }completion:^(BOOL finished) {
         
     }];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)manageCell:(UIBarButtonItem *)sender{
     

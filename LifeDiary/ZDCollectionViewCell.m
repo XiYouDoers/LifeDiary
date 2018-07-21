@@ -23,6 +23,9 @@
         
         //_imageView
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height/5*3)];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
+        
         [backView addSubview:_imageView];
         
         
@@ -96,7 +99,6 @@
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
         }];
-
         
         //_messageLabel
         
@@ -111,10 +113,11 @@
             
         }];
         
+        
+        
         //_sourceLabel
         
         _sourceLabel = [[UILabel alloc]init];
-        _sourceLabel.text = @"JingDong";
         _sourceLabel.textAlignment = NSTextAlignmentCenter;
         _sourceLabel.layer.cornerRadius = 5.f;
         _sourceLabel.layer.masksToBounds = YES;
@@ -130,4 +133,5 @@
     }
     return self;
 }
+
 @end

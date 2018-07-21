@@ -5,6 +5,5 @@ use_frameworks!
 inhibit_all_warnings!
 pod 'AFNetworking', '~> 3.1.0'
 pod 'ReactiveCocoa','~>2.0', :inhibit_warnings => true
-
-
+pod 'JSONModel'
 end

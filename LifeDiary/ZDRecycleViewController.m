@@ -62,9 +62,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
-    
 
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
@@ -74,12 +74,12 @@
             
         }];
 
-    
-    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
+
 - (void)manageCell:(UIBarButtonItem *)sender{
     
     if (_rightBarButtonItemIsSeleted == NO) {

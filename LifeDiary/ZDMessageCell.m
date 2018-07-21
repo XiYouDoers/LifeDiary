@@ -18,25 +18,14 @@
     
     // Initialization code
 }
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        //_pictureImageView
-        _pictureImageView = [[UIImageView alloc]init];
-        _pictureImageView.layer.cornerRadius = 5;
-        _pictureImageView.layer.masksToBounds = true;
-        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:_pictureImageView];
-        [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(50);
-            make.left.mas_offset(0);
-            make.bottom.mas_offset(-50);
-            make.right.mas_offset(0);
-            
-        }];
+        
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
@@ -60,8 +49,21 @@
             make.right.mas_offset(-10);
             make.size.mas_equalTo(CGSizeMake(150, 40));
         }];
+        //_pictureImageView
+        _pictureImageView = [[UIImageView alloc]init];
+        _pictureImageView.layer.cornerRadius = 5;
+        _pictureImageView.layer.masksToBounds = true;
+        //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:_pictureImageView];
+        [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_offset(50);
+            make.left.mas_offset(10);
+            make.bottom.mas_offset(-50);
+            make.right.mas_offset(-10);
+            
+        }];
         
-
+        
         // _remainderTimeLabel
         _remainderTimeLabel = [[UILabel alloc]init];
         _remainderTimeLabel.textColor = RED;
@@ -75,7 +77,7 @@
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
-        _sumLabel.textColor = LIGHTBLUE ;
+        _sumLabel.textColor = NAVIGATIONCOLOR;
         [self addSubview:_sumLabel];
         [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_offset(-10);
@@ -99,7 +101,7 @@
 }
 - (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval{
     
-    UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 300-25) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];
+    UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 400-25) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];
 
     _outsideArc.path = [pathOfOutsideArc CGPath];
     //外面圆弧的strokeColor
@@ -113,7 +115,7 @@
         _outsideArc.strokeColor = [UIColor greenColor].CGColor;
     }
 
-    UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 300-25) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
+    UIBezierPath *pathOfInsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 400-25) radius:13 startAngle:(1.5*M_PI) endAngle:ratio*M_PI clockwise:true];
     _insideArc.path = [pathOfInsideArc CGPath];
     int months = timeInterval/3600/24/30;
     //里面圆弧的fillColor

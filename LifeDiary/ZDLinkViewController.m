@@ -16,9 +16,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.hidesBottomBarWhenPushed = YES;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+//    _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 64)];
+//    _navView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:_navView];
+//
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    backButton.frame = CGRectMake(20, 20, 40, 40);
+//    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+//    [backButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [_navView addSubview:backButton];
+//    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//
+//    UIButton *qiTaButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    qiTaButton.frame = CGRectMake(WIDTH-50, 20, 40, 40);
+//    [qiTaButton setTitle:@"其他" forState:UIControlStateNormal];
+//    [qiTaButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [_navView addSubview:qiTaButton];
+    
 }
+- (void)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
+//    CGRect  tabRect = self.tabBarController.tabBar.frame;
+//    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+//    [UIView animateWithDuration:0.5f animations:^{
+//        self.tabBarController.tabBar.frame = tabRect;
+//    }completion:^(BOOL finished) {
+//        
+//    }];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
