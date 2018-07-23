@@ -7,13 +7,13 @@
 //
 
 #import "ZDFindViewController.h"
-#import "RGCardViewLayout.h"
-#import "ZDFindDataManager.h"
-#import <WebKit/WebKit.h>
-#import "ZDLinkViewController.h"
+#import "ZDLifeViewController.h"
+#import "ZDShoppingViewController.h"
 
-@interface ZDFindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
+@interface ZDFindViewController ()
+@property(nonatomic,strong)  UISegmentedControl *segmentControl;
+@property (nonatomic, weak) UIView *containerView;
+@property (nonatomic, weak) UIViewController *currentSubViewController;
 @end
 
 @implementation ZDFindViewController
@@ -23,132 +23,77 @@ static NSString *const footerId = @"footerId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    backBtnItem.title = @"发现";
+    self.navigationItem.backBarButtonItem = backBtnItem;
     self.view.backgroundColor = [UIColor whiteColor];
 self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
-    ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
-
-    [findDataManger getData_sucessBlock:^(ZDOrderModel *model) {
-
-        ZDBodyModel *bodyModel = [[ZDBodyModel alloc]init];
-        bodyModel = model.showapi_res_body;
-        ZDPagebeanModel *pagebeanModel = [[ZDPagebeanModel alloc]init];
-        pagebeanModel = bodyModel.pagebean;
-        _contentlistArray = [[NSMutableArray<ZDContentlistModel > alloc]initWithArray:pagebeanModel.contentlist];
-
-    } faliure:^{
-        
+   
+    ZDShoppingViewController *shoppingViewController = [[ZDShoppingViewController alloc]init];
+    ZDLifeViewController *lifeViewController = [[ZDLifeViewController alloc]init];
+    UIView *container = [[UIView alloc] init];
+    self.containerView = container;
+    [self.view addSubview:container];
+    [container mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(WIDTH, HEIGHT));;
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(0);
     }];
     
-   
-    _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    _collectionView.backgroundColor = BACKGROUNDCOLOR;
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    // 开启分页
-    _collectionView.pagingEnabled = YES;
-    // 隐藏水平滚动条
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    // 取消弹簧效果
-    _collectionView.bounces = NO;
-    [self.view addSubview:_collectionView];
     
-    // 注册cell、sectionHeader、sectionFooter
-    [_collectionView registerClass:[ZDCollectionViewCell class] forCellWithReuseIdentifier:cellId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
+    [self addChildViewController:lifeViewController];
+    [self addChildViewController:shoppingViewController];
+    self.childViewControllers[0].view.frame = self.containerView.bounds;
+    [self.containerView addSubview:self.childViewControllers[0].view];
+    self.currentSubViewController = self.childViewControllers[0];
     
+    //segmentControl
+    NSArray *array = @[@"生活", @"购物"];
+    _segmentControl = [[UISegmentedControl alloc] initWithItems:array];
+    _segmentControl.selectedSegmentIndex = 0;
+    _segmentControl.tintColor = [UIColor whiteColor];
+    _segmentControl.momentary = NO;
+    // 设置颜色
+    [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
+                                  forState:UIControlStateNormal];
+    [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
+                                  forState:UIControlStateSelected];
+    [_segmentControl setBackgroundColor:[UIColor lightGrayColor]];
+    [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:_segmentControl];
+    [_segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(24);
+        make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
+        make.left.mas_equalTo(WIDTH/3);
+    }];
+
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-//    [UIView animateWithDuration:0.5f animations:^{
-//        CGRect  tabRect=self.tabBarController.tabBar.frame;
-//        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
-//        [UIView animateWithDuration:0.5f animations:^{
-//            self.tabBarController.tabBar.frame = tabRect;
-//        }completion:^(BOOL finished) {
-//
-//        }];
-//    }completion:^(BOOL finished) {
-//
-//    }];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
-/**
- numberOfSections
-
- */
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//SegmentControl点击事件
+-(void)doSomethingInSegment:(UISegmentedControl *)Seg
 {
-    return 6;
-}
-/**
- ItemsInSection
-
- */
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1;
-}
-/**
- dataSource
-
- */
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger index = Seg.selectedSegmentIndex;
+    UIViewController *selectedController = self.childViewControllers[index];
+    selectedController.view.frame = self.containerView.bounds;
     
-    _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    
-    [self configureCell:_collectionViewCell withIndexPath:indexPath];
-    
-    return _collectionViewCell;
-}
-- (void)configureCell:(ZDCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
-{
-//    UIView  *subview = [cell.contentView viewWithTag:20];
-//    [subview removeFromSuperview];
-    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-    contentlist = _contentlistArray[indexPath.section];
-    NSData *data = [[NSData alloc]initWithContentsOfURL:contentlist.images.u];
-    
-    if (data) {
-        
-        cell.imageView.image =  [UIImage imageWithData:data];
-    }else{
-        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"practice%ld",indexPath.section]];
+    if (self.currentSubViewController != self.childViewControllers[index]) {
+        [self transitionFromViewController:self.currentSubViewController toViewController:self.childViewControllers[index] duration:0.8 options:UIViewAnimationOptionTransitionCurlUp animations:^{} completion:^(BOOL finished) {
+            if (finished) {
+                self.currentSubViewController = self.childViewControllers[index];
+            }
+        }];
     }
-    
-    cell.nameLabel.text = contentlist.title;
-    cell.sourceLabel.text = contentlist.media_name;
-            
-    
 
 }
-//定义每个UICollectionView 的 margin
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//    
-//    return UIEdgeInsetsMake(5, 5, 5, 5);
-//}
-//UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-    contentlist = _contentlistArray[indexPath.section];
-    
-    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
-    WKWebView *webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    [linkVC.view addSubview:webView];
-    NSURL* url = [NSURL URLWithString:contentlist.url];//创建URL
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
-    [webView loadRequest:request];//加载
-    
-    [self.navigationController pushViewController:linkVC animated:YES];
 
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

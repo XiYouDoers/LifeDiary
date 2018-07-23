@@ -14,6 +14,7 @@
     if (self) {
         self.contentView.layer.cornerRadius = 13.f;
         self.contentView.layer.masksToBounds = YES;
+        NSInteger value;
         //backView
         UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         backView.backgroundColor = [UIColor whiteColor];
@@ -40,6 +41,18 @@
             make.left.mas_equalTo(0);
         }];
         
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor blackColor];
+        [self addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(10);
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width-20, 0.5));
+            make.left.mas_equalTo(10);
+        }];
+
+        
+        
+        
         //_zanImageView
         
         _zanImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"zan"]];
@@ -55,7 +68,11 @@
         //_zanLabel
         
         _zanLabel = [[UILabel alloc]init];
-        _zanLabel.text = @"24";
+        value = arc4random_uniform(50);
+        while (value < 20) {
+            value = arc4random_uniform(50);
+        }
+        _zanLabel.text = [NSString stringWithFormat:@"%ld",value] ;
         _zanLabel.textAlignment = NSTextAlignmentCenter;
         [backView addSubview:_zanLabel];
         [_zanLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,7 +96,11 @@
         //_saveLabel
         
         _saveLabel = [[UILabel alloc]init];
-        _saveLabel.text = @"16";
+        value = arc4random_uniform(50);
+        while (value < 20) {
+            value = arc4random_uniform(50);
+        }
+        _saveLabel.text = [NSString stringWithFormat:@"%ld",value] ;
         _saveLabel.textAlignment = NSTextAlignmentCenter;
         [backView addSubview:_saveLabel];
         [_saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,7 +124,11 @@
         //_messageLabel
         
         _messageLabel = [[UILabel alloc]init];
-        _messageLabel.text = @"35";
+        value = arc4random_uniform(50);
+        while (value < 20) {
+            value = arc4random_uniform(50);
+        }
+        _messageLabel.text = [NSString stringWithFormat:@"%ld",value] ;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
         [backView addSubview:_messageLabel];
         [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDCollectionViewCell.h"
-#import "ZDOrderModel.h"
 
 
 @interface ZDFindViewController : UIViewController
-@property(nonatomic,strong) UICollectionView *collectionView;
-@property(nonatomic,strong) ZDCollectionViewCell *collectionViewCell;
 
-@property(nonatomic,strong) NSMutableArray <ZDContentlistModel > *contentlistArray;
 @end

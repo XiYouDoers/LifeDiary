@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-    self.view.backgroundColor = [UIColor grayColor];
+//    self.view.backgroundColor = [UIColor grayColor];
     backBtnItem.title = @"我";
     self.navigationItem.backBarButtonItem = backBtnItem;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
