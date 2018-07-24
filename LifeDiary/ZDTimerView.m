@@ -34,7 +34,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();//获取上下文对象  只要是用了 CoreGraPhics  就必须创建他
     CGContextSetLineWidth(context, 5);//显然是设置线宽
-    CGContextSetRGBStrokeColor(context, 1, 0, 0, 1);// 设置颜色
+    CGContextSetRGBStrokeColor(context, 242, 243,220, 1);// 设置颜色
     CGContextAddArc(context, 25, 25, 15, 0 , self.count/300.0 * 2* M_PI, 0);//这就是画曲线了
     CGContextStrokePath(context);
 }

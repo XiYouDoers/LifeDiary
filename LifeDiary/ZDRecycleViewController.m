@@ -8,6 +8,7 @@
 
 #import "ZDRecycleViewController.h"
 #import "ZDRecycleDataBase.h"
+#import "ZDAllDataBase.h"
 
 @interface ZDRecycleViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -232,6 +233,40 @@
 }
 
 /**
+ 　tableView左滑编辑
+
+ */
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 添加一个删除按钮
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
+        // 从数据库中删除
+        [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
+        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+        [self.recycleTableView reloadData];
+        
+    }];
+    // 添加一个恢复按钮
+    UITableViewRowAction *topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"恢复"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        ZDGoods *recoveryGoods = self.dataMutableArray[indexPath.row];
+        // 从数据库中删除
+        [[ZDRecycleDataBase sharedDataBase]deleteGoods:recoveryGoods];
+        [[ZDAllDataBase sharedDataBase]addGoods:recoveryGoods];
+        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+        [self.recycleTableView reloadData];
+        
+        
+        
+    }];
+    topRowAction.backgroundColor = [UIColor colorWithRed:249.0/255 green:160.0/255 blue:8.0/255 alpha:1];
+    // 将设置好的按钮放到数组中返回
+    return @[deleteRowAction, topRowAction];
+}
+
+/**
  cell是否可以左滑删除
  
  */
@@ -243,15 +278,15 @@
  
  */
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
+
         ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
         // 从数据库中删除
         [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
         self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
         [self.recycleTableView reloadData];
-        
+
     }
 }
 @end

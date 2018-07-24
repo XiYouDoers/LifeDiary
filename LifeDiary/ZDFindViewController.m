@@ -53,12 +53,13 @@ self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
     _segmentControl.selectedSegmentIndex = 0;
     _segmentControl.tintColor = [UIColor whiteColor];
     _segmentControl.momentary = NO;
+
     // 设置颜色
-    [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
+    [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
                                   forState:UIControlStateNormal];
     [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
                                   forState:UIControlStateSelected];
-    [_segmentControl setBackgroundColor:[UIColor lightGrayColor]];
+    [_segmentControl setBackgroundColor:BACKGROUNDCOLOR];
     [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
     [_segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,7 +86,14 @@ self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
     selectedController.view.frame = self.containerView.bounds;
     
     if (self.currentSubViewController != self.childViewControllers[index]) {
-        [self transitionFromViewController:self.currentSubViewController toViewController:self.childViewControllers[index] duration:0.8 options:UIViewAnimationOptionTransitionCurlUp animations:^{} completion:^(BOOL finished) {
+        
+        UIViewAnimationOptions options;
+        if (self.currentSubViewController == self.childViewControllers[0]) {
+             options = UIViewAnimationOptionTransitionCurlUp;
+        }else {
+            options = UIViewAnimationOptionTransitionCurlDown;
+        }
+        [self transitionFromViewController:self.currentSubViewController toViewController:self.childViewControllers[index] duration:0.8 options:options animations:^{} completion:^(BOOL finished) {
             if (finished) {
                 self.currentSubViewController = self.childViewControllers[index];
             }

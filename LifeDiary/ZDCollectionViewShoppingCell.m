@@ -1,20 +1,20 @@
 //
-//  ZDCollectionViewCell.m
+//  ZDCollectionViewShoppingCell.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/31.
+//  Created by Jack on 2018/7/24.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDCollectionViewCell.h"
+#import "ZDCollectionViewShoppingCell.h"
 
-@implementation ZDCollectionViewCell
+@implementation ZDCollectionViewShoppingCell
 -(instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
         self.contentView.layer.cornerRadius = 13.f;
         self.contentView.layer.masksToBounds = YES;
-        NSInteger value;
+
         //backView
         UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         backView.backgroundColor = [UIColor whiteColor];
@@ -49,9 +49,6 @@
             make.size.mas_equalTo(CGSizeMake(self.frame.size.width-20, 0.5));
             make.left.mas_equalTo(10);
         }];
-
-        
-        
         
         //_zanImageView
         
@@ -59,7 +56,7 @@
         [backView addSubview:_zanImageView];
         [_zanImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
-            make.left.mas_equalTo(self.frame.size.width/9*2);
+            make.left.mas_equalTo(self.frame.size.width/9*3);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
         }];
@@ -68,77 +65,38 @@
         //_zanLabel
         
         _zanLabel = [[UILabel alloc]init];
-        value = arc4random_uniform(50);
-        while (value < 20) {
-            value = arc4random_uniform(50);
-        }
-        _zanLabel.text = [NSString stringWithFormat:@"%ld",value] ;
-        _zanLabel.textAlignment = NSTextAlignmentCenter;
+        _zanLabel.text = @"99" ;
+        _zanLabel.textAlignment = NSTextAlignmentLeft;
         [backView addSubview:_zanLabel];
         [_zanLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_zanImageView.mas_bottom).with.offset(10);
-            make.left.mas_equalTo(self.frame.size.width/9*2);
-            make.size.mas_equalTo(CGSizeMake(frame.size.width/9, 20));
-            
-        }];
-        
-        //_saveImageView
-        
-        _saveImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"save"]];
-        [backView addSubview:_saveImageView];
-        [_saveImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
-            make.left.mas_equalTo(_zanImageView.mas_right).with.offset(frame.size.width/9);
-            make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
-            
-        }];
-        
-        //_saveLabel
-        
-        _saveLabel = [[UILabel alloc]init];
-        value = arc4random_uniform(50);
-        while (value < 20) {
-            value = arc4random_uniform(50);
-        }
-        _saveLabel.text = [NSString stringWithFormat:@"%ld",value] ;
-        _saveLabel.textAlignment = NSTextAlignmentCenter;
-        [backView addSubview:_saveLabel];
-        [_saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_saveImageView.mas_bottom).with.offset(10);
-            make.left.mas_equalTo(_saveImageView.mas_left);
-            make.size.mas_equalTo(CGSizeMake(frame.size.width/9, 20));
-            
-        }];
-
-        //_messageImageView
-        
-        _messageImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"message"]];
-        [backView addSubview:_messageImageView];
-        [_messageImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
-            make.left.mas_equalTo(_saveImageView.mas_right).with.offset(frame.size.width/9);
+            make.left.mas_equalTo(self.frame.size.width/9*5);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
         }];
         
-        //_messageLabel
+        //priceImageView
         
-        _messageLabel = [[UILabel alloc]init];
-        value = arc4random_uniform(50);
-        while (value < 20) {
-            value = arc4random_uniform(50);
-        }
-        _messageLabel.text = [NSString stringWithFormat:@"%ld",value] ;
-        _messageLabel.textAlignment = NSTextAlignmentCenter;
-        [backView addSubview:_messageLabel];
-        [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_messageImageView.mas_bottom).with.offset(10);
-            make.left.mas_equalTo(_saveImageView.mas_right).with.offset(frame.size.width/9);
-            make.size.mas_equalTo(CGSizeMake(frame.size.width/9, 20));
+        _priceImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"price"]];
+        [backView addSubview:_priceImageView];
+        [_priceImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_zanImageView.mas_bottom).with.offset(10);
+            make.left.mas_equalTo(self.frame.size.width/9*3);
+            make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
         }];
         
+        //_priceLabel
         
+        _priceLabel = [[UILabel alloc]init];
+        _priceLabel.textAlignment = NSTextAlignmentLeft;
+        [backView addSubview:_priceLabel];
+        [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_zanImageView.mas_bottom).with.offset(10);
+            make.left.mas_equalTo(self.frame.size.width/9*5);
+            make.size.mas_equalTo(CGSizeMake(frame.size.width/9*3, frame.size.width/9));
+            
+        }];
         
         //_sourceLabel
         
@@ -154,9 +112,8 @@
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9*3, frame.size.width/9*3/4*1));
             
         }];
-
+        
     }
     return self;
 }
-
 @end

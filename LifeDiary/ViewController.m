@@ -24,7 +24,7 @@
     animationImageView.image = [UIImage imageNamed:@"animationImageView"];
     animationImageView.contentMode =  UIViewContentModeScaleAspectFill;
     ZDTimerView *timerView = [[ZDTimerView alloc]init];
-    timerView.frame = CGRectMake(WIDTH/2.0-25, HEIGHT/5*4, 50, 50);
+    timerView.frame = CGRectMake(WIDTH/2.0-25, HEIGHT/6*5, 50, 50);
     [animationImageView addSubview:timerView];
     
     [self.view addSubview:animationImageView];

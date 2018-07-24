@@ -111,7 +111,9 @@ static NSString *const footerId = @"footerId";
     ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
     if (_contentlistArray) {
          contentlist = _contentlistArray[indexPath.section];
-
+        if(indexPath.section == 0){
+            NSLog(@"%@",contentlist);
+        }
         NSData *data = [[NSData alloc]initWithContentsOfURL:contentlist.images.u];
         
         if (data) {

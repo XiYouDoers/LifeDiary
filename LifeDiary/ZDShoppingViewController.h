@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDCollectionViewCell.h"
+#import "ZDCollectionViewShoppingCell.h"
 
 @interface ZDShoppingViewController : UIViewController
 
 @property(nonatomic,strong) UICollectionView *collectionView;
-@property(nonatomic,strong) ZDCollectionViewCell *collectionViewCell;
+@property(nonatomic,strong) ZDCollectionViewShoppingCell *collectionViewShoppingCell;
 
 @end

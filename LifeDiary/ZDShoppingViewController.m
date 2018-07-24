@@ -11,7 +11,6 @@
 #import "ZDFindDataManager.h"
 #import <WebKit/WebKit.h>
 #import "ZDLinkViewController.h"
-
 @interface ZDShoppingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
@@ -45,7 +44,7 @@ static NSString *const footerId = @"footerId";
     [self.view addSubview:_collectionView];
     
     // 注册cell、sectionHeader、sectionFooter
-    [_collectionView registerClass:[ZDCollectionViewCell class] forCellWithReuseIdentifier:cellId];
+    [_collectionView registerClass:[ZDCollectionViewShoppingCell class] forCellWithReuseIdentifier:cellId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
     
@@ -65,7 +64,7 @@ static NSString *const footerId = @"footerId";
  */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 6;
+    return 3;
 }
 /**
  ItemsInSection
@@ -80,22 +79,24 @@ static NSString *const footerId = @"footerId";
  */
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    _collectionViewShoppingCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
-    [self configureCell:_collectionViewCell withIndexPath:indexPath];
+    [self configureCell:_collectionViewShoppingCell withIndexPath:indexPath];
     
-    return _collectionViewCell;
+    return _collectionViewShoppingCell;
 }
-- (void)configureCell:(ZDCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(ZDCollectionViewShoppingCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
     //    UIView  *subview = [cell.contentView viewWithTag:20];
     //    [subview removeFromSuperview];
-    NSArray *array = [NSArray arrayWithObjects:@"长城（GreatWall）红酒", @"长城2（GreatWall）红酒",@"长城3（GreatWall）红酒",@"长城4（GreatWall）红酒",@"长城5（GreatWall）红酒",@"长城6（GreatWall）红酒",nil];
+    NSArray *nameArray = [NSArray arrayWithObjects:@"长城（GreatWall）红酒", @"蒙牛 纯甄 常温酸牛奶",@"鲁花 5S 压榨一级 花生油 4L",nil];
+    NSArray *priceArray = [NSArray arrayWithObjects:@"168.00",@"89.90",@"109.90", nil];
 //    NSInteger index = arc4random_uniform(5);
-    NSInteger index = 0;
+    NSInteger index = indexPath.section;
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"shopping%ld",index]];
-    cell.nameLabel.text = [array objectAtIndex:indexPath.section];
-    cell.sourceLabel.text = @"红酒 特酿3年解百纳干红葡萄酒 整箱装 750ml*6瓶";
+    cell.nameLabel.text = [nameArray objectAtIndex:indexPath.section];
+    cell.priceLabel.text = [priceArray objectAtIndex:indexPath.section];
+    cell.sourceLabel.text = @"京东商城";
     
 }
 //定义每个UICollectionView 的 margin
@@ -110,8 +111,9 @@ static NSString *const footerId = @"footerId";
     ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
     WKWebView *webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
     [linkVC.view addSubview:webView];
-    NSURL* url = [NSURL URLWithString:@"https://item.jd.com/1304924.html"];//创建URL
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
+    NSArray *arrayOfHtml = [NSArray arrayWithObjects:@"https://item.jd.com/1304924.html", @"https://item.jd.com/1975749.html",@"https://item.jd.com/964416.html",nil];
+    NSURL *url = [NSURL URLWithString:[arrayOfHtml objectAtIndex:indexPath.section]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
     [webView loadRequest:request];//加载
     
     [self.navigationController pushViewController:linkVC animated:YES];
