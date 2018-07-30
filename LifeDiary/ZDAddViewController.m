@@ -27,6 +27,7 @@
 @implementation ZDAddViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.navigationItem.title = @"添加物品";
 
@@ -39,7 +40,7 @@
     _countFormatter = [[NSDateFormatter alloc]init];
     [_countFormatter setDateFormat:@"yyy"];
     
-    self.view.backgroundColor = BACKGROUNDCOLOR;
+    self.view.backgroundColor = TABBARCOLOR;
     UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
     [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem =  finishBtnItem;
@@ -61,7 +62,7 @@
     [_addTableView registerClass:[ZDPickerViewCell class] forCellReuseIdentifier:@"pickerViewCell"];
     
     
-    _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",nil];
+    _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     
     // Do any additional setup after loading the view.
@@ -98,7 +99,7 @@
     return YES;
 }
 - (void)finish{
-    
+
     ZDGoods *newGoods = [[ZDGoods alloc]init];
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;

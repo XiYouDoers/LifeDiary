@@ -32,7 +32,7 @@
     [super viewDidLoad];
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
 //    self.view.backgroundColor = [UIColor grayColor];
-    backBtnItem.title = @"我";
+    backBtnItem.title = @"我的";
     self.navigationItem.backBarButtonItem = backBtnItem;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
@@ -74,7 +74,11 @@
 
 - (ZDMeTableHeaderView *)tableHeaderView{
     if (!_tableHeaderView) {
+        if(iPhoneX){
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -50, WIDTH, HEIGHT/2)];
+        }else{
         _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -20, WIDTH, HEIGHT/5*2)];
+        }
         _userDefaults = [NSUserDefaults standardUserDefaults];
         if ([_userDefaults stringForKey:@"user_name"]) {
             _tableHeaderView.nameTextField.text = [_userDefaults stringForKey:@"user_name"];

@@ -83,6 +83,20 @@ static ZDAllDataBase *_allDataBase = nil;
     
     [_db close];
 }
+//修改数据
+-(void)updateGoods:(ZDGoods*)goods
+{
+    [_db open];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_name = ? WHERE allGoods_identifier = ?",goods.name,goods.identifier];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_remark = ? WHERE allGoods_identifier = ?",goods.remark,goods.identifier];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_imageData = ? WHERE allGoods_identifier = ?",goods.imageData,goods.identifier];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_dateOfStart = ? WHERE allGoods_identifier = ?",goods.dateOfStart,goods.identifier];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_dateOfEnd = ? WHERE allGoods_identifier = ?",goods.dateOfEnd,goods.identifier];
+//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_saveTime = ? WHERE allGoods_identifier = ?",goods.saveTime,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET allGoods_sum = ? WHERE allGoods_identifier = ?",goods.sum,goods.identifier];
+    
+    [_db close];
+}
 - (NSMutableArray *)getAllGoods{
     [_db open];
     

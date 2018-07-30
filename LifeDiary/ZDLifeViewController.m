@@ -30,7 +30,7 @@ static NSString *const footerId = @"footerId";
     self.navigationItem.backBarButtonItem = backBtnItem;
    
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
+    self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
 
     ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
     
@@ -49,7 +49,7 @@ static NSString *const footerId = @"footerId";
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
     _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    _collectionView.backgroundColor = BACKGROUNDCOLOR;
+    _collectionView.backgroundColor = TABBARCOLOR;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
@@ -112,7 +112,7 @@ static NSString *const footerId = @"footerId";
     if (_contentlistArray) {
          contentlist = _contentlistArray[indexPath.section];
         if(indexPath.section == 0){
-            NSLog(@"%@",contentlist);
+      
         }
         NSData *data = [[NSData alloc]initWithContentsOfURL:contentlist.images.u];
         

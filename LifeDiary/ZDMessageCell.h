@@ -15,6 +15,8 @@
 @property(nonatomic,strong) UIImageView *pictureImageView;
 @property(nonatomic,strong) UILabel *remainderTimeLabel;
 @property(nonatomic,strong) UILabel *sumLabel;
+@property (nonatomic,strong) UIStepper *stepper;
+
 
 /**
  setting arc's startAngle and endAngle

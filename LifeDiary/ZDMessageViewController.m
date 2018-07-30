@@ -16,6 +16,7 @@
 #import "ZDAllViewController.h"
 #import "ZDAddViewController.h"
 #import "MJRefresh.h"
+#import "ZDEditViewController.h"
 
 @interface ZDMessageViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSDateFormatter *_formatter;
@@ -34,19 +35,22 @@
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
     
-    self.view.backgroundColor = BACKGROUNDCOLOR;
+    self.view.backgroundColor = TABBARCOLOR;
 
     //_messageTableView
     _messageTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _messageTableView.dataSource = self;
     _messageTableView.delegate = self;
-    _messageTableView.backgroundColor = BACKGROUNDCOLOR;
+    _messageTableView.backgroundColor = TABBARCOLOR;
     _messageTableView.sectionHeaderHeight = 5;
     _messageTableView.sectionFooterHeight = 5;
     _messageTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0.0f,0.0f,_messageTableView.bounds.size.width,0.01f)];
     _messageTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_messageTableView];
     [_messageTableView registerClass:[ZDMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    
+    
+//    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     //addRefreshHeaderGif
     [self addRefreshHeaderGif];
 
@@ -54,6 +58,28 @@
 
     // Do any additional setup after loading the view.
 }
+- (void)valueChanged:(UIStepper *)stepper{
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:stepper.tag - 200];
+    ZDMessageCell *cell = [_messageTableView cellForRowAtIndexPath:indexPath];
+    ZDGoods *goods = _messageDataMutableArray[indexPath.section];
+    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
+    goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
+    [[ZDAllDataBase sharedDataBase]updateGoods:goods];
+    
+}
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"text"]) {
+      
+    }else{
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+//-(void)dealloc{
+//    [_messageCell.sumLabel removeObserver:self forKeyPath:@"text" context:nil];
+//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -66,7 +92,7 @@
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
+    UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部 ▼" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
     [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
@@ -93,7 +119,7 @@
     for (ZDGoods *goods in _allDataMutableArray) {
 
         //判断是否加入耗尽数据库
-        if ([goods.sum isEqualToString:@"0"]) {
+        if ([goods.sum isEqualToString:@"0"]||[goods.sum isEqualToString:@""]) {
             int key=0;
             //根据identifier判断是否存在于全部数据库中
             for (ZDGoods *expireGoods in _allDataMutableArray) {
@@ -102,7 +128,7 @@
                     key=1;
                 }
             }
-            NSLog(@"key=%d",key);
+
             if (key) {
                 //耗尽数据库中添加物品
                 [[ZDExpireDataBase sharedDataBase]addGoods:goods];
@@ -115,15 +141,21 @@
         NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
         NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
           //判断是否加入过期数据库
+        
+
         if (seconds<=0){
     
             int key=0;
              //根据identifier判断是否存在于全部数据库中
-            for (ZDGoods *depleteGoods in [[ZDAllDataBase sharedDataBase]getAllGoods]) {
-                if (goods==depleteGoods) {
-                    key=1;
+
+            for (ZDGoods *depleteGoods in _allDataMutableArray) {
+               
+                if (goods == depleteGoods) {
+                    
+                    key = 1;
                 }
             }
+       
             if (key) {
                 //过期数据库中添加物品
                 [[ZDDepleteDataBase sharedDataBase]addGoods:goods];
@@ -160,6 +192,7 @@
     ZDAddViewController *addViewController = [[ZDAddViewController alloc]init];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
+
 #pragma mark - tableView代理方法
 /**
  section中cell的数量
@@ -201,12 +234,16 @@
     NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
         _messageCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
     _messageCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    
     //计算出保质期的时间戳
     NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
     NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
     NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
     NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
     [_messageCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+    _messageCell.stepper.tag = 200 + indexPath.section;
+    _messageCell.stepper.value = [goods.sum doubleValue];
+    [_messageCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     
     return _messageCell;
 
@@ -218,10 +255,12 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//     ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-//    if (selectedCell.selected) {
-//        selectedCell.selected = !selectedCell.selected;
-//    }
+    
+   
+   
+//    ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
+//    [self.navigationController pushViewController:editVC animated:YES];
+//    
 }
 #pragma mark - 下拉刷新
 - (void)addRefreshHeaderGif{
@@ -243,13 +282,16 @@
         [self.messageTableView.mj_header endRefreshing];
         
     }];
+    NSMutableArray *refreshHeaderArray2 = [[NSMutableArray alloc]init];
+    [refreshHeaderArray2 addObject:[UIImage imageNamed:@"clock0"]];
     NSMutableArray *refreshHeaderArray = [[NSMutableArray alloc]init];
-    [refreshHeaderArray addObject:[UIImage imageNamed:@"UFO"]];
-    [refreshHeaderArray addObject:[UIImage imageNamed:@"UFO"]];
+    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock1"]];
+    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock2"]];
+    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock3"]];
     // Set the ordinary state of animated images
-    [header setImages:refreshHeaderArray forState:MJRefreshStateIdle];
+    [header setImages:refreshHeaderArray2 forState:MJRefreshStateIdle];
     // Set the pulling state of animated images（Enter the status of refreshing as soon as loosen）
-    [header setImages:refreshHeaderArray forState:MJRefreshStatePulling];
+    [header setImages:refreshHeaderArray2 forState:MJRefreshStatePulling];
     // Set the refreshing state of animated images
     [header setImages:refreshHeaderArray forState:MJRefreshStateRefreshing];
     // Set header
@@ -261,7 +303,7 @@
     //set title
     [header setTitle:@"下拉刷新" forState:MJRefreshStateIdle];
     [header setTitle:@"松开刷新" forState:MJRefreshStatePulling];
-    [header setTitle:@"努力加载中..." forState:MJRefreshStateRefreshing];
+    [header setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
     
     // Set font
     header.stateLabel.font = [UIFont systemFontOfSize:17];

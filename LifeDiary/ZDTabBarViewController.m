@@ -35,11 +35,11 @@
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
-    [self wsf_settingController:meNavigationController tabBarTitle:@"我" tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
+    [self wsf_settingController:meNavigationController tabBarTitle:@"我的" tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
      ];
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
-    [[UITabBar appearance]setBarTintColor:BACKGROUNDCOLOR];
+    [[UITabBar appearance]setBarTintColor:TABBARCOLOR];
     [[UINavigationBar appearance]setBarTintColor:NAVIGATIONCOLOR];
     
     // Do any additional setup after loading the view.
@@ -61,6 +61,7 @@
 - (void)wsf_settingController:(UINavigationController *)controller tabBarTitle:(NSString *)title tabBarItemImageName:(NSString *)imageName tabBarItemSelectedImageName:(NSString *)selectedImageName{
     
     controller.tabBarItem.title = title;
+
     // 设置 tabbarItem 静态图片(不被系统默认渲染,显示图像原始颜色)
     UIImage *image = [UIImage imageNamed:imageName];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -72,7 +73,7 @@
     [controller.tabBarItem setSelectedImage:selectedImage];
     // 设置 tabbarItem 选中状态下的文字颜色(不被系统默认渲染,显示文字自定义颜色)
 
-    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObject:LIGHTBLUE forKey:NSForegroundColorAttributeName];
+    NSDictionary *selectedDictionary = [NSDictionary dictionaryWithObjectsAndKeys:LIGHTBLUE,NSForegroundColorAttributeName, [UIFont systemFontOfSize:50.0f],NSFontAttributeName,nil];
     [controller.tabBarItem setTitleTextAttributes:selectedDictionary forState:UIControlStateSelected];
     //设置tabbarItem 未选中状态下的文字颜色
     NSDictionary *normalDictionary = [NSDictionary dictionaryWithObject:[UIColor lightGrayColor] forKey:NSForegroundColorAttributeName];
@@ -80,7 +81,7 @@
     
     //改变navigationBar中间title的颜色
     
-    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE}];
+    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: NAVIGATIONCOLOR}];
     //改变navigationBar.barButtonItem的颜色
     
 //    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];

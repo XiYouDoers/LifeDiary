@@ -10,7 +10,7 @@
 #import "ZDAllDataBase.h"
 #import "ZDRecycleDataBase.h"
 #import "ZDRoundView.h"
-
+#import "ZDEditViewController.h"
 
 
 @interface ZDAllViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
@@ -30,7 +30,6 @@
     
     //_allTableView
     self.navigationItem.title = @"全部物品";
-
     _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
@@ -43,11 +42,12 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     _resultMutableArray = [NSMutableArray array];
-
+    [self.allTableView reloadData];
     //隐藏tabBar
         CGRect  tabRect = self.tabBarController.tabBar.frame;
         tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
@@ -118,8 +118,8 @@
         _cancleBtn.backgroundColor = [UIColor clearColor];
         _cancleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
         [_cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [_cancleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+        [_cancleBtn setTitleColor:LIGHTBLUE forState:UIControlStateNormal];
+        [_cancleBtn setTitleColor:LIGHTBLUE forState:UIControlStateHighlighted];
         _cancleBtn.hidden= YES;
         [_searchView addSubview:_cancleBtn];
         
@@ -264,6 +264,7 @@
 
     goods = _resultMutableArray[indexPath.row];
     }else{
+
     
     goods = _dataMutableArray[indexPath.row];
     }
@@ -290,11 +291,45 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ZDAllCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    if (selectedCell.selected==YES) {
-        selectedCell.selected = !selectedCell.selected;
-    }
+    
+    ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    ZDGoods *goods =  _dataMutableArray[indexPath.section];
+    cell.selected = !cell.selected;
+    ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
+    editVC.goods = goods;
+    [self.navigationController pushViewController:editVC animated:YES];
+    
 }
+/**
+ 　tableView左滑编辑
+ 
+ */
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // 添加一个删除按钮
+//    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//
+//        ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
+//        // 从数据库中删除
+//        [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
+//        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+//        [self.allTableView reloadData];
+//
+//    }];
+//    // 添加一个恢复按钮
+//    UITableViewRowAction *topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"恢复"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//
+//
+//        [self.allTableView reloadData];
+//
+//
+//
+//    }];
+//    topRowAction.backgroundColor = [UIColor colorWithRed:249.0/255 green:160.0/255 blue:8.0/255 alpha:1];
+//    // 将设置好的按钮放到数组中返回
+//    return @[deleteRowAction, topRowAction];
+//}
+
 /**
  cell是否可以左滑删除
 
@@ -308,6 +343,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
      if (editingStyle == UITableViewCellEditingStyleDelete) {
+      
+         
          ZDGoods *deletedGoods = [[ZDGoods alloc]init];
          if (self.resultMutableArray.count) {
              //计算在搜索结果中要删除的cell在总数据序列
@@ -327,7 +364,7 @@
          //从搜索列表中删除
          for (ZDGoods *goods in  self.resultMutableArray) {
              if (goods==deletedGoods) {
-                 NSLog(@"deletedGoods");
+   
                  [_resultMutableArray removeObject:deletedGoods];
              }
          }

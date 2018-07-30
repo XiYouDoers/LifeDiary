@@ -27,7 +27,7 @@ static NSString *const footerId = @"footerId";
     backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.view.backgroundColor = [UIColor whiteColor];
-self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
+self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
    
     ZDShoppingViewController *shoppingViewController = [[ZDShoppingViewController alloc]init];
     ZDLifeViewController *lifeViewController = [[ZDLifeViewController alloc]init];
@@ -59,11 +59,15 @@ self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
                                   forState:UIControlStateNormal];
     [_segmentControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:16]}
                                   forState:UIControlStateSelected];
-    [_segmentControl setBackgroundColor:BACKGROUNDCOLOR];
+    [_segmentControl setBackgroundColor:TABBARCOLOR];
     [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
     [_segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (iPhoneX) {
+        make.top.mas_equalTo(24+20);
+        }else{
         make.top.mas_equalTo(24);
+        }
         make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
         make.left.mas_equalTo(WIDTH/3);
     }];

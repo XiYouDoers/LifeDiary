@@ -27,12 +27,12 @@ static NSString *const footerId = @"footerId";
     backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = BACKGROUNDCOLOR;
+    self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
     
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
     _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    _collectionView.backgroundColor = BACKGROUNDCOLOR;
+    _collectionView.backgroundColor = TABBARCOLOR;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页

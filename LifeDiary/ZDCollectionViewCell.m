@@ -58,8 +58,12 @@
         _zanImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"zan"]];
         [backView addSubview:_zanImageView];
         [_zanImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            if(iPhoneX){
+               make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20+10);
+            }else{
             make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
-            make.left.mas_equalTo(self.frame.size.width/9*2);
+            }
+                make.left.mas_equalTo(self.frame.size.width/9*2);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
         }];
@@ -87,7 +91,11 @@
         _saveImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"save"]];
         [backView addSubview:_saveImageView];
         [_saveImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
+            if(iPhoneX){
+                make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20+10);
+            }else{
+                make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
+            }
             make.left.mas_equalTo(_zanImageView.mas_right).with.offset(frame.size.width/9);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
@@ -115,7 +123,11 @@
         _messageImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"message"]];
         [backView addSubview:_messageImageView];
         [_messageImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
+            if(iPhoneX){
+                make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20+10);
+            }else{
+                make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(20);
+            }
             make.left.mas_equalTo(_saveImageView.mas_right).with.offset(frame.size.width/9);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9, frame.size.width/9));
             
@@ -149,8 +161,12 @@
         _sourceLabel.backgroundColor = [UIColor lightGrayColor];
         [backView addSubview:_sourceLabel];
         [_sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (iPhoneX) {
+                make.bottom.mas_equalTo(-20-10);
+            }else{
             make.bottom.mas_equalTo(-20);
-            make.centerX.mas_equalTo(self.mas_centerX);
+            }
+                make.centerX.mas_equalTo(self.mas_centerX);
             make.size.mas_equalTo(CGSizeMake(frame.size.width/9*3, frame.size.width/9*3/4*1));
             
         }];

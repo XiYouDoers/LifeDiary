@@ -72,7 +72,7 @@
         
         //_dateOfEndLabel
         _dateOfEndLabel = [[UILabel alloc]init];
-        _dateOfEndLabel.textColor = [UIColor redColor];
+        _dateOfEndLabel.textColor = GOLDCOLOR;
         [self addSubview:_dateOfEndLabel];
         [_dateOfEndLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_dateOfstartLabel.mas_bottom).mas_offset(5);
@@ -82,7 +82,7 @@
         }];
         //_saveTimeLabel
         _saveTimeLabel = [[UILabel alloc]init];
-        _saveTimeLabel.textColor = [UIColor blueColor];
+        _saveTimeLabel.textColor = LIGHTBLUE;
         [self addSubview:_saveTimeLabel];
         [_saveTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
@@ -93,7 +93,7 @@
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
-        _sumLabel.textColor = [UIColor blueColor];
+        _sumLabel.textColor = LIGHTBLUE;
         [self addSubview:_sumLabel];
         [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);

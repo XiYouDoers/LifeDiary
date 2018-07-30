@@ -45,6 +45,9 @@
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
 		046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40CC20DF766100CEA199 /* ZDAllCell.m */; };
+		047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */; };
+		047F3459210C8B6900D84ADD /* ZDEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F3458210C8B6900D84ADD /* ZDEditViewController.m */; };
+		047F345F210C8EC000D84ADD /* ZDEditPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F345E210C8EC000D84ADD /* ZDEditPickerViewCell.m */; };
 		04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */; };
 		04B8368F20A871870050D568 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368520A871870050D568 /* FMDatabase.m */; };
 		04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8368720A871870050D568 /* FMDatabaseAdditions.m */; };
@@ -72,7 +75,6 @@
 		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
 		04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EF92106005400A97667 /* ZDLifeViewController.m */; };
 		04ED0EFD2106012C00A97667 /* ZDShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EFC2106012C00A97667 /* ZDShoppingViewController.m */; };
-		04F9DD8720DE3501004475F5 /* ZDSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */; };
 		04FF835720B94C9800EECE24 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832B20B94C9800EECE24 /* MJRefreshAutoFooter.m */; };
 		04FF835820B94C9800EECE24 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832D20B94C9800EECE24 /* MJRefreshBackFooter.m */; };
 		04FF835920B94C9800EECE24 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832F20B94C9800EECE24 /* MJRefreshComponent.m */; };
@@ -194,6 +196,12 @@
 		046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDUserDataBase.m; sourceTree = "<group>"; };
 		046E40CB20DF766100CEA199 /* ZDAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
 		046E40CC20DF766100CEA199 /* ZDAllCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllCell.m; sourceTree = "<group>"; };
+		047F3454210C884A00D84ADD /* ZDEditDefaultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDEditDefaultCell.h; sourceTree = "<group>"; };
+		047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDEditDefaultCell.m; sourceTree = "<group>"; };
+		047F3457210C8B6900D84ADD /* ZDEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDEditViewController.h; sourceTree = "<group>"; };
+		047F3458210C8B6900D84ADD /* ZDEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDEditViewController.m; sourceTree = "<group>"; };
+		047F345D210C8EC000D84ADD /* ZDEditPickerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDEditPickerViewCell.h; sourceTree = "<group>"; };
+		047F345E210C8EC000D84ADD /* ZDEditPickerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDEditPickerViewCell.m; sourceTree = "<group>"; };
 		04934B2220AFE1B700FE1E17 /* ZDPhotoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPhotoManagerViewController.h; sourceTree = "<group>"; };
 		04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPhotoManagerViewController.m; sourceTree = "<group>"; };
 		04B8368420A871870050D568 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -249,8 +257,6 @@
 		04ED0EF92106005400A97667 /* ZDLifeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDLifeViewController.m; sourceTree = "<group>"; };
 		04ED0EFB2106012C00A97667 /* ZDShoppingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDShoppingViewController.h; sourceTree = "<group>"; };
 		04ED0EFC2106012C00A97667 /* ZDShoppingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDShoppingViewController.m; sourceTree = "<group>"; };
-		04F9DD8520DE3501004475F5 /* ZDSearchViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSearchViewModel.h; sourceTree = "<group>"; };
-		04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSearchViewModel.m; sourceTree = "<group>"; };
 		04FF832A20B94C9800EECE24 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		04FF832B20B94C9800EECE24 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		04FF832C20B94C9800EECE24 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -503,6 +509,8 @@
 			children = (
 				04CF7C5720AC71DC00060741 /* ZDAllViewController.h */,
 				04CF7C5820AC71DC00060741 /* ZDAllViewController.m */,
+				047F3457210C8B6900D84ADD /* ZDEditViewController.h */,
+				047F3458210C8B6900D84ADD /* ZDEditViewController.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -693,8 +701,6 @@
 			children = (
 				04B836A120A87DE90050D568 /* ZDAllDataBase.h */,
 				04B836A220A87DE90050D568 /* ZDAllDataBase.m */,
-				04F9DD8520DE3501004475F5 /* ZDSearchViewModel.h */,
-				04F9DD8620DE3501004475F5 /* ZDSearchViewModel.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -704,6 +710,10 @@
 			children = (
 				046E40CB20DF766100CEA199 /* ZDAllCell.h */,
 				046E40CC20DF766100CEA199 /* ZDAllCell.m */,
+				047F3454210C884A00D84ADD /* ZDEditDefaultCell.h */,
+				047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */,
+				047F345D210C8EC000D84ADD /* ZDEditPickerViewCell.h */,
+				047F345E210C8EC000D84ADD /* ZDEditPickerViewCell.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -1033,6 +1043,8 @@
 				0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */,
 				04FF835C20B94C9800EECE24 /* MJRefreshAutoGifFooter.m in Sources */,
 				04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */,
+				047F3459210C8B6900D84ADD /* ZDEditViewController.m in Sources */,
+				047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */,
 				043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
@@ -1087,6 +1099,7 @@
 				04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */,
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
 				04B8369620A874750050D568 /* ZDGoods.m in Sources */,
+				047F345F210C8EC000D84ADD /* ZDEditPickerViewCell.m in Sources */,
 				04FF835E20B94C9800EECE24 /* MJRefreshAutoStateFooter.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
 				04FF836220B94C9800EECE24 /* MJRefreshGifHeader.m in Sources */,
@@ -1099,7 +1112,6 @@
 				04FF836920B94C9800EECE24 /* UIScrollView+MJRefresh.m in Sources */,
 				04BD723620A9BA9800A14ADF /* ZDDepleteDataBase.m in Sources */,
 				040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */,
-				04F9DD8720DE3501004475F5 /* ZDSearchViewModel.m in Sources */,
 				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
 				04FF836720B94C9800EECE24 /* NSBundle+MJRefresh.m in Sources */,

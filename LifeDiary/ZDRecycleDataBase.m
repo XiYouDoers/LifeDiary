@@ -87,6 +87,7 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     
     [_db close];
 }
+
 - (NSMutableArray *)getAllGoods{
     [_db open];
     

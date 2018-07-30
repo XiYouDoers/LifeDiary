@@ -19,8 +19,16 @@
 //宏定义屏幕长、宽
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
-#define BACKGROUNDCOLOR [UIColor colorWithRed:242/255.0 green:243/255.0 blue:220/255.0 alpha:1]
+#define TABBARCOLOR [UIColor colorWithRed:242/255.0 green:243/255.0 blue:220/255.0 alpha:1]
 #define LIGHTBLUE [UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1]
 #define LIGHTGREEN [UIColor colorWithRed:78.0/255 green:245.0/255 blue:14.0/255 alpha:1]
 #define RED [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
-#define NAVIGATIONCOLOR [UIColor colorWithRed:53.0/255 green:143.0/255 blue:203.0/255 alpha:1]
+#define NAVIGATIONCOLOR [UIColor colorWithRed:0.0/255 green:138.0/255 blue:223.0/255 alpha:1]
+#define GOLDCOLOR [UIColor colorWithRed:249.0/255 green:156.0/255 blue:8.0/255 alpha:1]
+#define kSCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
+#define kSCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
+#define iPhoneX     (kSCREEN_WIDTH == 375.f && kSCREEN_HEIGHT == 812.f)
+
+
+
+

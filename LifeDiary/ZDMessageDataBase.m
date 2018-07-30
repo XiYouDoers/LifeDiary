@@ -109,12 +109,26 @@ static ZDMessageDataBase *_messageDataBase = nil;
     [_db close];
     
 }
-
+//deleteGoods
 - (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM person WHERE goods_identifier = ?",goods.identifier];
+    [_db executeUpdate:@"DELETE FROM goods WHERE goods_identifier = ?",goods.identifier];
     
+    [_db close];
+}
+//修改数据
+-(void)updateGoods:(ZDGoods*)goods
+{
+    [_db open];
+    BOOL result = [_db executeUpdate:@"UPDATE goods SET goods_sum = ? WHERE goods_identifier = ?",goods.sum,goods.identifier];
+    
+    if(result){
+        NSLog(@"更新数据成功");
+
+    }else{
+        NSLog(@"更新数据失败");
+    }
     [_db close];
 }
 - (NSMutableArray *)getAllGoods{

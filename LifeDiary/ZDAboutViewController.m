@@ -22,7 +22,7 @@
     
 
     
-    self.view.backgroundColor = BACKGROUNDCOLOR;
+    self.view.backgroundColor = TABBARCOLOR;
     
     UIImageView *appHeadPictureImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"appHeadPictureImageView"]];
         [self.view addSubview:appHeadPictureImageView];

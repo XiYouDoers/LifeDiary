@@ -84,7 +84,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)deleteExpireGoodsFromAllGoods:(id )sender{
-    NSLog(@"%@",sender);
+    
     //响应删除通知
     //    NSLog(@"userInfo=%@",[sender.userInfo objectForKey:@"text"]);
     //    [[ZDAllDataBase sharedDataBase]deleteGoods:notification.object];
@@ -231,7 +231,7 @@
     _expireCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
     _expireCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
     _expireCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
-    _expireCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    _expireCell.sumLabel.text = @"数量：0";
     
     return _expireCell;
     

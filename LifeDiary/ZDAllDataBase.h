@@ -26,6 +26,16 @@
  *
  */
 - (void)deleteGoods:(ZDGoods *)goods;
+/**
+    修改Goods
+
+ */
+-(void)updateGoods:(ZDGoods*)goods;
+
+/**
+ 获取全部
+
+ */
 - (NSMutableArray *)getAllGoods;
 
 @end
