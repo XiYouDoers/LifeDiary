@@ -8,7 +8,7 @@
 
 #import "ZDOrderModel.h"
 
-@implementation ZDImagesModel
+@implementation ZDPicModel
 @end
 @implementation ZDContentlistModel
 @end

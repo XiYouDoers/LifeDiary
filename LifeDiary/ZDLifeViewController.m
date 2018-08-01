@@ -35,16 +35,16 @@ static NSString *const footerId = @"footerId";
     ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
     
     [findDataManger getData_sucessBlock:^(ZDOrderModel *model) {
-        
         ZDBodyModel *bodyModel = [[ZDBodyModel alloc]init];
         bodyModel = model.showapi_res_body;
         ZDPagebeanModel *pagebeanModel = [[ZDPagebeanModel alloc]init];
         pagebeanModel = bodyModel.pagebean;
-
+        
         _contentlistArray = [[NSMutableArray<ZDContentlistModel > alloc]initWithArray:pagebeanModel.contentlist];
+        [self.collectionView reloadData];
     } faliure:^{
         
-    }];
+    } maxResult:@"10"];
     
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
@@ -69,10 +69,12 @@ static NSString *const footerId = @"footerId";
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
+    
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
@@ -83,7 +85,7 @@ static NSString *const footerId = @"footerId";
  */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 6;
+    return _contentlistArray.count;
 }
 /**
  ItemsInSection
@@ -99,39 +101,14 @@ static NSString *const footerId = @"footerId";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    ZDContentlistModel *contentlistModel = [[ZDContentlistModel alloc]init];
+    contentlistModel = _contentlistArray[indexPath.section];
+    [_collectionViewCell updateCell:contentlistModel];
     
-    [self configureCell:_collectionViewCell withIndexPath:indexPath];
     
     return _collectionViewCell;
 }
-- (void)configureCell:(ZDCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
-{
-    //    UIView  *subview = [cell.contentView viewWithTag:20];
-    //    [subview removeFromSuperview];
-    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-    if (_contentlistArray) {
-         contentlist = _contentlistArray[indexPath.section];
-        if(indexPath.section == 0){
-      
-        }
-        NSData *data = [[NSData alloc]initWithContentsOfURL:contentlist.images.u];
-        
-        if (data) {
-            
-            cell.imageView.image =  [UIImage imageWithData:data];
-        }else{
-            cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"life%ld",indexPath.section]];
-        }
-        
-        cell.nameLabel.text = contentlist.title;
-        cell.sourceLabel.text = contentlist.media_name;
-    }
 
-    
-    
-    
-    
-}
 //定义每个UICollectionView 的 margin
 //-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //
@@ -142,16 +119,10 @@ static NSString *const footerId = @"footerId";
     
     ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
     contentlist = _contentlistArray[indexPath.section];
-    
-    //    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
-    WKWebView *webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    [linkVC.view addSubview:webView];
-    NSURL* url = [NSURL URLWithString:contentlist.url];//创建URL
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
-    [webView loadRequest:request];//加载
-    
+    linkVC.contentlistModel = contentlist;
     [self.navigationController pushViewController:linkVC animated:YES];
+  
     
 }
 - (void)didReceiveMemoryWarning {

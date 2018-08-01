@@ -11,27 +11,23 @@
 
 @protocol ZDContentlistModel
 @end
-
-@interface ZDImagesModel : JSONModel
-@property (copy, nonatomic) NSURL<Optional> *u;
-@property (copy, nonatomic) NSNumber<Optional> *w;
-@property (copy, nonatomic) NSNumber<Optional> *h;
-@property (copy, nonatomic) NSNumber<Optional> *t;
+@protocol ZDPicModel
 @end
-
+@interface ZDPicModel : JSONModel
+@property (copy, nonatomic) NSURL<Optional> *url;
+@end
 
 @interface ZDContentlistModel :JSONModel
-@property (copy, nonatomic) NSString<Optional> *media_name;
 @property (copy, nonatomic) NSString<Optional> *title;
-@property (copy, nonatomic) NSString<Optional> *ctime;
-@property (copy, nonatomic) NSString<Optional> *url;
-@property (copy, nonatomic) NSString<Optional> *intro;
-@property (strong, nonatomic) ZDImagesModel <Optional> *images;
+@property (copy, nonatomic) NSString<Optional> *channelName;
+@property (copy, nonatomic) NSString<Optional> *pubDate;
+@property (copy, nonatomic) NSString<Optional> *link;
+@property (copy, nonatomic) NSString<Optional> *html;
+@property (copy, nonatomic) NSArray <ZDPicModel,Optional> *imageurls;
 
 @end
 
-
-@interface ZDPagebeanModel : JSONModel
+@interface ZDPagebeanModel :JSONModel
 @property (copy, nonatomic) NSNumber<Optional> *allNum;
 @property (strong, nonatomic) NSMutableArray<ZDContentlistModel,Optional> *contentlist;
 @end
@@ -40,6 +36,6 @@
 @property (strong, nonatomic)  ZDPagebeanModel<Optional> *pagebean;
 @end
 
-@interface ZDOrderModel : JSONModel
+@interface  ZDOrderModel: JSONModel
 @property (strong, nonatomic)  ZDBodyModel<Optional> *showapi_res_body;
 @end

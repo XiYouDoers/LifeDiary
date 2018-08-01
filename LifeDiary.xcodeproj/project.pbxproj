@@ -19,6 +19,7 @@
 		040CE67E20ADABC800A30442 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE67320ADABC800A30442 /* ViewController+MASAdditions.m */; };
 		040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */; };
 		040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68320ADC34000A30442 /* ZDRoundView.m */; };
+		041823222111B5F30012C355 /* ZDHtmlScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041823212111B5F30012C355 /* ZDHtmlScrollView.m */; };
 		0426E3C72106C2080060583F /* ZDCollectionViewShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */; };
 		0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438384E20FF6B21002C2561 /* ZDFindDataManager.m */; };
 		0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385420FF6CF5002C2561 /* ZDOrderModel.m */; };
@@ -43,6 +44,8 @@
 		044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C520A8123500406D65 /* ZDAboutViewController.m */; };
 		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
+		045E8AB0210EC91400CC861A /* ZDAllCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */; };
+		045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
 		046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40CC20DF766100CEA199 /* ZDAllCell.m */; };
 		047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */; };
@@ -145,6 +148,8 @@
 		040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDUnderLineTextField.m; sourceTree = "<group>"; };
 		040CE68220ADC34000A30442 /* ZDRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDRoundView.h; sourceTree = "<group>"; };
 		040CE68320ADC34000A30442 /* ZDRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRoundView.m; sourceTree = "<group>"; };
+		041823202111B5F30012C355 /* ZDHtmlScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDHtmlScrollView.h; sourceTree = "<group>"; };
+		041823212111B5F30012C355 /* ZDHtmlScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDHtmlScrollView.m; sourceTree = "<group>"; };
 		0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCollectionViewShoppingCell.h; sourceTree = "<group>"; };
 		0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCollectionViewShoppingCell.m; sourceTree = "<group>"; };
 		0438384D20FF6B21002C2561 /* ZDFindDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFindDataManager.h; sourceTree = "<group>"; };
@@ -192,6 +197,10 @@
 		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
 		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
 		044F02CE20A8149300406D65 /* ZDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTabBarViewController.m; sourceTree = "<group>"; };
+		045E8AAE210EC91400CC861A /* ZDAllCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCollectionViewCell.h; sourceTree = "<group>"; };
+		045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllCollectionViewCell.m; sourceTree = "<group>"; };
+		045E8AB4210ECAE800CC861A /* ZDAllFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllFlowLayout.h; sourceTree = "<group>"; };
+		045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllFlowLayout.m; sourceTree = "<group>"; };
 		046E40C820DF6CC900CEA199 /* ZDUserDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDUserDataBase.h; sourceTree = "<group>"; };
 		046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDUserDataBase.m; sourceTree = "<group>"; };
 		046E40CB20DF766100CEA199 /* ZDAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
@@ -563,11 +572,11 @@
 		044F02A620A8112200406D65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04C5DC832101FA44003835E3 /* ZDTimerView.h */,
+				04C5DC842101FA44003835E3 /* ZDTimerView.m */,
 				044F02A820A8113600406D65 /* Message */,
 				044F02A920A8113E00406D65 /* Find */,
 				044F02AA20A8114700406D65 /* Me */,
-				04C5DC832101FA44003835E3 /* ZDTimerView.h */,
-				04C5DC842101FA44003835E3 /* ZDTimerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -596,12 +605,8 @@
 		044F02A920A8113E00406D65 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				043BD6DA20BFED1F0067F06E /* ZDCollectionViewCell.h */,
-				043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */,
-				0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */,
-				0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */,
-				043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */,
-				043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */,
+				04A1B3F22111A96E002D960A /* Life */,
+				04A1B3F32111A975002D960A /* Shopping */,
 			);
 			name = Find;
 			sourceTree = "<group>";
@@ -678,6 +683,28 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		04A1B3F22111A96E002D960A /* Life */ = {
+			isa = PBXGroup;
+			children = (
+				043BD6DA20BFED1F0067F06E /* ZDCollectionViewCell.h */,
+				043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */,
+				041823202111B5F30012C355 /* ZDHtmlScrollView.h */,
+				041823212111B5F30012C355 /* ZDHtmlScrollView.m */,
+			);
+			name = Life;
+			sourceTree = "<group>";
+		};
+		04A1B3F32111A975002D960A /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */,
+				0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */,
+				043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */,
+				043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */,
+			);
+			name = Shopping;
+			sourceTree = "<group>";
+		};
 		04B8368320A871870050D568 /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +737,10 @@
 			children = (
 				046E40CB20DF766100CEA199 /* ZDAllCell.h */,
 				046E40CC20DF766100CEA199 /* ZDAllCell.m */,
+				045E8AAE210EC91400CC861A /* ZDAllCollectionViewCell.h */,
+				045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */,
+				045E8AB4210ECAE800CC861A /* ZDAllFlowLayout.h */,
+				045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */,
 				047F3454210C884A00D84ADD /* ZDEditDefaultCell.h */,
 				047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */,
 				047F345D210C8EC000D84ADD /* ZDEditPickerViewCell.h */,
@@ -1020,12 +1051,14 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1044,6 +1077,7 @@
 				04FF835C20B94C9800EECE24 /* MJRefreshAutoGifFooter.m in Sources */,
 				04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */,
 				047F3459210C8B6900D84ADD /* ZDEditViewController.m in Sources */,
+				045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */,
 				047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */,
 				043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
@@ -1106,6 +1140,7 @@
 				04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */,
 				043BD6DF20BFEFE50067F06E /* RGCardViewLayout.m in Sources */,
 				044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */,
+				045E8AB0210EC91400CC861A /* ZDAllCollectionViewCell.m in Sources */,
 				040CE67E20ADABC800A30442 /* ViewController+MASAdditions.m in Sources */,
 				04FF835F20B94C9800EECE24 /* MJRefreshBackGifFooter.m in Sources */,
 				04B8369C20A875610050D568 /* ZDMessageDataBase.m in Sources */,
@@ -1118,6 +1153,7 @@
 				04FF836620B94C9800EECE24 /* MJRefreshConst.m in Sources */,
 				040CE67A20ADABC800A30442 /* MASViewConstraint.m in Sources */,
 				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
+				041823222111B5F30012C355 /* ZDHtmlScrollView.m in Sources */,
 				04FF836420B94C9800EECE24 /* MJRefreshStateHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

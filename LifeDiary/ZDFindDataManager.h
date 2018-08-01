@@ -13,5 +13,5 @@ typedef void (^requestFailure) (void);
 @interface ZDFindDataManager : NSObject
 @property(nonatomic,strong) ZDOrderModel *orderModel;
 //请求方法
-- (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock;
+- (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock maxResult:(NSString *)maxResult;
 @end

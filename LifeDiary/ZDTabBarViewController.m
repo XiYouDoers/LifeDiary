@@ -81,7 +81,7 @@
     
     //改变navigationBar中间title的颜色
     
-    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: NAVIGATIONCOLOR}];
+    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
     //改变navigationBar.barButtonItem的颜色
     
 //    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];

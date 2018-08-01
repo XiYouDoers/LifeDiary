@@ -7,6 +7,7 @@
 //
 
 #import "ZDCollectionViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ZDCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -33,11 +34,12 @@
         //_nameLabel
         
         _nameLabel = [[UILabel alloc]init];
+        _nameLabel.numberOfLines = 0;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         [backView addSubview:_nameLabel];
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_imageView.mas_bottom).with.offset(20);
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 20));
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 30));
             make.left.mas_equalTo(0);
         }];
         
@@ -174,5 +176,17 @@
     }
     return self;
 }
+- (void)updateCell:(ZDContentlistModel *)contentlistModel{
+    
 
+    if (contentlistModel) {
+        //添加图片
+        if (contentlistModel.imageurls.count) {
+            ZDPicModel *picModel = [contentlistModel.imageurls objectAtIndex:0];
+            [_imageView sd_setImageWithURL:picModel.url placeholderImage:[UIImage imageNamed:@"LifePlaceholderImage"]];
+        }
+        self.nameLabel.text = contentlistModel.title;
+        self.sourceLabel.text = contentlistModel.channelName;
+    }
+}
 @end

@@ -34,7 +34,7 @@
     }else{
         
     self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 3/4);
-    self.sectionInset = UIEdgeInsetsMake(0,inset,0,inset);
+    self.sectionInset = UIEdgeInsetsMake(0,inset,-20,inset);
     }
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }

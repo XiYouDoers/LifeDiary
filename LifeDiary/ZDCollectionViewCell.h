@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDOrderModel.h"
 
 @interface ZDCollectionViewCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *imageView;
@@ -18,4 +19,11 @@
 @property(nonatomic,strong) UILabel *saveLabel;
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *sourceLabel;
+
+
+/**
+ 更新cell
+ */
+- (void)updateCell:(ZDContentlistModel *)contentlistModel;
+
 @end

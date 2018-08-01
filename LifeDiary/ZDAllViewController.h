@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDAllCell.h"
+#import "ZDAllCollectionViewCell.h"
 
 @interface ZDAllViewController : UIViewController
+
+/**
+ UICollectionView
+ */
+@property(nonatomic,strong) UICollectionView *collectionView;
+@property(nonatomic,strong) ZDAllCollectionViewCell *allCollectionViewCell;
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) NSMutableArray *resultMutableArray;
 @property(nonatomic,strong) UITableView *allTableView;

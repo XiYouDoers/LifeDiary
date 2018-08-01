@@ -9,10 +9,10 @@
 #import "ZDFindDataManager.h"
 #import <AFNetworking/AFNetworking.h>
 @implementation ZDFindDataManager
-- (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock{
+- (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock maxResult:(NSString *)maxResult{
     
-    NSString *urlString = @"https://route.showapi.com/90-87";
-    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"70122",@"showapi_appid",@"0df9204adb56452a80f40b20652e1158",@"showapi_sign",@"569",@"tid",nil];
+    NSString *urlString = @"https://route.showapi.com/109-35";
+    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"71372",@"showapi_appid",@"348a376e09b04e5daccd93d19c7ba7ce",@"showapi_sign",@"1",@"needHtml",@"1", @"page",@"健康养生", @"channelName",maxResult,@"maxResult",nil];
     AFHTTPSessionManager *sessionManger = [AFHTTPSessionManager manager];
     sessionManger.requestSerializer = [AFHTTPRequestSerializer serializer];
     [sessionManger GET:urlString parameters:paraDictionary progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

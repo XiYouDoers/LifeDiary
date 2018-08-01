@@ -7,6 +7,7 @@
 //
 
 #import "ZDCollectionViewShoppingCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ZDCollectionViewShoppingCell
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -116,4 +117,12 @@
     }
     return self;
 }
+
+- (void)updateCell:(ZDContentlistModel *)contentlistModel{
+    
+   
+}
+
+
+
 @end

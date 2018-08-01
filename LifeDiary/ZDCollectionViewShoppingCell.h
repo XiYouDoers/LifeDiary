@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDOrderModel.h"
 
 @interface ZDCollectionViewShoppingCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *imageView;
@@ -16,5 +17,10 @@
 @property(nonatomic,strong) UILabel *zanLabel;
 @property(nonatomic,strong) UIImageView *priceImageView;
 @property(nonatomic,strong) UILabel *priceLabel;
+
+/**
+ 更新cell
+ */
+- (void)updateCell:(ZDContentlistModel *)contentlistModel;
 
 @end

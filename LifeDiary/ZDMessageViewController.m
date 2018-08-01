@@ -92,7 +92,9 @@
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    
     UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部 ▼" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
+
     [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
@@ -100,7 +102,9 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     //rightBarButtonItem
-    UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"╋" style:UIBarButtonItemStylePlain target:self action:@selector(addGoods)];
+    UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
+
+    
     [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = addBarButtonItem;
