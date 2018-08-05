@@ -17,17 +17,29 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-
+    //rightBarButtonItem
+    UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareToOther)];
+    
+    
+    [shareBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     _htmlScrollView = [[ZDHtmlScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     [_htmlScrollView updateHtmlView:_contentlistModel];
     [self.view addSubview: _htmlScrollView];
+    
+    
 }
 
 - (void)back{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)shareToOther{
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     

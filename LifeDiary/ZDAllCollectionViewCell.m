@@ -28,7 +28,7 @@
         }];
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
-        _nameLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:20.0];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:23];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.textColor = [UIColor whiteColor];
         [self addSubview:_nameLabel];

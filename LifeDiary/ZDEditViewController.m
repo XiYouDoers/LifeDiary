@@ -39,7 +39,7 @@
     
     self.view.backgroundColor = LIGHTBLUE;
     UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
-    [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE } forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem =  finishBtnItem;
     
     _editTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];

@@ -20,6 +20,7 @@
 		040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68020ADC2CC00A30442 /* ZDUnderLineTextField.m */; };
 		040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CE68320ADC34000A30442 /* ZDRoundView.m */; };
 		041823222111B5F30012C355 /* ZDHtmlScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041823212111B5F30012C355 /* ZDHtmlScrollView.m */; };
+		041823272111F2030012C355 /* ZDMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */; };
 		0426E3C72106C2080060583F /* ZDCollectionViewShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */; };
 		0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438384E20FF6B21002C2561 /* ZDFindDataManager.m */; };
 		0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385420FF6CF5002C2561 /* ZDOrderModel.m */; };
@@ -76,6 +77,7 @@
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
 		04D8B64620B133A300055018 /* ZDDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64520B133A300055018 /* ZDDateCell.m */; };
 		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
+		04EC47A721155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC47A621155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m */; };
 		04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EF92106005400A97667 /* ZDLifeViewController.m */; };
 		04ED0EFD2106012C00A97667 /* ZDShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EFC2106012C00A97667 /* ZDShoppingViewController.m */; };
 		04FF835720B94C9800EECE24 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF832B20B94C9800EECE24 /* MJRefreshAutoFooter.m */; };
@@ -150,6 +152,8 @@
 		040CE68320ADC34000A30442 /* ZDRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDRoundView.m; sourceTree = "<group>"; };
 		041823202111B5F30012C355 /* ZDHtmlScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDHtmlScrollView.h; sourceTree = "<group>"; };
 		041823212111B5F30012C355 /* ZDHtmlScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDHtmlScrollView.m; sourceTree = "<group>"; };
+		041823252111F2030012C355 /* ZDMessageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDMessageCollectionViewCell.h; sourceTree = "<group>"; };
+		041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCollectionViewCell.m; sourceTree = "<group>"; };
 		0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCollectionViewShoppingCell.h; sourceTree = "<group>"; };
 		0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCollectionViewShoppingCell.m; sourceTree = "<group>"; };
 		0438384D20FF6B21002C2561 /* ZDFindDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFindDataManager.h; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 		04D8B64520B133A300055018 /* ZDDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDateCell.m; sourceTree = "<group>"; };
 		04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPickerViewCell.h; sourceTree = "<group>"; };
 		04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPickerViewCell.m; sourceTree = "<group>"; };
+		04EC47A521155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDMessageCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		04EC47A621155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		04ED0EF82106005400A97667 /* ZDLifeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDLifeViewController.h; sourceTree = "<group>"; };
 		04ED0EF92106005400A97667 /* ZDLifeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDLifeViewController.m; sourceTree = "<group>"; };
 		04ED0EFB2106012C00A97667 /* ZDShoppingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDShoppingViewController.h; sourceTree = "<group>"; };
@@ -596,6 +602,10 @@
 			children = (
 				04BD721320A9A21100A14ADF /* ZDMessageCell.h */,
 				04BD721420A9A21100A14ADF /* ZDMessageCell.m */,
+				041823252111F2030012C355 /* ZDMessageCollectionViewCell.h */,
+				041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */,
+				04EC47A521155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.h */,
+				04EC47A621155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m */,
 				04B836A420A87EAD0050D568 /* All */,
 				044F02AB20A8115D00406D65 /* Add */,
 			);
@@ -952,7 +962,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ZD;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = JACK;
 				TargetAttributes = {
 					044F01E120A80DB500406D65 = {
@@ -1090,6 +1100,7 @@
 				0438385820FF7EF8002C2561 /* ZDLinkViewController.m in Sources */,
 				040CE67B20ADABC800A30442 /* NSArray+MASAdditions.m in Sources */,
 				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
+				041823272111F2030012C355 /* ZDMessageCollectionViewCell.m in Sources */,
 				04FF835B20B94C9800EECE24 /* MJRefreshHeader.m in Sources */,
 				040CE67D20ADABC800A30442 /* View+MASAdditions.m in Sources */,
 				04FF835D20B94C9800EECE24 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -1117,6 +1128,7 @@
 				04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */,
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				04FF835720B94C9800EECE24 /* MJRefreshAutoFooter.m in Sources */,
+				04EC47A721155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
 				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
@@ -1219,15 +1231,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1251,9 +1271,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1269,15 +1290,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1295,8 +1324,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

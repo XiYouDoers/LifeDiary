@@ -31,7 +31,7 @@
     self.navigationController.navigationBar.hidden = YES;
     
     //jump to main VC after 3.0s
-    [NSTimer scheduledTimerWithTimeInterval:3.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+    [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
         ZDTabBarViewController *tabBarVC = [[ZDTabBarViewController alloc]init];
         [self presentViewController:tabBarVC animated:YES completion:nil];
     }];

@@ -20,6 +20,7 @@
 @interface ZDContentlistModel :JSONModel
 @property (copy, nonatomic) NSString<Optional> *title;
 @property (copy, nonatomic) NSString<Optional> *channelName;
+@property (copy, nonatomic) NSString<Optional> *source;
 @property (copy, nonatomic) NSString<Optional> *pubDate;
 @property (copy, nonatomic) NSString<Optional> *link;
 @property (copy, nonatomic) NSString<Optional> *html;

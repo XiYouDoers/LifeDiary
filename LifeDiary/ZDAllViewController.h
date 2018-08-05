@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDAllCell.h"
+#import "ZDMessageCell.h"
 #import "ZDAllCollectionViewCell.h"
 
 @interface ZDAllViewController : UIViewController
@@ -15,12 +16,11 @@
 /**
  UICollectionView
  */
-@property(nonatomic,strong) UICollectionView *collectionView;
-@property(nonatomic,strong) ZDAllCollectionViewCell *allCollectionViewCell;
+@property(nonatomic,strong) ZDMessageCell *messageCell;
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) NSMutableArray *resultMutableArray;
 @property(nonatomic,strong) UITableView *allTableView;
-@property(nonatomic,strong) ZDAllCell *allCell;
+@property(nonatomic,strong) ZDMessageCell *allCell;
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UIView *searchView;
 @property(nonatomic,strong) UIButton *cancleBtn;

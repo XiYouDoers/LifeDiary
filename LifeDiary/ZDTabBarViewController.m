@@ -39,8 +39,8 @@
      ];
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
-    [[UITabBar appearance]setBarTintColor:TABBARCOLOR];
-    [[UINavigationBar appearance]setBarTintColor:NAVIGATIONCOLOR];
+    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
     
     // Do any additional setup after loading the view.
 }

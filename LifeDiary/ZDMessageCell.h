@@ -10,6 +10,7 @@
 
 @interface ZDMessageCell : UITableViewCell
 
+
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *remarkLabel;
 @property(nonatomic,strong) UIImageView *pictureImageView;

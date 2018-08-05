@@ -34,7 +34,7 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     
 }
 - (void)initDataBase{
-    NSLog(@"initDataBase");
+    
     NSString *filepath = [[NSString alloc]init];
     //判断是否为模拟器
     if(TARGET_IPHONE_SIMULATOR){

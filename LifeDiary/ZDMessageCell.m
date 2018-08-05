@@ -23,32 +23,26 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-
+      
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+
         
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
-        _remarkLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:22];
+
         [self addSubview:_nameLabel];
-        [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(10);
-            make.left.mas_equalTo(20);
-            make.width.mas_equalTo(150);
-            make.height.mas_equalTo(30);
-            
-        }];
+       
         //_remarkLabel
         _remarkLabel = [[UILabel alloc]init];
         _remarkLabel.textAlignment = NSTextAlignmentRight;
         _remarkLabel.numberOfLines = 0;
-        _remarkLabel.font = [UIFont systemFontOfSize:12];
+        _remarkLabel.font = [UIFont systemFontOfSize:15];
         _remarkLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:_remarkLabel];
-        [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(5);
-            make.right.mas_offset(-10);
-            make.size.mas_equalTo(CGSizeMake(150, 40));
-        }];
+      
         
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
@@ -56,41 +50,27 @@
         _pictureImageView.layer.masksToBounds = true;
         //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_pictureImageView];
-        [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(50);
-            make.left.mas_offset(10);
-            make.bottom.mas_offset(-50);
-            make.right.mas_offset(-10);
-            
-        }];
+       
         
         
         // _remainderTimeLabel
         _remainderTimeLabel = [[UILabel alloc]init];
         _remainderTimeLabel.textColor = GOLDCOLOR;
         [self addSubview:_remainderTimeLabel];
-        [_remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.bottom.mas_offset(-10);
-            make.left.mas_equalTo(10);
-            make.size.mas_equalTo(CGSizeMake(WIDTH/4, 30));
-        }];
+       
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
         _sumLabel.textColor = NAVIGATIONCOLOR;
         _sumLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_sumLabel];
-        [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_offset(-10);
-            make.left.mas_equalTo(_remainderTimeLabel.mas_right).with.offset(10);
-            make.size.mas_equalTo(CGSizeMake(WIDTH/5, 30));
-        }];
+       
         
         //stpper
         //可以设置x,y的位置，但是高和宽是固定的（80，40），即使设置为其他数值，也不会改变它的实际大小
         _stepper = [[UIStepper alloc] init];
-        _stepper.tintColor = NAVIGATIONCOLOR;
+        _stepper.tintColor = [UIColor colorWithRed:91.0/255 green:0.0/255 blue:220.0/255 alpha:1];
+        
         //设置步进器的最小值
         _stepper.minimumValue = 0;
         //设置最大值
@@ -114,11 +94,7 @@
          */
         _stepper.continuous = YES;
         [self addSubview:_stepper];
-        [_stepper mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_offset(-10);
-            make.left.mas_equalTo(_sumLabel.mas_right).with.offset(5);
-          
-        }];
+      
         
         
         //_outsideArc
@@ -136,7 +112,52 @@
     }
     return self;
 }
-
+- (void) layoutSubviews{
+    [super layoutSubviews];
+//    [self removeFromSuperview];
+    
+    [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_offset(10);
+        make.left.mas_equalTo(20);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(30);
+        
+    }];
+    
+    [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.right.mas_offset(-10);
+        make.size.mas_equalTo(CGSizeMake(150, 40));
+    }];
+    
+    [_pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_offset(50);
+        make.left.mas_offset(10);
+        make.bottom.mas_offset(-50);
+        make.right.mas_offset(-10);
+        
+    }];
+    
+    [_remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.mas_offset(-10);
+        make.left.mas_equalTo(10);
+        make.size.mas_equalTo(CGSizeMake(WIDTH/4, 30));
+    }];
+    
+    
+    [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-10);
+        make.left.mas_equalTo(_remainderTimeLabel.mas_right).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(WIDTH/5, 30));
+    }];
+    
+    [_stepper mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-10);
+        make.left.mas_equalTo(_sumLabel.mas_right).with.offset(5);
+        
+    }];
+}
 - (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval{
     
     UIBezierPath *pathOfOutsideArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(WIDTH-40, 400-25) radius:16 startAngle:(1.5*M_PI) endAngle:1.49999*M_PI clockwise:true];

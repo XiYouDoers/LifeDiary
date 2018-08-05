@@ -12,6 +12,7 @@
 @interface ZDHtmlScrollView : UIScrollView
 
 @property(nonatomic,strong) UILabel *titleLabel;
+@property(nonatomic,strong) UILabel *sourceLabel;
 @property(nonatomic,strong) UIImageView *headImageView;
 @property(nonatomic,strong) UIImageView *footImageView;
 @property(nonatomic,strong) UILabel *htmlLabel;

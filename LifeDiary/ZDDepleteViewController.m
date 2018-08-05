@@ -193,12 +193,14 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+   
     return _dataMutableArray.count;
 }
 /**
  TableView中section的数量
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+ 
     return 1;
 }
 /**

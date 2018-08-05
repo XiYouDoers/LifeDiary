@@ -10,6 +10,7 @@
 
 @interface ZDAllCollectionViewCell : UICollectionViewCell
 
+
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UIImageView *pictureImageView;
 @end

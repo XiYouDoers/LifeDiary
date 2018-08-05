@@ -32,20 +32,20 @@
         self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 7/10);
         self.sectionInset = UIEdgeInsetsMake(0,inset,0,inset);
     }else{
-        
     self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 3/4);
     self.sectionInset = UIEdgeInsetsMake(0,inset,-20,inset);
     }
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    [self applyTransformToLayoutAttributes:attributes];
-
-    return attributes;
-}
+//- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSLog(@"3333");
+//    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
+//    [self applyTransformToLayoutAttributes:attributes];
+//
+//    return attributes;
+//}
 
 // indicate that we want to redraw as we scroll
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {

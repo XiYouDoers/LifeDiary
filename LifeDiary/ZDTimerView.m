@@ -9,8 +9,9 @@
 #import "ZDTimerView.h"
 
 @implementation ZDTimerView
-- (id)init{
-    if (self = [super init]) {
+- (id)initWithFrame:(CGRect)frame {
+    
+    if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(action) userInfo:nil repeats:YES];
         [self addSubview:self.timeButton];

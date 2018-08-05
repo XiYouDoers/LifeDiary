@@ -115,6 +115,7 @@
 }
 
 - (void)saveToUserDeafault{
+    
     [_userDefaults setObject:_tableHeaderView.nameTextField.text forKey:@"user_name"];
     [_userDefaults setObject:_tableHeaderView.personalitySignatureTextField.text forKey:@"user_personalitySignature"];
     [_userDefaults synchronize];
@@ -131,6 +132,7 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+   
     if (section==0) {
          return 3;
     }else{
@@ -141,9 +143,14 @@
  TableView中section的数量
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+ 
     return 2;
+   
 }
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    return 55.f;
+}
 /**
  cell的高度
  */
@@ -154,14 +161,13 @@
     }else{
         return 50;
     }
-    
 }
 
 /**
  cell数据源
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+  
     if (indexPath.section==0){
     _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
     _meCell.selectionStyle = UITableViewCellEditingStyleNone;
