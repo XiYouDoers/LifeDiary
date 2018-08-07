@@ -19,7 +19,7 @@
         UICollectionViewLayoutAttributes * attrs = [self layoutAttributesForItemAtIndexPath:indexpath];
         [self.attributesMutableArray addObject:attrs];
     }
-
+    
 }
 - (NSMutableArray *)attributesMutableArray{
     if (!_attributesMutableArray) {
@@ -29,7 +29,7 @@
 }
 -(CGSize)collectionViewContentSize
 {
-    return CGSizeMake(WIDTH, HEIGHT);
+    return CGSizeMake(WIDTH, HEIGHT*2);
 }
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
@@ -38,20 +38,25 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat width =self.collectionView.frame.size.width*0.5;
-    CGFloat height =width*1.5;
+    CGFloat width = self.collectionView.frame.size.width/2;
+    CGFloat height = width * 1.4;
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    NSInteger i=indexPath.item;
-    if (indexPath.item%3==0) {
-        attributes.frame = CGRectMake(0, 0, width, height);
-    }else if (indexPath.item%3==1){
-         attributes.frame = CGRectMake(width, 0, width, height/2);
-    }else if (indexPath.item%3==2){
-        attributes.frame = CGRectMake( width, height/2, width, height/2);
+    NSInteger i = indexPath.item;
+    if (i == 0) {
+        
+        attributes.frame = CGRectMake(0, 5, width*2, height);
+    }else if (i  == 1){
+        
+        attributes.frame = CGRectMake(0, height+5, width, height);
+        
+    }else if (i == 2){
+        
+        attributes.frame = CGRectMake( width, height+5, width, height);
     }else{
         UICollectionViewLayoutAttributes *lastAttrs = self.attributesMutableArray[i-3];
         CGRect frame  = lastAttrs.frame;
-        frame.origin.y += 2 * height;
+        frame.origin.y += 2 * height+2*5;
+        
         attributes.frame = frame;
     }
     

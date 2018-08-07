@@ -18,7 +18,7 @@
 @property(nonatomic,strong) UILabel *sumLabel;
 @property (nonatomic,strong) UIStepper *stepper;
 @property (nonatomic) BOOL isChangeAlpha;
-@property (nonatomic,strong) UIView *GrayColorView;
+@property (nonatomic,strong) UIView *grayView;
 @property (nonatomic,strong) UIView *detailView;
 /**
  setting arc's startAngle and endAngle

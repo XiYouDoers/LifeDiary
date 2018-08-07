@@ -30,20 +30,17 @@
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
     self.navigationItem.title = @"全部物品";
-
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
     //_allTableView
-    _allTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDMessageCell class] forCellReuseIdentifier:@"allCell"];
     self.allTableView.tableHeaderView = self.searchView;
-    
-    
-    
-    
-    
     
     
     // Do any additional setup after loading the view.
@@ -56,13 +53,13 @@
     _resultMutableArray = [NSMutableArray array];
     [self.allTableView reloadData];
     //隐藏tabBar
-        CGRect  tabRect = self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-             
-        }];
+    CGRect  tabRect = self.tabBarController.tabBar.frame;
+    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.tabBarController.tabBar.frame = tabRect;
+    }completion:^(BOOL finished) {
+        
+    }];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -87,7 +84,7 @@
         _searchBar.tintColor = [UIColor orangeColor];
         _searchBar.placeholder = @"搜索物品";
         _searchBar.delegate = self;
-
+        
         for (UIView *subView in _searchBar.subviews) {
             if ([subView isKindOfClass:[UIView  class]]) {
                 [[subView.subviews objectAtIndex:0] removeFromSuperview];
@@ -109,10 +106,10 @@
                     [textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"搜索物品"
                                                                                         attributes:@{NSForegroundColorAttributeName:color}]];
                     //修改默认的放大镜图片
-//                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
-//                    imageView.backgroundColor = [UIColor clearColor];
-//                    imageView.image = [UIImage imageNamed:@"gww_search_ misplaces"];
-//                    textField.leftView = imageView;
+                    //                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
+                    //                    imageView.backgroundColor = [UIColor clearColor];
+                    //                    imageView.image = [UIImage imageNamed:@"gww_search_ misplaces"];
+                    //                    textField.leftView = imageView;
                 }
             }
         }
@@ -147,8 +144,8 @@
     [self.searchBar becomeFirstResponder];
     searchBar.frame = CGRectMake(0, 0, WIDTH-80, 44);
     _cancleBtn.hidden = NO;
-
-
+    
+    
 }
 
 - (void)cancleBtnTouched
@@ -173,7 +170,7 @@
  TableView中section的数量
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-  
+    
     return 1;
 }
 /**
@@ -181,7 +178,7 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 260;
-
+    
 }
 //搜框中输入关键字的事件响应
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -197,16 +194,16 @@
             //遍历需要搜索的所有内容w，其中self.dataArray为存放总数据的数组
             for (ZDGoods *goods in self.dataMutableArray) {
                 NSString *tempStr = goods.name;
-//
+                //
                 //----------->把所有的搜索结果转成成拼音
-//                NSString *pinyin = [self transformToPinyin:searchText];
-
+                //                NSString *pinyin = [self transformToPinyin:searchText];
+                
                 if ([tempStr rangeOfString:searchText options:NSCaseInsensitiveSearch].length >0 ) {
                     //把搜索结果存放self.resultArray数组
                     [self.resultMutableArray addObject:goods];
                 }
             }
-
+            
         }else{
             self.resultMutableArray = nil;
         }
@@ -265,54 +262,54 @@
  cell数据源
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-     _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell" forIndexPath:indexPath];
+    
+    _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell" forIndexPath:indexPath];
     ZDGoods *goods = [[ZDGoods alloc]init];
     if (self.resultMutableArray.count) {
-
-    goods = _resultMutableArray[indexPath.row];
+        
+        goods = _resultMutableArray[indexPath.row];
     }else{
-
-
-    goods = _dataMutableArray[indexPath.row];
+        
+        
+        goods = _dataMutableArray[indexPath.row];
     }
-
+    
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
     _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-//    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
-//    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
-//    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
-     _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    //    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
+    //    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
+    //    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
+    _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
-//    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
-//    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
-//    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
-//    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
-//    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
-
+    //    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
+    //    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
+    //    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
+    //    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
+    //    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+    
     return _allCell;
-
+    
 }
 /**
  cell点击方法
-
+ 
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     ZDGoods *goods =  _dataMutableArray[indexPath.section];
     cell.selected = !cell.selected;
     ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
     editVC.goods = goods;
     [self.navigationController pushViewController:editVC animated:YES];
-
+    
 }
 
 
 /**
  cell是否可以左滑删除
-
+ 
  */
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
@@ -321,39 +318,39 @@
  cell的删除方法
  */
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-
-     if (editingStyle == UITableViewCellEditingStyleDelete) {
-
-
-         ZDGoods *deletedGoods = [[ZDGoods alloc]init];
-         if (self.resultMutableArray.count) {
-             //计算在搜索结果中要删除的cell在总数据序列
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        
+        ZDGoods *deletedGoods = [[ZDGoods alloc]init];
+        if (self.resultMutableArray.count) {
+            //计算在搜索结果中要删除的cell在总数据序列
             deletedGoods = self.resultMutableArray[indexPath.row];
-             for(ZDGoods *goods in self.dataMutableArray){
-                 if (deletedGoods==goods) {
-                     NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
+            for(ZDGoods *goods in self.dataMutableArray){
+                if (deletedGoods==goods) {
+                    NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
                     deletedGoods = self.dataMutableArray[index];
-                 }
-             }
-         }else{
-          deletedGoods = self.dataMutableArray[indexPath.row];
-         }
-
-    // 从数据库中删除
-         [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
-         //从搜索列表中删除
-         for (ZDGoods *goods in  self.resultMutableArray) {
-             if (goods==deletedGoods) {
-
-                 [_resultMutableArray removeObject:deletedGoods];
-             }
-         }
-    // 回收站中添加
-         [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
-         self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-         [self.allTableView reloadData];
-
-     }
+                }
+            }
+        }else{
+            deletedGoods = self.dataMutableArray[indexPath.row];
+        }
+        
+        // 从数据库中删除
+        [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
+        //从搜索列表中删除
+        for (ZDGoods *goods in  self.resultMutableArray) {
+            if (goods==deletedGoods) {
+                
+                [_resultMutableArray removeObject:deletedGoods];
+            }
+        }
+        // 回收站中添加
+        [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
+        self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+        [self.allTableView reloadData];
+        
+    }
 }
 
 - (void)configureCell:(ZDAllCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
@@ -362,27 +359,27 @@
     //    [subview removeFromSuperview];
     
     ZDGoods *goods = [[ZDGoods alloc]init];
-        if (self.resultMutableArray.count) {
-    
+    if (self.resultMutableArray.count) {
+        
         goods = _resultMutableArray[indexPath.row];
-        }else{
-    
-    
+    }else{
+        
+        
         goods = _dataMutableArray[indexPath.row];
-        }
-        cell.nameLabel.text = goods.name;
+    }
+    cell.nameLabel.text = goods.name;
     
-        cell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    cell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

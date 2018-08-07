@@ -13,14 +13,18 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
-   
+        self.contentView.layer.cornerRadius = 13.f;
+        self.contentView.layer.masksToBounds = YES;
+        self.contentView.backgroundColor = [UIColor whiteColor];
+        
+        
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [UIFont boldSystemFontOfSize:15];
         _nameLabel.textColor = [UIColor blackColor];
         [self.contentView addSubview:_nameLabel];
-       
+        
         
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
@@ -29,44 +33,37 @@
         //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
         [self.contentView addSubview:_pictureImageView];
         
-        //_GrayColorView
-        _GrayColorView = [[UIView alloc]init];
-        _GrayColorView.alpha = 0.5;
-        _GrayColorView.layer.cornerRadius = 5;
-        _GrayColorView.layer.masksToBounds = true;
-        _GrayColorView.hidden = YES;
-        _GrayColorView.backgroundColor = [UIColor blackColor];
-        [self.contentView addSubview:_GrayColorView];
+        //_grayView
+        _grayView = [[UIView alloc]init];
+        _grayView.alpha = 0.5;
+        _grayView.layer.cornerRadius = 5;
+        _grayView.layer.masksToBounds = true;
+        _grayView.hidden = YES;
+        _grayView.backgroundColor = [UIColor blackColor];
+        [self.contentView addSubview:_grayView];
         
         //_detailView
         _detailView = [[UIView alloc]init];
-//         _detailView.translatesAutoresizingMaskIntoConstraints = NO;
-        _detailView.backgroundColor = [UIColor whiteColor];
+        //         _detailView.translatesAutoresizingMaskIntoConstraints = NO;
+        //        _detailView.backgroundColor = [UIColor whiteColor];
         _detailView.hidden = YES;
-        [self.contentView addSubview:_detailView];
+        //        [self.contentView addSubview:_detailView];
         
         
         
-//        //_remarkLabel
-//        _remarkLabel = [[UILabel alloc]init];
-//        _remarkLabel.textAlignment = NSTextAlignmentRight;
-//        _remarkLabel.numberOfLines = 0;
-//        _remarkLabel.font = [UIFont systemFontOfSize:15];
-//        _remarkLabel.textColor = [UIColor blackColor];
-//        [_detailView addSubview:_remarkLabel];
-//        [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(5);
-//            make.right.mas_offset(-10);
-//            make.size.mas_equalTo(CGSizeMake(150, 40));
-//        }];
-        
-       
+        //_remarkLabel
+        _remarkLabel = [[UILabel alloc]init];
+        _remarkLabel.textAlignment = NSTextAlignmentLeft;
+        _remarkLabel.numberOfLines = 0;
+        _remarkLabel.font = [UIFont systemFontOfSize:20];
+        _remarkLabel.textColor = [UIColor lightGrayColor];
+        [self.contentView addSubview:_remarkLabel];
         
         
         // _remainderTimeLabel
         _remainderTimeLabel = [[UILabel alloc]init];
         _remainderTimeLabel.textColor = GOLDCOLOR;
-//        _remainderTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        //        _remainderTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [_detailView addSubview:_remainderTimeLabel];
         
         
@@ -99,29 +96,42 @@
          当值为NO的时候，按住步进器，-(void)setpChange；这个方法只会在松开步进器才会有结果输出
          */
         _stepper.continuous = YES;
-//        _stepper.translatesAutoresizingMaskIntoConstraints = NO;
+        //        _stepper.translatesAutoresizingMaskIntoConstraints = NO;
         [_detailView addSubview:_stepper];
         
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
         _sumLabel.textColor = [UIColor blackColor];
-//        _sumLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        //        _sumLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [_detailView addSubview:_sumLabel];
-       
+        
         
     }
     return self;
 }
+- (void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
+    if (selected) {
+        //选中时
+        self.contentView.backgroundColor = [UIColor lightGrayColor];
+    }else{
+        //非选中
+        self.contentView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    // Configure the view for the selected state
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
-
-    _nameLabel.frame = CGRectMake(5, 5, self.frame.size.width-10, 30);
-     _pictureImageView.frame = CGRectMake(5, 40, self.frame.size.width-5*2, self.frame.size.height-40-5*2);
-    
-     _GrayColorView.frame = _pictureImageView.frame;
+    self.contentView.frame = CGRectMake(5, 5, self.frame.size.width-5*2, self.frame.size.height-5*2);
+    _grayView.frame = self.contentView.frame;
+    _nameLabel.frame = CGRectMake(5, 5, self.frame.size.width/3*2, 30);
     
     
+    
+    _remarkLabel.frame = CGRectMake(5,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+5, self.frame.size.width/3*2, 30);
+    _pictureImageView.frame = CGRectMake(5, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+5, self.contentView.frame.size.width-5*2, self.contentView.frame.size.height-60-5*4-5);
     if (self.frame.size.width > 300) {
         _detailView.frame = CGRectMake(_pictureImageView.frame.origin.x, _pictureImageView.frame.origin.y+_pictureImageView.frame.size.height/4*1.5, _pictureImageView.frame.size.width, _pictureImageView.frame.size.height/4);
     }else{
@@ -129,22 +139,18 @@
     }
     
     if (self.frame.size.width > 300 ) {
-    _remainderTimeLabel.frame = CGRectMake(20, 10, 150, 30);
-        
-         _stepper.frame = CGRectMake(_detailView.frame.size.width-100-10, 10, 100, 30);
-        
-        _sumLabel.frame = CGRectMake(_stepper.frame.origin.x -_stepper.frame.size.width-20, _stepper.frame.origin.y, 100, 30);
-        _sumLabel.textAlignment = NSTextAlignmentRight;
+        //    _remainderTimeLabel.frame = CGRectMake(20, 10, 150, 30);
+        //
+        //         _stepper.frame = CGRectMake(_detailView.frame.size.width-100-10, 10, 100, 30);
+        //
+        //        _sumLabel.frame = CGRectMake(_stepper.frame.origin.x -_stepper.frame.size.width-20, _stepper.frame.origin.y, 100, 30);
+        //        _sumLabel.textAlignment = NSTextAlignmentRight;
     }else{
-    _remainderTimeLabel.frame = CGRectMake(5, 10, 100, 30);
-        
-        _stepper.frame = CGRectMake(_detailView.frame.size.width-100-2, _detailView.frame.size.height-30-10, 100, 30);
-        _sumLabel.textAlignment = NSTextAlignmentLeft;
-        _sumLabel.frame = CGRectMake(5, _detailView.frame.size.height-30-10, 100, 30);
+        //    _remainderTimeLabel.frame = CGRectMake(5, 10, 100, 30);
+        //
+        //        _stepper.frame = CGRectMake(_detailView.frame.size.width-100-2, _detailView.frame.size.height-30-10, 100, 30);
+        //        _sumLabel.textAlignment = NSTextAlignmentLeft;
+        //        _sumLabel.frame = CGRectMake(5, _detailView.frame.size.height-30-10, 100, 30);
     }
-   
-    
-   
-    
 }
 @end

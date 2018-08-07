@@ -38,14 +38,16 @@ static NSString *const footerId = @"footerId";
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
     
-    self.view.backgroundColor = TABBARCOLOR;
-//    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
+    self.view.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    //    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     
     //_collectionView
     ZDMessageCollectionViewFlowLayout *messageLayout = [[ZDMessageCollectionViewFlowLayout alloc]init];
-//    SquareLayout *layout = [[SquareLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:messageLayout];
-    _collectionView.backgroundColor = TABBARCOLOR;
+    //    SquareLayout *layout = [[SquareLayout alloc]init];
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) collectionViewLayout:messageLayout];
+    self.automaticallyAdjustsScrollViewInsets= NO;
+    //    self.navigationController.navigationBar.translucent = NO;
+    _collectionView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
@@ -63,9 +65,9 @@ static NSString *const footerId = @"footerId";
     
     //addRefreshHeaderGif
     [self addRefreshHeaderGif];
-
-
-
+    
+    
+    
     // Do any additional setup after loading the view.
 }
 - (void)valueChanged:(UIStepper *)stepper{
@@ -101,7 +103,7 @@ static NSString *const footerId = @"footerId";
     
     
     UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
-
+    
     [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
@@ -110,7 +112,7 @@ static NSString *const footerId = @"footerId";
     
     //rightBarButtonItem
     UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
-
+    
     [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = addBarButtonItem;
@@ -141,9 +143,9 @@ static NSString *const footerId = @"footerId";
  
  */
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-   
+    
     return self.messageDataMutableArray.count;
-
+    
 }
 /**
  dataSource
@@ -151,11 +153,11 @@ static NSString *const footerId = @"footerId";
  */
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-  
+    
     _messageCollectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-
+    
     ZDGoods *goods = _messageDataMutableArray[indexPath.item];
-      _messageCollectionViewCell.nameLabel.text = goods.name;
+    _messageCollectionViewCell.nameLabel.text = goods.name;
     _messageCollectionViewCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
     if (indexPath.item == 0) {
         _messageCollectionViewCell.nameLabel.font = [UIFont boldSystemFontOfSize:23];
@@ -165,25 +167,25 @@ static NSString *const footerId = @"footerId";
     }
     
     
-            _messageCollectionViewCell.remarkLabel.text = goods.remark;
-            _messageCollectionViewCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-
-        NSDate *dateNow = [[NSDate alloc]init];
-        NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-        NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-            _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
-        _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
-
-        //计算出保质期的时间戳
-//        NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
-//        NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
-//        NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
-//        NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
-//        [_messageCollectionViewCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
-        _messageCollectionViewCell.stepper.tag = 200 + indexPath.row;
-        _messageCollectionViewCell.stepper.value = [goods.sum doubleValue];
-        [_messageCollectionViewCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-
+    _messageCollectionViewCell.remarkLabel.text = goods.remark;
+    _messageCollectionViewCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    
+    NSDate *dateNow = [[NSDate alloc]init];
+    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
+    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    
+    //计算出保质期的时间戳
+    //        NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
+    //        NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
+    //        NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
+    //        NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
+    //        [_messageCollectionViewCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+    _messageCollectionViewCell.stepper.tag = 200 + indexPath.row;
+    _messageCollectionViewCell.stepper.value = [goods.sum doubleValue];
+    [_messageCollectionViewCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+    
     
     return _messageCollectionViewCell;
 }
@@ -193,26 +195,26 @@ static NSString *const footerId = @"footerId";
 {
     
     UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId forIndexPath:indexPath];
-//    [headerView addSubview:_searchView];
+    //    [headerView addSubview:_searchView];
     return headerView;
     
 }
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-        ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-
+    ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
     if (!cell. isChangeAlpha) {
+        
         cell.alpha = 1;
-        cell.GrayColorView.hidden = NO;
-        cell.detailView.hidden = NO;
+        //        cell.detailView.hidden = NO;
     }else{
+        
         cell.alpha = 1;
-        cell.GrayColorView.hidden = YES;
-        cell.detailView.hidden = YES;
+        //        cell.detailView.hidden = YES;
     }
     cell. isChangeAlpha = !cell.isChangeAlpha;
-   
+    
     
 }
 #pragma mark - 下拉刷新
