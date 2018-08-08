@@ -9,6 +9,7 @@
 #import "ZDExpireViewController.h"
 #import "ZDExpireDataBase.h"
 #import "ZDAllDataBase.h"
+#import "ZDAllCell.h"
 
 @interface ZDExpireViewController ()<UITableViewDelegate,UITableViewDataSource>{
     

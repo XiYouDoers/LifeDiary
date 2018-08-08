@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDMeDefaultCell.h"
+
+@class ZDMeDefaultCell;
 
 @interface ZDMeViewController : UIViewController
+
 @property(nonatomic,strong) UITableView *meTableView;
 @property(nonatomic,strong) ZDMeDefaultCell *meCell;
 

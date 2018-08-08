@@ -9,6 +9,7 @@
 #import "ZDRecycleViewController.h"
 #import "ZDRecycleDataBase.h"
 #import "ZDAllDataBase.h"
+#import "ZDAllCell.h"
 
 @interface ZDRecycleViewController ()<UITableViewDelegate,UITableViewDataSource>{
     

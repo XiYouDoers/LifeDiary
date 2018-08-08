@@ -11,6 +11,8 @@
 #import "ZDFindDataManager.h"
 #import <WebKit/WebKit.h>
 #import "ZDLinkViewController.h"
+#import "ZDCollectionViewShoppingCell.h"
+
 @interface ZDShoppingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;

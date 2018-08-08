@@ -7,6 +7,8 @@
 //
 
 #import "ZDLinkViewController.h"
+#import "ZDHtmlScrollView.h"
+#import "ZDOrderModel.h"
 
 @interface ZDLinkViewController ()
 

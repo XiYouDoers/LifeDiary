@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDOrderModel.h"
 
+@class ZDContentlistModel;
 @interface ZDCollectionViewShoppingCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) UILabel *nameLabel;

@@ -8,6 +8,7 @@
 
 #import "ZDMessageDataBase.h"
 #import "FMDB.h"
+#import "ZDGoods.h"
 
 static ZDMessageDataBase *_messageDataBase = nil;
 @interface ZDMessageDataBase()<NSCopying,NSMutableCopying>{

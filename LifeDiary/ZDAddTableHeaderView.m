@@ -5,9 +5,9 @@
 //  Created by JACK on 2018/5/14.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define WIDTH [UIScreen mainScreen].bounds.size.width
-#define HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "ZDAddTableHeaderView.h"
+#import "ZDUnderLineTextField.h"
 
 @implementation ZDAddTableHeaderView
 - (id)init{

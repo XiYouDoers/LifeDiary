@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDAddTableHeaderView.h"
-#import "ZDEditDefaultCell.h"
-#import "ZDEditPickerViewCell.h"
-#import "ZDGoods.h"
+
+@class ZDAddTableHeaderView,ZDEditDefaultCell,ZDEditPickerViewCell,ZDGoods;
+
 @interface ZDEditViewController : UIViewController
 
 /**
@@ -21,4 +20,5 @@
 @property(nonatomic,strong) UITableView *editTableView;
 @property(nonatomic,strong) ZDEditDefaultCell *editDefaultCell;
 @property(nonatomic,strong)  ZDEditPickerViewCell *editPickerViewCell;
+
 @end

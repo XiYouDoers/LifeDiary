@@ -18,6 +18,9 @@
 #import "MJRefresh.h"
 #import "ZDEditViewController.h"
 #import "ZDMessageCollectionViewFlowLayout.h"
+#import "ZDAllCell.h"
+#import "ZDMessageCollectionViewCell.h"
+#import "ZDDetailView.h"
 
 @interface ZDMessageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
     NSDateFormatter *_formatter;
@@ -25,6 +28,9 @@
 @property(nonatomic,strong) UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 @property(nonatomic,strong) NSMutableArray *allDataMutableArray;
+@property(nonatomic,strong) ZDDetailView *detailView;
+
+
 @end
 static NSString *const cellId = @"collectionViewCellId";
 static NSString *const headerId = @"headerId";
@@ -62,6 +68,9 @@ static NSString *const footerId = @"footerId";
     [_collectionView registerClass:[ZDMessageCollectionViewCell class] forCellWithReuseIdentifier:cellId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
+    
+    
+    
     
     //addRefreshHeaderGif
     [self addRefreshHeaderGif];
@@ -207,16 +216,17 @@ static NSString *const footerId = @"footerId";
     if (!cell. isChangeAlpha) {
         
         cell.alpha = 1;
-        //        cell.detailView.hidden = NO;
+                cell.grayView.hidden = NO;
     }else{
         
         cell.alpha = 1;
-        //        cell.detailView.hidden = YES;
+                cell.grayView.hidden = YES;
     }
     cell. isChangeAlpha = !cell.isChangeAlpha;
-    
+   
     
 }
+
 #pragma mark - 下拉刷新
 - (void)addRefreshHeaderGif{
     //MJRefreshGifHeader

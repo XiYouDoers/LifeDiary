@@ -9,6 +9,7 @@
 #import "ZDDepleteViewController.h"
 #import "ZDDepleteDataBase.h"
 #import "ZDAllDataBase.h"
+#import "ZDAllCell.h"
 
 @interface ZDDepleteViewController()<UITableViewDelegate,UITableViewDataSource>{
     

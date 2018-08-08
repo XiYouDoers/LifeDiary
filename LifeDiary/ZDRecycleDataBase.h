@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZDGoods.h"
 
+@class ZDGoods;
 @interface ZDRecycleDataBase : NSObject
 //@property(nonatomic,strong) ZDGoods *recycleGoods;
 

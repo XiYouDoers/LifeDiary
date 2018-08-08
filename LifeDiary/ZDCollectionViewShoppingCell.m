@@ -8,6 +8,7 @@
 
 #import "ZDCollectionViewShoppingCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDOrderModel.h"
 
 @implementation ZDCollectionViewShoppingCell
 -(instancetype)initWithFrame:(CGRect)frame{

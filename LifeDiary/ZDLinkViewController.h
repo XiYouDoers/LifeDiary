@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDHtmlScrollView.h"
-#import "ZDOrderModel.h"
 
+@class ZDContentlistModel,ZDHtmlScrollView;
 @interface ZDLinkViewController : UIViewController
 
 @property(nonatomic,strong) ZDHtmlScrollView *htmlScrollView;

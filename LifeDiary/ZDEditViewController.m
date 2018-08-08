@@ -11,6 +11,10 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "ZDAddTableHeaderView.h"
+#import "ZDEditDefaultCell.h"
+#import "ZDEditPickerViewCell.h"
+#import "ZDGoods.h"
 
 @interface ZDEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
     NSArray *_cellTabArray;

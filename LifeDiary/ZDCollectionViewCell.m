@@ -8,6 +8,7 @@
 
 #import "ZDCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDOrderModel.h"
 
 @implementation ZDCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame{

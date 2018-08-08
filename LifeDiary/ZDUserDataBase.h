@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ZDUser.h"
+@class ZDUser;
 @interface ZDUserDataBase : NSObject
 
 + (instancetype)sharedDataBase;

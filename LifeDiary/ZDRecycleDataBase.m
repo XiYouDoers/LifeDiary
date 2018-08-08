@@ -8,6 +8,7 @@
 
 #import "ZDRecycleDataBase.h"
 #import "FMDB.h"
+#import "ZDGoods.h"
 
 static ZDRecycleDataBase *_messageDataBase = nil;
 @implementation ZDRecycleDataBase{

@@ -8,6 +8,7 @@
 
 #import "ZDExpireDataBase.h"
 #import "FMDB.h"
+#import "ZDGoods.h"
 
 static ZDExpireDataBase *_messageDataBase = nil;
 @implementation ZDExpireDataBase{

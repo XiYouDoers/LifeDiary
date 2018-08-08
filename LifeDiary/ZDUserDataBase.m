@@ -8,6 +8,7 @@
 
 #import "ZDUserDataBase.h"
 #import "FMDB.h"
+#import "ZDUser.h"
 
 @implementation ZDUserDataBase{
     FMDatabase *_db;

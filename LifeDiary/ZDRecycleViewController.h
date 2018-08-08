@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDAllCell.h"
 
+@class  ZDAllCell;
 @interface ZDRecycleViewController : UIViewController
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *recycleTableView;

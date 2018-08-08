@@ -45,6 +45,7 @@
 		044F02C620A8123500406D65 /* ZDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02C520A8123500406D65 /* ZDAboutViewController.m */; };
 		044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CB20A8124900406D65 /* ZDAddViewController.m */; };
 		044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F02CE20A8149300406D65 /* ZDTabBarViewController.m */; };
+		04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04592280211AFDF800AF75B8 /* ZDDetailView.m */; };
 		045E8AB0210EC91400CC861A /* ZDAllCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */; };
 		045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
@@ -201,6 +202,8 @@
 		044F02CB20A8124900406D65 /* ZDAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddViewController.m; sourceTree = "<group>"; };
 		044F02CD20A8149300406D65 /* ZDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDTabBarViewController.h; sourceTree = "<group>"; };
 		044F02CE20A8149300406D65 /* ZDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDTabBarViewController.m; sourceTree = "<group>"; };
+		0459227F211AFDF800AF75B8 /* ZDDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDDetailView.h; sourceTree = "<group>"; };
+		04592280211AFDF800AF75B8 /* ZDDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDDetailView.m; sourceTree = "<group>"; };
 		045E8AAE210EC91400CC861A /* ZDAllCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCollectionViewCell.h; sourceTree = "<group>"; };
 		045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllCollectionViewCell.m; sourceTree = "<group>"; };
 		045E8AB4210ECAE800CC861A /* ZDAllFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllFlowLayout.h; sourceTree = "<group>"; };
@@ -602,6 +605,8 @@
 			children = (
 				04BD721320A9A21100A14ADF /* ZDMessageCell.h */,
 				04BD721420A9A21100A14ADF /* ZDMessageCell.m */,
+				0459227F211AFDF800AF75B8 /* ZDDetailView.h */,
+				04592280211AFDF800AF75B8 /* ZDDetailView.m */,
 				041823252111F2030012C355 /* ZDMessageCollectionViewCell.h */,
 				041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */,
 				04EC47A521155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.h */,
@@ -1129,6 +1134,7 @@
 				044F02CF20A8149300406D65 /* ZDTabBarViewController.m in Sources */,
 				04FF835720B94C9800EECE24 /* MJRefreshAutoFooter.m in Sources */,
 				04EC47A721155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m in Sources */,
+				04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
 				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,

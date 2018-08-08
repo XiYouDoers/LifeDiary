@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZDOrderModel.h"
+
+@class ZDOrderModel;
 typedef void (^requestSuccess) (ZDOrderModel *model);
 typedef void (^requestFailure) (void);
 @interface ZDFindDataManager : NSObject

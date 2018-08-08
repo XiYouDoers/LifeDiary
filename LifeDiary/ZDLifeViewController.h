@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDCollectionViewCell.h"
-#import "ZDOrderModel.h"
-
+@protocol ZDContentlistModel;
+@class ZDCollectionViewCell;
 @interface ZDLifeViewController : UIViewController
 
 @property(nonatomic,strong) UICollectionView *collectionView;

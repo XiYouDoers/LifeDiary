@@ -7,14 +7,16 @@
 //
 
 #import "ZDViewController.h"
-//#import "ZDMessageCell.h"
-#import "ZDAllCell.h"
-#import "ZDMessageCollectionViewCell.h"
+
+@class ZDAllCell,ZDMessageCollectionViewCell;
+
 
 @interface ZDMessageViewController : ZDViewController
+
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) ZDMessageCollectionViewCell *messageCollectionViewCell;
-//@property(nonatomic,strong) UITableView *messageTableView;
+@property (nonatomic,strong) UIView *detailView;
 @property(nonatomic,strong) ZDAllCell *allCell;
+
 @end

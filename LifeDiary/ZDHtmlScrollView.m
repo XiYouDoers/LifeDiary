@@ -8,6 +8,7 @@
 #define SPACING 15.f
 #import "ZDHtmlScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDOrderModel.h"
 
 @implementation ZDHtmlScrollView
 

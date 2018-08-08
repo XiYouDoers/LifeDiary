@@ -8,6 +8,7 @@
 
 #import "ZDDepleteDataBase.h"
 #import "FMDB.h"
+#import "ZDGoods.h"
 
 static ZDDepleteDataBase *_messageDataBase = nil;
 @implementation ZDDepleteDataBase{

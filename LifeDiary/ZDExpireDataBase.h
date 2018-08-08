@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZDGoods.h"
+@class ZDGoods;
 
 @interface ZDExpireDataBase : NSObject
 @property(nonatomic,strong) ZDGoods *expireGoods;

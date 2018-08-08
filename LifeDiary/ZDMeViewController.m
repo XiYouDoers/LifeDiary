@@ -14,6 +14,7 @@
 #import "ZDMeTableHeaderView.h"
 #import "ZDPhotoManagerViewController.h"
 #import "ZDGoods.h"
+#import "ZDMeDefaultCell.h"
 
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate>{
     NSUserDefaults *_userDefaults;

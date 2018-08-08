@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDAddTableHeaderView.h"
-#import "ZDAddDefaultCell.h"
-#import "ZDPickerViewCell.h"
+
+@class ZDAddTableHeaderView,ZDAddDefaultCell,ZDPickerViewCell;
 
 @interface ZDAddViewController : UIViewController
 @property(nonatomic,strong) ZDAddTableHeaderView *addTableHeaderView;

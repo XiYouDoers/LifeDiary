@@ -12,6 +12,8 @@
 #import <WebKit/WebKit.h>
 #import "ZDLinkViewController.h"
 #import "ZDShoppingViewController.h"
+#import "ZDCollectionViewCell.h"
+#import "ZDOrderModel.h"
 
 @interface ZDLifeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;

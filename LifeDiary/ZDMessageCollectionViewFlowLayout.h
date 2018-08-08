@@ -10,4 +10,5 @@
 
 @interface ZDMessageCollectionViewFlowLayout : UICollectionViewFlowLayout
 @property(nonatomic,strong)NSMutableArray * attributesMutableArray;
+@property(nonatomic) CGSize sizeForContentSize;
 @end

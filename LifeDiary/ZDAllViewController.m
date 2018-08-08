@@ -12,6 +12,9 @@
 #import "ZDRecycleDataBase.h"
 #import "ZDRoundView.h"
 #import "ZDEditViewController.h"
+#import "ZDAllCell.h"
+#import "ZDMessageCell.h"
+#import "ZDAllCollectionViewCell.h"
 
 
 @interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>{

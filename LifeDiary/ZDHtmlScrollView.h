@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDOrderModel.h"
 
+@class ZDContentlistModel;
 @interface ZDHtmlScrollView : UIScrollView
 
 @property(nonatomic,strong) UILabel *titleLabel;

@@ -8,6 +8,8 @@
 
 #import "ZDFindDataManager.h"
 #import <AFNetworking/AFNetworking.h>
+#import "ZDOrderModel.h"
+
 @implementation ZDFindDataManager
 - (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock maxResult:(NSString *)maxResult{
     

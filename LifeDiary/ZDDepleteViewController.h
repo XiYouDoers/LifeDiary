@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDAllCell.h"
+
+@class ZDAllCell;
 
 @interface ZDDepleteViewController : UIViewController
+
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *depleteTableView;
 @property(nonatomic,strong) ZDAllCell *depleteCell;
+
 @end
