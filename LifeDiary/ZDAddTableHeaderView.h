@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDUnderLineTextField.h"
+//@class ZDUnderLineTextField;
 
-@class ZDUnderLineTextField;
 @interface ZDAddTableHeaderView : UIView
 @property(nonatomic,strong) UIButton *headPictureSetButton;
 @property(nonatomic,strong) ZDUnderLineTextField *nameTextField;

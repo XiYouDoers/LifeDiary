@@ -16,7 +16,6 @@
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) ZDMessageCollectionViewCell *messageCollectionViewCell;
-@property (nonatomic,strong) UIView *detailView;
 @property(nonatomic,strong) ZDAllCell *allCell;
 
 @end

@@ -27,8 +27,9 @@
 }
 @property(nonatomic,strong) UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
-@property(nonatomic,strong) NSMutableArray *allDataMutableArray;
 @property(nonatomic,strong) ZDDetailView *detailView;
+@property(nonatomic,strong) NSMutableArray *allDataMutableArray;
+
 
 
 @end
@@ -83,7 +84,7 @@ static NSString *const footerId = @"footerId";
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:stepper.tag - 200 inSection:0];
     ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
+//    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
     ZDGoods *goods = _messageDataMutableArray[indexPath.item];
     goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
     [[ZDAllDataBase sharedDataBase]updateGoods:goods];
@@ -182,18 +183,18 @@ static NSString *const footerId = @"footerId";
     NSDate *dateNow = [[NSDate alloc]init];
     NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
     NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
-    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
-    
+//    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
+//    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+//    
     //计算出保质期的时间戳
     //        NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
     //        NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
     //        NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
     //        NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
     //        [_messageCollectionViewCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
-    _messageCollectionViewCell.stepper.tag = 200 + indexPath.row;
-    _messageCollectionViewCell.stepper.value = [goods.sum doubleValue];
-    [_messageCollectionViewCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+//    _messageCollectionViewCell.stepper.tag = 200 + indexPath.row;
+//    _messageCollectionViewCell.stepper.value = [goods.sum doubleValue];
+//    [_messageCollectionViewCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     
     
     return _messageCollectionViewCell;

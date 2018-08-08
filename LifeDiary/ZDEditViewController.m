@@ -15,6 +15,8 @@
 #import "ZDEditDefaultCell.h"
 #import "ZDEditPickerViewCell.h"
 #import "ZDGoods.h"
+#import "ZDAddTableHeaderView.h"
+#import "ZDUnderLineTextField.h"
 
 @interface ZDEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
     NSArray *_cellTabArray;
