@@ -11,7 +11,8 @@
 @class ZDAllCell,ZDMessageCollectionViewCell;
 
 
-@interface ZDMessageViewController : ZDViewController
+@interface ZDMessageViewController : UIViewController
+
 
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
 @property(nonatomic,strong) UICollectionView *collectionView;

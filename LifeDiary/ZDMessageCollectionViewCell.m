@@ -14,34 +14,23 @@
     self=[super initWithFrame:frame];
     if (self) {
         
-        self.contentView.layer.cornerRadius = 13.f;
-        self.contentView.layer.masksToBounds = YES;
-        self.contentView.backgroundColor = [UIColor whiteColor];
+//        self.contentView.layer.cornerRadius = 13.f;
+//        self.contentView.layer.masksToBounds = YES;
+        self.contentView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+//        self.contentView.backgroundColor = [UIColor blueColor];
+       
         
+       
         
-        //_nameLabel
-        _nameLabel = [[UILabel alloc]init];
-        _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.font = [UIFont boldSystemFontOfSize:18];
-        _nameLabel.textColor = [UIColor blackColor];
-        [self.contentView addSubview:_nameLabel];
+        [self.contentView addSubview:self.shadowView];
         
+        [self.shadowView addSubview:self.exhibitView];
         
-        //_pictureImageView
-        _pictureImageView = [[UIImageView alloc]init];
-        _pictureImageView.layer.cornerRadius = 5;
-        _pictureImageView.layer.masksToBounds = true;
-        //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
-        [self.contentView addSubview:_pictureImageView];
+        [self.exhibitView addSubview:self.nameLabel];
         
+        [self.exhibitView addSubview:self.pictureImageView];
         
-        //_remarkLabel
-        _remarkLabel = [[UILabel alloc]init];
-        _remarkLabel.textAlignment = NSTextAlignmentLeft;
-        _remarkLabel.numberOfLines = 0;
-        _remarkLabel.font = [UIFont systemFontOfSize:17];
-        _remarkLabel.textColor = [UIColor lightGrayColor];
-        [self.contentView addSubview:_remarkLabel];
+        [self.exhibitView addSubview:self.remarkLabel];
         
         
 //        // _remainderTimeLabel
@@ -89,16 +78,17 @@
 //        _sumLabel.textColor = [UIColor blackColor];
 
         
-        //_grayView
-        _grayView = [[UIView alloc]init];
-        _grayView.alpha = 0.5;
-        _grayView.layer.cornerRadius = 5;
-        _grayView.layer.masksToBounds = true;
-        _grayView.hidden = YES;
-        _grayView.backgroundColor = [UIColor lightGrayColor];
-        [self.contentView addSubview:_grayView];
+//        //_grayView
+//        _grayView = [[UIView alloc]init];
+//        _grayView.alpha = 0.5;
+//        _grayView.layer.cornerRadius = 5;
+//        _grayView.layer.masksToBounds = true;
+//        _grayView.hidden = YES;
+//        _grayView.backgroundColor = [UIColor lightGrayColor];
+//        [self.contentView addSubview:_grayView];
         
     }
+    
     return self;
 }
 
@@ -106,43 +96,83 @@
 //    [super setSelected:selected];
 //    if (selected) {
 //        //选中时
-//        self.contentView.backgroundColor = [UIColor lightGrayColor];
+////        self.contentView.backgroundColor = [UIColor grayColor];
+//        self.contentView.alpha = 0.7f;
 //    }else{
 //        //非选中
-//        self.contentView.backgroundColor = [UIColor whiteColor];
+////        self.contentView.backgroundColor = [UIColor whiteColor];
+//        self.contentView.alpha = 1.0f;
 //    }
-//    
+//
 //    // Configure the view for the selected state
 //}
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-    self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
-    _grayView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     
-    NSLog(@"%@  %@",NSStringFromCGRect(self.contentView.frame),NSStringFromCGRect(_grayView.frame));
+    self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
+    _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+  
     _nameLabel.frame = CGRectMake(10, 10, self.frame.size.width-20, 30);
     _remarkLabel.frame = CGRectMake(10,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+10, self.frame.size.width-20-10, 20);
     _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-20-10*4-10);
-    if (self.frame.size.width > 300) {
-//        _detailView.frame = CGRectMake(_pictureImageView.frame.origin.x, _pictureImageView.frame.origin.y+_pictureImageView.frame.size.height/4*1.5, _pictureImageView.frame.size.width, _pictureImageView.frame.size.height/4);
-    }else{
-//        _detailView.frame = CGRectMake(_pictureImageView.frame.origin.x, _pictureImageView.frame.origin.y+_pictureImageView.frame.size.height/5, _pictureImageView.frame.size.width, _pictureImageView.frame.size.height/5*3);
+}
+- (UIView *)shadowView{
+    if (_shadowView == nil) {
+
+        //_shadowView
+        _shadowView = [[UIView alloc]init];
+        _shadowView.backgroundColor = [UIColor purpleColor];
+        _shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+        _shadowView.layer.shadowRadius = 4 ;
+        _shadowView.layer.shadowOpacity = 0.8;
+        _shadowView.layer.shouldRasterize = YES;
     }
+    return _shadowView;
+}
+- (UIView *)exhibitView{
+    if (_exhibitView==nil) {
+        //_exhibitView
+        _exhibitView = [[UIView alloc]init];
+        _exhibitView.backgroundColor = [UIColor whiteColor];
+        _exhibitView.layer.cornerRadius = 13;
+        _exhibitView.layer.masksToBounds = YES;
+    }
+    return _exhibitView;
+}
+- (UILabel *)nameLabel{
     
-    if (self.frame.size.width > 300 ) {
-        //    _remainderTimeLabel.frame = CGRectMake(20, 10, 150, 30);
-        //
-        //         _stepper.frame = CGRectMake(_detailView.frame.size.width-100-10, 10, 100, 30);
-        //
-        //        _sumLabel.frame = CGRectMake(_stepper.frame.origin.x -_stepper.frame.size.width-20, _stepper.frame.origin.y, 100, 30);
-        //        _sumLabel.textAlignment = NSTextAlignmentRight;
-    }else{
-        //    _remainderTimeLabel.frame = CGRectMake(5, 10, 100, 30);
-        //
-        //        _stepper.frame = CGRectMake(_detailView.frame.size.width-100-2, _detailView.frame.size.height-30-10, 100, 30);
-        //        _sumLabel.textAlignment = NSTextAlignmentLeft;
-        //        _sumLabel.frame = CGRectMake(5, _detailView.frame.size.height-30-10, 100, 30);
+    if (_nameLabel==nil) {
+        
+        //_nameLabel
+        _nameLabel = [[UILabel alloc]init];
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:18];
+        _nameLabel.textColor = [UIColor blackColor];
     }
+    return _nameLabel;
+}
+- (UIImageView *)pictureImageView{
+    
+    if (_pictureImageView == nil) {
+        //_pictureImageView
+        _pictureImageView = [[UIImageView alloc]init];
+        _pictureImageView.layer.cornerRadius = 5;
+        _pictureImageView.layer.masksToBounds = true;
+        //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _pictureImageView;
+}
+- (UILabel *)remarkLabel{
+    if (_remarkLabel == nil) {
+        //_remarkLabel
+        _remarkLabel = [[UILabel alloc]init];
+        _remarkLabel.textAlignment = NSTextAlignmentLeft;
+        _remarkLabel.numberOfLines = 0;
+        _remarkLabel.font = [UIFont systemFontOfSize:17];
+        _remarkLabel.textColor = [UIColor lightGrayColor];
+    }
+    return _remarkLabel;
 }
 @end

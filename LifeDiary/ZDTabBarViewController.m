@@ -25,17 +25,17 @@
     //“消息”界面
     ZDMessageViewController *messageViewController = [[ZDMessageViewController alloc]init];
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
-    [self wsf_settingController:messageNavigationController tabBarTitle:@"消息" tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
+    [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
     UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
-    [self wsf_settingController:findNavigationController tabBarTitle:@"发现" tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
+    [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
-    [self wsf_settingController:meNavigationController tabBarTitle:@"我的" tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
+    [self wsf_settingController:meNavigationController tabBarTitle:nil tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
      ];
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
@@ -81,10 +81,10 @@
     
     //改变navigationBar中间title的颜色
     
-    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
+    [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: TITLECOLOR}];
     //改变navigationBar.barButtonItem的颜色
     
-//    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: LIGHTBLUE} forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: BARBUTTONITEMCOLOR} forState:UIControlStateNormal];
 }
 /*
  #pragma mark - Navigation

@@ -27,7 +27,7 @@ static NSString *const footerId = @"footerId";
     backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.view.backgroundColor = [UIColor whiteColor];
-self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
+    self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
    
     ZDShoppingViewController *shoppingViewController = [[ZDShoppingViewController alloc]init];
     ZDLifeViewController *lifeViewController = [[ZDLifeViewController alloc]init];
@@ -71,16 +71,16 @@ self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
         make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
         make.left.mas_equalTo(WIDTH/3);
     }];
-
+    
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 //SegmentControl点击事件
 -(void)doSomethingInSegment:(UISegmentedControl *)Seg

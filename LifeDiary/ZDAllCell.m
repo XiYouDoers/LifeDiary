@@ -24,9 +24,26 @@
 
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-
-
-
+        
+        [self.contentView addSubview:self.shadowView];
+        
+        [self.shadowView addSubview:self.exhibitView];
+        
+        [self.contentView addSubview: self.nameLabel];
+        
+        [self.contentView addSubview: self.remarkLabel];
+        
+        [self.contentView addSubview: self.pictureImageView];
+        
+        [self.contentView addSubview: self.dateOfstartLabel];
+        
+        [self.contentView addSubview: self.dateOfEndLabel];
+        
+        [self.contentView addSubview: self.saveTimeLabel];
+        
+        [self.contentView addSubview: self.sumLabel];
+        
+        
 //        _outsideArc =  [CAShapeLayer layer];
 //        _outsideArc.fillColor = [UIColor clearColor].CGColor;
 //        //圆弧的宽度
@@ -75,7 +92,7 @@
 //}
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);
         make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
@@ -121,10 +138,32 @@
     }];
     
 }
+- (UIView *)shadowView{
+    if (_shadowView == nil) {
+        //_shadowView
+        _shadowView = [[UIView alloc]init];
+        _shadowView.backgroundColor = [UIColor purpleColor];
+        _shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+        _shadowView.layer.shadowRadius = 4;
+        _shadowView.layer.shadowOpacity = 1;
+        _shadowView.layer.shouldRasterize = YES;
+    }
+    return _shadowView;
+}
+- (UIView *)exhibitView{
+    if (_exhibitView==nil) {
+        //_exhibitView
+        _exhibitView = [[UIView alloc]init];
+        _exhibitView.backgroundColor = [UIColor whiteColor];
+        _exhibitView.layer.cornerRadius = 13;
+        _exhibitView.layer.masksToBounds = YES;
+    }
+    return _exhibitView;
+}
 - (UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        [self.contentView addSubview: _nameLabel];
         
     }
     return _nameLabel;
@@ -134,7 +173,7 @@
         _remarkLabel = [[UILabel alloc]init];
         _remarkLabel.font = [UIFont systemFontOfSize:11];
         _remarkLabel.textColor = [UIColor lightGrayColor];
-        [self.contentView addSubview: _remarkLabel];
+        
 
     }
     return _remarkLabel;
@@ -145,7 +184,7 @@
         _pictureImageView = [[UIImageView alloc]init];
         _pictureImageView.layer.cornerRadius = 5;
         _pictureImageView.layer.masksToBounds = true;
-        [self.contentView addSubview: _pictureImageView];
+        
     }
     return _pictureImageView;
 }
@@ -154,7 +193,7 @@
     if (!_dateOfstartLabel) {
         _dateOfstartLabel = [[UILabel alloc]init];
         _dateOfstartLabel.textColor = [UIColor lightGrayColor];
-        [self.contentView addSubview: _dateOfstartLabel];
+        
     }
     return _dateOfstartLabel;
 }
@@ -163,7 +202,7 @@
     if (!_dateOfEndLabel) {
         _dateOfEndLabel = [[UILabel alloc]init];
         _dateOfEndLabel.textColor = GOLDCOLOR;
-        [self.contentView addSubview: _dateOfEndLabel];
+        
     }
     return _dateOfEndLabel;
 }
@@ -172,7 +211,7 @@
     if (!_saveTimeLabel) {
         _saveTimeLabel = [[UILabel alloc]init];
         _saveTimeLabel.textColor = LIGHTBLUE;
-        [self.contentView addSubview: _saveTimeLabel];
+        
     }
     return _saveTimeLabel;
 }
@@ -180,7 +219,7 @@
     if (!_sumLabel) {
         _sumLabel = [[UILabel alloc]init];
         _sumLabel.textColor = LIGHTBLUE;
-        [self.contentView addSubview: _sumLabel];
+        
     }
     return _sumLabel;
 }

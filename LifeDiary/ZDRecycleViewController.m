@@ -29,6 +29,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"回收站";
     
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     _manageCellBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
     self.navigationItem.rightBarButtonItem =  _manageCellBarButtonItem;
     
@@ -36,7 +37,7 @@
  
 
     //_recycleTableView
-    _recycleTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _recycleTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-20) style:UITableViewStylePlain];
     _recycleTableView.dataSource = self;
     _recycleTableView.delegate = self;
     _recycleTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
@@ -246,7 +247,7 @@
    
     // 添加一个删除按钮
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
- 
+
         ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
         // 从数据库中删除
         [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];

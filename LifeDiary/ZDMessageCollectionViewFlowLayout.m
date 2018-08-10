@@ -21,12 +21,9 @@
         if (i == count-1) {
             CGRect rectForFinalItem = [self layoutAttributesForItemAtIndexPath:indexpath].frame;
              _sizeForContentSize = CGSizeMake(WIDTH, 0);
-             _sizeForContentSize.height = rectForFinalItem.origin.y +rectForFinalItem.size.height + 20;
+             _sizeForContentSize.height = rectForFinalItem.origin.y + rectForFinalItem.size.height + 20;
         }
-        
     }
-   
-    
 }
 - (NSMutableArray *)attributesMutableArray{
     if (!_attributesMutableArray) {
@@ -65,7 +62,7 @@
     }else{
         UICollectionViewLayoutAttributes *lastAttrs = self.attributesMutableArray[i-3];
         CGRect frame  = lastAttrs.frame;
-        frame.origin.y += widthForSmallItem+heightForBigItem+2*5;
+        frame.origin.y += heightForSmallItem + heightForBigItem;
         
         attributes.frame = frame;
     }

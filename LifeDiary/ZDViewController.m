@@ -10,6 +10,7 @@
 
 @interface ZDViewController ()
 @property(nonatomic,assign)  CGFloat historyY;
+
 @end
 
 @implementation ZDViewController
@@ -29,12 +30,14 @@
     if (_historyY+20<targetContentOffset->y)
     {
         [self setTabBarHidden:YES];
+        
     }
     else if(_historyY-20>targetContentOffset->y)
     {
         [self setTabBarHidden:NO];
+       
     }
-    _historyY=targetContentOffset->y;
+    _historyY  = targetContentOffset->y;
 }
 
 //设置tabBar

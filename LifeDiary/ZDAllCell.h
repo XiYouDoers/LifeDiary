@@ -17,6 +17,8 @@
 @property(nonatomic,strong) UILabel *dateOfEndLabel;
 @property(nonatomic,strong) UILabel *saveTimeLabel;
 @property(nonatomic,strong) UILabel *sumLabel;
+@property (nonatomic,strong) UIView *shadowView;
+@property (nonatomic,strong) UIView *exhibitView;
 
 /**
  setting arc's startAngle and endAngle

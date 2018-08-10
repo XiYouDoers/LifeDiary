@@ -31,16 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-//    self.view.backgroundColor = [UIColor grayColor];
-    backBtnItem.title = @"我的";
-    self.navigationItem.backBarButtonItem = backBtnItem;
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
-    
-    _meTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    [self setNavigationBar];
+    _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
     _meTableView.scrollEnabled=NO;
@@ -69,10 +62,28 @@
     }completion:^(BOOL finished) {
         
     }];
-    
-    
 }
+- (void)setNavigationBar{
+    
+    //设置NavigationBar是否透明
+    self.navigationController.navigationBar.translucent = NO;
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    //    self.view.backgroundColor = [UIColor grayColor];
+    backBtnItem.title = @"我的";
+    self.navigationItem.backBarButtonItem = backBtnItem;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    //改变BarButtonItem图片颜色
+    self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
+    
+    if (@available(iOS 11.0, *)) {
+        self.navigationController.navigationBar.prefersLargeTitles = YES;
+    } else {
+        // Fallback on earlier versions
+    }
 
+}
 - (ZDMeTableHeaderView *)tableHeaderView{
     if (!_tableHeaderView) {
         if(iPhoneX){

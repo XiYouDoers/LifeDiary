@@ -36,13 +36,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     //_allTableView
-    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
+    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-20) style:UITableViewStylePlain];
     self.automaticallyAdjustsScrollViewInsets = NO;
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
-    [_allTableView registerClass:[ZDMessageCell class] forCellReuseIdentifier:@"allCell"];
+    [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
     self.allTableView.tableHeaderView = self.searchView;
     
     
@@ -180,7 +180,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 260;
+    return 150;
     
 }
 //搜框中输入关键字的事件响应

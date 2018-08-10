@@ -29,8 +29,12 @@
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 @property(nonatomic,strong) ZDDetailView *detailView;
 @property(nonatomic,strong) NSMutableArray *allDataMutableArray;
+@property(nonatomic,assign) bool isHiddenTabBar;
 
-
+/**
+ 用来保存上一次滑动后的位置y参数
+ */
+@property(nonatomic,assign) CGFloat historyY;
 
 @end
 static NSString *const cellId = @"collectionViewCellId";
@@ -44,24 +48,24 @@ static NSString *const footerId = @"footerId";
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+
+    self.view.backgroundColor = [UIColor whiteColor];
     //    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     
     //_collectionView
     ZDMessageCollectionViewFlowLayout *messageLayout = [[ZDMessageCollectionViewFlowLayout alloc]init];
     //    SquareLayout *layout = [[SquareLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) collectionViewLayout:messageLayout];
-    self.automaticallyAdjustsScrollViewInsets= NO;
-    //    self.navigationController.navigationBar.translucent = NO;
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake( 0, 0, WIDTH, HEIGHT-49) collectionViewLayout:messageLayout];
+    self.navigationController.navigationBar.translucent = NO;
     _collectionView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+//    _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
     //    _collectionView.pagingEnabled = YES;
     // 隐藏水平滚动条
     _collectionView.showsHorizontalScrollIndicator = NO;
-    // 取消弹簧效果
+    // 设置弹簧效果
     _collectionView.bounces = YES;
     [self.view addSubview:_collectionView];
     
@@ -70,21 +74,20 @@ static NSString *const footerId = @"footerId";
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
     
-    
-    
+    //_detailView
+    _detailView = [[ZDDetailView alloc]init];
+    _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH, 49);
+    [self.view addSubview:_detailView];
     
     //addRefreshHeaderGif
     [self addRefreshHeaderGif];
-    
-    
-    
     // Do any additional setup after loading the view.
 }
 - (void)valueChanged:(UIStepper *)stepper{
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:stepper.tag - 200 inSection:0];
     ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-//    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
+    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
     ZDGoods *goods = _messageDataMutableArray[indexPath.item];
     goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
     [[ZDAllDataBase sharedDataBase]updateGoods:goods];
@@ -104,28 +107,38 @@ static NSString *const footerId = @"footerId";
     // Dispose of any resources that can be recreated.
 }
 - (void)setNavigationBar{
+    
     //backBarButtonItem
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-    [backBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE } forState:UIControlStateNormal];
+//    [backBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR } forState:UIControlStateNormal];
     backBtnItem.title = @"消息";
     self.navigationItem.backBarButtonItem = backBtnItem;
-    self.navigationController.navigationBar.tintColor = LIGHTBLUE;
+    //改变BarButtonItem图片颜色
+    self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
     
-    
+    //allBarButtonItem
     UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
     
-    [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
+//    [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE}];
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR}];
     
     //rightBarButtonItem
     UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
     
-    [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
+//    [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = addBarButtonItem;
+    
+    if (@available(iOS 11.0, *)) {
+        self.navigationController.navigationBar.prefersLargeTitles = YES;
+    } else {
+        // Fallback on earlier versions
+    }
+    
+    self.navigationItem.title = @"消息";
 }
 
 
@@ -172,17 +185,15 @@ static NSString *const footerId = @"footerId";
     if (indexPath.item == 0) {
         _messageCollectionViewCell.nameLabel.font = [UIFont boldSystemFontOfSize:23];
         _messageCollectionViewCell.nameLabel.text = @"DELICIOUS FOOD";
-    }else{
-        _messageCollectionViewCell.nameLabel.font = [UIFont boldSystemFontOfSize:15];
     }
     
     
     _messageCollectionViewCell.remarkLabel.text = goods.remark;
     _messageCollectionViewCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
     
-    NSDate *dateNow = [[NSDate alloc]init];
-    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+//    NSDate *dateNow = [[NSDate alloc]init];
+//    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+//    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
 //    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
 //    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
 //    
@@ -215,13 +226,21 @@ static NSString *const footerId = @"footerId";
     ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     if (!cell. isChangeAlpha) {
-        
+        NSLog(@"2222");
         cell.alpha = 1;
-                cell.grayView.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            _detailView.frame = CGRectMake(0, HEIGHT-49-64-49, WIDTH, 54);
+        }];
+        NSLog(@"%@",NSStringFromCGRect(_detailView.frame));
+        _detailView.sumLabel.text = [NSString stringWithFormat:@"数量：%@",cell.sumLabel.text];
+        _detailView.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余天数：%@",cell.remainderTimeLabel.text];
     }else{
-        
+       
         cell.alpha = 1;
-                cell.grayView.hidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH,49);
+        }];
+
     }
     cell. isChangeAlpha = !cell.isChangeAlpha;
    
@@ -341,12 +360,26 @@ static NSString *const footerId = @"footerId";
             [_messageDataMutableArray addObject:goods];
         }
         
+        
+    }
+//    [self.collectionView reloadData];
+   
+    //显示tabBar
+    [self setTabBarHidden:NO];
+}
+
+//设置tabBar
+- (void)setTabBarHidden:(BOOL)hidden
+{
+    
+    CGRect  tabRect=self.tabBarController.tabBar.frame;
+    
+    if (hidden) {
+        tabRect.origin.y=[[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
+    } else {
+        tabRect.origin.y=[[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
     }
     
-    [self.collectionView reloadData];
-    //显示tabBar
-    CGRect  tabRect=self.tabBarController.tabBar.frame;
-    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
     [UIView animateWithDuration:0.5f animations:^{
         self.tabBarController.tabBar.frame = tabRect;
     }completion:^(BOOL finished) {

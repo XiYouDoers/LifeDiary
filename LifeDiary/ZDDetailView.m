@@ -13,11 +13,25 @@
 - (id)init{
     if (self = [super init]) {
         
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.cornerRadius = 13.f;
+        self.layer.masksToBounds = YES;
+        
         // _remainderTimeLabel
         _remainderTimeLabel = [[UILabel alloc]init];
-        _remainderTimeLabel.textColor = GOLDCOLOR;
+        _remainderTimeLabel.font = [UIFont systemFontOfSize:16];
+        _remainderTimeLabel.textColor = [UIColor blackColor];
+        _remainderTimeLabel.textAlignment = NSTextAlignmentCenter;
         //        _remainderTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_remainderTimeLabel];
+        [_remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(5);
+            make.left.mas_equalTo(10);
+            make.width.mas_equalTo(140);
+            make.bottom.mas_equalTo(-5);
+        }];
+        
+       
         
         
         //stpper
@@ -52,11 +66,25 @@
         //        _stepper.translatesAutoresizingMaskIntoConstraints = NO;
         //        [_detailView addSubview:_stepper];
         [self addSubview:_stepper];
+        [_stepper mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.mas_centerY);
+            make.right.mas_offset(-10);
+        }];
         
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
         _sumLabel.textColor = [UIColor blackColor];
+        _sumLabel.font = [UIFont systemFontOfSize:16];
+        _sumLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_sumLabel];
+        [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(5);
+            make.left.mas_equalTo(_remainderTimeLabel.mas_right).with.offset(5);
+            make.right.mas_equalTo(_stepper.mas_left).with.offset(-10);
+            make.bottom.mas_equalTo(-5);
+            
+        }];
+       
     }
     return self;
 }
