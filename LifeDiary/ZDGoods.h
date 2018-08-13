@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface ZDGoods : NSObject
-@property(nonatomic,strong) NSNumber *identifier;
-@property(nonatomic,strong) NSString *name;
-@property(nonatomic,strong) NSString *remark;
-@property(nonatomic,strong) NSData *imageData;
-@property(nonatomic,strong) NSString *dateOfStart;
-@property(nonatomic,strong) NSString *dateOfEnd;
-@property(nonatomic,strong) NSString *saveTime;
-@property(nonatomic,strong) NSString *sum;
+@property(nonatomic,copy) NSNumber *identifier;
+@property(nonatomic,copy) NSString *name;
+@property(nonatomic,copy) NSString *remark;
+@property(nonatomic,copy) NSData *imageData;
+@property(nonatomic,copy) NSString *dateOfStart;
+@property(nonatomic,copy) NSString *dateOfEnd;
+@property(nonatomic,copy) NSString *saveTime;
+@property(nonatomic,copy) NSString *sum;
 @property(nonatomic,assign) float ratio;
+@property(nonatomic,copy) NSString *family;
 @end

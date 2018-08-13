@@ -20,6 +20,9 @@
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *sourceLabel;
 
+@property (nonatomic,strong) UIView *shadowView;
+@property (nonatomic,strong) UIView *exhibitView;
+
 
 /**
  更新cell

@@ -14,7 +14,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
-        self.contentView.layer.cornerRadius = 13.f;
+        self.contentView.layer.cornerRadius = 20.f;
         self.contentView.layer.masksToBounds = YES;
 
         //backView

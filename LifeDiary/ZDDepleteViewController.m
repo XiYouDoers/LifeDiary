@@ -42,6 +42,7 @@
     _depleteTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _depleteTableView.dataSource = self;
     _depleteTableView.delegate = self;
+    _depleteTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _depleteTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _depleteTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_depleteTableView];

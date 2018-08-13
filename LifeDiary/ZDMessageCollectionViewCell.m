@@ -33,9 +33,9 @@
         [self.exhibitView addSubview:self.remarkLabel];
         
         
-//        // _remainderTimeLabel
-//        _remainderTimeLabel = [[UILabel alloc]init];
-//        _remainderTimeLabel.textColor = GOLDCOLOR;
+        // _remainderTimeLabel
+        _remainderTimeLabel = [[UILabel alloc]init];
+        _remainderTimeLabel.textColor = GOLDCOLOR;
 //        //        _remainderTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
 ////        [_detailView addSubview:_remainderTimeLabel];
 //        
@@ -73,9 +73,9 @@
 ////        [_detailView addSubview:_stepper];
 //        
 //        
-//        //_sumLabel
-//        _sumLabel = [[UILabel alloc]init];
-//        _sumLabel.textColor = [UIColor blackColor];
+        //_sumLabel
+        _sumLabel = [[UILabel alloc]init];
+        _sumLabel.textColor = [UIColor blackColor];
 
         
 //        //_grayView
@@ -91,21 +91,6 @@
     
     return self;
 }
-
-//- (void)setSelected:(BOOL)selected{
-//    [super setSelected:selected];
-//    if (selected) {
-//        //选中时
-////        self.contentView.backgroundColor = [UIColor grayColor];
-//        self.contentView.alpha = 0.7f;
-//    }else{
-//        //非选中
-////        self.contentView.backgroundColor = [UIColor whiteColor];
-//        self.contentView.alpha = 1.0f;
-//    }
-//
-//    // Configure the view for the selected state
-//}
 - (void)layoutSubviews{
     
     [super layoutSubviews];
@@ -115,7 +100,7 @@
   
     _nameLabel.frame = CGRectMake(10, 10, self.frame.size.width-20, 30);
     _remarkLabel.frame = CGRectMake(10,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+10, self.frame.size.width-20-10, 20);
-    _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-20-10*4-10);
+    _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-20-10*4);
 }
 - (UIView *)shadowView{
     if (_shadowView == nil) {

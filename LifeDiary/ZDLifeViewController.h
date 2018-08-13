@@ -13,6 +13,6 @@
 
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) ZDCollectionViewCell *collectionViewCell;
-
+@property (nonatomic, assign, readwrite) NSInteger selectedIndex;
 @property(nonatomic,strong) NSMutableArray <ZDContentlistModel > *contentlistArray;
 @end

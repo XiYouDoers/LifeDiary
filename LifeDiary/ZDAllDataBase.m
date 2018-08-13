@@ -44,7 +44,7 @@ static ZDAllDataBase *_allDataBase = nil;
 
     [_db open];
     // 初始化数据表
-    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,allGoods_identifier VARCHAR(255),allGoods_name VARCHAR(255),allGoods_remark VARCHAR(255),allGoods_imageData blob,allGoods_dateOfStart VARCHAR(255),allGoods_dateOfEnd VARCHAR(255),allGoods_saveTime VARCHAR(255),allGoods_sum VARCHAR(255),allGoods_ratio double)";
+    NSString *goodsSql = @"CREATE TABLE IF NOT EXISTS allGoods (       id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,identifier VARCHAR(255),name VARCHAR(255),remark VARCHAR(255),imageData blob,dateOfStart VARCHAR(255),dateOfEnd VARCHAR(255),saveTime VARCHAR(255),sum VARCHAR(255),ratio double,Family VARCHAR(255)          )";
     [_db executeUpdate:goodsSql];
     
     [_db close];
@@ -60,8 +60,8 @@ static ZDAllDataBase *_allDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM allGoods "];
     //获取数据库中最大的ID
     while ([res next]) {
-        if ([maxID integerValue] < [[res stringForColumn:@"allGoods_identifier"] integerValue]) {
-            maxID = @([[res stringForColumn:@"allGoods_identifier"] integerValue] ) ;
+        if ([maxID integerValue] < [[res stringForColumn:@"identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"identifier"] integerValue] ) ;
         }
         
     }
@@ -69,7 +69,7 @@ static ZDAllDataBase *_allDataBase = nil;
     maxID = @([maxID integerValue] + 1);
     
     NSNumber *ratioNumber = @(goods.ratio);
-    [_db executeUpdate:@"INSERT INTO allGoods(allGoods_identifier,allGoods_name,allGoods_remark,allGoods_imageData,allGoods_dateOfStart,allGoods_dateOfEnd,allGoods_saveTime,allGoods_sum,allGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber];
+    [_db executeUpdate:@"INSERT INTO allGoods(identifier,name,remark,imageData,dateOfStart,dateOfEnd,saveTime,sum,ratio,family)VALUES(?,?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber,goods.family];
     
  
     [_db close];
@@ -79,7 +79,7 @@ static ZDAllDataBase *_allDataBase = nil;
 - (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM allGoods WHERE allGoods_identifier = ?",goods.identifier];
+    [_db executeUpdate:@"DELETE FROM allGoods WHERE identifier = ?",goods.identifier];
     
     [_db close];
 }
@@ -87,13 +87,13 @@ static ZDAllDataBase *_allDataBase = nil;
 -(void)updateGoods:(ZDGoods*)goods
 {
     [_db open];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_name = ? WHERE allGoods_identifier = ?",goods.name,goods.identifier];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_remark = ? WHERE allGoods_identifier = ?",goods.remark,goods.identifier];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_imageData = ? WHERE allGoods_identifier = ?",goods.imageData,goods.identifier];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_dateOfStart = ? WHERE allGoods_identifier = ?",goods.dateOfStart,goods.identifier];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_dateOfEnd = ? WHERE allGoods_identifier = ?",goods.dateOfEnd,goods.identifier];
-//    [_db executeUpdate:@"UPDATE allGoods SET allGoods_saveTime = ? WHERE allGoods_identifier = ?",goods.saveTime,goods.identifier];
-    [_db executeUpdate:@"UPDATE allGoods SET allGoods_sum = ? WHERE allGoods_identifier = ?",goods.sum,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET name = ? WHERE identifier = ?",goods.name,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET remark = ? WHERE identifier = ?",goods.remark,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET imageData = ? WHERE identifier = ?",goods.imageData,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET dateOfStart = ? WHERE identifier = ?",goods.dateOfStart,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET dateOfEnd = ? WHERE identifier = ?",goods.dateOfEnd,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET saveTime = ? WHERE identifier = ?",goods.saveTime,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET sum = ? WHERE identifier = ?",goods.sum,goods.identifier];
     
     [_db close];
 }
@@ -106,15 +106,16 @@ static ZDAllDataBase *_allDataBase = nil;
     
     while ([res next]) {
         ZDGoods *goods = [[ZDGoods alloc] init];
-        goods.identifier = @([[res stringForColumn:@"allGoods_identifier"] integerValue]);
-        goods.name = [res stringForColumn:@"allGoods_name"];
-        goods.remark = [res stringForColumn:@"allGoods_remark"];
-        goods.imageData = [res dataForColumn:@"allGoods_imageData"];
-        goods.dateOfStart = [res stringForColumn:@"allGoods_dateOfStart"];
-        goods.dateOfEnd = [res stringForColumn:@"allGoods_dateOfEnd"];
-        goods.saveTime = [res stringForColumn:@"allGoods_saveTime"];
-        goods.sum = [res stringForColumn:@"allGoods_sum"];
-        goods.ratio = [res doubleForColumn:@"allGoods_ratio"];
+        goods.identifier = @([[res stringForColumn:@"identifier"] integerValue]);
+        goods.name = [res stringForColumn:@"name"];
+        goods.remark = [res stringForColumn:@"remark"];
+        goods.imageData = [res dataForColumn:@"imageData"];
+        goods.dateOfStart = [res stringForColumn:@"dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"saveTime"];
+        goods.sum = [res stringForColumn:@"sum"];
+        goods.ratio = [res doubleForColumn:@"ratio"];
+        goods.family = [res stringForColumn:@"family"];
   
         [dataArray addObject:goods];
     }

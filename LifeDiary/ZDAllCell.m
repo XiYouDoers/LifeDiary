@@ -29,19 +29,19 @@
         
         [self.shadowView addSubview:self.exhibitView];
         
-        [self.contentView addSubview: self.nameLabel];
+        [self.exhibitView addSubview: self.nameLabel];
         
-        [self.contentView addSubview: self.remarkLabel];
+        [self.exhibitView addSubview: self.remarkLabel];
         
-        [self.contentView addSubview: self.pictureImageView];
+        [self.exhibitView addSubview: self.pictureImageView];
         
-        [self.contentView addSubview: self.dateOfstartLabel];
+        [self.exhibitView addSubview: self.dateOfstartLabel];
         
-        [self.contentView addSubview: self.dateOfEndLabel];
+        [self.exhibitView addSubview: self.dateOfEndLabel];
         
-        [self.contentView addSubview: self.saveTimeLabel];
+        [self.exhibitView addSubview: self.saveTimeLabel];
         
-        [self.contentView addSubview: self.sumLabel];
+        [self.exhibitView addSubview: self.sumLabel];
         
         
 //        _outsideArc =  [CAShapeLayer layer];
@@ -92,6 +92,9 @@
 //}
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
+    _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);

@@ -21,15 +21,18 @@
     [super viewDidLoad];
     //rightBarButtonItem
     UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareToOther)];
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+    } else {
+        // Fallback on earlier versions
+    }
     
-    
-    [shareBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE} forState:UIControlStateNormal];
+    [shareBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BARBUTTONITEMCOLOR} forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    _htmlScrollView = [[ZDHtmlScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    _htmlScrollView = [[ZDHtmlScrollView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-20)];
     
     [_htmlScrollView updateHtmlView:_contentlistModel];
     [self.view addSubview: _htmlScrollView];
@@ -68,7 +71,7 @@
     }completion:^(BOOL finished) {
         
     }];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

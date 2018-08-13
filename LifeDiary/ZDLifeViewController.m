@@ -15,9 +15,15 @@
 #import "ZDCollectionViewCell.h"
 #import "ZDOrderModel.h"
 
-@interface ZDLifeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface ZDLifeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
+    
+    CGFloat _dragStartX;
+    
+    CGFloat _dragEndX;
+}
 @property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
+@property(nonatomic,strong) UIImageView *imageView;
 @end
 
 @implementation ZDLifeViewController
@@ -30,9 +36,9 @@ static NSString *const footerId = @"footerId";
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
-   
+    self.navigationItem.title = @"生活";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 
     ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
     
@@ -50,8 +56,12 @@ static NSString *const footerId = @"footerId";
     
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    _collectionView.backgroundColor = TABBARCOLOR;
+     if (@available(iOS 11.0, *)) {
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96) collectionViewLayout:_rgcardViewLayout];
+     }else{
+     _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
+     }
+    _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
@@ -66,19 +76,29 @@ static NSString *const footerId = @"footerId";
     [_collectionView registerClass:[ZDCollectionViewCell class] forCellWithReuseIdentifier:cellId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
-   
+    
+     [self addImageView];
     
     // Do any additional setup after loading the view.
+}
+- (void)addImageView {
+    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    [self.view addSubview:_imageView];
+    
+    UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    effectView.frame = _imageView.bounds;
+    [_imageView addSubview:effectView];
 }
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
-    
+
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 /**
@@ -87,14 +107,14 @@ static NSString *const footerId = @"footerId";
  */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return _contentlistArray.count;
+    return 1;
 }
 /**
  ItemsInSection
  
  */
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1;
+    return _contentlistArray.count;
 }
 /**
  dataSource
@@ -104,13 +124,41 @@ static NSString *const footerId = @"footerId";
     
     _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     ZDContentlistModel *contentlistModel = [[ZDContentlistModel alloc]init];
-    contentlistModel = _contentlistArray[indexPath.section];
+    contentlistModel = _contentlistArray[indexPath.item];
     [_collectionViewCell updateCell:contentlistModel];
     
     
     return _collectionViewCell;
 }
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+//    if (!_pagingEnabled) {return;}
+    _dragEndX = scrollView.contentOffset.x;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self fixCellToCenter];
+    });
 
+}
+//滚动到中间
+- (void)scrollToCenter {
+    
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+
+}
+//配置cell居中
+- (void)fixCellToCenter {
+    //最小滚动距离
+    float dragMiniDistance = self.view.frame.size.width/20.0f;
+    if (_dragStartX -  _dragEndX >= dragMiniDistance) {
+        _selectedIndex -= 1;//向右
+    }else if(_dragEndX -  _dragStartX >= dragMiniDistance){
+        _selectedIndex += 1;//向左
+    }
+    NSInteger maxIndex = [_collectionView numberOfItemsInSection:0] - 1;
+    _selectedIndex = _selectedIndex <= 0 ? 0 : _selectedIndex;
+    _selectedIndex = _selectedIndex >= maxIndex ? maxIndex : _selectedIndex;
+    [self scrollToCenter];
+}
 //定义每个UICollectionView 的 margin
 //-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //
@@ -119,8 +167,10 @@ static NSString *const footerId = @"footerId";
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    _selectedIndex = indexPath.row;
+    [self scrollToCenter];
     ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-    contentlist = _contentlistArray[indexPath.section];
+    contentlist = _contentlistArray[indexPath.item];
     ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
     linkVC.contentlistModel = contentlist;
     [self.navigationController pushViewController:linkVC animated:YES];

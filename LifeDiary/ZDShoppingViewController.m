@@ -26,15 +26,19 @@ static NSString *const footerId = @"footerId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-    backBtnItem.title = @"发现";
+    backBtnItem.title = @"商品";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = TABBARCOLOR;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    _collectionView.backgroundColor = TABBARCOLOR;
+    if (@available(iOS 11.0, *)) {
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96) collectionViewLayout:_rgcardViewLayout];
+    }else{
+        _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
+    }
+    _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     // 开启分页
@@ -54,11 +58,11 @@ static NSString *const footerId = @"footerId";
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 /**
  numberOfSections

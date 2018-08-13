@@ -50,7 +50,7 @@ static ZDDepleteDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *depleteGoodsSql = @"CREATE TABLE  if not exists depleteGoods('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,depleteGoods_identifier VARCHAR(255),depleteGoods_name VARCHAR(255),depleteGoods_remark VARCHAR(255),depleteGoods_imageData blob,depleteGoods_dateOfStart VARCHAR(255),depleteGoods_dateOfEnd VARCHAR(255),depleteGoods_saveTime VARCHAR(255),depleteGoods_sum VARCHAR(255),depleteGoods_ratio double)";
+    NSString *depleteGoodsSql = @"CREATE TABLE  if not exists depleteGoods(       id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,identifier VARCHAR(255),name VARCHAR(255),remark VARCHAR(255),imageData blob,dateOfStart VARCHAR(255),dateOfEnd VARCHAR(255),saveTime VARCHAR(255),sum VARCHAR(255),ratio double,Family VARCHAR(255)          )";
     [_db executeUpdate:depleteGoodsSql];
     
     [_db close];
@@ -58,7 +58,7 @@ static ZDDepleteDataBase *_messageDataBase = nil;
 }
 #pragma mark - 接口
 
-- (void)addGoods:(ZDGoods *)depleteGoods{
+- (void)addGoods:(ZDGoods *)goods{
     [_db open];
     
     NSNumber *maxID = @(0);
@@ -66,24 +66,24 @@ static ZDDepleteDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM depleteGoods "];
     //获取数据库中最大的ID
     while ([res next]) {
-        if ([maxID integerValue] < [[res stringForColumn:@"depleteGoods_identifier"] integerValue]) {
-            maxID = @([[res stringForColumn:@"depleteGoods_identifier"] integerValue] ) ;
+        if ([maxID integerValue] < [[res stringForColumn:@"identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"identifier"] integerValue] ) ;
         }
         
     }
     maxID = @([maxID integerValue] + 1);
-    NSNumber *ratioNumber = @(depleteGoods.ratio);
-    [_db executeUpdate:@"INSERT INTO depleteGoods(depleteGoods_identifier,depleteGoods_name,depleteGoods_remark,depleteGoods_imageData,depleteGoods_dateOfStart,depleteGoods_dateOfEnd,depleteGoods_saveTime,depleteGoods_sum,depleteGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,depleteGoods.name,depleteGoods.remark,depleteGoods.imageData,depleteGoods.dateOfStart,depleteGoods.dateOfEnd,depleteGoods.saveTime,depleteGoods.sum,ratioNumber];
+    NSNumber *ratioNumber = @(goods.ratio);
+    [_db executeUpdate:@"INSERT INTO depleteGoods(identifier,name,remark,imageData,dateOfStart,dateOfEnd,saveTime,sum,ratio,family)VALUES(?,?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber,goods.family];
     
     
     [_db close];
     
 }
 
-- (void)deleteGoods:(ZDGoods *)depleteGoods{
+- (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM depleteGoods WHERE depleteGoods_identifier = ?",depleteGoods.identifier];
+    [_db executeUpdate:@"DELETE FROM depleteGoods WHERE identifier = ?",goods.identifier];
     
     [_db close];
 }
@@ -95,17 +95,19 @@ static ZDDepleteDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM depleteGoods"];
     
     while ([res next]) {
-        ZDGoods *depleteGoods = [[ZDGoods alloc] init];
-        depleteGoods.identifier = @([[res stringForColumn:@"depleteGoods_identifier"] integerValue]);
-        depleteGoods.name = [res stringForColumn:@"depleteGoods_name"];
-        depleteGoods.remark = [res stringForColumn:@"depleteGoods_remark"];
-        depleteGoods.imageData = [res dataForColumn:@"depleteGoods_imageData"];
-        depleteGoods.dateOfStart = [res stringForColumn:@"depleteGoods_dateOfStart"];
-        depleteGoods.dateOfEnd = [res stringForColumn:@"depleteGoods_dateOfEnd"];
-        depleteGoods.saveTime = [res stringForColumn:@"depleteGoods_saveTime"];
-        depleteGoods.sum = [res stringForColumn:@"depleteGoods_sum"];
-        depleteGoods.ratio = [res doubleForColumn:@"depleteGoods_saveTime"];
-        [dataArray addObject:depleteGoods];
+        ZDGoods *goods = [[ZDGoods alloc] init];
+        goods.identifier = @([[res stringForColumn:@"identifier"] integerValue]);
+        goods.name = [res stringForColumn:@"name"];
+        goods.remark = [res stringForColumn:@"remark"];
+        goods.imageData = [res dataForColumn:@"imageData"];
+        goods.dateOfStart = [res stringForColumn:@"dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"saveTime"];
+        goods.sum = [res stringForColumn:@"sum"];
+        goods.ratio = [res doubleForColumn:@"ratio"];
+        goods.family = [res stringForColumn:@"family"];
+        
+        [dataArray addObject:goods];
     }
     
     [_db close];

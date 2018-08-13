@@ -27,16 +27,19 @@
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
     [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
+    messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
     UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
     [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
+    findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,-1,-7,1);
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
     [self wsf_settingController:meNavigationController tabBarTitle:nil tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
      ];
+    meNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,0,-7 ,0);
     
     self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
     [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];

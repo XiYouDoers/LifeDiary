@@ -44,9 +44,8 @@
     [_countFormatter setDateFormat:@"yyy"];
     
     self.view.backgroundColor = TABBARCOLOR;
-    UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
-    [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE } forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem =  finishBtnItem;
+    [self setNavigationBar];
+    
     
     _addTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _addTableView.dataSource = self;
@@ -69,6 +68,16 @@
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     
     // Do any additional setup after loading the view.
+}
+- (void)setNavigationBar{
+    UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
+    [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE } forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem =  finishBtnItem;
+    if (@available(iOS 11.0, *)) {
+//        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

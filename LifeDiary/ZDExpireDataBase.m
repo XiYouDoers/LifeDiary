@@ -22,14 +22,13 @@ static ZDExpireDataBase *_messageDataBase = nil;
     }
     return _messageDataBase;
 }
-+(instancetype)allocWithZone:(struct _NSZone *)zone{
++ (instancetype)allocWithZone:(struct _NSZone *)zone{
     
     if (_messageDataBase == nil) {
         
         _messageDataBase = [super allocWithZone:zone];
         
     }
-    
     return _messageDataBase;
     
 }
@@ -50,7 +49,7 @@ static ZDExpireDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *expireGoodsSql = @"CREATE TABLE IF NOT EXISTS expireGoods ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,expireGoods_identifier VARCHAR(255),expireGoods_name VARCHAR(255),expireGoods_remark VARCHAR(255),expireGoods_imageData blob,expireGoods_dateOfStart VARCHAR(255),expireGoods_dateOfEnd VARCHAR(255),expireGoods_saveTime VARCHAR(255),expireGoods_sum VARCHAR(255),expireGoods_ratio double)";
+    NSString *expireGoodsSql = @"CREATE TABLE IF NOT EXISTS expireGoods (       id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,identifier VARCHAR(255),name VARCHAR(255),remark VARCHAR(255),imageData blob,dateOfStart VARCHAR(255),dateOfEnd VARCHAR(255),saveTime VARCHAR(255),sum VARCHAR(255),ratio double,Family VARCHAR(255)          )";
     [_db executeUpdate:expireGoodsSql];
     
     [_db close];
@@ -58,7 +57,7 @@ static ZDExpireDataBase *_messageDataBase = nil;
 }
 #pragma mark - 接口
 
-- (void)addGoods:(ZDGoods *)expireGoods{
+- (void)addGoods:(ZDGoods *)goods{
     [_db open];
     
     NSNumber *maxID = @(0);
@@ -66,14 +65,14 @@ static ZDExpireDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM expireGoods "];
     //获取数据库中最大的ID
     while ([res next]) {
-        if ([maxID integerValue] < [[res stringForColumn:@"expireGoods_identifier"] integerValue]) {
-            maxID = @([[res stringForColumn:@"expireGoods_identifier"] integerValue] ) ;
+        if ([maxID integerValue] < [[res stringForColumn:@"identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"identifier"] integerValue] ) ;
         }
         
     }
     maxID = @([maxID integerValue] + 1);
-    NSNumber *ratioNumber = @(expireGoods.ratio);
-    [_db executeUpdate:@"INSERT INTO expireGoods(expireGoods_identifier,expireGoods_name,expireGoods_remark,expireGoods_imageData,expireGoods_dateOfStart,expireGoods_dateOfEnd,expireGoods_saveTime,expireGoods_sum,expireGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,expireGoods.name,expireGoods.remark,expireGoods.imageData,expireGoods.dateOfStart,expireGoods.dateOfEnd,expireGoods.saveTime,expireGoods.sum,ratioNumber];
+    NSNumber *ratioNumber = @(goods.ratio);
+    [_db executeUpdate:@"INSERT INTO expireGoods(identifier,name,remark,imageData,dateOfStart,dateOfEnd,saveTime,sum,ratio,family)VALUES(?,?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber,goods.family];
     
     
     [_db close];
@@ -81,10 +80,10 @@ static ZDExpireDataBase *_messageDataBase = nil;
     
 }
 
-- (void)deleteGoods:(ZDGoods *)expireGoods{
+- (void)deleteGoods:(ZDGoods *)goods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM expireGoods WHERE expireGoods_identifier = ?",expireGoods.identifier];
+    [_db executeUpdate:@"DELETE FROM expireGoods WHERE identifier = ?",goods.identifier];
     
     [_db close];
 }
@@ -96,17 +95,19 @@ static ZDExpireDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM expireGoods"];
     
     while ([res next]) {
-        ZDGoods *expireGoods = [[ZDGoods alloc] init];
-        expireGoods.identifier = @([[res stringForColumn:@"expireGoods_identifier"] integerValue]);
-        expireGoods.name = [res stringForColumn:@"expireGoods_name"];
-        expireGoods.remark = [res stringForColumn:@"expireGoods_remark"];
-        expireGoods.imageData = [res dataForColumn:@"expireGoods_imageData"];
-        expireGoods.dateOfStart = [res stringForColumn:@"expireGoods_dateOfStart"];
-        expireGoods.dateOfEnd = [res stringForColumn:@"expireGoods_dateOfEnd"];
-        expireGoods.saveTime = [res stringForColumn:@"expireGoods_saveTime"];
-        expireGoods.sum = [res stringForColumn:@"expireGoods_sum"];
-        expireGoods.ratio = [res doubleForColumn:@"expireGoods_saveTime"];
-        [dataArray addObject:expireGoods];
+        ZDGoods *goods = [[ZDGoods alloc] init];
+        goods.identifier = @([[res stringForColumn:@"identifier"] integerValue]);
+        goods.name = [res stringForColumn:@"name"];
+        goods.remark = [res stringForColumn:@"remark"];
+        goods.imageData = [res dataForColumn:@"imageData"];
+        goods.dateOfStart = [res stringForColumn:@"dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"saveTime"];
+        goods.sum = [res stringForColumn:@"sum"];
+        goods.ratio = [res doubleForColumn:@"ratio"];
+        goods.family = [res stringForColumn:@"family"];
+        
+        [dataArray addObject:goods];
     }
     
     [_db close];

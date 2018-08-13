@@ -24,6 +24,7 @@
 
 @interface ZDMessageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
     NSDateFormatter *_formatter;
+    ZDMessageCollectionViewCell *_tempCell;
 }
 @property(nonatomic,strong) UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
@@ -52,6 +53,7 @@ static NSString *const footerId = @"footerId";
     self.view.backgroundColor = [UIColor whiteColor];
     //    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     
+    _tempCell = [[ZDMessageCollectionViewCell alloc]init];
     //_collectionView
     ZDMessageCollectionViewFlowLayout *messageLayout = [[ZDMessageCollectionViewFlowLayout alloc]init];
     //    SquareLayout *layout = [[SquareLayout alloc]init];
@@ -77,20 +79,23 @@ static NSString *const footerId = @"footerId";
     //_detailView
     _detailView = [[ZDDetailView alloc]init];
     _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH, 49);
+    [_detailView.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_detailView];
     
     //addRefreshHeaderGif
     [self addRefreshHeaderGif];
+    
+
     // Do any additional setup after loading the view.
 }
 - (void)valueChanged:(UIStepper *)stepper{
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:stepper.tag - 200 inSection:0];
-    ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    cell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
-    ZDGoods *goods = _messageDataMutableArray[indexPath.item];
-    goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
-    [[ZDAllDataBase sharedDataBase]updateGoods:goods];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:stepper.tag - 200 inSection:0];
+//    ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    _tempCell.sumLabel.text = [NSString stringWithFormat:@"数量：%d",(int)stepper.value ];
+//    ZDGoods *goods = _messageDataMutableArray[indexPath.item];
+//    goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
+//    [[ZDAllDataBase sharedDataBase]updateGoods:goods];
     
 }
 //-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -191,12 +196,12 @@ static NSString *const footerId = @"footerId";
     _messageCollectionViewCell.remarkLabel.text = goods.remark;
     _messageCollectionViewCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
     
-//    NSDate *dateNow = [[NSDate alloc]init];
-//    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-//    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-//    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
-//    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
-//    
+    NSDate *dateNow = [[NSDate alloc]init];
+    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+    _messageCollectionViewCell.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
+    _messageCollectionViewCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+//
     //计算出保质期的时间戳
     //        NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
     //        NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
@@ -226,16 +231,27 @@ static NSString *const footerId = @"footerId";
     ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     if (!cell. isChangeAlpha) {
-        NSLog(@"2222");
-        cell.alpha = 1;
+        //处理点击别的item的问题
+        if (self.messageDataMutableArray.count) {
+            for (int i = 0;i<self.messageDataMutableArray.count;i++) {
+                NSIndexPath *indexpathForOthers = [NSIndexPath indexPathForItem:i inSection:0];
+                ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexpathForOthers];
+                if (cell.isChangeAlpha == YES) {
+                    cell.isChangeAlpha = NO;
+                }
+                cell.alpha = 1;
+            }
+        }
+       
+        cell.alpha = 0.6;
         [UIView animateWithDuration:0.3 animations:^{
             _detailView.frame = CGRectMake(0, HEIGHT-49-64-49, WIDTH, 54);
         }];
-        NSLog(@"%@",NSStringFromCGRect(_detailView.frame));
-        _detailView.sumLabel.text = [NSString stringWithFormat:@"数量：%@",cell.sumLabel.text];
-        _detailView.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余天数：%@",cell.remainderTimeLabel.text];
+        _detailView.sumLabel.text = cell.sumLabel.text;
+        _detailView.remainderTimeLabel.text = cell.remainderTimeLabel.text;
+        _tempCell = cell;
     }else{
-       
+    
         cell.alpha = 1;
         [UIView animateWithDuration:0.3 animations:^{
             _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH,49);
@@ -243,16 +259,28 @@ static NSString *const footerId = @"footerId";
 
     }
     cell. isChangeAlpha = !cell.isChangeAlpha;
-   
-    
 }
 
 #pragma mark - 下拉刷新
 - (void)addRefreshHeaderGif{
     //MJRefreshGifHeader
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+        
         //延时1s执行
         [NSThread sleepForTimeInterval:0.3f];
+        //隐藏底部信息栏
+                //将原来选中状态清除
+        for (int i = 0;i<self.messageDataMutableArray.count;i++) {
+            NSIndexPath *indexpathForOthers = [NSIndexPath indexPathForItem:i inSection:0];
+            ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexpathForOthers];
+            if (cell.isChangeAlpha == YES) {
+                cell.isChangeAlpha = NO;
+                break;
+            }
+        }
+        [UIView animateWithDuration:0.3 animations:^{
+            _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH,49);
+        }];
         _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
         _messageDataMutableArray = [NSMutableArray array];
         NSDate *dateNow = [[NSDate alloc]init];

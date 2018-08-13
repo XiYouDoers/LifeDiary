@@ -51,7 +51,7 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     
     [_db open];
     // 初始化数据表
-    NSString *recyleGoodsSql = @"CREATE TABLE IF NOT EXISTS recyleGoods (id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,recyleGoods_identifier VARCHAR(255),recyleGoods_name VARCHAR(255),recyleGoods_remark VARCHAR(255),recyleGoods_imageData blob,recyleGoods_dateOfStart VARCHAR(255),recyleGoods_dateOfEnd VARCHAR(255),recyleGoods_saveTime VARCHAR(255),recyleGoods_sum VARCHAR(255),recyleGoods_ratio double)";
+    NSString *recyleGoodsSql = @"CREATE TABLE IF NOT EXISTS recyleGoods (       id INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,identifier VARCHAR(255),name VARCHAR(255),remark VARCHAR(255),imageData blob,dateOfStart VARCHAR(255),dateOfEnd VARCHAR(255),saveTime VARCHAR(255),sum VARCHAR(255),ratio double,Family VARCHAR(255)          )";
     [_db executeUpdate:recyleGoodsSql];
     
     [_db close];
@@ -59,7 +59,7 @@ static ZDRecycleDataBase *_messageDataBase = nil;
 }
 #pragma mark - 接口
 
-- (void)addGoods:(ZDGoods *)recyleGoods{
+- (void)addGoods:(ZDGoods *)goods{
     [_db open];
     
     NSNumber *maxID = @(0);
@@ -67,14 +67,14 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM recyleGoods "];
     //获取数据库中最大的ID
     while ([res next]) {
-        if ([maxID integerValue] < [[res stringForColumn:@"recyleGoods_identifier"] integerValue]) {
-            maxID = @([[res stringForColumn:@"recyleGoods_identifier"] integerValue] ) ;
+        if ([maxID integerValue] < [[res stringForColumn:@"identifier"] integerValue]) {
+            maxID = @([[res stringForColumn:@"identifier"] integerValue] ) ;
         }
         
     }
     maxID = @([maxID integerValue] + 1);
-    NSNumber *ratioNumber = @(recyleGoods.ratio);
-    [_db executeUpdate:@"INSERT INTO recyleGoods(recyleGoods_identifier,recyleGoods_name,recyleGoods_remark,recyleGoods_imageData,recyleGoods_dateOfStart,recyleGoods_dateOfEnd,recyleGoods_saveTime,recyleGoods_sum,recyleGoods_ratio)VALUES(?,?,?,?,?,?,?,?,?)",maxID,recyleGoods.name,recyleGoods.remark,recyleGoods.imageData,recyleGoods.dateOfStart,recyleGoods.dateOfEnd,recyleGoods.saveTime,recyleGoods.sum,ratioNumber];
+    NSNumber *ratioNumber = @(goods.ratio);
+    [_db executeUpdate:@"INSERT INTO recyleGoods(identifier,name,remark,imageData,dateOfStart,dateOfEnd,saveTime,sum,ratio,family)VALUES(?,?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber,goods.family];
     
     
     [_db close];
@@ -84,7 +84,7 @@ static ZDRecycleDataBase *_messageDataBase = nil;
 - (void)deleteGoods:(ZDGoods *)recycleGoods{
     [_db open];
     
-    [_db executeUpdate:@"DELETE FROM recyleGoods WHERE recyleGoods_identifier = ?",recycleGoods.identifier];
+    [_db executeUpdate:@"DELETE FROM recyleGoods WHERE identifier = ?",recycleGoods.identifier];
     
     [_db close];
 }
@@ -97,17 +97,19 @@ static ZDRecycleDataBase *_messageDataBase = nil;
     FMResultSet *res = [_db executeQuery:@"SELECT * FROM recyleGoods"];
     
     while ([res next]) {
-        ZDGoods *recycleGoods = [[ZDGoods alloc] init];
-        recycleGoods.identifier = @([[res stringForColumn:@"recyleGoods_identifier"] integerValue]);
-        recycleGoods.name = [res stringForColumn:@"recyleGoods_name"];
-        recycleGoods.remark = [res stringForColumn:@"recyleGoods_remark"];
-        recycleGoods.imageData = [res dataForColumn:@"recyleGoods_imageData"];
-        recycleGoods.dateOfStart = [res stringForColumn:@"recyleGoods_dateOfStart"];
-        recycleGoods.dateOfEnd = [res stringForColumn:@"recyleGoods_dateOfEnd"];
-        recycleGoods.saveTime = [res stringForColumn:@"recyleGoods_saveTime"];
-        recycleGoods.sum = [res stringForColumn:@"recyleGoods_sum"];
-        recycleGoods.ratio = [res doubleForColumn:@"recyleGoods_saveTime"];
-        [dataArray addObject:recycleGoods];
+        ZDGoods *goods = [[ZDGoods alloc] init];
+        goods.identifier = @([[res stringForColumn:@"identifier"] integerValue]);
+        goods.name = [res stringForColumn:@"name"];
+        goods.remark = [res stringForColumn:@"remark"];
+        goods.imageData = [res dataForColumn:@"imageData"];
+        goods.dateOfStart = [res stringForColumn:@"dateOfStart"];
+        goods.dateOfEnd = [res stringForColumn:@"dateOfEnd"];
+        goods.saveTime = [res stringForColumn:@"saveTime"];
+        goods.sum = [res stringForColumn:@"sum"];
+        goods.ratio = [res doubleForColumn:@"ratio"];
+        goods.family = [res stringForColumn:@"family"];
+        
+        [dataArray addObject:goods];
     }
     
     [_db close];

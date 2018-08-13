@@ -32,12 +32,16 @@
     
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    self.navigationItem.title = @"全部物品";
+    [self setNavigationBar];
+    
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
+
     //_allTableView
     _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-20) style:UITableViewStylePlain];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    //取消cell间的分割线
+    _allTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
     _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
@@ -47,6 +51,16 @@
     
     
     // Do any additional setup after loading the view.
+}
+- (void)setNavigationBar{
+    
+    self.navigationItem.title = @"全部物品";
+//    self.navigationController.navigationBar.translucent = NO;
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -121,16 +135,18 @@
         [_searchView addSubview:_searchBar];
         
         
-        _cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-70, 0, 60, 44)];
-        _cancleBtn.backgroundColor = [UIColor clearColor];
-        _cancleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
-        [_cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancleBtn setTitleColor:LIGHTBLUE forState:UIControlStateNormal];
-        [_cancleBtn setTitleColor:LIGHTBLUE forState:UIControlStateHighlighted];
-        _cancleBtn.hidden= YES;
-        [_searchView addSubview:_cancleBtn];
-        
-        [_cancleBtn addTarget:self action:@selector(cancleBtnTouched) forControlEvents:UIControlEventTouchUpInside];
+        _sortButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-55, 0, 44, 44)];
+        _sortButton.backgroundColor = [UIColor clearColor];
+        _sortButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        UIImage *sortImage = [UIImage imageNamed:@"sortNormal"];
+        sortImage = [sortImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_sortButton setImage:sortImage forState:UIControlStateNormal];
+        [_sortButton setImage:[UIImage imageNamed:@"sortSelected"] forState:UIControlStateSelected];
+        [_sortButton setTitleColor:LIGHTBLUE forState:UIControlStateNormal];
+        [_sortButton setTitleColor:LIGHTBLUE forState:UIControlStateHighlighted];
+        _sortButton.hidden= YES;
+        [_searchView addSubview:_sortButton];
+        [_sortButton addTarget:self action:@selector(sortTouched:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _searchView;
@@ -145,17 +161,16 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar becomeFirstResponder];
-    searchBar.frame = CGRectMake(0, 0, WIDTH-80, 44);
-    _cancleBtn.hidden = NO;
-    
-    
+    searchBar.frame = CGRectMake(0, 0, WIDTH-60, 44);
+    _sortButton.hidden = NO;
 }
 
-- (void)cancleBtnTouched
+- (void)sortTouched:(UIButton *)sender
 {
+    sender.selected = !sender.selected;
+    
     [self.searchBar resignFirstResponder];
-    self.searchBar.frame = CGRectMake(0, 0, WIDTH, 44);
-    _cancleBtn.hidden = YES;
+
 }
 #pragma mark - tableView代理方法
 /**
@@ -180,7 +195,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 160;
     
 }
 //搜框中输入关键字的事件响应
@@ -280,9 +295,9 @@
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
     _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    //    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
-    //    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
-    //    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
+    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
+    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
+    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
     _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
     //计算出保质期的时间戳
     //    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
@@ -301,7 +316,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    ZDGoods *goods =  _dataMutableArray[indexPath.section];
+    ZDGoods *goods =  _dataMutableArray[indexPath.row];
     cell.selected = !cell.selected;
     ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
     editVC.goods = goods;
@@ -371,8 +386,8 @@
         goods = _dataMutableArray[indexPath.row];
     }
     cell.nameLabel.text = goods.name;
-    
     cell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+
 }
 
 /*
