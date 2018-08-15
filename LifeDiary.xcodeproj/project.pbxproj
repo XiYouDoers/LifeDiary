@@ -72,9 +72,12 @@
 		04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */; };
 		04C5DC852101FA44003835E3 /* ZDTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5DC842101FA44003835E3 /* ZDTimerView.m */; };
 		04C76C2820AE84750094A5B0 /* ZDMeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */; };
+		04C907A6212407E90081B37A /* ZDCardForShoppingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C907A5212407E90081B37A /* ZDCardForShoppingView.m */; };
 		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
 		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
 		04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C5820AC71DC00060741 /* ZDAllViewController.m */; };
+		04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91EE21225DF600113E09 /* ZDCardView.m */; };
+		04CF91F22122C71500113E09 /* ZDMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91F12122C71500113E09 /* ZDMessageCardView.m */; };
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
 		04D8B64620B133A300055018 /* ZDDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64520B133A300055018 /* ZDDateCell.m */; };
 		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
@@ -257,12 +260,18 @@
 		04C5DC842101FA44003835E3 /* ZDTimerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDTimerView.m; sourceTree = "<group>"; };
 		04C76C2620AE84750094A5B0 /* ZDMeTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeTableHeaderView.h; sourceTree = "<group>"; };
 		04C76C2720AE84750094A5B0 /* ZDMeTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeTableHeaderView.m; sourceTree = "<group>"; };
+		04C907A4212407E90081B37A /* ZDCardForShoppingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCardForShoppingView.h; sourceTree = "<group>"; };
+		04C907A5212407E90081B37A /* ZDCardForShoppingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCardForShoppingView.m; sourceTree = "<group>"; };
 		04CF7C4820AC6C2400060741 /* ZDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDViewController.h; sourceTree = "<group>"; };
 		04CF7C4920AC6C2400060741 /* ZDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDViewController.m; sourceTree = "<group>"; };
 		04CF7C4E20AC6F5700060741 /* ZDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMessageViewController.h; sourceTree = "<group>"; };
 		04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
 		04CF7C5720AC71DC00060741 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
 		04CF7C5820AC71DC00060741 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
+		04CF91ED21225DF600113E09 /* ZDCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCardView.h; sourceTree = "<group>"; };
+		04CF91EE21225DF600113E09 /* ZDCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCardView.m; sourceTree = "<group>"; };
+		04CF91F02122C71500113E09 /* ZDMessageCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDMessageCardView.h; sourceTree = "<group>"; };
+		04CF91F12122C71500113E09 /* ZDMessageCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCardView.m; sourceTree = "<group>"; };
 		04D8B64120B12CE200055018 /* ZDMeDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeDefaultCell.h; sourceTree = "<group>"; };
 		04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeDefaultCell.m; sourceTree = "<group>"; };
 		04D8B64420B133A200055018 /* ZDDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDDateCell.h; sourceTree = "<group>"; };
@@ -514,9 +523,10 @@
 			children = (
 				044F02B520A811F200406D65 /* ZDMeViewController.h */,
 				044F02B620A811F200406D65 /* ZDMeViewController.m */,
-				044F02A320A810E600406D65 /* Recycle */,
-				044F02A420A810ED00406D65 /* Expire */,
-				044F02A220A810DE00406D65 /* Deplete */,
+				04C907A721240F5C0081B37A /* Repertory */,
+				04C907A821240FAF0081B37A /* Setting */,
+				04C907A921240FD70081B37A /* Feedback */,
+				04C907AA21240FE00081B37A /* Save */,
 				044F02A120A810D500406D65 /* About */,
 			);
 			name = Me;
@@ -611,6 +621,8 @@
 				041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */,
 				04EC47A521155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.h */,
 				04EC47A621155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m */,
+				04CF91F02122C71500113E09 /* ZDMessageCardView.h */,
+				04CF91F12122C71500113E09 /* ZDMessageCardView.m */,
 				04B836A420A87EAD0050D568 /* All */,
 				044F02AB20A8115D00406D65 /* Add */,
 			);
@@ -620,6 +632,8 @@
 		044F02A920A8113E00406D65 /* Find */ = {
 			isa = PBXGroup;
 			children = (
+				043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */,
+				043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */,
 				04A1B3F22111A96E002D960A /* Life */,
 				04A1B3F32111A975002D960A /* Shopping */,
 			);
@@ -705,6 +719,8 @@
 				043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */,
 				041823202111B5F30012C355 /* ZDHtmlScrollView.h */,
 				041823212111B5F30012C355 /* ZDHtmlScrollView.m */,
+				04CF91ED21225DF600113E09 /* ZDCardView.h */,
+				04CF91EE21225DF600113E09 /* ZDCardView.m */,
 			);
 			name = Life;
 			sourceTree = "<group>";
@@ -714,8 +730,8 @@
 			children = (
 				0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */,
 				0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */,
-				043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */,
-				043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */,
+				04C907A4212407E90081B37A /* ZDCardForShoppingView.h */,
+				04C907A5212407E90081B37A /* ZDCardForShoppingView.m */,
 			);
 			name = Shopping;
 			sourceTree = "<group>";
@@ -789,6 +805,37 @@
 				04BD723520A9BA9800A14ADF /* ZDDepleteDataBase.m */,
 			);
 			name = Deplete;
+			sourceTree = "<group>";
+		};
+		04C907A721240F5C0081B37A /* Repertory */ = {
+			isa = PBXGroup;
+			children = (
+				044F02A420A810ED00406D65 /* Expire */,
+				044F02A320A810E600406D65 /* Recycle */,
+				044F02A220A810DE00406D65 /* Deplete */,
+			);
+			name = Repertory;
+			sourceTree = "<group>";
+		};
+		04C907A821240FAF0081B37A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		04C907A921240FD70081B37A /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Feedback;
+			sourceTree = "<group>";
+		};
+		04C907AA21240FE00081B37A /* Save */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Save;
 			sourceTree = "<group>";
 		};
 		04EC58E620E5136A00C1FF5D /* About */ = {
@@ -1096,6 +1143,7 @@
 				047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */,
 				043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
+				04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
 				04FF836320B94C9800EECE24 /* MJRefreshNormalHeader.m in Sources */,
@@ -1106,6 +1154,7 @@
 				040CE67B20ADABC800A30442 /* NSArray+MASAdditions.m in Sources */,
 				04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */,
 				041823272111F2030012C355 /* ZDMessageCollectionViewCell.m in Sources */,
+				04C907A6212407E90081B37A /* ZDCardForShoppingView.m in Sources */,
 				04FF835B20B94C9800EECE24 /* MJRefreshHeader.m in Sources */,
 				040CE67D20ADABC800A30442 /* View+MASAdditions.m in Sources */,
 				04FF835D20B94C9800EECE24 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -1124,6 +1173,7 @@
 				040CE67820ADABC800A30442 /* MASLayoutConstraint.m in Sources */,
 				04FF835920B94C9800EECE24 /* MJRefreshComponent.m in Sources */,
 				0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */,
+				04CF91F22122C71500113E09 /* ZDMessageCardView.m in Sources */,
 				04B8369320A871870050D568 /* FMResultSet.m in Sources */,
 				04FF835820B94C9800EECE24 /* MJRefreshBackFooter.m in Sources */,
 				046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */,

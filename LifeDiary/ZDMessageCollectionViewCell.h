@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZDGoods;
 @interface ZDMessageCollectionViewCell : UICollectionViewCell
 
 
@@ -27,4 +28,10 @@
  @param ratio   a rate of remainder/all
  */
 //- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;
+
+
+/**
+ 数据源
+ */
+- (void)setData:(ZDGoods *)goods;
 @end

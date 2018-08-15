@@ -14,32 +14,41 @@
 #import "ZDShoppingViewController.h"
 #import "ZDCollectionViewCell.h"
 #import "ZDOrderModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDCardView.h"
 
-@interface ZDLifeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
+@interface ZDLifeViewController ()<ZDCardViewDelegate>{
     
     CGFloat _dragStartX;
-    
     CGFloat _dragEndX;
+
 }
-@property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
+@property(nonatomic,strong) NSMutableArray <ZDContentlistModel > *contentlistArray;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIImageView *imageView;
+@property(nonatomic,strong) ZDCardView *cardView;
 @end
-
 @implementation ZDLifeViewController
-static NSString *const cellId = @"collectionViewCellId";
-static NSString *const headerId = @"headerId";
-static NSString *const footerId = @"footerId";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setNavigationBar];
+    [self getData];
+    [self addImageView];
+    [self addCardView];
+}
+- (void)setNavigationBar{
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationItem.title = @"生活";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
 
+- (void)getData{
     ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
     
     [findDataManger getData_sucessBlock:^(ZDOrderModel *model) {
@@ -49,147 +58,55 @@ static NSString *const footerId = @"footerId";
         pagebeanModel = bodyModel.pagebean;
         
         _contentlistArray = [[NSMutableArray<ZDContentlistModel > alloc]initWithArray:pagebeanModel.contentlist];
-        [self.collectionView reloadData];
+        //初始化数据源
+        [_cardView setContentlistArray:_contentlistArray];
+        [_cardView setSelectedIndex:0];
+      
     } faliure:^{
         
     } maxResult:@"10"];
-    
-    
-    _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-     if (@available(iOS 11.0, *)) {
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96) collectionViewLayout:_rgcardViewLayout];
-     }else{
-     _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-     }
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    // 开启分页
-    _collectionView.pagingEnabled = YES;
-    // 隐藏水平滚动条
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    // 取消弹簧效果
-    _collectionView.bounces = NO;
-    [self.view addSubview:_collectionView];
-    
-    // 注册cell、sectionHeader、sectionFooter
-    [_collectionView registerClass:[ZDCollectionViewCell class] forCellWithReuseIdentifier:cellId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
-    
-     [self addImageView];
-    
-    // Do any additional setup after loading the view.
 }
+
 - (void)addImageView {
-    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-//    [self.view addSubview:_imageView];
     
-    UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:_imageView];
+    
+    UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
     UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     effectView.frame = _imageView.bounds;
     [_imageView addSubview:effectView];
 }
-- (void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-- (void)viewWillDisappear:(BOOL)animated{
 
-    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
-/**
- numberOfSections
- 
- */
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-/**
- ItemsInSection
- 
- */
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return _contentlistArray.count;
-}
-/**
- dataSource
- 
- */
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)addCardView{
     
-    _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    ZDContentlistModel *contentlistModel = [[ZDContentlistModel alloc]init];
-    contentlistModel = _contentlistArray[indexPath.item];
-    [_collectionViewCell updateCell:contentlistModel];
-    
-    
-    return _collectionViewCell;
-}
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-//    if (!_pagingEnabled) {return;}
-    _dragEndX = scrollView.contentOffset.x;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self fixCellToCenter];
-    });
+    _cardView = [[ZDCardView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    _cardView.delegate = self;
+    [self.view addSubview:_cardView];
 
 }
-//滚动到中间
-- (void)scrollToCenter {
-    
-    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 
-}
-//配置cell居中
-- (void)fixCellToCenter {
-    //最小滚动距离
-    float dragMiniDistance = self.view.frame.size.width/20.0f;
-    if (_dragStartX -  _dragEndX >= dragMiniDistance) {
-        _selectedIndex -= 1;//向右
-    }else if(_dragEndX -  _dragStartX >= dragMiniDistance){
-        _selectedIndex += 1;//向左
+#pragma mark ZDCardViewDelegate 代理方法
+- (void)changeBackgroundImageView:(NSInteger)index{
+
+    ZDContentlistModel *contentlistModel= [[ZDContentlistModel alloc]init];
+    contentlistModel = _contentlistArray[index];
+    if (contentlistModel.imageurls.count) {
+        ZDPicModel *picModel = contentlistModel.imageurls[0];
+        [_imageView sd_setImageWithURL:picModel.url];
+    }else{
+        NSInteger index = arc4random_uniform(20);
+        [_imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"goods%ld",index]]];
     }
-    NSInteger maxIndex = [_collectionView numberOfItemsInSection:0] - 1;
-    _selectedIndex = _selectedIndex <= 0 ? 0 : _selectedIndex;
-    _selectedIndex = _selectedIndex >= maxIndex ? maxIndex : _selectedIndex;
-    [self scrollToCenter];
-}
-//定义每个UICollectionView 的 margin
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//
-//    return UIEdgeInsetsMake(5, 5, 5, 5);
-//}
-//UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    _selectedIndex = indexPath.row;
-    [self scrollToCenter];
+}
+- (void)pushToNextViewController:(NSInteger)index{
+    
     ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-    contentlist = _contentlistArray[indexPath.item];
+    contentlist = _contentlistArray[index];
     ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
     linkVC.contentlistModel = contentlist;
     [self.navigationController pushViewController:linkVC animated:YES];
-  
-    
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -205,11 +205,11 @@
 //    CGFloat inset  = self.collectionView.bounds.size.width * (10/64.0f);
 //    inset = floor(inset);
 
-    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width *0.7,self.collectionView.bounds.size.height * 3/5);
+    self.itemSize = CGSizeMake([self cellWidth],self.collectionView.bounds.size.height * 0.7);
 //    self.sectionInset = UIEdgeInsetsMake(0,inset*1.2,inset/2,inset*1.2);
 
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-     self.sectionInset = UIEdgeInsetsMake(0, [self collectionInset], 0, [self collectionInset]);
+     self.sectionInset = UIEdgeInsetsMake(-50, [self collectionInset], 0, [self collectionInset]);
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -234,11 +234,10 @@
 //        // 根据间距值 计算 cell的缩放比例
 //        CGFloat scale = 1.2 - delta / self.collectionView.frame.size.width;
 //        attrs.alpha =scale;
-//
 //        // 设置缩放比例
 //        attrs.transform = CGAffineTransformMakeScale(scale, scale);
         
-        
+//
         CGFloat distance = fabs(attrs.center.x - centerX);
         //移动的距离和屏幕宽度的的比例
         CGFloat apartScale = distance/self.collectionView.bounds.size.width;
@@ -265,7 +264,7 @@
 }
 //卡片间隔
 - (float)cellMargin {
-    return (self.collectionView.bounds.size.width - [self cellWidth])/7;
+    return (self.collectionView.bounds.size.width - [self cellWidth])/9;
 }
 //设置左右缩进
 - (CGFloat)collectionInset {

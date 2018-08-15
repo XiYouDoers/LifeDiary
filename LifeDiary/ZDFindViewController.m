@@ -34,10 +34,9 @@ static NSString *const footerId = @"footerId";
     
     ZDShoppingViewController *shoppingViewController = [[ZDShoppingViewController alloc]init];
     ZDLifeViewController *lifeViewController = [[ZDLifeViewController alloc]init];
-    UIView *container = [[UIView alloc] init];
-    self.containerView = container;
-    [self.view addSubview:container];
-    [container mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.containerView = [[UIView alloc] init];
+    [self.view addSubview:_containerView];
+    [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(WIDTH, HEIGHT));;
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
@@ -47,6 +46,7 @@ static NSString *const footerId = @"footerId";
     [self addChildViewController:lifeViewController];
     [self addChildViewController:shoppingViewController];
     self.childViewControllers[0].view.frame = self.containerView.bounds;
+    self.childViewControllers[1].view.frame = self.containerView.bounds;
     [self.containerView addSubview:self.childViewControllers[0].view];
     self.currentSubViewController = self.childViewControllers[0];
     
@@ -96,9 +96,9 @@ static NSString *const footerId = @"footerId";
     }
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.frame = CGRectMake(10, 0, 100, 44);
+    _titleLabel.frame = CGRectMake(10, 10, 100, 40);
     _titleLabel.text = @"发现";
-    _titleLabel.font = [UIFont boldSystemFontOfSize:34];
+    _titleLabel.font = [UIFont systemFontOfSize:34];
     [self.navigationController.navigationBar addSubview:_titleLabel];
     
     
@@ -122,15 +122,8 @@ static NSString *const footerId = @"footerId";
     NSInteger index = Seg.selectedSegmentIndex;
     UIViewController *selectedController = self.childViewControllers[index];
     selectedController.view.frame = self.containerView.bounds;
-    
     if (self.currentSubViewController != self.childViewControllers[index]) {
-        
-        UIViewAnimationOptions options;
-        if (self.currentSubViewController == self.childViewControllers[0]) {
-             options = UIViewAnimationOptionLayoutSubviews;
-        }else {
-            options = UIViewAnimationOptionLayoutSubviews;
-        }
+        UIViewAnimationOptions options = UIViewAnimationOptionLayoutSubviews;
         [self transitionFromViewController:self.currentSubViewController toViewController:self.childViewControllers[index] duration:0.8 options:options animations:^{} completion:^(BOOL finished) {
             if (finished) {
                 self.currentSubViewController = self.childViewControllers[index];

@@ -107,8 +107,8 @@
         _shadowView.backgroundColor = [UIColor purpleColor];
 //        _shadowView.layer.shadowColor =  [UIColor colorWithRed:97.0/255 green:191.0/255 blue:246.0/255 alpha:1].CGColor;
         _shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-        _shadowView.layer.shadowOffset = CGSizeMake(0, 70);
-        _shadowView.layer.shadowRadius = 90 ;
+        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+        _shadowView.layer.shadowRadius = 0 ;
         _shadowView.layer.shadowOpacity = 1;
         _shadowView.layer.shouldRasterize = YES;
     }

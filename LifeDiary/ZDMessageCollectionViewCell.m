@@ -7,6 +7,12 @@
 //
 
 #import "ZDMessageCollectionViewCell.h"
+#import "ZDGoods.h"
+extern NSDateFormatter const *_formatter;
+@interface ZDMessageCollectionViewCell(){
+    
+}
+@end
 
 @implementation ZDMessageCollectionViewCell
 
@@ -159,5 +165,30 @@
         _remarkLabel.textColor = [UIColor lightGrayColor];
     }
     return _remarkLabel;
+}
+- (void)setData:(ZDGoods *)goods{
+    
+    self.nameLabel.text = goods.name;
+    self.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    self.remarkLabel.text = goods.remark;
+    self.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    
+    NSDate *dateNow = [[NSDate alloc]init];
+    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+    self.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余：%ld天",seconds];
+    self.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    //
+    //计算出保质期的时间戳
+    //        NSDate *dateOfStart = [_formatter dateFromString:goods.dateOfStart];
+    //        NSDate *dateOfEnd = [_formatter dateFromString:goods.dateOfEnd];
+    //        NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
+    //        NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
+    //        [_messageCollectionViewCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+    //    _messageCollectionViewCell.stepper.tag = 200 + indexPath.row;
+    //    _messageCollectionViewCell.stepper.value = [goods.sum doubleValue];
+    //    [_messageCollectionViewCell.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    
 }
 @end

@@ -37,12 +37,12 @@
  
 
     //_recycleTableView
-    _recycleTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-20) style:UITableViewStylePlain];
+    _recycleTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _recycleTableView.dataSource = self;
     _recycleTableView.delegate = self;
     _recycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _recycleTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
-    _recycleTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
+    _recycleTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
+    _recycleTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_recycleTableView];
     [_recycleTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"recycleCell"];
     
@@ -54,7 +54,7 @@
     
     //_deleteButton
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+    _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT*0.1);
     [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_deleteButton setBackgroundColor:[UIColor redColor]];
@@ -97,9 +97,9 @@
     self.navigationItem.leftBarButtonItem = _allSelectedBarButtonItem;
     //上移删除button
     [UIView animateWithDuration:0.5 animations:^{
-        _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+        _deleteButton.frame = CGRectMake(0, HEIGHT*0.8, WIDTH, HEIGHT*0.1);
+        NSLog(@"%@   %f",NSStringFromCGRect(_deleteButton.frame),HEIGHT);
     }];
-        NSLog(@"%@",NSStringFromCGRect(_deleteButton.frame));
        
     }else{
         _rightBarButtonItemIsSeleted = NO;
@@ -115,7 +115,7 @@
         self.navigationItem.leftBarButtonItem = nil;
         //下移删除button
         [UIView animateWithDuration:0.5 animations:^{
-            _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+            _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT*0.1);
         }];
   
     }

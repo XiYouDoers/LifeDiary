@@ -16,7 +16,7 @@
 #import "ZDGoods.h"
 #import "ZDMeDefaultCell.h"
 
-@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate>{
+@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate,ZDPhotoManagerViewControllerDelegate>{
     NSUserDefaults *_userDefaults;
     
 }
@@ -31,21 +31,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBar];
     _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
-    _meTableView.scrollEnabled=NO;
-    _meTableView.sectionHeaderHeight = 0.01f;
-    _meTableView.sectionFooterHeight = 12.f;
+    _meTableView.scrollEnabled = YES;
+    _meTableView.sectionHeaderHeight = 12.f;
+    _meTableView.sectionFooterHeight = 0.01f;
+    _meTableView.backgroundColor = [UIColor whiteColor];
     _meTableView.tableHeaderView= self.tableHeaderView;
-    _meTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
+    self.tableHeaderView.degegate = self;
+    _meTableView.tableFooterView = [UIView new];
     [self.view addSubview:_meTableView];
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
 
-    _cellLabelDataArray = [NSArray arrayWithObjects:@"回收站",@"耗尽物品",@"过期物品",@"关于", nil];
-    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete", nil];    // Do any additional setup after loading the view.
+    _cellLabelDataArray = [NSArray arrayWithObjects:@"设置",@"反馈",@"收藏",@"关于", nil];
+    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete",@"about", nil];    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -85,11 +87,12 @@
 
 }
 - (ZDMeTableHeaderView *)tableHeaderView{
-    if (!_tableHeaderView) {
+    
+    if (_tableHeaderView == nil) {
         if(iPhoneX){
-        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -50, WIDTH, HEIGHT/2)];
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -50, WIDTH, HEIGHT*0.72)];
         }else{
-        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -20, WIDTH, HEIGHT/5*2)];
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -20, WIDTH, HEIGHT*0.72)];
         }
         _userDefaults = [NSUserDefaults standardUserDefaults];
         if ([_userDefaults stringForKey:@"user_name"]) {
@@ -133,9 +136,8 @@
     [_userDefaults synchronize];
 }
 - (void)willChangeHeadPicture{
-    
-    ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]initWithController:self Button:_tableHeaderView.headPictureButton];
-
+    ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]init];
+    photoManagerVC.delegate = self;
     [photoManagerVC selectedWay];
 }
 
@@ -145,34 +147,22 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
-    if (section==0) {
-         return 3;
-    }else{
-        return 1;
-    }
+    return 4;
 }
+
 /**
  TableView中section的数量
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
  
-    return 2;
+    return 1;
    
-}
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return 55.f;
 }
 /**
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section==0) {
-        return 50;
-    }else{
-        return 50;
-    }
+    return 50;
 }
 
 /**
@@ -180,56 +170,21 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    if (indexPath.section==0){
     _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
     _meCell.selectionStyle = UITableViewCellEditingStyleNone;
     _meCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
-    _meCell.tabImageView.image = [UIImage imageNamed:[_cellImageDataArray objectAtIndex:indexPath.row]];
-          return _meCell;
-    }else{
-        _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
-        _meCell.selectionStyle = UITableViewCellEditingStyleNone;
- 
-        _meCell.tabLabel.text = @"关于";
-        _meCell.tabImageView.image = [UIImage imageNamed:@"about"];
-        return _meCell;
-    }
+    return _meCell;
 }
 /**
  cell点击方法
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-       if(indexPath.section==0){
-        if (indexPath.row==0) {
-            ZDRecycleViewController *recycleViewController = [[ZDRecycleViewController alloc]init];
-            [self.navigationController pushViewController:recycleViewController animated:YES];
-        }else if(indexPath.row==1) {
-            ZDExpireViewController *expireViewController = [[ZDExpireViewController alloc]init];
-            [self.navigationController pushViewController:expireViewController animated:YES];
-        }else if(indexPath.row==2) {
-            ZDDepleteViewController *depleteViewController = [[ZDDepleteViewController alloc]init];
-            [self.navigationController pushViewController:depleteViewController animated:YES];
-        }
-    }else{
-        //indexPath.section==2&&indexPath.row==0
-            ZDAboutViewController *aboutViewController = [[ZDAboutViewController alloc]init];
-            [self.navigationController pushViewController:aboutViewController animated:YES];
+    if (indexPath.row==3) {
+        ZDAboutViewController *aboutVC = [[ZDAboutViewController alloc]init];
+        [self.navigationController pushViewController:aboutVC animated:YES];
     }
-
-    
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
 

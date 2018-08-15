@@ -9,19 +9,16 @@
 #import "ZDPhotoManagerViewController.h"
 
 @interface ZDPhotoManagerViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>
-@property(nonatomic,strong) UIViewController *tempViewController;
-@property(nonatomic,strong) UIButton *button;
+
+
 @end
 
 @implementation ZDPhotoManagerViewController
 
-- (id)initWithController:(UIViewController *)viewController Button:(UIButton *)button{
+- (id)init{
     self = [super init];
     if (self) {
-        _tempViewController = [[UIViewController alloc]init];
-        _tempViewController = viewController;
         _button = [[UIButton alloc]init];
-        _button = button;
     }
     return self;
 }
@@ -30,6 +27,8 @@
     // Do any additional setup after loading the view.
 }
 - (void)selectedWay{
+    
+    NSLog(@"11");
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"选择方式" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *openCameraAction = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -47,7 +46,7 @@
     [actionSheet addAction:cancelAction];
     
     //相当于之前的[actionSheet show];
-    [_tempViewController presentViewController:actionSheet animated:YES completion:nil];
+    [self.delegate presentViewController:actionSheet animated:YES completion:nil];
 }
 /**
  *  调用照相机
@@ -62,7 +61,7 @@
         
         //摄像头
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [_tempViewController presentViewController:picker animated:YES completion:nil];
+        [self.delegate presentViewController:picker animated:YES completion:nil];
     }else{
         
         NSLog(@"没有摄像头");
@@ -87,7 +86,7 @@
         imagePicker.allowsEditing = YES;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
-        [_tempViewController presentViewController:imagePicker animated:YES completion:^{
+        [self.delegate presentViewController:imagePicker animated:YES completion:^{
             
             NSLog(@"打开相册");
         }];
@@ -104,17 +103,17 @@
 
 // 拍照完成回调
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
 
     //
     //无法回调
     //
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         
-        //图片存入相册
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        NSLog(@"setImage");
-        [_button setImage:image forState:UIControlStateNormal];
+//        //图片存入相册
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//        NSLog(@"setImage");
+//        [_button setImage:image forState:UIControlStateNormal];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

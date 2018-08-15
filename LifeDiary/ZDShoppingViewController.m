@@ -11,105 +11,73 @@
 #import "ZDFindDataManager.h"
 #import <WebKit/WebKit.h>
 #import "ZDLinkViewController.h"
+#import "ZDShoppingViewController.h"
 #import "ZDCollectionViewShoppingCell.h"
+#import "ZDOrderModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDCardForShoppingView.h"
 
-@interface ZDShoppingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property(nonatomic,strong) RGCardViewLayout *rgcardViewLayout;
+@interface ZDShoppingViewController ()<ZDCardForShoppingViewDelegate>{
+    
+    CGFloat _dragStartX;
+    CGFloat _dragEndX;
+    
+}
+@property(nonatomic,strong) NSMutableArray *dataMutableArray ;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
+@property(nonatomic,strong) UIImageView *imageView;
+@property(nonatomic,strong) ZDCardForShoppingView *cardForShoppingView;
 @end
-
 @implementation ZDShoppingViewController
-static NSString *const cellId = @"collectionViewCellId";
-static NSString *const headerId = @"headerId";
-static NSString *const footerId = @"footerId";
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self getData];
+    [self setNavigationBar];
+    [self addImageView];
+    [self addCardForShoppingView];
+
+}
+- (void)getData{
+    
+    NSDictionary *dic0 = @{@"name":@"长城（GreatWall）红酒",@"price":@"168.00",@"image":@"shopping0"};
+     NSDictionary *dic1 = @{@"name":@"蒙牛 纯甄 常温酸牛奶",@"price":@"89.90",@"image":@"shopping1"};
+     NSDictionary *dic2 = @{@"name":@"鲁花 5S 压榨一级 花生油 4L",@"price":@"109.90",@"image":@"shopping2"};
+    _dataMutableArray = [NSMutableArray arrayWithObjects:dic0,dic1,dic2, nil];
+
+}
+- (void)setNavigationBar{
+    
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"商品";
     self.navigationItem.backBarButtonItem = backBtnItem;
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    
-    
-    _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-    if (@available(iOS 11.0, *)) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96) collectionViewLayout:_rgcardViewLayout];
-    }else{
-        _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    }
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    // 开启分页
-    _collectionView.pagingEnabled = YES;
-    // 隐藏水平滚动条
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    // 取消弹簧效果
-    _collectionView.bounces = NO;
-    [self.view addSubview:_collectionView];
-    
-    // 注册cell、sectionHeader、sectionFooter
-    [_collectionView registerClass:[ZDCollectionViewShoppingCell class] forCellWithReuseIdentifier:cellId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
-    
-    // Do any additional setup after loading the view.
 }
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-/**
- numberOfSections
- 
- */
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 3;
-}
-/**
- ItemsInSection
- 
- */
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1;
-}
-/**
- dataSource
- 
- */
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)addImageView {
     
-    _collectionViewShoppingCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:_imageView];
     
-    [self configureCell:_collectionViewShoppingCell withIndexPath:indexPath];
-    
-    return _collectionViewShoppingCell;
+    UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
+    UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    effectView.frame = _imageView.bounds;
+    [_imageView addSubview:effectView];
 }
-- (void)configureCell:(ZDCollectionViewShoppingCell *)cell withIndexPath:(NSIndexPath *)indexPath
-{
-    //    UIView  *subview = [cell.contentView viewWithTag:20];
-    //    [subview removeFromSuperview];
-    NSArray *nameArray = [NSArray arrayWithObjects:@"长城（GreatWall）红酒", @"蒙牛 纯甄 常温酸牛奶",@"鲁花 5S 压榨一级 花生油 4L",nil];
-    NSArray *priceArray = [NSArray arrayWithObjects:@"168.00",@"89.90",@"109.90", nil];
-//    NSInteger index = arc4random_uniform(5);
-    NSInteger index = indexPath.section;
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"shopping%ld",index]];
-    cell.nameLabel.text = [nameArray objectAtIndex:indexPath.section];
-    cell.priceLabel.text = [priceArray objectAtIndex:indexPath.section];
-    cell.sourceLabel.text = @"京东商城";
+
+- (void)addCardForShoppingView{
+    
+    _cardForShoppingView = [[ZDCardForShoppingView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    _cardForShoppingView.delegate = self;
+    [_cardForShoppingView setDataMutableArray:_dataMutableArray];
+    [_cardForShoppingView setSelectedIndex:0];
+    [self.view addSubview:_cardForShoppingView];
     
 }
-//定义每个UICollectionView 的 margin
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//
-//    return UIEdgeInsetsMake(5, 5, 5, 5);
-//}
+
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -126,19 +94,23 @@ static NSString *const footerId = @"footerId";
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark ZDCardViewDelegate 代理方法
+- (void)changeBackgroundImageView:(NSInteger)index{
+    
+    if (_dataMutableArray.count >= index) {
+        NSDictionary *dic = _dataMutableArray[index];
+        [_imageView setImage:[UIImage imageNamed:dic[@"image"]]];
+    }
+    
 }
-*/
+- (void)pushToNextViewController:(NSInteger)index{
+    
+//    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
+//    contentlist = _contentlistArray[index];
+//    ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
+//    linkVC.contentlistModel = contentlist;
+//    [self.navigationController pushViewController:linkVC animated:YES];
+}
 
 @end

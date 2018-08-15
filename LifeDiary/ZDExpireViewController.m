@@ -51,7 +51,7 @@
     
     //_deleteButton
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+    _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT/9);
     [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_deleteButton setBackgroundColor:[UIColor redColor]];
@@ -85,12 +85,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
-- (void)deleteExpireGoodsFromAllGoods:(id )sender{
-    
-    //响应删除通知
-    //    NSLog(@"userInfo=%@",[sender.userInfo objectForKey:@"text"]);
-    //    [[ZDAllDataBase sharedDataBase]deleteGoods:notification.object];
-}
+
 - (void)manageCell:(UIBarButtonItem *)sender{
     
     if (_rightBarButtonItemIsSeleted == NO) {
@@ -104,7 +99,7 @@
         self.navigationItem.leftBarButtonItem = _allSelectedBarButtonItem;
         //下移删除button
         [UIView animateWithDuration:0.5 animations:^{
-            _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+            _deleteButton.frame = CGRectMake(0, HEIGHT*8/9, WIDTH, HEIGHT/9);
         }];
         
     }else{
@@ -121,7 +116,7 @@
         self.navigationItem.leftBarButtonItem = nil;
         //上移删除button
         [UIView animateWithDuration:0.5 animations:^{
-            _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+            _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT/9);
         }];
     }
     
@@ -137,6 +132,7 @@
     _deletedCellArray = [NSMutableArray arrayWithArray:self.dataMutableArray];
 }
 - (void)deleteSelectedCells{
+    
     for (ZDGoods *goods in _deletedCellArray) {
         [[ZDExpireDataBase sharedDataBase]deleteGoods:goods];
     }
@@ -145,7 +141,7 @@
     
     //下移删除button
     [UIView animateWithDuration:0.5 animations:^{
-        _deleteButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height/9*8, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height/9);
+        _deleteButton.frame = CGRectMake(0, HEIGHT/9*8, WIDTH, HEIGHT/9);
     }];
     //删除后回归原状态
     [self manageCell:_manageCellBarButtonItem];
@@ -265,14 +261,6 @@
     }
 }
 @end
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 

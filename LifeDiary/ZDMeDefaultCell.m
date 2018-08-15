@@ -22,15 +22,23 @@
 
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];
-        _tabImageView.frame = CGRectMake(10, 13, 19, 19);
-        _tabImageView.image = [UIImage imageNamed:@"add"];
+        _tabImageView.image = [UIImage imageNamed:@"arrow"];
         [self addSubview:_tabImageView];
+        [_tabImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(-5);
+            make.size.mas_equalTo(CGSizeMake(8, 15));
+            make.right.mas_equalTo(-40);
+        }];
         
         
         //_tabLabel
         _tabLabel = [[UILabel alloc]init];
-        _tabLabel.frame = CGRectMake(45, 10, 100, 25);
         [self addSubview:_tabLabel];
+        [_tabLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(-5 );
+            make.size.mas_equalTo(CGSizeMake(60, 20));
+            make.left.mas_equalTo(40);
+        }];
         
 
     }

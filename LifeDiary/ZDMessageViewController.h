@@ -7,12 +7,11 @@
 //
 
 #import "ZDViewController.h"
-
+extern NSDateFormatter const *_formatter;
 @class ZDAllCell,ZDMessageCollectionViewCell;
 
 
 @interface ZDMessageViewController : UIViewController
-
 
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;
 @property(nonatomic,strong) UICollectionView *collectionView;

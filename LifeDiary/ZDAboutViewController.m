@@ -20,9 +20,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"关于";
     
-
-    
-    self.view.backgroundColor = TABBARCOLOR;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIImageView *appHeadPictureImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"appHeadPictureImageView"]];
         [self.view addSubview:appHeadPictureImageView];

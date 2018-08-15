@@ -74,7 +74,7 @@
     [finishBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LIGHTBLUE } forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem =  finishBtnItem;
     if (@available(iOS 11.0, *)) {
-//        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
     } else {
         // Fallback on earlier versions
     }
@@ -115,7 +115,7 @@
     ZDGoods *newGoods = [[ZDGoods alloc]init];
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;
-    int index = arc4random_uniform(9);
+    int index = arc4random_uniform(22);
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
     newGoods.imageData = UIImagePNGRepresentation(image);
     

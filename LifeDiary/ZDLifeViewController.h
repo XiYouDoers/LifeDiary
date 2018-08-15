@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol ZDContentlistModel;
-@class ZDCollectionViewCell;
-@interface ZDLifeViewController : UIViewController
 
-@property(nonatomic,strong) UICollectionView *collectionView;
-@property(nonatomic,strong) ZDCollectionViewCell *collectionViewCell;
-@property (nonatomic, assign, readwrite) NSInteger selectedIndex;
-@property(nonatomic,strong) NSMutableArray <ZDContentlistModel > *contentlistArray;
+@interface ZDLifeViewController : UIViewController
+@property(nonatomic,strong) NSMutableArray *imageViewMutableArray;
+
 @end

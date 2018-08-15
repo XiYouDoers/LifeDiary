@@ -157,7 +157,6 @@
     [self.searchBar resignFirstResponder];
     // do sth about get search result
 }
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar becomeFirstResponder];
