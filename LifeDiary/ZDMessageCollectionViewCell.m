@@ -20,13 +20,9 @@ extern NSDateFormatter const *_formatter;
     self=[super initWithFrame:frame];
     if (self) {
         
-//        self.contentView.layer.cornerRadius = 13.f;
-//        self.contentView.layer.masksToBounds = YES;
-        self.contentView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
-//        self.contentView.backgroundColor = [UIColor blueColor];
-       
-        
-       
+//         self.contentView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+        self.contentView.backgroundColor = [UIColor clearColor];
+
         
         [self.contentView addSubview:self.shadowView];
         
@@ -113,11 +109,10 @@ extern NSDateFormatter const *_formatter;
 
         //_shadowView
         _shadowView = [[UIView alloc]init];
-        _shadowView.backgroundColor = [UIColor purpleColor];
-        _shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-        _shadowView.layer.shadowRadius = 4 ;
-        _shadowView.layer.shadowOpacity = 0.8;
+        _shadowView.layer.shadowColor = [UIColor colorWithDisplayP3Red:210.0/255 green:210.0/255 blue:210.0/255 alpha:1].CGColor;
+        _shadowView.layer.shadowOffset = CGSizeMake(0, 10);
+        _shadowView.layer.shadowRadius = 10;
+        _shadowView.layer.shadowOpacity = 1;
         _shadowView.layer.shouldRasterize = YES;
     }
     return _shadowView;
@@ -127,7 +122,7 @@ extern NSDateFormatter const *_formatter;
         //_exhibitView
         _exhibitView = [[UIView alloc]init];
         _exhibitView.backgroundColor = [UIColor whiteColor];
-        _exhibitView.layer.cornerRadius = 13;
+        _exhibitView.layer.cornerRadius = 15;
         _exhibitView.layer.masksToBounds = YES;
     }
     return _exhibitView;

@@ -40,11 +40,14 @@
     _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
+    _meTableView.bounces = NO;// 设置回弹
     _meTableView.scrollEnabled = YES;
     _meTableView.sectionHeaderHeight = 12.f;
     _meTableView.sectionFooterHeight = 0.01f;
     _meTableView.backgroundColor = [UIColor whiteColor];
     _meTableView.tableHeaderView= self.tableHeaderView;
+    //是否展示竖直滚动条
+    _meTableView.showsVerticalScrollIndicator = NO;
     self.tableHeaderView.degegate = self;
     _meTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.view addSubview:_meTableView];

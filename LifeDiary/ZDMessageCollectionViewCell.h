@@ -11,7 +11,6 @@
 @class ZDGoods;
 @interface ZDMessageCollectionViewCell : UICollectionViewCell
 
-
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *remarkLabel;
 @property(nonatomic,strong) UIImageView *pictureImageView;
@@ -24,7 +23,7 @@
 
 /**
  setting arc's startAngle and endAngle
- 
+ *
  @param ratio   a rate of remainder/all
  */
 //- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;

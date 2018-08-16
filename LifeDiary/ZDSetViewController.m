@@ -29,7 +29,7 @@
     _setTableView.delegate = self;
     _setTableView.sectionHeaderHeight = 0.01f;
     _setTableView.sectionFooterHeight = 0.01f;
-    _setTableView.backgroundColor = [UIColor whiteColor];
+    _setTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _setTableView.tableHeaderView = [UIView new];
     _setTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_setTableView];
@@ -49,6 +49,7 @@
     }];
 }
 #pragma mark tableView 代理方法
+
 /**
  section中cell的数量
  */

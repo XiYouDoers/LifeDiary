@@ -44,7 +44,10 @@
     _allTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _allTableView.dataSource = self;
     _allTableView.delegate = self;
-    _allTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
+    //是否展示竖直滚动条
+    _allTableView.showsVerticalScrollIndicator = YES;
+    _allTableView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+    _allTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
     self.allTableView.tableHeaderView = self.searchView;
@@ -92,11 +95,13 @@
 - (UIView *)searchView
 {
     if (!_searchView) {
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 54)];
         _searchView.backgroundColor = [UIColor whiteColor];
         
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 5, WIDTH, 44)];
         _searchBar.backgroundColor = [UIColor clearColor];
+        _searchBar.layer.masksToBounds = YES;
+        _searchBar.layer.cornerRadius = 20.f;
         _searchBar.showsCancelButton = NO;
         _searchBar.tintColor = [UIColor orangeColor];
         _searchBar.placeholder = @"搜索物品";
@@ -135,7 +140,7 @@
         [_searchView addSubview:_searchBar];
         
         
-        _sortButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-55, 0, 44, 44)];
+        _sortButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-44, 7+5, 31.4,30)];
         _sortButton.backgroundColor = [UIColor clearColor];
         _sortButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
         UIImage *sortImage = [UIImage imageNamed:@"sortNormal"];
@@ -160,13 +165,24 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar becomeFirstResponder];
-    searchBar.frame = CGRectMake(0, 0, WIDTH-60, 44);
+    searchBar.frame = CGRectMake(0, 5, WIDTH-50, 44);
     _sortButton.hidden = NO;
 }
 
 - (void)sortTouched:(UIButton *)sender
 {
     sender.selected = !sender.selected;
+    if (sender.selected) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 100);
+        }];
+     
+    }else{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+        }];
+        
+    }
     
     [self.searchBar resignFirstResponder];
 

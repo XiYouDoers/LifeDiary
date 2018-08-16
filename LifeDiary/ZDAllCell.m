@@ -22,7 +22,8 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 
-
+        self.contentView.backgroundColor = [UIColor clearColor];
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [self.contentView addSubview:self.shadowView];
@@ -145,10 +146,9 @@
     if (_shadowView == nil) {
         //_shadowView
         _shadowView = [[UIView alloc]init];
-        _shadowView.backgroundColor = [UIColor purpleColor];
-        _shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-        _shadowView.layer.shadowRadius = 4;
+        _shadowView.layer.shadowColor = [UIColor colorWithDisplayP3Red:210.0/255 green:210.0/255 blue:210.0/255 alpha:1].CGColor;;
+        _shadowView.layer.shadowOffset = CGSizeMake(0, 10);
+        _shadowView.layer.shadowRadius = 10;
         _shadowView.layer.shadowOpacity = 1;
         _shadowView.layer.shouldRasterize = YES;
     }
