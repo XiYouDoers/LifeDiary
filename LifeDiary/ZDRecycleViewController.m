@@ -40,7 +40,7 @@
     _recycleTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _recycleTableView.dataSource = self;
     _recycleTableView.delegate = self;
-    _recycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _recycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _recycleTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
     _recycleTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_recycleTableView];
@@ -54,7 +54,7 @@
     
     //_deleteButton
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT*0.1);
+    _deleteButton.frame = CGRectMake(0, HEIGHT-64, WIDTH, HEIGHT/9);
     [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_deleteButton setBackgroundColor:[UIColor redColor]];
@@ -75,7 +75,7 @@
         [UIView animateWithDuration:0.5f animations:^{
             self.tabBarController.tabBar.frame = tabRect;
         }completion:^(BOOL finished) {
-            
+
         }];
 
 }
@@ -97,7 +97,7 @@
     self.navigationItem.leftBarButtonItem = _allSelectedBarButtonItem;
     //上移删除button
     [UIView animateWithDuration:0.5 animations:^{
-        _deleteButton.frame = CGRectMake(0, HEIGHT*0.8, WIDTH, HEIGHT*0.1);
+        _deleteButton.frame = CGRectMake(0,HEIGHT*8/9-64, WIDTH,HEIGHT/9);
         NSLog(@"%@   %f",NSStringFromCGRect(_deleteButton.frame),HEIGHT);
     }];
        
@@ -115,7 +115,7 @@
         self.navigationItem.leftBarButtonItem = nil;
         //下移删除button
         [UIView animateWithDuration:0.5 animations:^{
-            _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT*0.1);
+            _deleteButton.frame = CGRectMake(0, HEIGHT-64, WIDTH, HEIGHT/9);
         }];
   
     }
@@ -153,6 +153,7 @@
 // 改变选中时最左边对勾的背景颜色
 - (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
     ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    cell.editing = NO;
     NSArray *subviews = cell.subviews;
     for (id obj in subviews) {
         if ([obj isKindOfClass:[UIControl class]]) {
@@ -179,8 +180,9 @@
 
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    [self shallowCellSelectedImageView:indexPath];
+    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    cell.editing = YES;
+//    [self shallowCellSelectedImageView:indexPath];
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
@@ -189,7 +191,8 @@
  
  */
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
-    
+    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    cell.editing = NO;
     [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
@@ -223,7 +226,7 @@
     
     _recycleCell = [tableView dequeueReusableCellWithIdentifier:@"recycleCell"];
     //去除选中时渲染的蓝色背景
-    _recycleCell.selectedBackgroundView = [[UIView alloc] init];
+//    _recycleCell.selectedBackgroundView = [[UIView alloc] init];
     ZDGoods *goods = [[ZDGoods alloc]init];
     goods = _dataMutableArray[indexPath.row];
     

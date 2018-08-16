@@ -52,6 +52,7 @@
     ZDFindDataManager *findDataManger = [[ZDFindDataManager alloc]init];
     
     [findDataManger getData_sucessBlock:^(ZDOrderModel *model) {
+
         ZDBodyModel *bodyModel = [[ZDBodyModel alloc]init];
         bodyModel = model.showapi_res_body;
         ZDPagebeanModel *pagebeanModel = [[ZDPagebeanModel alloc]init];
@@ -83,6 +84,7 @@
     _cardView = [[ZDCardView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
     _cardView.delegate = self;
     [self.view addSubview:_cardView];
+
 
 }
 

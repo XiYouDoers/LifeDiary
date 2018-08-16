@@ -9,6 +9,7 @@
 #import "ZDCollectionViewShoppingCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ZDOrderModel.h"
+#import "ZDShoppingModel.h"
 
 @implementation ZDCollectionViewShoppingCell
 
@@ -215,12 +216,12 @@
     }
     return _messageLabel;
 }
-- (void)updateCell:(NSDictionary *)dic{
+- (void)updateCell:(ZDProductInfo *)productInfo{
     
 
-    [_imageView setImage:[UIImage imageNamed:dic[@"image"]]];
-    self.nameLabel.text = dic[@"name"];
-    self.priceLabel.text = dic[@"price"];
+    [_imageView sd_setImageWithURL:productInfo.imageUrl];
+    self.nameLabel.text = productInfo.name;
+    self.priceLabel.text = productInfo.price;
 
 }
 @end

@@ -42,7 +42,7 @@
     _meTableView.backgroundColor = [UIColor whiteColor];
     _meTableView.tableHeaderView= self.tableHeaderView;
     self.tableHeaderView.degegate = self;
-    _meTableView.tableFooterView = [UIView new];
+    _meTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.view addSubview:_meTableView];
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
 
@@ -78,12 +78,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     //改变BarButtonItem图片颜色
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
-    
-    if (@available(iOS 11.0, *)) {
-//        self.navigationController.navigationBar.prefersLargeTitles = YES;
-    } else {
-        // Fallback on earlier versions
-    }
+
 
 }
 - (ZDMeTableHeaderView *)tableHeaderView{
@@ -171,7 +166,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
     _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
-    _meCell.selectionStyle = UITableViewCellEditingStyleNone;
     _meCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
     return _meCell;
 }

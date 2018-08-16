@@ -16,6 +16,8 @@
 #import "ZDOrderModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ZDCardForShoppingView.h"
+#import "ZDShoppingDataManger.h"
+#import "ZDShoppingModel.h"
 
 @interface ZDShoppingViewController ()<ZDCardForShoppingViewDelegate>{
     
@@ -23,7 +25,7 @@
     CGFloat _dragEndX;
     
 }
-@property(nonatomic,strong) NSMutableArray *dataMutableArray ;
+@property(nonatomic,strong) NSMutableArray <ZDProductInfo>*dataMutableArray ;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) ZDCardForShoppingView *cardForShoppingView;
@@ -36,18 +38,26 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self getData];
+
     [self setNavigationBar];
+    [self getData];
     [self addImageView];
     [self addCardForShoppingView];
-
+    
 }
 - (void)getData{
-    
-    NSDictionary *dic0 = @{@"name":@"长城（GreatWall）红酒",@"price":@"168.00",@"image":@"shopping0"};
-     NSDictionary *dic1 = @{@"name":@"蒙牛 纯甄 常温酸牛奶",@"price":@"89.90",@"image":@"shopping1"};
-     NSDictionary *dic2 = @{@"name":@"鲁花 5S 压榨一级 花生油 4L",@"price":@"109.90",@"image":@"shopping2"};
-    _dataMutableArray = [NSMutableArray arrayWithObjects:dic0,dic1,dic2, nil];
+    ZDShoppingDataManger *shoppingManger= [[ZDShoppingDataManger alloc]init];
+    [shoppingManger getData_sucessBlock:^(ZDShoppingModel *shoppingModel){
+        _dataMutableArray = [[NSMutableArray<ZDProductInfo> alloc]initWithArray:shoppingModel.productInfo];
+        //初始化数据源
+        [_cardForShoppingView setDataMutableArray:_dataMutableArray];
+        [_cardForShoppingView setSelectedIndex:0];
+    } faliure:^{
+        
+    }];
+//    NSDictionary *dic0 = @{@"name":@"长城（GreatWall）红酒",@"price":@"168.00",@"image":@"shopping0"};
+//     NSDictionary *dic1 = @{@"name":@"蒙牛 纯甄 常温酸牛奶",@"price":@"89.90",@"image":@"shopping1"};
+//     NSDictionary *dic2 = @{@"name":@"鲁花 5S 压榨一级 花生油 4L",@"price":@"109.90",@"image":@"shopping2"};
 
 }
 - (void)setNavigationBar{
@@ -72,10 +82,7 @@
     
     _cardForShoppingView = [[ZDCardForShoppingView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
     _cardForShoppingView.delegate = self;
-    [_cardForShoppingView setDataMutableArray:_dataMutableArray];
-    [_cardForShoppingView setSelectedIndex:0];
     [self.view addSubview:_cardForShoppingView];
-    
 }
 
 //UICollectionView被选中时调用的方法

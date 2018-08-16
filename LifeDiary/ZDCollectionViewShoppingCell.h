@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDContentlistModel;
+@class ZDContentlistModel,ZDProductInfo;
 @interface ZDCollectionViewShoppingCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) UIImageView *zanImageView;
@@ -27,6 +27,6 @@
 /**
  更新cell
  */
-- (void)updateCell:(NSDictionary *)dic;
+- (void)updateCell:(ZDProductInfo *)productInfo;
 
 @end

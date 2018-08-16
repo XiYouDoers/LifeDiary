@@ -24,8 +24,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         //通知
-        
-        
         failureBlock();
     }];
     

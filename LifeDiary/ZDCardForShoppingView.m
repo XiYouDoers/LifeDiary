@@ -12,6 +12,7 @@
 #import "RGCardViewLayout.h"
 #import "ZDOrderModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ZDShoppingModel.h"
 
 @interface ZDCardForShoppingView ()<UICollectionViewDelegate,UICollectionViewDataSource> {
     UICollectionView *_collectionView;
@@ -61,7 +62,8 @@ static NSString *const cellIdForShopping = @"collectionViewForShoppingCellId";
     [_collectionView registerClass:[ZDCollectionViewShoppingCell class] forCellWithReuseIdentifier:cellIdForShopping];
     
 }
-- (void)setDataMutableArray:(NSMutableArray *)dataMutableArray{
+- (void)setDataMutableArray:(NSMutableArray<ZDProductInfo> *)dataMutableArray{
+    
     _dataMutableArray = dataMutableArray;
     [_collectionView reloadData];
 }
@@ -71,6 +73,7 @@ static NSString *const cellIdForShopping = @"collectionViewForShoppingCellId";
  
  */
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
     return _dataMutableArray.count;
 }
 /**
@@ -81,9 +84,12 @@ static NSString *const cellIdForShopping = @"collectionViewForShoppingCellId";
     
     
     _collectionViewShoppingCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellIdForShopping forIndexPath:indexPath];
-    NSDictionary *dic = _dataMutableArray[indexPath.row];
-    [_collectionViewShoppingCell updateCell:dic];
-    
+    if (_dataMutableArray.count) {
+  
+        ZDProductInfo *productInfo = _dataMutableArray[indexPath.item];
+        [_collectionViewShoppingCell updateCell:productInfo];
+    }
+
     
     return _collectionViewShoppingCell;
 }

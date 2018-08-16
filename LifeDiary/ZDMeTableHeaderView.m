@@ -126,7 +126,7 @@
         
         
         //_shadowViewForRepertoryView
-        [self addSubview:self.shadowViewForRepertoryView];
+        [self addSubview:self.shadowViewForUserInfoView];
         
         
         //_userInfoView
@@ -134,7 +134,7 @@
         _userInfoView.layer.cornerRadius = 13.f;
         _userInfoView.layer.masksToBounds = YES;
         _userInfoView.backgroundColor = [UIColor whiteColor];
-        [self.shadowViewForRepertoryView addSubview:_userInfoView];
+        [self.shadowViewForUserInfoView addSubview:_userInfoView];
         [_userInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(25);
             make.width.mas_equalTo(WIDTH-25*2);
@@ -196,20 +196,20 @@
     return self;
 }
 
-- (UIView *)shadowViewForRepertoryView{
-    if (_shadowViewForRepertoryView == nil) {
+- (UIView *)shadowViewForUserInfoView{
+    if (_shadowViewForUserInfoView == nil) {
         
         //_shadowViewForRepertoryView
-        _shadowViewForRepertoryView = [[UIView alloc]init];
-        _shadowViewForHeadPicture.frame = CGRectMake(0, 100, WIDTH, HEIGHT/2);
+        _shadowViewForUserInfoView = [[UIView alloc]init];
+        _shadowViewForUserInfoView.frame = CGRectMake(0, 0, WIDTH, HEIGHT/2);
 //        _shadowViewForRepertoryView = [UIColor purpleColor];
-        _shadowViewForRepertoryView.layer.shadowColor =  [UIColor colorWithRed:203.0/255 green:231.0/255 blue:247.0/255 alpha:1].CGColor;
-        _shadowViewForRepertoryView.layer.shadowOffset = CGSizeMake(0, 8);
-        _shadowViewForRepertoryView.layer.shadowRadius = 20 ;
-        _shadowViewForRepertoryView.layer.shadowOpacity = 1;
-        _shadowViewForRepertoryView.layer.shouldRasterize = YES;
+        _shadowViewForUserInfoView.layer.shadowColor =  [UIColor colorWithRed:203.0/255 green:231.0/255 blue:247.0/255 alpha:1].CGColor;
+        _shadowViewForUserInfoView.layer.shadowOffset = CGSizeMake(0, 8);
+        _shadowViewForUserInfoView.layer.shadowRadius = 20 ;
+        _shadowViewForUserInfoView.layer.shadowOpacity = 1;
+        _shadowViewForUserInfoView.layer.shouldRasterize = YES;
     }
-    return _shadowViewForRepertoryView;
+    return _shadowViewForUserInfoView;
 }
 - (UIView *)shadowViewForHeadPicture{
     
