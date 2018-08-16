@@ -127,6 +127,7 @@ static NSString *const cellIdForShopping = @"collectionViewForShoppingCellId";
     [self scrollToCenter];
 }
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
+
     _selectedIndex = selectedIndex;
     [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
     [self.delegate changeBackgroundImageView:_selectedIndex];

@@ -49,9 +49,11 @@
     ZDShoppingDataManger *shoppingManger= [[ZDShoppingDataManger alloc]init];
     [shoppingManger getData_sucessBlock:^(ZDShoppingModel *shoppingModel){
         _dataMutableArray = [[NSMutableArray<ZDProductInfo> alloc]initWithArray:shoppingModel.productInfo];
+
         //初始化数据源
         [_cardForShoppingView setDataMutableArray:_dataMutableArray];
         [_cardForShoppingView setSelectedIndex:0];
+        
     } faliure:^{
         
     }];
@@ -68,7 +70,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 - (void)addImageView {
-    
+     
     _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_imageView];
     
@@ -82,7 +84,9 @@
     
     _cardForShoppingView = [[ZDCardForShoppingView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
     _cardForShoppingView.delegate = self;
+    
     [self.view addSubview:_cardForShoppingView];
+    
 }
 
 //UICollectionView被选中时调用的方法
@@ -106,18 +110,22 @@
 - (void)changeBackgroundImageView:(NSInteger)index{
     
     if (_dataMutableArray.count >= index) {
-        NSDictionary *dic = _dataMutableArray[index];
-        [_imageView setImage:[UIImage imageNamed:dic[@"image"]]];
+        ZDProductInfo *productInfo = _dataMutableArray[index];
+        [_imageView sd_setImageWithURL:productInfo.imageUrl];
     }
     
 }
 - (void)pushToNextViewController:(NSInteger)index{
     
-//    ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];
-//    contentlist = _contentlistArray[index];
-//    ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
-//    linkVC.contentlistModel = contentlist;
-//    [self.navigationController pushViewController:linkVC animated:YES];
+    ZDProductInfo *productInfo = _dataMutableArray[index];
+    UIViewController *linkVC = [[UIViewController alloc]init];
+    WKWebView* webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    //    webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
+    [linkVC.view addSubview:webView];
+    NSURL* url = productInfo.url;//创建URL
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
+    [webView loadRequest:request];//加载
+    [self.navigationController pushViewController:linkVC animated:YES];
 }
 
 @end

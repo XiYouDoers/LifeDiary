@@ -37,6 +37,7 @@
     _expireTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _expireTableView.dataSource = self;
     _expireTableView.delegate = self;
+    //消除cell间细线
     _expireTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _expireTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _expireTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];

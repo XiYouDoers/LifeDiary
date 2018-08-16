@@ -15,6 +15,10 @@
 #import "ZDPhotoManagerViewController.h"
 #import "ZDGoods.h"
 #import "ZDMeDefaultCell.h"
+#import "ZDSetViewController.h"
+#import "ZDFeedbackViewController.h"
+#import "ZDSaveViewController.h"
+
 
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate,ZDPhotoManagerViewControllerDelegate>{
     NSUserDefaults *_userDefaults;
@@ -47,34 +51,16 @@
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
 
     _cellLabelDataArray = [NSArray arrayWithObjects:@"设置",@"反馈",@"收藏",@"关于", nil];
-    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete",@"about", nil];    // Do any additional setup after loading the view.
+    _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete",@"about", nil];    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect  tabRect=self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
-    }completion:^(BOOL finished) {
-        
-    }];
-}
+
 - (void)setNavigationBar{
     
     //设置NavigationBar是否透明
-    self.navigationController.navigationBar.translucent = NO;
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-    //    self.view.backgroundColor = [UIColor grayColor];
     backBtnItem.title = @"我的";
     self.navigationItem.backBarButtonItem = backBtnItem;
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     //改变BarButtonItem图片颜色
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
@@ -106,9 +92,24 @@
     }
     return _tableHeaderView;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect  tabRect=self.tabBarController.tabBar.frame;
+        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tabBarController.tabBar.frame = tabRect;
+        }completion:^(BOOL finished) {
+            
+        }];
+    }completion:^(BOOL finished) {
+        
+    }];
+}
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self saveToUserDeafault];
     
 }
@@ -136,7 +137,7 @@
     [photoManagerVC selectedWay];
 }
 
-
+#pragma mark tableView 代理方法
 /**
  section中cell的数量
  */
@@ -174,10 +175,35 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==3) {
-        ZDAboutViewController *aboutVC = [[ZDAboutViewController alloc]init];
-        [self.navigationController pushViewController:aboutVC animated:YES];
+
+    switch (indexPath.row) {
+        case 0:{
+            ZDSetViewController *setVC = [[ZDSetViewController alloc]init];
+            [self.navigationController pushViewController:setVC animated:YES];
+            break;
+        }
+        case 1:{
+            ZDFeedbackViewController *feedbackVC = [[ZDFeedbackViewController alloc]init];
+            [self.navigationController pushViewController:feedbackVC animated:YES];
+            break;
+        }
+        case 2:{
+            ZDSaveViewController *saveVC = [[ZDSaveViewController alloc]init];
+            [self.navigationController pushViewController:saveVC animated:YES];
+            break;
+        }
+      
+        case 3:{
+            ZDAboutViewController *aboutVC = [[ZDAboutViewController alloc]init];
+            [self.navigationController pushViewController:aboutVC animated:YES];
+            break;
+
+        }
+        default:
+            break;
     }
+    
+
 }
 
 @end

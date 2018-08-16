@@ -217,7 +217,6 @@
     return _messageLabel;
 }
 - (void)updateCell:(ZDProductInfo *)productInfo{
-    
 
     [_imageView sd_setImageWithURL:productInfo.imageUrl];
     self.nameLabel.text = productInfo.name;

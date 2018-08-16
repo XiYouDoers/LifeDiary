@@ -36,7 +36,7 @@
         [self addSubview:_tabLabel];
         [_tabLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-5 );
-            make.size.mas_equalTo(CGSizeMake(60, 20));
+            make.size.mas_equalTo(CGSizeMake(100, 20));
             make.left.mas_equalTo(40);
         }];
         

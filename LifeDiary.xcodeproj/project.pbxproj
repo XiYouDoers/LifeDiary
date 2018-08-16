@@ -23,6 +23,9 @@
 		041823272111F2030012C355 /* ZDMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041823262111F2030012C355 /* ZDMessageCollectionViewCell.m */; };
 		0422844C21250F3D003FB619 /* ZDShoppingDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422844B21250F3D003FB619 /* ZDShoppingDataManger.m */; };
 		0422845121251375003FB619 /* ZDShoppingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845021251375003FB619 /* ZDShoppingModel.m */; };
+		0422845621253345003FB619 /* ZDSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845521253345003FB619 /* ZDSetViewController.m */; };
+		0422845921253354003FB619 /* ZDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845821253354003FB619 /* ZDFeedbackViewController.m */; };
+		0422845C2125335D003FB619 /* ZDSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845B2125335D003FB619 /* ZDSaveViewController.m */; };
 		0426E3C72106C2080060583F /* ZDCollectionViewShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */; };
 		0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438384E20FF6B21002C2561 /* ZDFindDataManager.m */; };
 		0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385420FF6CF5002C2561 /* ZDOrderModel.m */; };
@@ -164,6 +167,12 @@
 		0422844B21250F3D003FB619 /* ZDShoppingDataManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDShoppingDataManger.m; sourceTree = "<group>"; };
 		0422844F21251375003FB619 /* ZDShoppingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDShoppingModel.h; sourceTree = "<group>"; };
 		0422845021251375003FB619 /* ZDShoppingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDShoppingModel.m; sourceTree = "<group>"; };
+		0422845421253345003FB619 /* ZDSetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSetViewController.h; sourceTree = "<group>"; };
+		0422845521253345003FB619 /* ZDSetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSetViewController.m; sourceTree = "<group>"; };
+		0422845721253354003FB619 /* ZDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFeedbackViewController.h; sourceTree = "<group>"; };
+		0422845821253354003FB619 /* ZDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDFeedbackViewController.m; sourceTree = "<group>"; };
+		0422845A2125335D003FB619 /* ZDSaveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSaveViewController.h; sourceTree = "<group>"; };
+		0422845B2125335D003FB619 /* ZDSaveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSaveViewController.m; sourceTree = "<group>"; };
 		0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCollectionViewShoppingCell.h; sourceTree = "<group>"; };
 		0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCollectionViewShoppingCell.m; sourceTree = "<group>"; };
 		0438384D20FF6B21002C2561 /* ZDFindDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFindDataManager.h; sourceTree = "<group>"; };
@@ -417,6 +426,15 @@
 			name = Shopping;
 			sourceTree = "<group>";
 		};
+		0422845321253332003FB619 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				0422845421253345003FB619 /* ZDSetViewController.h */,
+				0422845521253345003FB619 /* ZDSetViewController.m */,
+			);
+			name = Set;
+			sourceTree = "<group>";
+		};
 		044F01D920A80DB500406D65 = {
 			isa = PBXGroup;
 			children = (
@@ -552,7 +570,7 @@
 				044F02B520A811F200406D65 /* ZDMeViewController.h */,
 				044F02B620A811F200406D65 /* ZDMeViewController.m */,
 				04C907A721240F5C0081B37A /* Repertory */,
-				04C907A821240FAF0081B37A /* Setting */,
+				0422845321253332003FB619 /* Set */,
 				04C907A921240FD70081B37A /* Feedback */,
 				04C907AA21240FE00081B37A /* Save */,
 				044F02A120A810D500406D65 /* About */,
@@ -843,16 +861,11 @@
 			name = Repertory;
 			sourceTree = "<group>";
 		};
-		04C907A821240FAF0081B37A /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Setting;
-			sourceTree = "<group>";
-		};
 		04C907A921240FD70081B37A /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
+				0422845721253354003FB619 /* ZDFeedbackViewController.h */,
+				0422845821253354003FB619 /* ZDFeedbackViewController.m */,
 			);
 			name = Feedback;
 			sourceTree = "<group>";
@@ -860,6 +873,8 @@
 		04C907AA21240FE00081B37A /* Save */ = {
 			isa = PBXGroup;
 			children = (
+				0422845A2125335D003FB619 /* ZDSaveViewController.h */,
+				0422845B2125335D003FB619 /* ZDSaveViewController.m */,
 			);
 			name = Save;
 			sourceTree = "<group>";
@@ -1213,6 +1228,7 @@
 				04EC47A721155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m in Sources */,
 				04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
+				0422845621253345003FB619 /* ZDSetViewController.m in Sources */,
 				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
 				04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */,
@@ -1225,6 +1241,7 @@
 				04B8369920A874EA0050D568 /* ZDUser.m in Sources */,
 				040CE67920ADABC800A30442 /* MASViewAttribute.m in Sources */,
 				04BD723C20A9C24600A14ADF /* ZDAddTableHeaderView.m in Sources */,
+				0422845921253354003FB619 /* ZDFeedbackViewController.m in Sources */,
 				044F01E720A80DB500406D65 /* main.m in Sources */,
 				04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */,
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
@@ -1245,6 +1262,7 @@
 				040CE68420ADC34000A30442 /* ZDRoundView.m in Sources */,
 				04BD721520A9A21100A14ADF /* ZDMessageCell.m in Sources */,
 				04B8369120A871870050D568 /* FMDatabasePool.m in Sources */,
+				0422845C2125335D003FB619 /* ZDSaveViewController.m in Sources */,
 				04FF836720B94C9800EECE24 /* NSBundle+MJRefresh.m in Sources */,
 				04FF836620B94C9800EECE24 /* MJRefreshConst.m in Sources */,
 				040CE67A20ADABC800A30442 /* MASViewConstraint.m in Sources */,
