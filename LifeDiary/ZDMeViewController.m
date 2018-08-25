@@ -20,7 +20,7 @@
 #import "ZDSaveViewController.h"
 
 
-@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate,ZDPhotoManagerViewControllerDelegate>{
+@interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate>{
     NSUserDefaults *_userDefaults;
     
 }
@@ -37,7 +37,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBar];
-    _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
+    _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-44) style:UITableViewStyleGrouped];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
     _meTableView.bounces = NO;// 设置回弹
@@ -49,7 +49,7 @@
     //是否展示竖直滚动条
     _meTableView.showsVerticalScrollIndicator = NO;
     self.tableHeaderView.degegate = self;
-    _meTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    _meTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_meTableView];
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
 

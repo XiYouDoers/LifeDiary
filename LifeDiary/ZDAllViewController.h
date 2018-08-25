@@ -12,7 +12,6 @@
 
 @interface ZDAllViewController : UIViewController
 
-
 @property(nonatomic,strong) ZDMessageCell *messageCell;
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) NSMutableArray *resultMutableArray;

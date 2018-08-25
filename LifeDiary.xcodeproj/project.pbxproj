@@ -39,6 +39,7 @@
 		04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E252130FC9100B453A4 /* CoreImage.framework */; };
 		04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E272130FC9E00B453A4 /* libstdc++.tbd */; };
 		04473E2A2130FCA800B453A4 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E292130FCA800B453A4 /* TesseractOCR.framework */; };
+		04473E2D2131118800B453A4 /* ZDSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473E2C2131118800B453A4 /* ZDSortView.m */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
 		044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E920A80DB500406D65 /* AppDelegate.m */; };
 		044F01ED20A80DB500406D65 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01EC20A80DB500406D65 /* ViewController.m */; };
@@ -202,6 +203,8 @@
 		04473E252130FC9100B453A4 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		04473E272130FC9E00B453A4 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		04473E292130FCA800B453A4 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04473E2B2131118800B453A4 /* ZDSortView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSortView.h; sourceTree = "<group>"; };
+		04473E2C2131118800B453A4 /* ZDSortView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSortView.m; sourceTree = "<group>"; };
 		044F01E220A80DB500406D65 /* LifeDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F01E620A80DB500406D65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		044F01E820A80DB500406D65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -873,6 +876,8 @@
 				047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */,
 				047F345D210C8EC000D84ADD /* ZDEditPickerViewCell.h */,
 				047F345E210C8EC000D84ADD /* ZDEditPickerViewCell.m */,
+				04473E2B2131118800B453A4 /* ZDSortView.h */,
+				04473E2C2131118800B453A4 /* ZDSortView.m */,
 			);
 			name = All;
 			sourceTree = "<group>";
@@ -1294,6 +1299,7 @@
 				046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */,
 				044F02CC20A8124900406D65 /* ZDAddViewController.m in Sources */,
 				0422844C21250F3D003FB619 /* ZDShoppingDataManger.m in Sources */,
+				04473E2D2131118800B453A4 /* ZDSortView.m in Sources */,
 				044F02B420A811E800406D65 /* ZDFindViewController.m in Sources */,
 				044F02BD20A8121300406D65 /* ZDRecycleViewController.m in Sources */,
 				040CE68120ADC2CC00A30442 /* ZDUnderLineTextField.m in Sources */,

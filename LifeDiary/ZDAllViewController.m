@@ -15,12 +15,14 @@
 #import "ZDAllCell.h"
 #import "ZDMessageCell.h"
 #import "ZDAllCollectionViewCell.h"
+#import "ZDSortView.h"
 
-
-@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>{
+@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,ZDAllCellDelegate>{
     NSDateFormatter *_dateFormatter;
+    ZDSortView *_sortView;
+    NSMutableDictionary *selectedIndexes;
 }
-
+@property(nonatomic,strong) UIView *sortView;
 
 @end
 
@@ -34,12 +36,11 @@
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
     
-    
+    selectedIndexes = [NSMutableDictionary dictionary];
     self.view.backgroundColor = [UIColor whiteColor];
 
     //_allTableView
-    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, HEIGHT-(64+54)) style:UITableViewStylePlain];
     //取消cell间的分割线
     _allTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _allTableView.dataSource = self;
@@ -50,10 +51,15 @@
     _allTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
-    self.allTableView.tableHeaderView = self.searchView;
+    [self.view addSubview: self.searchView];
     
     
-    // Do any additional setup after loading the view.
+    //sortView
+    _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155)];
+
+    _sortView.hidden = YES;
+    [self.view addSubview:_sortView];
+
 }
 - (void)setNavigationBar{
     
@@ -68,6 +74,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    //隐藏顶部tabbar分割线
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     _resultMutableArray = [NSMutableArray array];
@@ -83,7 +93,7 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,15 +105,15 @@
 - (UIView *)searchView
 {
     if (!_searchView) {
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 54)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 54)];
         _searchView.backgroundColor = [UIColor whiteColor];
         
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 5, WIDTH, 44)];
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 7, WIDTH-20, 40)];
         _searchBar.backgroundColor = [UIColor clearColor];
         _searchBar.layer.masksToBounds = YES;
         _searchBar.layer.cornerRadius = 20.f;
         _searchBar.showsCancelButton = NO;
-        _searchBar.tintColor = [UIColor orangeColor];
+        _searchBar.tintColor = [UIColor whiteColor];
         _searchBar.placeholder = @"搜索物品";
         _searchBar.delegate = self;
         
@@ -114,7 +124,7 @@
                     
                     
                     UITextField *textField = [subView.subviews objectAtIndex:0];
-                    textField.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
+                    textField.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
                     
                     //设置输入框边框的颜色
                     //                    textField.layer.borderColor = [UIColor blackColor].CGColor;
@@ -124,7 +134,7 @@
                     //                    textField.textColor = [UIColor lightGrayColor];
                     
                     //设置默认文字颜色
-                    UIColor *color = [UIColor grayColor];
+                    UIColor *color = [UIColor whiteColor];
                     [textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"搜索物品"
                                                                                         attributes:@{NSForegroundColorAttributeName:color}]];
                     //修改默认的放大镜图片
@@ -132,6 +142,7 @@
                     //                    imageView.backgroundColor = [UIColor clearColor];
                     //                    imageView.image = [UIImage imageNamed:@"gww_search_ misplaces"];
                     //                    textField.leftView = imageView;
+                    textField.tintColor = [UIColor whiteColor];
                 }
             }
         }
@@ -140,7 +151,7 @@
         [_searchView addSubview:_searchBar];
         
         
-        _sortButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-44, 7+5, 31.4,30)];
+        _sortButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-54+10, 13, 27,29)];
         _sortButton.backgroundColor = [UIColor clearColor];
         _sortButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
         UIImage *sortImage = [UIImage imageNamed:@"sortNormal"];
@@ -165,7 +176,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar becomeFirstResponder];
-    searchBar.frame = CGRectMake(0, 5, WIDTH-50, 44);
+    searchBar.frame = CGRectMake(10, 5, WIDTH-54-10, 44);
     _sortButton.hidden = NO;
 }
 
@@ -174,14 +185,26 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 100);
+            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 54+150);
         }];
-     
-    }else{
-        [UIView animateWithDuration:0.3 animations:^{
-            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+        [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [UIView animateWithDuration:0.2 animations:^{
+            _sortView.hidden = NO;
+        }];
         }];
         
+    }else{
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            _sortView.hidden = YES;
+        }];
+        [NSTimer scheduledTimerWithTimeInterval:0.2 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+            }];
+        }];
+        
+       
     }
     
     [self.searchBar resignFirstResponder];
@@ -206,10 +229,23 @@
     
     return 1;
 }
+- (BOOL)cellIsSelected:(NSIndexPath*)indexPath {
+    
+    // Return whether the cell at the specified index path is selected or not
+    
+    NSNumber *selectedIndex = [selectedIndexes objectForKey:indexPath];
+    
+    return selectedIndex == nil ? FALSE : [selectedIndex boolValue];
+    
+}
 /**
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if ([self cellIsSelected:indexPath]) {
+        return 160+50;
+    }
     return 160;
     
 }
@@ -297,6 +333,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell" forIndexPath:indexPath];
+    _allCell.delegate = self;
     ZDGoods *goods = [[ZDGoods alloc]init];
     if (self.resultMutableArray.count) {
         
@@ -306,7 +343,6 @@
         
         goods = _dataMutableArray[indexPath.row];
     }
-    
     _allCell.nameLabel.text = goods.name;
     _allCell.remarkLabel.text = goods.remark;
     _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
@@ -330,12 +366,23 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    ZDGoods *goods =  _dataMutableArray[indexPath.row];
-    cell.selected = !cell.selected;
-    ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
-    editVC.goods = goods;
-    [self.navigationController pushViewController:editVC animated:YES];
+    BOOL isSelected = ![self cellIsSelected:indexPath];
+    NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+    [selectedIndexes setObject:selectedIndex forKey:indexPath];
+    [self.allTableView beginUpdates];
+    
+    [self.allTableView endUpdates];
+    [self.allTableView beginUpdates];
+    if ([self cellIsSelected:indexPath]) {
+        
+        [_allCell.manageView setFrame:CGRectMake(87.5, 160, 100, 40)];
+
+    }else{
+        
+        [_allCell.manageView setFrame:CGRectMake(87.5, 110, 100, 40)];
+
+    }
+    [self.allTableView endUpdates];
     
 }
 
@@ -386,33 +433,18 @@
     }
 }
 
-- (void)configureCell:(ZDAllCollectionViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
-{
-    //    UIView  *subview = [cell.contentView viewWithTag:20];
-    //    [subview removeFromSuperview];
+
+- (void)deleteButtonWasClicked{
     
-    ZDGoods *goods = [[ZDGoods alloc]init];
-    if (self.resultMutableArray.count) {
-        
-        goods = _resultMutableArray[indexPath.row];
-    }else{
-        
-        
-        goods = _dataMutableArray[indexPath.row];
-    }
-    cell.nameLabel.text = goods.name;
-    cell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)editButtonWasClicked{
+    
+//        ZDAllCell *cell = [self.allTableView cellForRowAtIndexPath:indexPath];
+//        ZDGoods *goods =  _dataMutableArray[indexPath.row];
+//        cell.selected = !cell.selected;
+//        ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
+//        editVC.goods = goods;
+//        [self.navigationController pushViewController:editVC animated:YES];
+}
 
 @end

@@ -26,6 +26,12 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        [self.contentView addSubview:self.manageView];
+        
+        [self.manageView addSubview:self.deleteButton];
+        
+        [self.manageView addSubview:self.editButton];
+        
         [self.contentView addSubview:self.shadowView];
         
         [self.shadowView addSubview:self.exhibitView];
@@ -43,6 +49,10 @@
         [self.exhibitView addSubview: self.saveTimeLabel];
         
         [self.exhibitView addSubview: self.sumLabel];
+        
+        [self.exhibitView addSubview: self.classificationLabel];
+        
+       
         
         
 //        _outsideArc =  [CAShapeLayer layer];
@@ -93,14 +103,17 @@
 //}
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
-    _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+    _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 140);
+    
+    self.manageView.frame = CGRectMake(87.5, 100, 100, 40);
+    self.deleteButton.frame = CGRectMake(0, 0, 100, 40);
+    self.editButton.frame = CGRectMake(100, 0, 100, 40);
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);
         make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
-        make.right.mas_offset(-10);
+        make.right.mas_offset(-50);
         make.height.mas_equalTo(20);
         
     }];
@@ -140,6 +153,12 @@
         make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
         make.width.mas_equalTo(WIDTH/3);
     }];
+    [self.classificationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
+        make.right.mas_offset(-10);
+        make.size.mas_equalTo(CGSizeMake(36, 36));
+    }];
+
     
 }
 - (UIView *)shadowView{
@@ -225,6 +244,50 @@
         
     }
     return _sumLabel;
+}
+- (UILabel *)classificationLabel{
+    if (_classificationLabel == nil) {
+        _classificationLabel = [[UILabel alloc]init];
+        _classificationLabel.textAlignment = NSTextAlignmentCenter;
+        _classificationLabel.textColor = [UIColor whiteColor];
+        _classificationLabel.text = @"食";
+        _classificationLabel.backgroundColor = [UIColor colorWithRed:114/255.0 green:190/255.0 blue:246/255.0 alpha:1];
+        _classificationLabel.layer.masksToBounds = YES;
+        _classificationLabel.layer.cornerRadius = 18.f;
+    }
+    return _classificationLabel;
+}
+- (UIView *)manageView{
+    if (_manageView == nil) {
+        _manageView = [[UIView alloc]init];
+    }
+    return _manageView;
+}
+- (UIButton *)deleteButton{
+    if (_deleteButton == nil) {
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _deleteButton.layer.masksToBounds = YES;
+        _deleteButton.layer.cornerRadius = 5.f;
+        [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [_deleteButton setBackgroundColor:[UIColor redColor]];
+        [_deleteButton addTarget:self.delegate action:@selector(deleteButtonWasClicked) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _deleteButton;
+}
+- (UIButton *)editButton{
+    if (_editButton == nil) {
+        _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _editButton.layer.masksToBounds = YES;
+        _editButton.layer.cornerRadius = 5.f;
+        [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+        [_editButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_editButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_editButton setBackgroundColor:[UIColor whiteColor]];
+        [_editButton addTarget:self.delegate action:@selector(editButtonWasClicked) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _editButton;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
