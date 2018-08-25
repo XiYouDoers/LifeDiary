@@ -38,7 +38,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     //_allTableView
-    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-20) style:UITableViewStylePlain];
+    _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
     self.automaticallyAdjustsScrollViewInsets = NO;
     //取消cell间的分割线
     _allTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

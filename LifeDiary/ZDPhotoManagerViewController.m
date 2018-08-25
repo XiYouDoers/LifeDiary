@@ -44,7 +44,7 @@
     [actionSheet addAction:openPhotoLibraryAction];
     [actionSheet addAction:cancelAction];
     
-    //相当于之前的[actionSheet show];
+
     [self.delegate presentViewController:actionSheet animated:YES completion:nil];
 }
 /**
@@ -103,18 +103,21 @@
 // 拍照完成回调
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-
-    //
-    //无法回调
-    //
+    
+     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //如果实现了这个代理方法 必须手动退出相册界面
+     NSLog(@"444444");
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
-        
+       
 //        //图片存入相册
-//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//        NSLog(@"setImage");
-//        [_button setImage:image forState:UIControlStateNormal];
+        [self.delegate returnImage:info[@"UIImagePickerControllerOriginalImage"]];
+    }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
+        NSLog(@"2333333");
+        [self.delegate returnImage:info[@"UIImagePickerControllerOriginalImage"]];
+        
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+   
 }
 
 //进入拍摄页面点击取消按钮

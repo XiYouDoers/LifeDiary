@@ -11,8 +11,10 @@
 #import "ZDMessageViewController.h"
 #import "ZDFindViewController.h"
 #import "ZDMeViewController.h"
+#import "ZDHighTabBar.h"
+#import "ZDPhotoManagerViewController.h"
 
-@interface ZDTabBarViewController (){
+@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate>{
 }
 
 @end
@@ -21,7 +23,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupUI];
+  
     
+    // Do any additional setup after loading the view.
+}
+- (void)setupUI{
+    [self setupVC];
+    [[UITabBar appearance] setShadowImage:[UIImage new]];
+    //kvo形式添加自定义的 UITabBar
+    ZDHighTabBar *tabar = [ZDHighTabBar instanceCustomTabBarWithType:SamItemUIType_Five];
+    tabar.centerBtnIcon = @"添加";
+    tabar.tabDelegate = self;
+    [self setValue:tabar forKey:@"tabBar"];
+   
+    
+//    //自定义分割线颜色
+    //改变tabbar 线条颜色
+    CGRect rect = CGRectMake(0, 0, WIDTH, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context,
+                                   [UIColor whiteColor].CGColor);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self.tabBar setShadowImage:img];
+
+    [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
+
+}
+
+- (void)setupVC{
     //“消息”界面
     ZDMessageViewController *messageViewController = [[ZDMessageViewController alloc]init];
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
@@ -34,6 +68,12 @@
     [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
     findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,-1,-7,1);
+    //view4
+    UIViewController *vC3 = [[UIViewController alloc]init];
+    UINavigationController *nVC3 = [[UINavigationController alloc]initWithRootViewController:vC3];
+    [self wsf_settingController:nVC3 tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
+     ];
+    nVC3.tabBarItem.imageInsets = UIEdgeInsetsMake(7,-1,-7,1);
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
@@ -41,13 +81,10 @@
      ];
     meNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,0,-7 ,0);
     
-    self.viewControllers = @[messageNavigationController,findNavigationController,meNavigationController];
+    self.viewControllers = @[messageNavigationController,findNavigationController,nVC3,meNavigationController];
     [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
-    
-    // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -89,14 +126,29 @@
     
     [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: BARBUTTONITEMCOLOR} forState:UIControlStateNormal];
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)addChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage{
+    // 设置子控制器的文字(可以设置tabBar和navigationBar的文字)
+    childVc.title = title;
+    // 设置子控制器的tabBarItem图片
+    childVc.tabBarItem.image = [UIImage imageNamed:image];
+    // 禁用图片渲染
+    childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    // 设置文字的样式
+    [childVc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
+    [childVc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]} forState:UIControlStateSelected];
+    // 为子控制器包装导航控制器
+//    WBBaseNC *navigationVc = [[WBBaseNC alloc] initWithRootViewController:childVc];
+//    // 添加子控制器
+//    [self addChildViewController:navigationVc];
+}
 
+-(void)tabBar:(ZDHighTabBar *)tabBar clickCenterButton:(UIButton *)sender{
+    ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]init];
+    photoManagerVC.delegate = self;
+    [photoManagerVC selectedWay];
+}
+
+- (void)returnImage:(UIImage *)image{
+    NSLog(@"%@",image);
+}
 @end

@@ -27,11 +27,18 @@
 		0422845921253354003FB619 /* ZDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845821253354003FB619 /* ZDFeedbackViewController.m */; };
 		0422845C2125335D003FB619 /* ZDSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422845B2125335D003FB619 /* ZDSaveViewController.m */; };
 		0426E3C72106C2080060583F /* ZDCollectionViewShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */; };
+		0428447D212FF4170043B27B /* ZDHighTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0428447C212FF4170043B27B /* ZDHighTabBar.m */; };
+		0428447F213002220043B27B /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0428447E213002220043B27B /* MobileNet.mlmodel */; };
+		04284482213005680043B27B /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 04284481213005670043B27B /* Resnet50.mlmodel */; };
 		0438384F20FF6B21002C2561 /* ZDFindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438384E20FF6B21002C2561 /* ZDFindDataManager.m */; };
 		0438385520FF6CF5002C2561 /* ZDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385420FF6CF5002C2561 /* ZDOrderModel.m */; };
 		0438385820FF7EF8002C2561 /* ZDLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385720FF7EF8002C2561 /* ZDLinkViewController.m */; };
 		043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */; };
 		043BD6DF20BFEFE50067F06E /* RGCardViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */; };
+		04473E242130F81F00B453A4 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 04473E232130F81E00B453A4 /* tessdata */; };
+		04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E252130FC9100B453A4 /* CoreImage.framework */; };
+		04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E272130FC9E00B453A4 /* libstdc++.tbd */; };
+		04473E2A2130FCA800B453A4 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E292130FCA800B453A4 /* TesseractOCR.framework */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
 		044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E920A80DB500406D65 /* AppDelegate.m */; };
 		044F01ED20A80DB500406D65 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01EC20A80DB500406D65 /* ViewController.m */; };
@@ -53,6 +60,7 @@
 		04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04592280211AFDF800AF75B8 /* ZDDetailView.m */; };
 		045E8AB0210EC91400CC861A /* ZDAllCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */; };
 		045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */; };
+		046D0AE72130447000095CF4 /* ZDTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046D0AE62130447000095CF4 /* ZDTextView.mm */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
 		046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40CC20DF766100CEA199 /* ZDAllCell.m */; };
 		047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */; };
@@ -175,6 +183,10 @@
 		0422845B2125335D003FB619 /* ZDSaveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSaveViewController.m; sourceTree = "<group>"; };
 		0426E3C52106C2080060583F /* ZDCollectionViewShoppingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCollectionViewShoppingCell.h; sourceTree = "<group>"; };
 		0426E3C62106C2080060583F /* ZDCollectionViewShoppingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCollectionViewShoppingCell.m; sourceTree = "<group>"; };
+		0428447B212FF4170043B27B /* ZDHighTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDHighTabBar.h; sourceTree = "<group>"; };
+		0428447C212FF4170043B27B /* ZDHighTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDHighTabBar.m; sourceTree = "<group>"; };
+		0428447E213002220043B27B /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
+		04284481213005670043B27B /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 		0438384D20FF6B21002C2561 /* ZDFindDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDFindDataManager.h; sourceTree = "<group>"; };
 		0438384E20FF6B21002C2561 /* ZDFindDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDFindDataManager.m; sourceTree = "<group>"; };
 		0438385320FF6CF5002C2561 /* ZDOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDOrderModel.h; sourceTree = "<group>"; };
@@ -186,6 +198,10 @@
 		043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGCardViewLayout.h; sourceTree = "<group>"; };
 		043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCardViewLayout.m; sourceTree = "<group>"; };
 		043BD6E120C030F10067F06E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		04473E232130F81E00B453A4 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tessdata; path = LifeDiary/tessdata; sourceTree = "<group>"; };
+		04473E252130FC9100B453A4 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		04473E272130FC9E00B453A4 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		04473E292130FCA800B453A4 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F01E220A80DB500406D65 /* LifeDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F01E620A80DB500406D65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		044F01E820A80DB500406D65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -226,6 +242,11 @@
 		045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllCollectionViewCell.m; sourceTree = "<group>"; };
 		045E8AB4210ECAE800CC861A /* ZDAllFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllFlowLayout.h; sourceTree = "<group>"; };
 		045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllFlowLayout.m; sourceTree = "<group>"; };
+		046D0AE22130422A00095CF4 /* eng.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = eng.traineddata; sourceTree = "<group>"; };
+		046D0AE3213042A000095CF4 /* chi_sim_vert.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = chi_sim_vert.traineddata; sourceTree = "<group>"; };
+		046D0AE42130435600095CF4 /* chi_sim.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = chi_sim.traineddata; sourceTree = "<group>"; };
+		046D0AE52130447000095CF4 /* ZDTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDTextView.h; sourceTree = "<group>"; };
+		046D0AE62130447000095CF4 /* ZDTextView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ZDTextView.mm; sourceTree = "<group>"; };
 		046E40C820DF6CC900CEA199 /* ZDUserDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDUserDataBase.h; sourceTree = "<group>"; };
 		046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDUserDataBase.m; sourceTree = "<group>"; };
 		046E40CB20DF766100CEA199 /* ZDAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
@@ -349,9 +370,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04473E2A2130FCA800B453A4 /* TesseractOCR.framework in Frameworks */,
+				04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */,
+				04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */,
+				35398D4042297F9EA3E40A8A /* Pods_LifeDiary.framework in Frameworks */,
 				044F028620A80F8D00406D65 /* libsqlite3.0.tbd in Frameworks */,
 				044F028420A80F7E00406D65 /* QuartzCore.framework in Frameworks */,
-				35398D4042297F9EA3E40A8A /* Pods_LifeDiary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,9 +459,19 @@
 			name = Set;
 			sourceTree = "<group>";
 		};
+		042844802130028A0043B27B /* Core ML */ = {
+			isa = PBXGroup;
+			children = (
+				04284481213005670043B27B /* Resnet50.mlmodel */,
+				0428447E213002220043B27B /* MobileNet.mlmodel */,
+			);
+			path = "Core ML";
+			sourceTree = "<group>";
+		};
 		044F01D920A80DB500406D65 = {
 			isa = PBXGroup;
 			children = (
+				04473E232130F81E00B453A4 /* tessdata */,
 				044F01E420A80DB500406D65 /* LifeDiary */,
 				044F01FE20A80DB500406D65 /* LifeDiaryTests */,
 				044F020920A80DB500406D65 /* LifeDiaryUITests */,
@@ -465,8 +499,12 @@
 				044F01E920A80DB500406D65 /* AppDelegate.m */,
 				044F01EB20A80DB500406D65 /* ViewController.h */,
 				044F01EC20A80DB500406D65 /* ViewController.m */,
+				046D0AE52130447000095CF4 /* ZDTextView.h */,
+				046D0AE62130447000095CF4 /* ZDTextView.mm */,
 				044F02CD20A8149300406D65 /* ZDTabBarViewController.h */,
 				044F02CE20A8149300406D65 /* ZDTabBarViewController.m */,
+				0428447B212FF4170043B27B /* ZDHighTabBar.h */,
+				0428447C212FF4170043B27B /* ZDHighTabBar.m */,
 				044F029B20A8104E00406D65 /* Controller */,
 				044F02A620A8112200406D65 /* View */,
 				044F02A720A8112D00406D65 /* Model */,
@@ -509,6 +547,8 @@
 		044F021820A80E6D00406D65 /* ThirdCodes */ = {
 			isa = PBXGroup;
 			children = (
+				046D0AE121303E6800095CF4 /* tessdata */,
+				042844802130028A0043B27B /* Core ML */,
 				04FF832820B94C9800EECE24 /* MJRefresh */,
 				040CE65920ADABC700A30442 /* Masonry */,
 				04B8368320A871870050D568 /* fmdb */,
@@ -519,6 +559,9 @@
 		044F028220A80F7E00406D65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04473E292130FCA800B453A4 /* TesseractOCR.framework */,
+				04473E272130FC9E00B453A4 /* libstdc++.tbd */,
+				04473E252130FC9100B453A4 /* CoreImage.framework */,
 				044F028520A80F8D00406D65 /* libsqlite3.0.tbd */,
 				044F028320A80F7E00406D65 /* QuartzCore.framework */,
 				0C672D8236B688F0FBCA5892 /* Pods_LifeDiary.framework */,
@@ -754,6 +797,16 @@
 				04BD722D20A9BA3200A14ADF /* Deplete */,
 			);
 			name = Me;
+			sourceTree = "<group>";
+		};
+		046D0AE121303E6800095CF4 /* tessdata */ = {
+			isa = PBXGroup;
+			children = (
+				046D0AE42130435600095CF4 /* chi_sim.traineddata */,
+				046D0AE22130422A00095CF4 /* eng.traineddata */,
+				046D0AE3213042A000095CF4 /* chi_sim_vert.traineddata */,
+			);
+			path = tessdata;
 			sourceTree = "<group>";
 		};
 		04A1B3F22111A96E002D960A /* Life */ = {
@@ -1102,6 +1155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04473E242130F81F00B453A4 /* tessdata in Resources */,
 				044F01F520A80DB500406D65 /* LaunchScreen.storyboard in Resources */,
 				044F01F220A80DB500406D65 /* Assets.xcassets in Resources */,
 				04FF836520B94C9800EECE24 /* MJRefresh.bundle in Resources */,
@@ -1155,6 +1209,7 @@
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1162,6 +1217,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1183,6 +1239,7 @@
 				045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */,
 				047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */,
 				043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */,
+				0428447F213002220043B27B /* MobileNet.mlmodel in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
 				04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
@@ -1200,8 +1257,10 @@
 				040CE67D20ADABC800A30442 /* View+MASAdditions.m in Sources */,
 				04FF835D20B94C9800EECE24 /* MJRefreshAutoNormalFooter.m in Sources */,
 				0426E3C72106C2080060583F /* ZDCollectionViewShoppingCell.m in Sources */,
+				0428447D212FF4170043B27B /* ZDHighTabBar.m in Sources */,
 				040CE67720ADABC800A30442 /* MASConstraintMaker.m in Sources */,
 				04FF836820B94C9800EECE24 /* UIScrollView+MJExtension.m in Sources */,
+				046D0AE72130447000095CF4 /* ZDTextView.mm in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				0422845121251375003FB619 /* ZDShoppingModel.m in Sources */,
 				04D8B64620B133A300055018 /* ZDDateCell.m in Sources */,
@@ -1269,6 +1328,7 @@
 				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
 				041823222111B5F30012C355 /* ZDHtmlScrollView.m in Sources */,
 				04FF836420B94C9800EECE24 /* MJRefreshStateHeader.m in Sources */,
+				04284482213005680043B27B /* Resnet50.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,7 +1433,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
@@ -1426,7 +1486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
 				SDKROOT = iphoneos;
@@ -1443,11 +1503,12 @@
 				DEVELOPMENT_TEAM = NA957TRD83;
 				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1460,11 +1521,12 @@
 				DEVELOPMENT_TEAM = NA957TRD83;
 				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LifeDiary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

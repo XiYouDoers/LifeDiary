@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol ZDPhotoManagerViewControllerDelegate
+- (void)returnImage:(UIImage *)image;
 @end
 @interface ZDPhotoManagerViewController : UIViewController
 @property(nonatomic,strong) UIButton *button;
