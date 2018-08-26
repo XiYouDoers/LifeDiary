@@ -110,8 +110,8 @@
         
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 7, WIDTH-20, 40)];
         _searchBar.backgroundColor = [UIColor clearColor];
-        _searchBar.layer.masksToBounds = YES;
-        _searchBar.layer.cornerRadius = 20.f;
+//        _searchBar.layer.masksToBounds = YES;
+//        _searchBar.layer.cornerRadius = 20.f;
         _searchBar.showsCancelButton = NO;
         _searchBar.tintColor = [UIColor whiteColor];
         _searchBar.placeholder = @"搜索物品";
@@ -125,6 +125,8 @@
                     
                     UITextField *textField = [subView.subviews objectAtIndex:0];
                     textField.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
+                    textField.layer.masksToBounds = YES;
+                    textField.layer.cornerRadius = 20.f;
                     
                     //设置输入框边框的颜色
                     //                    textField.layer.borderColor = [UIColor blackColor].CGColor;
@@ -185,7 +187,8 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 54+150);
+//            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 54+150);
+            self.allTableView.frame = CGRectMake(0, 64+54+180, WIDTH, HEIGHT-(64+54+180));
         }];
         [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -200,7 +203,8 @@
         }];
         [NSTimer scheduledTimerWithTimeInterval:0.2 repeats:NO block:^(NSTimer * _Nonnull timer) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+//                self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+                self.allTableView.frame = CGRectMake(0, 64+54, WIDTH, HEIGHT-(64+54));
             }];
         }];
         

@@ -8,8 +8,9 @@
 
 #import "ZDPhotoManagerViewController.h"
 
-@interface ZDPhotoManagerViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>
-
+@interface ZDPhotoManagerViewController ()< UINavigationControllerDelegate,UIScrollViewDelegate>{
+UIImagePickerController *picker;
+}
 
 @end
 
@@ -19,6 +20,7 @@
     self = [super init];
     if (self) {
         _button = [[UIButton alloc]init];
+        
     }
     return self;
 }
@@ -52,8 +54,8 @@
  */
 - (void)openCamera{
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
+    picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self.delegate;
     picker.allowsEditing = YES; //可编辑
     //判断是否可以打开照相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -81,11 +83,11 @@
     // 进入相册
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-        imagePicker.allowsEditing = YES;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.delegate = self;
-        [self.delegate presentViewController:imagePicker animated:YES completion:^{
+        picker = [[UIImagePickerController alloc]init];
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self.delegate;
+        [self.delegate presentViewController:picker animated:YES completion:^{
             
             NSLog(@"打开相册");
         }];
@@ -98,27 +100,6 @@
 
 
 
-#pragma mark - UIImagePickerControllerDelegate
-
-// 拍照完成回调
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
-     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    //如果实现了这个代理方法 必须手动退出相册界面
-     NSLog(@"444444");
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
-       
-//        //图片存入相册
-        [self.delegate returnImage:info[@"UIImagePickerControllerOriginalImage"]];
-    }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
-        NSLog(@"2333333");
-        [self.delegate returnImage:info[@"UIImagePickerControllerOriginalImage"]];
-        
-    }
-   
-}
 
 //进入拍摄页面点击取消按钮
 

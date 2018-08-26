@@ -13,8 +13,14 @@
 #import "ZDMeViewController.h"
 #import "ZDHighTabBar.h"
 #import "ZDPhotoManagerViewController.h"
+#import "Resnet50.h"
+#import <CoreML/CoreML.h>
+#import <Vision/Vision.h>
+#import <TesseractOCR/TesseractOCR.h>
+#import "ZDAddViewController.h"
+#import "ZDAddTableHeaderView.h"
 
-@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate>{
+@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate>{
 }
 
 @end
@@ -33,7 +39,7 @@
     [[UITabBar appearance] setShadowImage:[UIImage new]];
     //kvo形式添加自定义的 UITabBar
     ZDHighTabBar *tabar = [ZDHighTabBar instanceCustomTabBarWithType:SamItemUIType_Five];
-    tabar.centerBtnIcon = @"添加";
+    tabar.centerBtnIcon = @"addTabBarItemSelectedImage";
     tabar.tabDelegate = self;
     [self setValue:tabar forKey:@"tabBar"];
    
@@ -65,24 +71,24 @@
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
     UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
-    [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
+    [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"shoppingTabBarItemImage" tabBarItemSelectedImageName:@"shoppingTabBarItemSelectedImage"
      ];
-    findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,-1,-7,1);
+    findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     //view4
     UIViewController *vC3 = [[UIViewController alloc]init];
     UINavigationController *nVC3 = [[UINavigationController alloc]initWithRootViewController:vC3];
-    [self wsf_settingController:nVC3 tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
+    [self wsf_settingController:nVC3 tabBarTitle:nil tabBarItemImageName:@"lifeTabBarItemImage" tabBarItemSelectedImageName:@"lifeTabBarItemSelectedImage"
      ];
-    nVC3.tabBarItem.imageInsets = UIEdgeInsetsMake(7,-1,-7,1);
+    nVC3.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     //“我”界面
     ZDMeViewController *meViewController = [[ZDMeViewController alloc]init];
     UINavigationController *meNavigationController = [[UINavigationController alloc]initWithRootViewController:meViewController];
     [self wsf_settingController:meNavigationController tabBarTitle:nil tabBarItemImageName:@"meTabBarItemImage" tabBarItemSelectedImageName:@"meTabBarItemSelectedImage"
      ];
-    meNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(7,0,-7 ,0);
+    meNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     self.viewControllers = @[messageNavigationController,findNavigationController,nVC3,meNavigationController];
-    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance]setBarTintColor:[UIColor lightGrayColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
 }
 - (void)didReceiveMemoryWarning {
@@ -127,6 +133,7 @@
     [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: BARBUTTONITEMCOLOR} forState:UIControlStateNormal];
 }
 - (void)addChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage{
+    
     // 设置子控制器的文字(可以设置tabBar和navigationBar的文字)
     childVc.title = title;
     // 设置子控制器的tabBarItem图片
@@ -148,7 +155,84 @@
     [photoManagerVC selectedWay];
 }
 
-- (void)returnImage:(UIImage *)image{
-    NSLog(@"%@",image);
+#pragma mark - UIImagePickerControllerDelegate
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+     [picker dismissViewControllerAnimated:YES completion:nil];
+
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
+//        [self GoToCoreML:info[@"UIImagePickerControllerOriginalImage"]];
+        [self tesseractRecogniceWithImage:[UIImage imageNamed:@"1535273887355"] compleate:^(NSString *text) {
+            NSLog(@"text = %@",text);
+        } ];
+
+    }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
+//        [self GoToCoreML:info[@"UIImagePickerControllerOriginalImage"]];
+        [self tesseractRecogniceWithImage:[UIImage imageNamed:@"1535273887355"] compleate:^(NSString *text) {
+            NSLog(@"text = %@",text);
+        }
+    ];
+
 }
+
+}
+
+
+- (void)GoToCoreML:(UIImage *)image{
+    if (@available(iOS 11.0, *)) {
+        Resnet50 *resnetModel = [[Resnet50 alloc] init];
+        VNCoreMLModel *vnCoreModel = [VNCoreMLModel modelForMLModel:resnetModel.model error:nil];
+        
+        VNCoreMLRequest *vnCoreMlRequest = [[VNCoreMLRequest alloc] initWithModel:vnCoreModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+            CGFloat confidence = 0.0f;
+            VNClassificationObservation *tempClassification = nil;
+            for (VNClassificationObservation *classification in request.results) {
+                if (classification.confidence > confidence) {
+                    confidence = classification.confidence;
+                    tempClassification = classification;
+                }
+            }
+            NSMutableArray *muArray = [NSMutableArray array];
+            ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+            [muArray addObject:tempClassification.identifier];
+            [self presentViewController:addVC animated:YES completion:nil];
+            [addVC setGoodsInfo:muArray];
+            NSLog(@"%@",[NSString stringWithFormat:@"识别结果:%@",tempClassification.identifier]);
+            NSLog(@"%@",[NSString stringWithFormat:@"匹配率:%@",@(tempClassification.confidence)]);
+        }];
+        
+        VNImageRequestHandler *vnImageRequestHandler = [[VNImageRequestHandler alloc] initWithCGImage:image.CGImage options:nil];
+        
+        NSError *error = nil;
+        [vnImageRequestHandler performRequests:@[vnCoreMlRequest] error:&error];
+        
+        if (error) {
+            NSLog(@"%@",error.localizedDescription);
+        }
+        
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+/**
+ 文字识别
+
+ @param image
+ @param compleate
+ */
+- (void)tesseractRecogniceWithImage:(UIImage *)image compleate:(void(^)(NSString *text))compleate {
+        G8Tesseract *tesseract = [[G8Tesseract alloc]initWithLanguage:@"eng+chi_sim"];
+        //模式
+        tesseract.engineMode = G8OCREngineModeTesseractOnly;
+        tesseract.maximumRecognitionTime = 10;
+        tesseract.pageSegmentationMode = G8PageSegmentationModeAuto;
+        //灰化 如果是英文或者数字推荐使用。如果是汉字不推荐使用
+//        tesseract.image = [image g8_blackAndWhite];
+        tesseract.image = image;
+        [tesseract recognize];
+        compleate(tesseract.recognizedText);
+    }
 @end

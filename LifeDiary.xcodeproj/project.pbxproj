@@ -35,10 +35,8 @@
 		0438385820FF7EF8002C2561 /* ZDLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0438385720FF7EF8002C2561 /* ZDLinkViewController.m */; };
 		043BD6DC20BFED1F0067F06E /* ZDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DB20BFED1F0067F06E /* ZDCollectionViewCell.m */; };
 		043BD6DF20BFEFE50067F06E /* RGCardViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */; };
-		04473E242130F81F00B453A4 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 04473E232130F81E00B453A4 /* tessdata */; };
 		04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E252130FC9100B453A4 /* CoreImage.framework */; };
 		04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E272130FC9E00B453A4 /* libstdc++.tbd */; };
-		04473E2A2130FCA800B453A4 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E292130FCA800B453A4 /* TesseractOCR.framework */; };
 		04473E2D2131118800B453A4 /* ZDSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473E2C2131118800B453A4 /* ZDSortView.m */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
 		044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E920A80DB500406D65 /* AppDelegate.m */; };
@@ -61,7 +59,6 @@
 		04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04592280211AFDF800AF75B8 /* ZDDetailView.m */; };
 		045E8AB0210EC91400CC861A /* ZDAllCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AAF210EC91400CC861A /* ZDAllCollectionViewCell.m */; };
 		045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */; };
-		046D0AE72130447000095CF4 /* ZDTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046D0AE62130447000095CF4 /* ZDTextView.mm */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
 		046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40CC20DF766100CEA199 /* ZDAllCell.m */; };
 		047F3456210C884A00D84ADD /* ZDEditDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F3455210C884A00D84ADD /* ZDEditDefaultCell.m */; };
@@ -90,6 +87,8 @@
 		04CF7C4A20AC6C2400060741 /* ZDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4920AC6C2400060741 /* ZDViewController.m */; };
 		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
 		04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C5820AC71DC00060741 /* ZDAllViewController.m */; };
+		04CF7F632132AF240039A356 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 04CF7F612132AEC90039A356 /* tessdata */; };
+		04CF7F652132B05C0039A356 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CF7F642132B05C0039A356 /* TesseractOCR.framework */; };
 		04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91EE21225DF600113E09 /* ZDCardView.m */; };
 		04CF91F22122C71500113E09 /* ZDMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91F12122C71500113E09 /* ZDMessageCardView.m */; };
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
@@ -199,7 +198,6 @@
 		043BD6DD20BFEFDA0067F06E /* RGCardViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGCardViewLayout.h; sourceTree = "<group>"; };
 		043BD6DE20BFEFE50067F06E /* RGCardViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCardViewLayout.m; sourceTree = "<group>"; };
 		043BD6E120C030F10067F06E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		04473E232130F81E00B453A4 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tessdata; path = LifeDiary/tessdata; sourceTree = "<group>"; };
 		04473E252130FC9100B453A4 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		04473E272130FC9E00B453A4 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		04473E292130FCA800B453A4 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,8 +246,6 @@
 		046D0AE22130422A00095CF4 /* eng.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = eng.traineddata; sourceTree = "<group>"; };
 		046D0AE3213042A000095CF4 /* chi_sim_vert.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = chi_sim_vert.traineddata; sourceTree = "<group>"; };
 		046D0AE42130435600095CF4 /* chi_sim.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = chi_sim.traineddata; sourceTree = "<group>"; };
-		046D0AE52130447000095CF4 /* ZDTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDTextView.h; sourceTree = "<group>"; };
-		046D0AE62130447000095CF4 /* ZDTextView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ZDTextView.mm; sourceTree = "<group>"; };
 		046E40C820DF6CC900CEA199 /* ZDUserDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDUserDataBase.h; sourceTree = "<group>"; };
 		046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDUserDataBase.m; sourceTree = "<group>"; };
 		046E40CB20DF766100CEA199 /* ZDAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
@@ -307,6 +303,8 @@
 		04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMessageViewController.m; sourceTree = "<group>"; };
 		04CF7C5720AC71DC00060741 /* ZDAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAllViewController.h; sourceTree = "<group>"; };
 		04CF7C5820AC71DC00060741 /* ZDAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAllViewController.m; sourceTree = "<group>"; };
+		04CF7F612132AEC90039A356 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		04CF7F642132B05C0039A356 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CF91ED21225DF600113E09 /* ZDCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDCardView.h; sourceTree = "<group>"; };
 		04CF91EE21225DF600113E09 /* ZDCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDCardView.m; sourceTree = "<group>"; };
 		04CF91F02122C71500113E09 /* ZDMessageCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDMessageCardView.h; sourceTree = "<group>"; };
@@ -373,7 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04473E2A2130FCA800B453A4 /* TesseractOCR.framework in Frameworks */,
+				04CF7F652132B05C0039A356 /* TesseractOCR.framework in Frameworks */,
 				04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */,
 				04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */,
 				35398D4042297F9EA3E40A8A /* Pods_LifeDiary.framework in Frameworks */,
@@ -474,7 +472,7 @@
 		044F01D920A80DB500406D65 = {
 			isa = PBXGroup;
 			children = (
-				04473E232130F81E00B453A4 /* tessdata */,
+				04CF7F612132AEC90039A356 /* tessdata */,
 				044F01E420A80DB500406D65 /* LifeDiary */,
 				044F01FE20A80DB500406D65 /* LifeDiaryTests */,
 				044F020920A80DB500406D65 /* LifeDiaryUITests */,
@@ -502,8 +500,6 @@
 				044F01E920A80DB500406D65 /* AppDelegate.m */,
 				044F01EB20A80DB500406D65 /* ViewController.h */,
 				044F01EC20A80DB500406D65 /* ViewController.m */,
-				046D0AE52130447000095CF4 /* ZDTextView.h */,
-				046D0AE62130447000095CF4 /* ZDTextView.mm */,
 				044F02CD20A8149300406D65 /* ZDTabBarViewController.h */,
 				044F02CE20A8149300406D65 /* ZDTabBarViewController.m */,
 				0428447B212FF4170043B27B /* ZDHighTabBar.h */,
@@ -562,6 +558,7 @@
 		044F028220A80F7E00406D65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04CF7F642132B05C0039A356 /* TesseractOCR.framework */,
 				04473E292130FCA800B453A4 /* TesseractOCR.framework */,
 				04473E272130FC9E00B453A4 /* libstdc++.tbd */,
 				04473E252130FC9100B453A4 /* CoreImage.framework */,
@@ -1160,7 +1157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04473E242130F81F00B453A4 /* tessdata in Resources */,
+				04CF7F632132AF240039A356 /* tessdata in Resources */,
 				044F01F520A80DB500406D65 /* LaunchScreen.storyboard in Resources */,
 				044F01F220A80DB500406D65 /* Assets.xcassets in Resources */,
 				04FF836520B94C9800EECE24 /* MJRefresh.bundle in Resources */,
@@ -1265,7 +1262,6 @@
 				0428447D212FF4170043B27B /* ZDHighTabBar.m in Sources */,
 				040CE67720ADABC800A30442 /* MASConstraintMaker.m in Sources */,
 				04FF836820B94C9800EECE24 /* UIScrollView+MJExtension.m in Sources */,
-				046D0AE72130447000095CF4 /* ZDTextView.mm in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				0422845121251375003FB619 /* ZDShoppingModel.m in Sources */,
 				04D8B64620B133A300055018 /* ZDDateCell.m in Sources */,
@@ -1507,6 +1503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1525,6 +1522,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NA957TRD83;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = LifeDiary/PrefixHeader.pch;
 				INFOPLIST_FILE = LifeDiary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;

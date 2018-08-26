@@ -22,6 +22,7 @@
     NSDateFormatter *_saveTimeFormatter;
     NSDateFormatter *_countFormatter;
     NSArray *_pickerViewDataArray;
+    NSMutableArray *_muArray;
 }
 
 
@@ -62,12 +63,69 @@
     [self.view addSubview:_addTableView];
     [_addTableView registerClass:[ZDAddDefaultCell class] forCellReuseIdentifier:@"addDefaultCell"];
     [_addTableView registerClass:[ZDPickerViewCell class] forCellReuseIdentifier:@"pickerViewCell"];
-    
+    [self setInfo];
     
     _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
-    
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.frame = CGRectMake(150, 500, 100, 60);
+    cancelButton.layer.masksToBounds = YES;
+    cancelButton.layer.cornerRadius = 10.f;
+    cancelButton.selected = YES;
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [cancelButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"buttonSelected"] forState:UIControlStateSelected];
+    [self.view addSubview:cancelButton];
     // Do any additional setup after loading the view.
+}
+- (void)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)setInfo{
+    if (_muArray.count) {
+        NSString *str;
+        for (int i = 0 ; i < _muArray.count ; i ++) {
+            str = _muArray[i];
+            switch (i) {
+                case  0:{
+                    _addTableHeaderView.nameTextField.text = str;
+                }
+                    break;
+                case  1:
+                    _addTableHeaderView.remarkTextField.text = str;
+                    break;
+                case  2:{
+                    
+                    NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
+                    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
+                    cellForZero.textField.text = str;
+                }
+                    break;
+                case  3:
+                {
+                    
+                    NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
+                    ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
+                    cellForOne.textField.text = str;
+                }
+                    break;
+                case  4:
+                {
+                    
+                    NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
+                    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
+                    cellForZero.textField.text = str;
+                }
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+    }
+    
 }
 - (void)setNavigationBar{
     UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
@@ -81,7 +139,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //隐藏tabBar
+    //隐藏tabBarbbbbb
     CGRect  tabRect = self.tabBarController.tabBar.frame;
     tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
     [UIView animateWithDuration:0.5f animations:^{
@@ -226,6 +284,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)setGoodsInfo:(NSMutableArray *)muArray{
+    
+    _muArray = [NSMutableArray array];
+    _muArray = muArray;
+}
+
 #pragma mark - 拍照和相册
 /**
  *  调用照相机
@@ -279,10 +344,10 @@
 
 // 拍照完成回调
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
-
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
-        
+        UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         //图片存入相册
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];

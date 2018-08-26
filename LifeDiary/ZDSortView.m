@@ -8,11 +8,26 @@
 
 #import "ZDSortView.h"
 
+@interface ZDSortView()
+@property(nonatomic,strong) NSMutableArray *classMuArray;
+@property(nonatomic,strong) NSMutableArray *sortMuArray;
+@property(nonatomic,strong) UIImage *buttonOfClassImage;
+@property(nonatomic,strong) UIImage *buttonOfSortImage;
+@end
 @implementation ZDSortView
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         
         
+        _buttonOfClassImage = [UIImage imageNamed:@"buttonOfClassSelected"];
+        _buttonOfClassImage = [_buttonOfClassImage  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        _buttonOfSortImage = [UIImage imageNamed:@"buttonOfSortSelected"];
+        _buttonOfSortImage = [_buttonOfSortImage  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        self.backgroundColor = [UIColor whiteColor];
+        _classMuArray = [NSMutableArray array];
+        _sortMuArray = [NSMutableArray array];
         //classLabel
         [self addSubview:self.classLabel];
         [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -29,11 +44,20 @@
             make.size.mas_equalTo(CGSizeMake(WIDTH-16, 40));
         }];
         
+        
+        //allButton
+        [self.classScrollView addSubview:self.allButton];
+        [self.allButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.classLabel.mas_bottom).with.offset(5);
+            make.left.mas_equalTo(8);
+            make.size.mas_equalTo(CGSizeMake(80, 30));
+        }];
+        
         //foodButton
         [self.classScrollView addSubview:self.foodButton];
         [self.foodButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.classLabel.mas_bottom).with.offset(5);
-            make.left.mas_equalTo(8);
+            make.left.mas_equalTo(_allButton.mas_right).with.offset(5);
             make.size.mas_equalTo(CGSizeMake(80, 30));
         }];
         
@@ -137,10 +161,26 @@
 - (UIScrollView *)classScrollView{
     if (_classScrollView == nil) {
         _classScrollView = [[UIScrollView alloc]init];
-        _classScrollView.contentSize = CGSizeMake(WIDTH*1.5, 40);
+        _classScrollView.contentSize = CGSizeMake(WIDTH*1.2, 40);
         _classScrollView.showsHorizontalScrollIndicator = NO;
     }
     return _classScrollView;
+}
+- (UIButton *)allButton{
+    
+    if (_allButton == nil) {
+        _allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _allButton.layer.masksToBounds = YES;
+        _allButton.layer.cornerRadius = 15.f;
+        _allButton.selected = YES;
+        [_allButton setTitle:@"全部" forState:UIControlStateNormal];
+        [_allButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_allButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [_allButton addTarget:self action:@selector(clickButtonOfClass:) forControlEvents:UIControlEventTouchUpInside];
+        [_allButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
+        [_classMuArray addObject:_allButton];
+    }
+    return _allButton;
 }
 - (UIButton *)foodButton{
     
@@ -151,7 +191,9 @@
         [_foodButton setTitle:@"食品" forState:UIControlStateNormal];
         [_foodButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_foodButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [_foodButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_foodButton addTarget:self action:@selector(clickButtonOfClass:) forControlEvents:UIControlEventTouchUpInside];
+        [_foodButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
+        [_classMuArray addObject:_foodButton];
     }
     return _foodButton;
 }
@@ -165,7 +207,9 @@
         [_medicineButton setTitle:@"药品" forState:UIControlStateNormal];
         [_medicineButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_medicineButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-//        [_medicineButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_medicineButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
+        [_medicineButton addTarget:self action:@selector(clickButtonOfClass:) forControlEvents:UIControlEventTouchUpInside];
+        [_classMuArray addObject:_medicineButton];
     }
     return _medicineButton;
 }
@@ -179,7 +223,9 @@
         [_cosmeticButton setTitle:@"化妆品" forState:UIControlStateNormal];
         [_cosmeticButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_cosmeticButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-//        [_cosmeticButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_cosmeticButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
+        [_cosmeticButton addTarget:self action:@selector(clickButtonOfClass:) forControlEvents:UIControlEventTouchUpInside];
+        [_classMuArray addObject:_cosmeticButton];
     }
     return _cosmeticButton;
 }
@@ -193,9 +239,18 @@
         [_commodityButton setTitle:@"日用品" forState:UIControlStateNormal];
         [_commodityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_commodityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-//        [_commodityButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_commodityButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
+        [_commodityButton addTarget:self action:@selector(clickButtonOfClass:) forControlEvents:UIControlEventTouchUpInside];
+        [_classMuArray addObject:_commodityButton];
     }
     return _commodityButton;
+}
+- (void)clickButtonOfClass:(UIButton *)button{
+    
+    for (UIButton *button in _classMuArray) {
+        button.selected = NO;
+    }
+    button.selected = !button.selected;
 }
 - (UILabel *)sortLabel{
     
@@ -211,7 +266,7 @@
 - (UIScrollView *)sortScrollView{
     if (_sortScrollView == nil) {
         _sortScrollView = [[UIScrollView alloc]init];
-        _sortScrollView.contentSize = CGSizeMake(WIDTH*2,40);
+        _sortScrollView.contentSize = CGSizeMake(WIDTH*1.5,40);
         _sortScrollView.showsHorizontalScrollIndicator = NO;
     }
     return _sortScrollView;
@@ -222,10 +277,13 @@
         _defaultSortButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _defaultSortButton.layer.masksToBounds = YES;
         _defaultSortButton.layer.cornerRadius = 15.f;
+        _defaultSortButton.selected = YES;
         [_defaultSortButton setTitle:@"默认排序" forState:UIControlStateNormal];
         [_defaultSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_defaultSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [_defaultSortButton setBackgroundColor:[UIColor colorWithRed:64/255.0 green:219/255.0 blue:228/255.0 alpha:1]];
+        [_defaultSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_defaultSortButton addTarget:self action:@selector(clickButtonOfSort:) forControlEvents:UIControlEventTouchUpInside];
+        [_sortMuArray addObject:_defaultSortButton];
     }
     return _defaultSortButton;
 }
@@ -239,7 +297,9 @@
         [_timeUpSortButton setTitle:@"时间升序" forState:UIControlStateNormal];
         [_timeUpSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_timeUpSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        //        [_medicineButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_timeUpSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_timeUpSortButton addTarget:self action:@selector(clickButtonOfSort:) forControlEvents:UIControlEventTouchUpInside];
+        [_sortMuArray addObject:_timeUpSortButton];
     }
     return _timeUpSortButton;
 }
@@ -253,7 +313,9 @@
         [_timeDownSortButton setTitle:@"时间升序" forState:UIControlStateNormal];
         [_timeDownSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_timeDownSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        //        [_cosmeticButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_timeDownSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_timeDownSortButton addTarget:self action:@selector(clickButtonOfSort:) forControlEvents:UIControlEventTouchUpInside];
+        [_sortMuArray addObject:_timeDownSortButton];
     }
     return _timeDownSortButton;
 }
@@ -267,7 +329,9 @@
         [_sumUpSortButton setTitle:@"数量升序" forState:UIControlStateNormal];
         [_sumUpSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_sumUpSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        //        [_commodityButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+        [_sumUpSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_sumUpSortButton addTarget:self action:@selector(clickButtonOfSort:) forControlEvents:UIControlEventTouchUpInside];
+        [_sortMuArray addObject:_sumUpSortButton];
     }
     return _sumUpSortButton;
 }
@@ -280,8 +344,19 @@
         [_sumDownSortButton setTitle:@"数量降序" forState:UIControlStateNormal];
         [_sumDownSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_sumDownSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        //        [_commodityButton setBackgroundColor:[UIColor colorWithRed:90/255.0 green:180/255.0 blue:249/255.0 alpha:1]];
+      
+        [_sumDownSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_sumDownSortButton addTarget:self action:@selector(clickButtonOfSort:) forControlEvents:UIControlEventTouchUpInside];
+        [_sortMuArray addObject:_sumDownSortButton];
     }
     return _sumDownSortButton;
 }
+- (void)clickButtonOfSort:(UIButton *)button{
+    
+    for (UIButton *button in _sortMuArray) {
+        button.selected = NO;
+    }
+    button.selected = !button.selected;
+}
+
 @end

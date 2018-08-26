@@ -12,6 +12,7 @@
 //class
 @property(nonatomic,strong) UILabel *classLabel;
 @property(nonatomic,strong) UIScrollView *classScrollView;
+@property(nonatomic,strong) UIButton *allButton;
 @property(nonatomic,strong) UIButton *foodButton;
 @property(nonatomic,strong) UIButton *medicineButton;
 @property(nonatomic,strong) UIButton *cosmeticButton;

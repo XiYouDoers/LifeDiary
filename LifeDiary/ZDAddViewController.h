@@ -11,9 +11,11 @@
 @class ZDAddTableHeaderView,ZDAddDefaultCell,ZDPickerViewCell;
 
 @interface ZDAddViewController : UIViewController
+
 @property(nonatomic,strong) ZDAddTableHeaderView *addTableHeaderView;
 @property(nonatomic,strong) UITableView *addTableView;
 @property(nonatomic,strong) ZDAddDefaultCell *addDefaultCell;
 @property(nonatomic,strong) ZDPickerViewCell *pickerViewCell;
+- (void)setGoodsInfo:(NSMutableArray *)muArray;
 
 @end
