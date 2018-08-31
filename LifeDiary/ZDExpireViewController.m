@@ -25,6 +25,7 @@
 @implementation ZDExpireViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"耗尽物品";
@@ -68,23 +69,16 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
     [self.expireTableView reloadData];
     
     
-        CGRect  tabRect = self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
 }
 
 - (void)manageCell:(UIBarButtonItem *)sender{

@@ -17,6 +17,8 @@
 #import "ZDMessageCollectionViewCell.h"
 #import "ZDDetailView.h"
 #import "ZDMessageCardView.h"
+#import "ZDMeViewController.h"
+
 
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
@@ -96,11 +98,14 @@ NSDateFormatter const *_formatter;
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR}];
     
     //rightBarButtonItem
-    UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGoods)];
+    UIImage *image = [UIImage imageNamed:@"me"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *meBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(openMe)];
+
     
 //    [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
     
-    self.navigationItem.rightBarButtonItem = addBarButtonItem;
+    self.navigationItem.rightBarButtonItem = meBarButtonItem;
     
     if (@available(iOS 11.0, *)) {
         self.navigationController.navigationBar.prefersLargeTitles = YES;
@@ -116,13 +121,10 @@ NSDateFormatter const *_formatter;
     ZDAllViewController *allViewController = [[ZDAllViewController alloc]init];
     [self.navigationController pushViewController:allViewController animated:YES];
 }
-- (void)addGoods{
-    ZDAddViewController *addViewController = [[ZDAddViewController alloc]init];
-    [self.navigationController pushViewController:addViewController animated:YES];
+- (void)openMe{
+    ZDMeViewController *meVC = [[ZDMeViewController alloc]init];
+    [self.navigationController pushViewController:meVC animated:YES];
 }
-
-
-
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -187,8 +189,6 @@ NSDateFormatter const *_formatter;
         
     }
     _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
-
-   
     //显示tabBar
     [self setTabBarHidden:NO];
 }
@@ -225,4 +225,5 @@ NSDateFormatter const *_formatter;
         _detailView.frame = CGRectMake(0, HEIGHT, WIDTH,49);
     }];
 }
+
 @end

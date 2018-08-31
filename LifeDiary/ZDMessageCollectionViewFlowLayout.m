@@ -45,7 +45,7 @@
 {
     CGFloat widthForBigItem = self.collectionView.frame.size.width;
     CGFloat widthForSmallItem = self.collectionView.frame.size.width/2;
-    CGFloat heightForBigItem = widthForBigItem * 0.8;
+    CGFloat heightForBigItem = widthForBigItem * 0.9;
     CGFloat heightForSmallItem = widthForSmallItem * 1.3;
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     NSInteger i = indexPath.item;

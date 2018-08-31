@@ -28,21 +28,21 @@
 @property(nonatomic,copy) NSArray *cellImageDataArray;
 @property(nonatomic,strong) ZDMeTableHeaderView *tableHeaderView;
 
-
 @end
 
 @implementation ZDMeViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBar];
-    _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-44) style:UITableViewStyleGrouped];
+    _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
-    _meTableView.bounces = NO;// 设置回弹
+    _meTableView.bounces = YES;// 设置回弹
     _meTableView.scrollEnabled = YES;
-    _meTableView.sectionHeaderHeight = 12.f;
+    _meTableView.sectionHeaderHeight = 0.01f;
     _meTableView.sectionFooterHeight = 0.01f;
     _meTableView.backgroundColor = [UIColor whiteColor];
     _meTableView.tableHeaderView= self.tableHeaderView;
@@ -60,6 +60,12 @@
 
 - (void)setNavigationBar{
     
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+    } else {
+        // Fallback on earlier versions
+    }
+    self.navigationItem.title = @"我的";
     //设置NavigationBar是否透明
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"我的";
@@ -67,16 +73,14 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     //改变BarButtonItem图片颜色
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
-
-
 }
 - (ZDMeTableHeaderView *)tableHeaderView{
     
     if (_tableHeaderView == nil) {
         if(iPhoneX){
-        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -50, WIDTH, HEIGHT*0.72)];
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -50, WIDTH, HEIGHT*0.2)];
         }else{
-        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, -20, WIDTH, HEIGHT*0.72)];
+        _tableHeaderView = [[ZDMeTableHeaderView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT*0.2)];
         }
         _userDefaults = [NSUserDefaults standardUserDefaults];
         if ([_userDefaults stringForKey:@"user_name"]) {
@@ -97,23 +101,18 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    //隐藏tabBar
+    CGRect  tabRect = self.tabBarController.tabBar.frame;
+    tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect  tabRect=self.tabBarController.tabBar.frame;
-        tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height-self.tabBarController.tabBar.frame.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.tabBarController.tabBar.frame = tabRect;
-        }completion:^(BOOL finished) {
-            
-        }];
+        self.tabBarController.tabBar.frame = tabRect;
     }completion:^(BOOL finished) {
         
     }];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self saveToUserDeafault];
+//    [self saveToUserDeafault];
     
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -121,8 +120,8 @@
     [_tableHeaderView.nameTextField resignFirstResponder];
     [_tableHeaderView.personalitySignatureTextField resignFirstResponder];
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
     [textField resignFirstResponder];
     [self saveToUserDeafault];
     return YES;
@@ -205,8 +204,6 @@
         default:
             break;
     }
-    
-
 }
 
 @end

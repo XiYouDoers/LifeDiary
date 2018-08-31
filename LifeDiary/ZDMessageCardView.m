@@ -33,7 +33,6 @@ static NSString *const cellId = @"collectionViewCellId";
 }
 - (void)buildUI {
     [self addCollectionView];
-    [self addRefreshHeaderGif];
 }
 
 - (void)addCollectionView {
@@ -120,69 +119,69 @@ static NSString *const cellId = @"collectionViewCellId";
     }
     cell. isChangeAlpha = !cell.isChangeAlpha;
 }
-#pragma mark - 下拉刷新
-- (void)addRefreshHeaderGif{
-    //MJRefreshGifHeader
-    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
-        
-        //延时1s执行
-        [NSThread sleepForTimeInterval:0.3f];
-        //隐藏底部信息栏
-        //将原来选中状态清除
-        for (int i = 0;i<self.messageDataMutableArray.count;i++) {
-            NSIndexPath *indexpathForOthers = [NSIndexPath indexPathForItem:i inSection:0];
-            ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexpathForOthers];
-            if (cell.isChangeAlpha == YES) {
-                cell.isChangeAlpha = NO;
-                break;
-            }
-        }
-        [self.delegate hiddenDetailView];
-        _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-        _messageDataMutableArray = [NSMutableArray array];
-        NSDate *dateNow = [[NSDate alloc]init];
-        for (ZDGoods *goods in _allDataMutableArray) {
-            NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-            NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-            if (seconds<100) {
-                [_messageDataMutableArray addObject:goods];
-            }
-        }
-        [self.collectionView reloadData];
-        [self.collectionView.mj_header endRefreshing];
-        
-    }];
-    NSMutableArray *refreshHeaderArray2 = [[NSMutableArray alloc]init];
-    [refreshHeaderArray2 addObject:[UIImage imageNamed:@"clock0"]];
-    NSMutableArray *refreshHeaderArray = [[NSMutableArray alloc]init];
-    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock1"]];
-    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock2"]];
-    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock3"]];
-    // Set the ordinary state of animated images
-    [header setImages:refreshHeaderArray2 forState:MJRefreshStateIdle];
-    // Set the pulling state of animated images（Enter the status of refreshing as soon as loosen）
-    [header setImages:refreshHeaderArray2 forState:MJRefreshStatePulling];
-    // Set the refreshing state of animated images
-    [header setImages:refreshHeaderArray forState:MJRefreshStateRefreshing];
-    // Set header
-    self.collectionView.mj_header = header;
-    // Hide the time
-    header.lastUpdatedTimeLabel.hidden = YES;
-    // Hide the status
-    header.stateLabel.hidden = NO;
-    //set title
-    [header setTitle:@"下拉刷新" forState:MJRefreshStateIdle];
-    [header setTitle:@"松开刷新" forState:MJRefreshStatePulling];
-    [header setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
-    
-    // Set font
-    header.stateLabel.font = [UIFont systemFontOfSize:17];
-    header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:17];
-    
-    // Set textColor
-    header.stateLabel.textColor = [UIColor lightGrayColor];
-    header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
-}
+//#pragma mark - 下拉刷新
+//- (void)addRefreshHeaderGif{
+//    //MJRefreshGifHeader
+//    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+//
+//        //延时1s执行
+//        [NSThread sleepForTimeInterval:0.3f];
+//        //隐藏底部信息栏
+//        //将原来选中状态清除
+//        for (int i = 0;i<self.messageDataMutableArray.count;i++) {
+//            NSIndexPath *indexpathForOthers = [NSIndexPath indexPathForItem:i inSection:0];
+//            ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexpathForOthers];
+//            if (cell.isChangeAlpha == YES) {
+//                cell.isChangeAlpha = NO;
+//                break;
+//            }
+//        }
+//        [self.delegate hiddenDetailView];
+//        _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+//        _messageDataMutableArray = [NSMutableArray array];
+//        NSDate *dateNow = [[NSDate alloc]init];
+//        for (ZDGoods *goods in _allDataMutableArray) {
+//            NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+//            NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+//            if (seconds<100) {
+//                [_messageDataMutableArray addObject:goods];
+//            }
+//        }
+//        [self.collectionView reloadData];
+//        [self.collectionView.mj_header endRefreshing];
+//
+//    }];
+//    NSMutableArray *refreshHeaderArray2 = [[NSMutableArray alloc]init];
+//    [refreshHeaderArray2 addObject:[UIImage imageNamed:@"clock0"]];
+//    NSMutableArray *refreshHeaderArray = [[NSMutableArray alloc]init];
+//    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock1"]];
+//    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock2"]];
+//    [refreshHeaderArray addObject:[UIImage imageNamed:@"clock3"]];
+//    // Set the ordinary state of animated images
+//    [header setImages:refreshHeaderArray2 forState:MJRefreshStateIdle];
+//    // Set the pulling state of animated images（Enter the status of refreshing as soon as loosen）
+//    [header setImages:refreshHeaderArray2 forState:MJRefreshStatePulling];
+//    // Set the refreshing state of animated images
+//    [header setImages:refreshHeaderArray forState:MJRefreshStateRefreshing];
+//    // Set header
+//    self.collectionView.mj_header = header;
+//    // Hide the time
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    // Hide the status
+//    header.stateLabel.hidden = NO;
+//    //set title
+//    [header setTitle:@"下拉刷新" forState:MJRefreshStateIdle];
+//    [header setTitle:@"松开刷新" forState:MJRefreshStatePulling];
+//    [header setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
+//
+//    // Set font
+//    header.stateLabel.font = [UIFont systemFontOfSize:17];
+//    header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:17];
+//
+//    // Set textColor
+//    header.stateLabel.textColor = [UIColor lightGrayColor];
+//    header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
+//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

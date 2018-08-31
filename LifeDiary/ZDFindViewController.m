@@ -72,11 +72,9 @@ static NSString *const footerId = @"footerId";
     [_segmentControl addTarget:self action:@selector(doSomethingInSegment:) forControlEvents:UIControlEventValueChanged];
     [self.navigationController.navigationBar addSubview:_segmentControl];
     [_segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (iPhoneX) {
-        make.bottom.mas_equalTo(-10);
-        }else{
-        make.bottom.mas_equalTo(-15);
-        }
+        
+    
+        make.top.mas_equalTo(30);
         make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
         make.left.mas_equalTo(WIDTH/3);
     }];
@@ -88,18 +86,22 @@ static NSString *const footerId = @"footerId";
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"生活";
     self.navigationItem.backBarButtonItem = backBtnItem;
+    
     if (@available(iOS 11.0, *)) {
         self.navigationController.navigationBar.prefersLargeTitles = YES;
+        
         self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     } else {
         // Fallback on earlier versions
     }
-    _titleLabel = [[UILabel alloc]init];
-    _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.frame = CGRectMake(10, 10, 100, 40);
-    _titleLabel.text = @"发现";
-    _titleLabel.font = [UIFont systemFontOfSize:34];
-    [self.navigationController.navigationBar addSubview:_titleLabel];
+    self.navigationItem.title = @"发现";
+    
+//    _titleLabel = [[UILabel alloc]init];
+//    _titleLabel.textAlignment = NSTextAlignmentLeft;
+//    _titleLabel.frame = CGRectMake(10, 10, 100, 40);
+//    _titleLabel.text = @"发现";
+//    _titleLabel.font = [UIFont systemFontOfSize:34];
+//    [self.navigationController.navigationBar addSubview:_titleLabel];
     
     
     //改变BarButtonItem图片颜色
@@ -133,19 +135,6 @@ static NSString *const footerId = @"footerId";
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

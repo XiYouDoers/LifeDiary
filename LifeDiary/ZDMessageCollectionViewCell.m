@@ -101,8 +101,8 @@ extern NSDateFormatter const *_formatter;
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
   
     _nameLabel.frame = CGRectMake(10, 10, self.frame.size.width-20, 30);
-    _remarkLabel.frame = CGRectMake(10,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+10, self.frame.size.width-20-10, 20);
-    _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-20-10*4);
+    _remarkLabel.frame = CGRectMake(10,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+5, self.frame.size.width-20-10, 15);
+    _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-10-10*4);
 }
 - (UIView *)shadowView{
     if (_shadowView == nil) {

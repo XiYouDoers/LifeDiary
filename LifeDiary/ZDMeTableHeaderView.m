@@ -15,23 +15,23 @@
     if(self=[super initWithFrame:frame]){
         
         self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:244.0/255 alpha:1];
-        //_backgroundImageView
-        _backgroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backgroundImage"]];
-        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _backgroundImageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height*0.5);
-        [self addSubview:_backgroundImageView];
-        
-        
-        //_titleLabel
-        _titleLabel = [[UILabel alloc]init];
-        _titleLabel.text = @"我的";
-        _titleLabel.font = [UIFont systemFontOfSize: 34];
-        [_backgroundImageView addSubview:_titleLabel];
-        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(14);
-            make.top.mas_equalTo(10);
-            make.size.mas_equalTo(CGSizeMake(100, 40));
-        }];
+//        //_backgroundImageView
+//        _backgroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backgroundImage"]];
+//        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        _backgroundImageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height*0.5);
+//        [self addSubview:_backgroundImageView];
+//
+//
+//        //_titleLabel
+//        _titleLabel = [[UILabel alloc]init];
+//        _titleLabel.text = @"我的";
+//        _titleLabel.font = [UIFont systemFontOfSize: 34];
+//        [_backgroundImageView addSubview:_titleLabel];
+//        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(14);
+//            make.top.mas_equalTo(10);
+//            make.size.mas_equalTo(CGSizeMake(100, 40));
+//        }];
         
         
        
@@ -43,13 +43,10 @@
         [_repertoryView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
             make.right.mas_equalTo(0);
-            make.height.mas_equalTo(frame.size.height*0.48);
-            make.top.mas_equalTo(_backgroundImageView.mas_bottom);
+            make.height.mas_equalTo(frame.size.height*0.9);
+            make.top.mas_equalTo(0);
         }];
         
-       
-        
-     
         
         //_depleteButton
         _depleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,7 +56,7 @@
         [_depleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(WIDTH/9);
             make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
-            make.bottom.mas_equalTo(-60);
+            make.bottom.mas_equalTo(-50);
         }];
         
         //_depleteLabel
@@ -85,7 +82,7 @@
         [_recycleButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_depleteButton.mas_right).with.offset(WIDTH/9*2);
             make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
-            make.bottom.mas_equalTo(-60);
+            make.bottom.mas_equalTo(-50);
         }];
         //_recycleLabel
         _recycleLabel = [[[UILabel alloc]init]init];
@@ -110,7 +107,7 @@
         [_expireButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_recycleButton.mas_right).with.offset(WIDTH/9*2);
             make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
-            make.bottom.mas_equalTo(-60);
+            make.bottom.mas_equalTo(-50);
         }];
         
         //_expireLabel
@@ -125,72 +122,72 @@
         }];
         
         
-        //_shadowViewForRepertoryView
-        [self addSubview:self.shadowViewForUserInfoView];
-        
-        
-        //_userInfoView
-        _userInfoView = [[UIView alloc]init];
-        _userInfoView.layer.cornerRadius = 13.f;
-        _userInfoView.layer.masksToBounds = YES;
-        _userInfoView.backgroundColor = [UIColor whiteColor];
-        [self.shadowViewForUserInfoView addSubview:_userInfoView];
-        [_userInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(25);
-            make.width.mas_equalTo(WIDTH-25*2);
-            make.height.mas_equalTo(140);
-            make.top.mas_equalTo(_backgroundImageView.mas_bottom).with.offset(-50);
-        }];
-        
-        
-        //_nameTextField
-        _nameTextField = [[UITextField alloc]init];
-        _nameTextField.textAlignment = NSTextAlignmentCenter;
-        _nameTextField.font = [UIFont systemFontOfSize:20];
-        _nameTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
-        [_userInfoView addSubview:_nameTextField];
-        [_nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(65);
-            make.left.mas_equalTo(20);
-            make.right.mas_equalTo(-20);
-            make.height.mas_equalTo(20);
-        }];
-        
-        //_personalitySignatureTextField
-        _personalitySignatureTextField = [[UITextField alloc]init];
-        //        _personalitySignatureTextField.text = @"没有个性，何来签名";
-        _personalitySignatureTextField.frame = CGRectMake(0,  frame.size.height/3-30+90+10, frame.size.width, 20);
-        _personalitySignatureTextField.textAlignment = NSTextAlignmentCenter;
-        _personalitySignatureTextField.font = [UIFont systemFontOfSize:18];
-        _personalitySignatureTextField.textColor = [UIColor lightGrayColor];
-        _personalitySignatureTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
-        [_userInfoView addSubview:_personalitySignatureTextField];
-        [_personalitySignatureTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-20);
-            make.left.mas_equalTo(20);
-            make.right.mas_equalTo(-20);
-            make.height.mas_equalTo(20);
-        }];
-        
-        
-        
-        //shadowViewForHeadPicture
-        [self addSubview:self.shadowViewForHeadPicture];
-        
-        //_headPictureButton
-        _headPictureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _headPictureButton.backgroundColor = [UIColor whiteColor];
-        _headPictureButton.layer.cornerRadius = 100/2;
-        _headPictureButton.layer.masksToBounds = YES;
-        _headPictureButton.layer.borderWidth = 1.0f;
-        _headPictureButton.userInteractionEnabled = YES;
-        _headPictureButton.layer.borderColor = LIGHTBLUE.CGColor;
-        [self.shadowViewForHeadPicture addSubview:_headPictureButton];
-        [_headPictureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_userInfoView.mas_top).with.offset(-100/2);
-            make.size.mas_equalTo(CGSizeMake(100, 100));
-            make.left.mas_equalTo(frame.size.width/2-100/2);
-        }];
+//        //_shadowViewForRepertoryView
+//        [self addSubview:self.shadowViewForUserInfoView];
+//
+//
+//        //_userInfoView
+//        _userInfoView = [[UIView alloc]init];
+//        _userInfoView.layer.cornerRadius = 13.f;
+//        _userInfoView.layer.masksToBounds = YES;
+//        _userInfoView.backgroundColor = [UIColor whiteColor];
+//        [self.shadowViewForUserInfoView addSubview:_userInfoView];
+//        [_userInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(25);
+//            make.width.mas_equalTo(WIDTH-25*2);
+//            make.height.mas_equalTo(140);
+//            make.top.mas_equalTo(_backgroundImageView.mas_bottom).with.offset(-50);
+//        }];
+//
+//
+//        //_nameTextField
+//        _nameTextField = [[UITextField alloc]init];
+//        _nameTextField.textAlignment = NSTextAlignmentCenter;
+//        _nameTextField.font = [UIFont systemFontOfSize:20];
+//        _nameTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
+//        [_userInfoView addSubview:_nameTextField];
+//        [_nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(65);
+//            make.left.mas_equalTo(20);
+//            make.right.mas_equalTo(-20);
+//            make.height.mas_equalTo(20);
+//        }];
+//
+//        //_personalitySignatureTextField
+//        _personalitySignatureTextField = [[UITextField alloc]init];
+//        //        _personalitySignatureTextField.text = @"没有个性，何来签名";
+//        _personalitySignatureTextField.frame = CGRectMake(0,  frame.size.height/3-30+90+10, frame.size.width, 20);
+//        _personalitySignatureTextField.textAlignment = NSTextAlignmentCenter;
+//        _personalitySignatureTextField.font = [UIFont systemFontOfSize:18];
+//        _personalitySignatureTextField.textColor = [UIColor lightGrayColor];
+//        _personalitySignatureTextField.returnKeyType = UIReturnKeyDone;//变为确认按钮
+//        [_userInfoView addSubview:_personalitySignatureTextField];
+//        [_personalitySignatureTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.mas_equalTo(-20);
+//            make.left.mas_equalTo(20);
+//            make.right.mas_equalTo(-20);
+//            make.height.mas_equalTo(20);
+//        }];
+//
+//
+//
+//        //shadowViewForHeadPicture
+//        [self addSubview:self.shadowViewForHeadPicture];
+//
+//        //_headPictureButton
+//        _headPictureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _headPictureButton.backgroundColor = [UIColor whiteColor];
+//        _headPictureButton.layer.cornerRadius = 100/2;
+//        _headPictureButton.layer.masksToBounds = YES;
+//        _headPictureButton.layer.borderWidth = 1.0f;
+//        _headPictureButton.userInteractionEnabled = YES;
+//        _headPictureButton.layer.borderColor = LIGHTBLUE.CGColor;
+//        [self.shadowViewForHeadPicture addSubview:_headPictureButton];
+//        [_headPictureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(_userInfoView.mas_top).with.offset(-100/2);
+//            make.size.mas_equalTo(CGSizeMake(100, 100));
+//            make.left.mas_equalTo(frame.size.width/2-100/2);
+//        }];
         
     }
     return self;

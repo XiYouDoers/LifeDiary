@@ -7,9 +7,11 @@
 //
 
 #import "ZDPhotoManagerViewController.h"
+#import "ZDImagePickerController.h"
+#import "ZDAddViewController.h"
 
-@interface ZDPhotoManagerViewController ()< UINavigationControllerDelegate,UIScrollViewDelegate>{
-UIImagePickerController *picker;
+@interface ZDPhotoManagerViewController ()< UIScrollViewDelegate>{
+    ZDImagePickerController *imagePicker;
 }
 
 @end
@@ -35,8 +37,12 @@ UIImagePickerController *picker;
     UIAlertAction *openCameraAction = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self openCamera];
     }];
+    
     UIAlertAction *openPhotoLibraryAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self openPhotoLibrary];
+    }];
+    UIAlertAction *handPhotoLibraryAction = [UIAlertAction actionWithTitle:@"手动" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self openAddVC];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -44,25 +50,36 @@ UIImagePickerController *picker;
     //把action添加到actionSheet里
     [actionSheet addAction:openCameraAction];
     [actionSheet addAction:openPhotoLibraryAction];
+    [actionSheet addAction:handPhotoLibraryAction];
     [actionSheet addAction:cancelAction];
     
 
     [self.delegate presentViewController:actionSheet animated:YES completion:nil];
+}
+
+/**
+ 直接打开添加界面
+ */
+- (void)openAddVC{
+    ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+    [self.delegate presentViewController:addVC animated:YES completion:nil];
 }
 /**
  *  调用照相机
  */
 - (void)openCamera{
     
-    picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self.delegate;
-    picker.allowsEditing = YES; //可编辑
+    imagePicker = [[ZDImagePickerController alloc] init];
+    imagePicker.delegate = self.delegate;
+    imagePicker.imageRecognitionDelegate = self.delegate;
+    imagePicker.allowsEditing = YES; //可编辑
     //判断是否可以打开照相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         
         //摄像头
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self.delegate presentViewController:picker animated:YES completion:nil];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self.delegate presentViewController:imagePicker animated:YES completion:nil];
+        
     }else{
         
         NSLog(@"没有摄像头");
@@ -83,11 +100,12 @@ UIImagePickerController *picker;
     // 进入相册
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         
-        picker = [[UIImagePickerController alloc]init];
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.delegate = self.delegate;
-        [self.delegate presentViewController:picker animated:YES completion:^{
+        imagePicker = [[ZDImagePickerController alloc]init];
+        imagePicker.allowsEditing = YES;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.delegate = self.delegate;
+        [imagePicker setHiddenMode];
+        [self.delegate presentViewController:imagePicker animated:YES completion:^{
             
             NSLog(@"打开相册");
         }];
@@ -106,6 +124,7 @@ UIImagePickerController *picker;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    [imagePicker setHiddenMode];
 }
 
 - (void)didReceiveMemoryWarning {

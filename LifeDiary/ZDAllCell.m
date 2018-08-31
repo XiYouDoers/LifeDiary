@@ -52,7 +52,8 @@
         
         [self.exhibitView addSubview: self.classificationLabel];
         
-       
+        
+        
         
         
 //        _outsideArc =  [CAShapeLayer layer];
@@ -105,8 +106,8 @@
     [super layoutSubviews];
     self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 140);
-    
-    self.manageView.frame = CGRectMake(87.5, 100, 100, 40);
+
+    self.manageView.frame = CGRectMake(87.5, 100, 200, 40);
     self.deleteButton.frame = CGRectMake(0, 0, 100, 40);
     self.editButton.frame = CGRectMake(100, 0, 100, 40);
     

@@ -44,14 +44,39 @@
     _countFormatter = [[NSDateFormatter alloc]init];
     [_countFormatter setDateFormat:@"yyy"];
     
-    self.view.backgroundColor = TABBARCOLOR;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBar];
     
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame  = CGRectMake(20, 20+10,40, 24);
+    backButton.layer.masksToBounds = YES;
+    backButton.layer.cornerRadius = 15.f;
+    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+    [backButton setTitleColor:BARBUTTONITEMCOLOR forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
     
-    _addTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    UIButton *finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    finishButton.frame  = CGRectMake(305+10,20+10 ,40, 24);
+    finishButton.layer.masksToBounds = YES;
+    finishButton.layer.cornerRadius = 15.f;
+    [finishButton setTitle:@"完成" forState:UIControlStateNormal];
+    [finishButton setTitleColor:BARBUTTONITEMCOLOR forState:UIControlStateNormal];
+    [finishButton addTarget:self action:@selector(finish) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:finishButton];
+    
+    
+    
+    
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.frame = CGRectMake(150,20+10, 75, 24);
+    titleLabel.text = @"添加物品";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:titleLabel];
+    
+    _addTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
     _addTableView.dataSource = self;
     _addTableView.delegate = self;
-//    _addTableView.sectionHeaderHeight = 16.0f;
     _addTableHeaderView  = [[ZDAddTableHeaderView alloc]init];
     _addTableHeaderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,150);
     _addTableHeaderView.nameTextField.delegate = self;
@@ -67,17 +92,7 @@
     
     _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
-    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(150, 500, 100, 60);
-    cancelButton.layer.masksToBounds = YES;
-    cancelButton.layer.cornerRadius = 10.f;
-    cancelButton.selected = YES;
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [cancelButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setBackgroundImage:[UIImage imageNamed:@"buttonSelected"] forState:UIControlStateSelected];
-    [self.view addSubview:cancelButton];
+
     // Do any additional setup after loading the view.
 }
 - (void)back{
@@ -85,19 +100,23 @@
 }
 - (void)setInfo{
     if (_muArray.count) {
-        NSString *str;
+       
         for (int i = 0 ; i < _muArray.count ; i ++) {
-            str = _muArray[i];
             switch (i) {
                 case  0:{
+                    UIImage *image = [[UIImage alloc]init];
+                    image = _muArray[i];
+                    NSLog(@"image = %@  !!! =%@ ",image,_addTableHeaderView.headPictureSetButton.imageView.image);
+                    [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
+                }
+                    break;
+                case  1:{
+                     NSString *str = _muArray[i];
                     _addTableHeaderView.nameTextField.text = str;
                 }
                     break;
-                case  1:
-                    _addTableHeaderView.remarkTextField.text = str;
-                    break;
                 case  2:{
-                    
+                    NSString *str = _muArray[i];
                     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
                     ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
                     cellForZero.textField.text = str;
@@ -105,7 +124,7 @@
                     break;
                 case  3:
                 {
-                    
+                    NSString *str = _muArray[i];
                     NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
                     ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
                     cellForOne.textField.text = str;
@@ -113,7 +132,7 @@
                     break;
                 case  4:
                 {
-                    
+                    NSString *str = _muArray[i];
                     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
                     ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
                     cellForZero.textField.text = str;
@@ -349,7 +368,7 @@
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         //图片存入相册
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
     }
     [self dismissViewControllerAnimated:YES completion:nil];

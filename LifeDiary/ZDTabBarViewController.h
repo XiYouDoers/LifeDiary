@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ZDTabBarViewController : UITabBarController
-- (void)tesseractRecogniceWithImage:(UIImage *)image compleate:(void(^)(NSString *text))compleate ;
+
 @end

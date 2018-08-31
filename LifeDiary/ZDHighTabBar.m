@@ -23,6 +23,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.selectedItem = 0;
         self.translucent = NO;
         UIButton *plusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.centerButton = plusBtn;

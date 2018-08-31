@@ -357,6 +357,7 @@
         button.selected = NO;
     }
     button.selected = !button.selected;
+    [self.delegate clickbuttonOfSort:button.titleLabel.text];
 }
 
 @end

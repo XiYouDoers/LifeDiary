@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ZDSortViewDelegate <NSObject>
+- (void) clickbuttonOfSort:(NSString *)str;
+@end
 
 @interface ZDSortView : UIView
 //class
@@ -25,6 +28,9 @@
 @property(nonatomic,strong) UIButton *timeDownSortButton;
 @property(nonatomic,strong) UIButton *sumUpSortButton;
 @property(nonatomic,strong) UIButton *sumDownSortButton;
-
+/**
+ 代理
+ */
+@property(nonatomic,weak) id <ZDSortViewDelegate> delegate;
 
 @end

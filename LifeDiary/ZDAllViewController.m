@@ -17,7 +17,7 @@
 #import "ZDAllCollectionViewCell.h"
 #import "ZDSortView.h"
 
-@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,ZDAllCellDelegate>{
+@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,ZDAllCellDelegate,ZDSortViewDelegate>{
     NSDateFormatter *_dateFormatter;
     ZDSortView *_sortView;
     NSMutableDictionary *selectedIndexes;
@@ -56,20 +56,22 @@
     
     //sortView
     _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155)];
-
+    _sortView.delegate = self;
     _sortView.hidden = YES;
     [self.view addSubview:_sortView];
 
 }
 - (void)setNavigationBar{
-    
-    self.navigationItem.title = @"全部物品";
-//    self.navigationController.navigationBar.translucent = NO;
+   
+
     if (@available(iOS 11.0, *)) {
         self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
     } else {
-        // Fallback on earlier versions
+        
     }
+}
+- (void)openRepertory{
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -96,10 +98,6 @@
     [self.navigationController.navigationBar setShadowImage:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - searchbar
 - (UIView *)searchView
@@ -140,10 +138,10 @@
                     [textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"搜索物品"
                                                                                         attributes:@{NSForegroundColorAttributeName:color}]];
                     //修改默认的放大镜图片
-                    //                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
-                    //                    imageView.backgroundColor = [UIColor clearColor];
-                    //                    imageView.image = [UIImage imageNamed:@"gww_search_ misplaces"];
-                    //                    textField.leftView = imageView;
+                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+                    imageView.backgroundColor = [UIColor clearColor];
+                    imageView.image = [UIImage imageNamed:@"放大镜"];
+                    textField.leftView = imageView;
                     textField.tintColor = [UIColor whiteColor];
                 }
             }
@@ -173,7 +171,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self.searchBar resignFirstResponder];
-    // do sth about get search result
+
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
@@ -187,7 +185,7 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [UIView animateWithDuration:0.3 animations:^{
-//            self.allTableView.transform = CGAffineTransformMakeTranslation(0, 54+150);
+
             self.allTableView.frame = CGRectMake(0, 64+54+180, WIDTH, HEIGHT-(64+54+180));
         }];
         [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
@@ -203,7 +201,6 @@
         }];
         [NSTimer scheduledTimerWithTimeInterval:0.2 repeats:NO block:^(NSTimer * _Nonnull timer) {
             [UIView animateWithDuration:0.3 animations:^{
-//                self.allTableView.transform = CGAffineTransformMakeTranslation(0, 0);
                 self.allTableView.frame = CGRectMake(0, 64+54, WIDTH, HEIGHT-(64+54));
             }];
         }];
@@ -262,9 +259,9 @@
     //这里最好放在数据库里面再进行搜索，效率会更快一些
     dispatch_queue_t globalQueue = dispatch_get_global_queue(0, 0);
     dispatch_async(globalQueue, ^{
-        if (searchText!=nil && searchText.length>0) {
+        if (searchText != nil && searchText.length > 0) {
             
-            //遍历需要搜索的所有内容w，其中self.dataArray为存放总数据的数组
+            //遍历需要搜索的所有内容w，其中dataMutableArray为存放总数据的数组
             for (ZDGoods *goods in self.dataMutableArray) {
                 NSString *tempStr = goods.name;
                 //
@@ -272,13 +269,13 @@
                 //                NSString *pinyin = [self transformToPinyin:searchText];
                 
                 if ([tempStr rangeOfString:searchText options:NSCaseInsensitiveSearch].length >0 ) {
+                    NSLog(@"succeed");
                     //把搜索结果存放self.resultArray数组
                     [self.resultMutableArray addObject:goods];
+                    NSLog(@" = %@",self.resultMutableArray);
                 }
             }
             
-        }else{
-            self.resultMutableArray = nil;
         }
         //回到主线程
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -370,24 +367,24 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     BOOL isSelected = ![self cellIsSelected:indexPath];
     NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
     [selectedIndexes setObject:selectedIndex forKey:indexPath];
-    [self.allTableView beginUpdates];
     
-    [self.allTableView endUpdates];
     [self.allTableView beginUpdates];
-    if ([self cellIsSelected:indexPath]) {
-        
-        [_allCell.manageView setFrame:CGRectMake(87.5, 160, 100, 40)];
-
-    }else{
-        
-        [_allCell.manageView setFrame:CGRectMake(87.5, 110, 100, 40)];
-
-    }
     [self.allTableView endUpdates];
+        if ([self cellIsSelected:indexPath]) {
+            CGRect rect = cell.frame;
+            rect.size.height = 160+50;
+            cell.frame = rect;
+            
+            _allCell.manageView.frame = CGRectMake(87.5, 160, 200, 40);
+        }else{
+            _allCell.manageView.frame = CGRectMake(87.5, 110, 200, 40);
+        }
     
+
 }
 
 
@@ -436,8 +433,19 @@
         
     }
 }
-
-
+- (void)clickbuttonOfSort:(NSString *)str{
+    if ([str isEqualToString:@""]) {
+    
+    }
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.allTableView) {
+        if (self.sortButton.selected) {
+            [self sortTouched:self.sortButton];
+        }
+        
+    }
+}
 - (void)deleteButtonWasClicked{
     
 }
