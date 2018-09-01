@@ -24,9 +24,9 @@ extern NSDateFormatter const *_formatter;
         self.contentView.backgroundColor = [UIColor clearColor];
 
         
-        [self.contentView addSubview:self.shadowView];
+        [self.contentView addSubview:self.exhibitView];
         
-        [self.shadowView addSubview:self.exhibitView];
+//        [self.shadowView addSubview:self.exhibitView];
         
         [self.exhibitView addSubview:self.nameLabel];
         

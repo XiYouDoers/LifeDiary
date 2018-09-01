@@ -21,6 +21,8 @@
     NSDateFormatter *_dateFormatter;
     ZDSortView *_sortView;
     NSMutableDictionary *selectedIndexes;
+    NSIndexPath *lastIndexPath;
+    BOOL isReclickCell;
 }
 @property(nonatomic,strong) UIView *sortView;
 
@@ -366,22 +368,43 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (isReclickCell && (lastIndexPath.row != indexPath.row)) {
+
+        BOOL isSelected = ![self cellIsSelected:lastIndexPath];
+        NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+        [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
+        [self.allTableView reloadRowsAtIndexPaths:@[lastIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [UIView animateWithDuration:0.3 animations:^{
+           _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
+        }];
+        
+        
+    }
+
     BOOL isSelected = ![self cellIsSelected:indexPath];
     NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
     [selectedIndexes setObject:selectedIndex forKey:indexPath];
     
-    [self.allTableView beginUpdates];
-    [self.allTableView endUpdates];
+  
+    
         if ([self cellIsSelected:indexPath]) {
-            CGRect rect = cell.frame;
-            rect.size.height = 160+50;
-            cell.frame = rect;
+            isReclickCell = 1;
+            lastIndexPath = indexPath;
+            [self.allTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [UIView animateWithDuration:0.3 animations:^{
+                _allCell.manageView.frame = CGRectMake(87.5, 140, 200, 40);
+            }];
             
-            _allCell.manageView.frame = CGRectMake(87.5, 160, 200, 40);
+            
+         
         }else{
-            _allCell.manageView.frame = CGRectMake(87.5, 110, 200, 40);
+            isReclickCell = 0;
+            [self.allTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [UIView animateWithDuration:0.3 animations:^{
+                _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
+            }];
+            
+            
         }
     
 
@@ -393,7 +416,7 @@
  
  */
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
+    return NO;
 }
 /**
  cell的删除方法
@@ -402,34 +425,34 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        
-        ZDGoods *deletedGoods = [[ZDGoods alloc]init];
-        if (self.resultMutableArray.count) {
-            //计算在搜索结果中要删除的cell在总数据序列
-            deletedGoods = self.resultMutableArray[indexPath.row];
-            for(ZDGoods *goods in self.dataMutableArray){
-                if (deletedGoods==goods) {
-                    NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
-                    deletedGoods = self.dataMutableArray[index];
-                }
-            }
-        }else{
-            deletedGoods = self.dataMutableArray[indexPath.row];
-        }
-        
-        // 从数据库中删除
-        [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
-        //从搜索列表中删除
-        for (ZDGoods *goods in  self.resultMutableArray) {
-            if (goods==deletedGoods) {
-                
-                [_resultMutableArray removeObject:deletedGoods];
-            }
-        }
-        // 回收站中添加
-        [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
-        self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-        [self.allTableView reloadData];
+//
+//        ZDGoods *deletedGoods = [[ZDGoods alloc]init];
+//        if (self.resultMutableArray.count) {
+//            //计算在搜索结果中要删除的cell在总数据序列
+//            deletedGoods = self.resultMutableArray[indexPath.row];
+//            for(ZDGoods *goods in self.dataMutableArray){
+//                if (deletedGoods==goods) {
+//                    NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
+//                    deletedGoods = self.dataMutableArray[index];
+//                }
+//            }
+//        }else{
+//            deletedGoods = self.dataMutableArray[indexPath.row];
+//        }
+//
+//        // 从数据库中删除
+//        [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
+//        //从搜索列表中删除
+//        for (ZDGoods *goods in  self.resultMutableArray) {
+//            if (goods==deletedGoods) {
+//
+//                [_resultMutableArray removeObject:deletedGoods];
+//            }
+//        }
+//        // 回收站中添加
+//        [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
+//        self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+//        [self.allTableView reloadData];
         
     }
 }
@@ -440,6 +463,7 @@
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if (scrollView == self.allTableView) {
+        [self.searchBar resignFirstResponder];
         if (self.sortButton.selected) {
             [self sortTouched:self.sortButton];
         }
@@ -447,16 +471,43 @@
     }
 }
 - (void)deleteButtonWasClicked{
+    ZDGoods *deletedGoods = [[ZDGoods alloc]init];
+    if (self.resultMutableArray.count) {
+        //计算在搜索结果中要删除的cell在总数据序列
+        deletedGoods = self.resultMutableArray[lastIndexPath.row];
+        for(ZDGoods *goods in self.dataMutableArray){
+            if (deletedGoods==goods) {
+                NSInteger index = [self.dataMutableArray indexOfObject:deletedGoods];
+                deletedGoods = self.dataMutableArray[index];
+            }
+        }
+    }else{
+        deletedGoods = self.dataMutableArray[lastIndexPath.row];
+    }
+    
+    // 从数据库中删除
+    [[ZDAllDataBase sharedDataBase]deleteGoods:deletedGoods];
+    //从搜索列表中删除
+    for (ZDGoods *goods in  self.resultMutableArray) {
+        if (goods==deletedGoods) {
+            
+            [_resultMutableArray removeObject:deletedGoods];
+        }
+    }
+    // 回收站中添加
+    [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
+    self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+    [self.allTableView reloadData];
     
 }
 - (void)editButtonWasClicked{
-    
-//        ZDAllCell *cell = [self.allTableView cellForRowAtIndexPath:indexPath];
-//        ZDGoods *goods =  _dataMutableArray[indexPath.row];
-//        cell.selected = !cell.selected;
-//        ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
-//        editVC.goods = goods;
-//        [self.navigationController pushViewController:editVC animated:YES];
+
+        ZDAllCell *cell = [self.allTableView cellForRowAtIndexPath:lastIndexPath];
+        ZDGoods *goods =  _dataMutableArray[lastIndexPath.row];
+        cell.selected = !cell.selected;
+        ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
+        editVC.goods = goods;
+        [self.navigationController pushViewController:editVC animated:YES];
 }
 
 @end

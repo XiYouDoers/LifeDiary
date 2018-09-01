@@ -21,20 +21,20 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-
+        self.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
         self.contentView.backgroundColor = [UIColor clearColor];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         [self.contentView addSubview:self.manageView];
         
         [self.manageView addSubview:self.deleteButton];
         
         [self.manageView addSubview:self.editButton];
         
-        [self.contentView addSubview:self.shadowView];
+        [self.contentView addSubview:self.exhibitView];
         
-        [self.shadowView addSubview:self.exhibitView];
+//        [self.shadowView addSubview:self.exhibitView];
         
         [self.exhibitView addSubview: self.nameLabel];
         
@@ -114,6 +114,7 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);
         make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
+        
         make.right.mas_offset(-50);
         make.height.mas_equalTo(20);
         
@@ -261,14 +262,15 @@
 - (UIView *)manageView{
     if (_manageView == nil) {
         _manageView = [[UIView alloc]init];
+        _manageView.backgroundColor = [UIColor whiteColor];
+        _manageView.layer.masksToBounds = YES;
+        _manageView.layer.cornerRadius = 5.f;
     }
     return _manageView;
 }
 - (UIButton *)deleteButton{
     if (_deleteButton == nil) {
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _deleteButton.layer.masksToBounds = YES;
-        _deleteButton.layer.cornerRadius = 5.f;
         [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
         [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -280,20 +282,17 @@
 - (UIButton *)editButton{
     if (_editButton == nil) {
         _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _editButton.layer.masksToBounds = YES;
-        _editButton.layer.cornerRadius = 5.f;
         [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
-        [_editButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_editButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_editButton setBackgroundColor:[UIColor whiteColor]];
+        [_editButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_editButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [_editButton setBackgroundColor:[UIColor colorWithRed:114/255.0 green:190/255.0 blue:246/255.0 alpha:1]];
         [_editButton addTarget:self.delegate action:@selector(editButtonWasClicked) forControlEvents:UIControlEventTouchUpInside];
     }
     return _editButton;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
+     self.manageView.frame = CGRectMake(87.5, 160, 200, 40);
 }
 
 @end

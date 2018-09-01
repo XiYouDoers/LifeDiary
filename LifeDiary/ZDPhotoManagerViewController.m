@@ -7,11 +7,11 @@
 //
 
 #import "ZDPhotoManagerViewController.h"
-#import "ZDImagePickerController.h"
+#import "ZDPickerViewController.h"
 #import "ZDAddViewController.h"
 
 @interface ZDPhotoManagerViewController ()< UIScrollViewDelegate>{
-    ZDImagePickerController *imagePicker;
+    ZDPickerViewController *imagePicker;
 }
 
 @end
@@ -69,7 +69,7 @@
  */
 - (void)openCamera{
     
-    imagePicker = [[ZDImagePickerController alloc] init];
+    imagePicker = [[ZDPickerViewController alloc] init];
     imagePicker.delegate = self.delegate;
     imagePicker.imageRecognitionDelegate = self.delegate;
     imagePicker.allowsEditing = YES; //可编辑
@@ -100,11 +100,11 @@
     // 进入相册
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         
-        imagePicker = [[ZDImagePickerController alloc]init];
+        imagePicker = [[ZDPickerViewController alloc]init];
         imagePicker.allowsEditing = YES;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self.delegate;
-        [imagePicker setHiddenMode];
+//        [imagePicker setHiddenMode];
         [self.delegate presentViewController:imagePicker animated:YES completion:^{
             
             NSLog(@"打开相册");
@@ -124,7 +124,7 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [imagePicker setHiddenMode];
+//    [imagePicker setHiddenMode];
 }
 
 - (void)didReceiveMemoryWarning {

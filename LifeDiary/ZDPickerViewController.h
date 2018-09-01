@@ -1,8 +1,8 @@
 //
-//  ZDImagePickerController.h
+//  ZDPickerViewController.h
 //  LifeDiary
 //
-//  Created by Jack on 2018/8/27.
+//  Created by Jack on 2018/8/31.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 - (void)imageButtonWasClicked;
 @end
 
-@interface ZDImagePickerController : UIImagePickerController
+@interface ZDPickerViewController : UIImagePickerController
 @property(nonatomic,weak) id <ZDImageRecognitionDelegate> imageRecognitionDelegate;
 
 /**

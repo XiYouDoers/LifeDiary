@@ -23,8 +23,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.selectedItem = 0;
-        self.translucent = NO;
+        self.backgroundColor = [UIColor whiteColor];
         UIButton *plusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.centerButton = plusBtn;
         [plusBtn addTarget:self action:@selector(plusBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
@@ -51,8 +50,6 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     
-    
-    
     CGFloat width = self.frame.size.width/self.type;
     Class class = NSClassFromString(@"UITabBarButton");
     for (UIView *view in self.subviews) {
@@ -71,18 +68,21 @@
             }
             CGFloat x = indexFromOrign * width;
             //如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
-            view.frame = CGRectMake(x, view.frame.origin.y, width, frame.size.height);
-            
-            //调整badge postion
-            for (UIView *badgeView in view.subviews){
-                NSString *className = NSStringFromClass([badgeView class]);
-                // Looking for _UIBadgeView
-                if ([className rangeOfString:@"BadgeView"].location != NSNotFound){
-                    badgeView.layer.transform = CATransform3DIdentity;
-                    badgeView.layer.transform = CATransform3DMakeTranslation(-17.0, 1.0, 1.0);
-                    break;
-                }
+            if(indexFromOrign == 0){
+            view.frame = CGRectMake(x+15, view.frame.origin.y, width, frame.size.height);
+            }else if(indexFromOrign == 1){
+            view.frame = CGRectMake(x-15, view.frame.origin.y, width, frame.size.height);
             }
+//            //调整badge postion
+//            for (UIView *badgeView in view.subviews){
+//                NSString *className = NSStringFromClass([badgeView class]);
+//                // Looking for _UIBadgeView
+//                if ([className rangeOfString:@"BadgeView"].location != NSNotFound){
+//                    badgeView.layer.transform = CATransform3DIdentity;
+//                    badgeView.layer.transform = CATransform3DMakeTranslation(-17.0, 1.0, 1.0);
+//                    break;
+//                }
+//            }
         }
     }
 }

@@ -48,16 +48,16 @@
     [self setNavigationBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame  = CGRectMake(20, 20+10,40, 24);
+    backButton.frame  = CGRectMake(15, 20+10,40, 24);
     backButton.layer.masksToBounds = YES;
     backButton.layer.cornerRadius = 15.f;
     [backButton setTitle:@"返回" forState:UIControlStateNormal];
     [backButton setTitleColor:BARBUTTONITEMCOLOR forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(backToBeforeVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     
     UIButton *finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    finishButton.frame  = CGRectMake(305+10,20+10 ,40, 24);
+    finishButton.frame  = CGRectMake(305+15,20+10 ,40, 24);
     finishButton.layer.masksToBounds = YES;
     finishButton.layer.cornerRadius = 15.f;
     [finishButton setTitle:@"完成" forState:UIControlStateNormal];
@@ -95,7 +95,12 @@
 
     // Do any additional setup after loading the view.
 }
-- (void)back{
+- (void)backToBeforeVC{
+
+    [_addTableHeaderView.nameTextField resignFirstResponder];
+    [_addTableHeaderView.remarkTextField resignFirstResponder];
+    [_addDefaultCell.textField resignFirstResponder];
+    [_pickerViewCell.textField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)setInfo{
@@ -267,7 +272,7 @@
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 - (void)displayWrongIntput{

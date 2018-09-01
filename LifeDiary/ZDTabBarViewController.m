@@ -19,9 +19,8 @@
 #import <TesseractOCR/TesseractOCR.h>
 #import "ZDAddViewController.h"
 #import "ZDAddTableHeaderView.h"
-#import "ZDImagePickerController.h"
 #import "ZDTextRecognitionView.h"
-
+#import "ZDPickerViewController.h"
 
 typedef NS_ENUM(NSInteger,RECOgnitionMode){
     RECOgnitionForTextMode,
@@ -39,18 +38,18 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     [super viewDidLoad];
     [self setupUI];
   
-    
-    // Do any additional setup after loading the view.
 }
 - (void)setupUI{
-    [self setupVC];
-    [[UITabBar appearance] setShadowImage:[UIImage new]];
+   
     //kvo形式添加自定义的 UITabBar
     ZDHighTabBar *tabar = [ZDHighTabBar instanceCustomTabBarWithType:SamItemUIType_Three];
     tabar.centerBtnIcon = @"addTabBarItemSelectedImage";
     tabar.tabDelegate = self;
+    tabar.selectedItem = 0;
     [self setValue:tabar forKey:@"tabBar"];
-   
+    
+    [self setupVC];
+    [[UITabBar appearance] setShadowImage:[UIImage new]];
     
 //    //自定义分割线颜色
     //改变tabbar 线条颜色
@@ -75,13 +74,13 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
     [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
-    messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
+    messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
             UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
     [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
-    findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
+    findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);
     
 
     self.viewControllers = @[messageNavigationController,findNavigationController];

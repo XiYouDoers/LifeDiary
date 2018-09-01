@@ -1,21 +1,21 @@
 //
-//  ZDImagePickerController.m
+//  ZDPickerViewController.m
 //  LifeDiary
 //
-//  Created by Jack on 2018/8/27.
+//  Created by Jack on 2018/8/31.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDImagePickerController.h"
+#import "ZDPickerViewController.h"
 
-@interface ZDImagePickerController (){
+@interface ZDPickerViewController (){
     UIButton *imageRecognitionButton;
     UIButton *textRecognitionButton;
 }
 
 @end
 
-@implementation ZDImagePickerController
+@implementation ZDPickerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,42 +41,21 @@
     [imageRecognitionButton addTarget:self action:@selector(clickImageRecognitionButton:) forControlEvents:UIControlEventTouchUpInside];
     [imageRecognitionButton setBackgroundImage:[UIImage imageNamed:@"buttonSelected"] forState:UIControlStateSelected];
     [self.view addSubview:imageRecognitionButton];
-    // Do any additional setup after loading the view.
-}
-- (void)clickTextRecognitionButton:(UIButton *)button{
-
-    imageRecognitionButton.selected = NO;
-    button.selected = YES;
-    [self.imageRecognitionDelegate textButtonWasClicked];
-}
-- (void)clickImageRecognitionButton:(UIButton *)button{
-
-    textRecognitionButton.selected = NO;
-    button.selected = YES;
-    [self.imageRecognitionDelegate imageButtonWasClicked];
-}
-- (void)viewWillAppear:(BOOL)animated{
-//    imageRecognitionButton.hidden = NO;
-//    textRecognitionButton.hidden = NO;
+    
     
 }
-- (void)setHiddenMode{
-//    imageRecognitionButton.hidden = YES;
-//    textRecognitionButton.hidden = YES;
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)clickTextRecognitionButton:(UIButton *)button{
+    
+        imageRecognitionButton.selected = NO;
+        button.selected = YES;
+        [self.imageRecognitionDelegate textButtonWasClicked];
 }
-*/
+- (void)clickImageRecognitionButton:(UIButton *)button{
+    
+        textRecognitionButton.selected = NO;
+        button.selected = YES;
+        [self.imageRecognitionDelegate imageButtonWasClicked];
+}
 
 @end

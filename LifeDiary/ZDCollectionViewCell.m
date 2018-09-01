@@ -15,7 +15,7 @@
     self=[super initWithFrame:frame];
     if (self) {
 
-        NSLog(@"frame = %@",NSStringFromCGRect(self.frame));
+       
         [self.contentView addSubview:self.exhibitView];
         self.contentView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
@@ -24,7 +24,7 @@
         [self.exhibitView addSubview:self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-16);
-            make.size.height.mas_equalTo(self.frame.size.height/5*3);
+            make.height.mas_equalTo(self.frame.size.height/5*3);
             make.left.mas_equalTo(14);
             make.right.mas_equalTo(-14);
         }];

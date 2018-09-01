@@ -67,7 +67,7 @@
         [_depleteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(_depleteButton.mas_centerX);
             make.size.mas_equalTo(CGSizeMake(100, 15));
-            make.bottom.mas_equalTo(-30);
+            make.bottom.mas_equalTo(-25);
         }];
         
         
@@ -92,7 +92,7 @@
         [_recycleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(_recycleButton.mas_centerX);
             make.size.mas_equalTo(CGSizeMake(100, 15));
-            make.bottom.mas_equalTo(-30);
+            make.bottom.mas_equalTo(-25);
         }];
         
        
@@ -118,7 +118,7 @@
         [_expireLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(_expireButton.mas_centerX);
             make.size.mas_equalTo(CGSizeMake(100, 15));
-            make.bottom.mas_equalTo(-30);
+            make.bottom.mas_equalTo(-25);
         }];
         
         

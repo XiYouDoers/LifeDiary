@@ -19,6 +19,11 @@
 #import "ZDMessageCardView.h"
 #import "ZDMeViewController.h"
 
+#import <UserNotifications/UNUserNotificationCenter.h>
+#import <UserNotifications/UNNotificationContent.h>
+#import <UserNotifications/UNNotificationSound.h>
+#import <UserNotifications/UNNotificationTrigger.h>
+#import <UserNotifications/UNNotificationRequest.h>
 
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
@@ -48,7 +53,7 @@ NSDateFormatter const *_formatter;
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     self.view.backgroundColor = [UIColor whiteColor];
-    //    [_messageCell.sumLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
+
     
     _tempCell = [[ZDMessageCollectionViewCell alloc]init];
     
@@ -90,7 +95,7 @@ NSDateFormatter const *_formatter;
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
     //allBarButtonItem
     UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
-    
+
 //    [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
@@ -122,6 +127,40 @@ NSDateFormatter const *_formatter;
     [self.navigationController pushViewController:allViewController animated:YES];
 }
 - (void)openMe{
+    
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter  currentNotificationCenter];
+    //请求获取通知权限（角标，声音，弹框）
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //获取用户是否同意开启通知
+            NSLog(@"request authorization successed!");
+        }
+    }];
+    
+    //第二步：新建通知内容对象
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"物品过期通知";
+    content.subtitle = @"您有新的物品即将到期";
+    content.body = @"您添加的旺仔牛奶距离到期还有3个月，赶快使用吧";
+    content.badge = @1;
+    UNNotificationSound *sound = [UNNotificationSound soundNamed:@"wakeup.caf"];
+    content.sound = sound;
+    
+    //第三步：通知触发机制。（重复提醒，时间间隔要大于60s）
+    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:362 repeats:YES];
+    
+    //第四步：创建UNNotificationRequest通知请求对象
+    NSString *requertIdentifier = @"RequestIdentifier";
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger1];
+    
+    //第五步：将通知加到通知中心
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
+    
+    
     ZDMeViewController *meVC = [[ZDMeViewController alloc]init];
     [self.navigationController pushViewController:meVC animated:YES];
 }

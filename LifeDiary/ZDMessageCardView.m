@@ -44,6 +44,7 @@ static NSString *const cellId = @"collectionViewCellId";
     //    _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
+
     // 开启分页
     //    _collectionView.pagingEnabled = YES;
     // 隐藏水平滚动条
