@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDAllCell;
+@class ZDRepertoryCell;
 
 @interface ZDExpireViewController : UIViewController
 
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *expireTableView;
-@property(nonatomic,strong) ZDAllCell *expireCell;
+@property(nonatomic,strong) ZDRepertoryCell *expireCell;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @protocol ZDPhotoManagerViewControllerDelegate
 @end
 @interface ZDPhotoManagerViewController : UIViewController

@@ -9,7 +9,7 @@
 #import "ZDDepleteViewController.h"
 #import "ZDDepleteDataBase.h"
 #import "ZDAllDataBase.h"
-#import "ZDAllCell.h"
+#import "ZDRepertoryCell.h"
 
 @interface ZDDepleteViewController()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -47,7 +47,7 @@
     _depleteTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _depleteTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_depleteTableView];
-    [_depleteTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"depleteCell"];
+    [_depleteTableView registerClass:[ZDRepertoryCell class] forCellReuseIdentifier:@"depleteCell"];
     
     //允许table在编辑的时候多选
     self.depleteTableView.allowsMultipleSelectionDuringEditing = YES;
@@ -145,7 +145,7 @@
 
 // 改变选中时最左边对勾的背景颜色
 - (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
-    ZDAllCell *cell = [self.depleteTableView cellForRowAtIndexPath:indexPath];
+    ZDRepertoryCell *cell = [self.depleteTableView cellForRowAtIndexPath:indexPath];
     NSArray *subviews = cell.subviews;
     for (id obj in subviews) {
         if ([obj isKindOfClass:[UIControl class]]) {

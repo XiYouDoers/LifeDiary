@@ -220,7 +220,7 @@
     bigRect.size.width = rect.size.width + 2*[self cellWidth];
     bigRect.origin.x = rect.origin.x - [self cellWidth];
     
-    NSArray *attributes = [self getCopyOfAttributes:[super layoutAttributesForElementsInRect:bigRect]];
+    NSArray *attributes = [self getCopyOfAttributes:[super layoutAttributesForElementsInRect:rect]];
 //    // 获得super已经计算好的布局属性
 //    NSArray *attributes = [super layoutAttributesForElementsInRect:rect];
 
@@ -237,12 +237,13 @@
 //        // 设置缩放比例
 //        attrs.transform = CGAffineTransformMakeScale(scale, scale);
         
-//
+
         CGFloat distance = fabs(attrs.center.x - centerX);
         //移动的距离和屏幕宽度的的比例
         CGFloat apartScale = distance/self.collectionView.bounds.size.width;
         //把卡片移动范围固定到 -π/4到 +π/4这一个范围内
         CGFloat scale = fabs(cos(apartScale * M_PI/4));
+        
         //设置cell的缩放 按照余弦函数曲线 越居中越趋近于1
         attrs.transform = CGAffineTransformMakeScale(scale, scale);
     }

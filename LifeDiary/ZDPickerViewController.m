@@ -19,8 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     textRecognitionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    textRecognitionButton.frame = CGRectMake(75, 400, 100, 60);
+    textRecognitionButton.frame = CGRectMake(75, 500, 100, 60);
     textRecognitionButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     textRecognitionButton.selected = YES;
     [textRecognitionButton setTitle:@"文字识别" forState:UIControlStateNormal];
@@ -32,7 +33,7 @@
     
     
     imageRecognitionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    imageRecognitionButton.frame = CGRectMake(200, 400, 100, 60);
+    imageRecognitionButton.frame = CGRectMake(200, 500, 100, 60);
     imageRecognitionButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     imageRecognitionButton.selected = NO;
     [imageRecognitionButton setTitle:@"图像识别" forState:UIControlStateNormal];

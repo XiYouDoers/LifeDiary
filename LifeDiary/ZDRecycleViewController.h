@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class  ZDAllCell;
+@class  ZDRepertoryCell;
 @interface ZDRecycleViewController : UIViewController
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *recycleTableView;
-@property(nonatomic,strong) ZDAllCell *recycleCell;
+@property(nonatomic,strong) ZDRepertoryCell *recycleCell;
 
 @end

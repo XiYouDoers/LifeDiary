@@ -73,6 +73,7 @@
     imagePicker.delegate = self.delegate;
     imagePicker.imageRecognitionDelegate = self.delegate;
     imagePicker.allowsEditing = YES; //可编辑
+
     //判断是否可以打开照相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         

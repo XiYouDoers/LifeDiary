@@ -21,13 +21,15 @@
 #import "ZDAddTableHeaderView.h"
 #import "ZDTextRecognitionView.h"
 #import "ZDPickerViewController.h"
+#import "ZDGoods.h"
 
 typedef NS_ENUM(NSInteger,RECOgnitionMode){
     RECOgnitionForTextMode,
     RECOgnitionForImageMode,
 };
-@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate,ZDImageRecognitionDelegate>{
+@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate,ZDImageRecognitionDelegate,ZDTextRecognitionViewDelegate>{
     RECOgnitionMode recognitionMode;
+    ZDTextRecognitionView *textReView;
 }
 
 @end
@@ -148,11 +150,17 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
             NSLog(@"图像识别");
             
         }else  if (recognitionMode == RECOgnitionForTextMode){
+            
             NSLog(@"文字识别");
             //文字识别
-            ZDTextRecognitionView *textReView = [[ZDTextRecognitionView alloc]init];
+            textReView = [[ZDTextRecognitionView alloc]init];
+            textReView.delegate = self;
             [textReView setData:info[@"UIImagePickerControllerOriginalImage"]];
             [textReView recognitionForText];
+
+          
+            
+            
             
         }
     }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
@@ -164,6 +172,11 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
         
     }
 
+}
+- (void)jumpToAddVC{
+    ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+    [addVC setGoodsInfo:textReView.goods];
+    [self presentViewController:addVC animated:YES completion:nil];
 }
 - (void)textButtonWasClicked{
      recognitionMode = RECOgnitionForTextMode;
@@ -186,12 +199,13 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
                     tempClassification = classification;
                 }
             }
-            NSMutableArray *muArray = [NSMutableArray array];
+            ZDGoods *goods = [[ZDGoods alloc]init];
             ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
-            [muArray addObject:image];
-            [muArray addObject:tempClassification.identifier];
+            goods.imageData = UIImagePNGRepresentation(image);
+            goods.name = tempClassification.identifier;
+            [addVC setGoodsInfo:goods];
             [self presentViewController:addVC animated:YES completion:nil];
-            [addVC setGoodsInfo:muArray];
+            
             NSLog(@"%@",[NSString stringWithFormat:@"识别结果:%@",tempClassification.identifier]);
             NSLog(@"%@",[NSString stringWithFormat:@"匹配率:%@",@(tempClassification.confidence)]);
         }];

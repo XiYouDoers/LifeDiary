@@ -14,6 +14,7 @@
 #import "ZDAddTableHeaderView.h"
 #import "ZDAddDefaultCell.h"
 #import "ZDPickerViewCell.h"
+#import "ZDRecognitionData.h"
 
 
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
@@ -22,7 +23,7 @@
     NSDateFormatter *_saveTimeFormatter;
     NSDateFormatter *_countFormatter;
     NSArray *_pickerViewDataArray;
-    NSMutableArray *_muArray;
+    ZDGoods *_goods;
 }
 
 
@@ -93,10 +94,10 @@
     _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
 
-    // Do any additional setup after loading the view.
 }
-- (void)backToBeforeVC{
 
+- (void)backToBeforeVC{
+    //回收所有输入框
     [_addTableHeaderView.nameTextField resignFirstResponder];
     [_addTableHeaderView.remarkTextField resignFirstResponder];
     [_addDefaultCell.textField resignFirstResponder];
@@ -104,52 +105,30 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)setInfo{
-    if (_muArray.count) {
+
+    if (_goods) {
        
-        for (int i = 0 ; i < _muArray.count ; i ++) {
-            switch (i) {
-                case  0:{
-                    UIImage *image = [[UIImage alloc]init];
-                    image = _muArray[i];
-                    NSLog(@"image = %@  !!! =%@ ",image,_addTableHeaderView.headPictureSetButton.imageView.image);
-                    [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
-                }
-                    break;
-                case  1:{
-                     NSString *str = _muArray[i];
-                    _addTableHeaderView.nameTextField.text = str;
-                }
-                    break;
-                case  2:{
-                    NSString *str = _muArray[i];
-                    NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
-                    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
-                    cellForZero.textField.text = str;
-                }
-                    break;
-                case  3:
-                {
-                    NSString *str = _muArray[i];
-                    NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
-                    ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
-                    cellForOne.textField.text = str;
-                }
-                    break;
-                case  4:
-                {
-                    NSString *str = _muArray[i];
-                    NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
-                    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
-                    cellForZero.textField.text = str;
-                }
-                    break;
-                default:
-                    break;
-            }
+        if (_goods.imageData) {
+            UIImage *image = [[UIImage alloc]init];
+            image = [UIImage imageWithData:_goods.imageData];
+            [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
+        }
+        if (![_goods.name isEqualToString:@""]) {
+            NSString *str = _goods.name;
+     
+            _addTableHeaderView.nameTextField.text = str;
+        }
+
+        if (_goods.dateOfStart != nil) {
             
+            NSString *str = _goods.dateOfStart;
+            NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
+            ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
+            cellForZero.textField.text = str;
         }
     }
-    
+        
+
 }
 - (void)setNavigationBar{
     UIBarButtonItem *finishBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finish)];
@@ -272,6 +251,11 @@
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
+        //回收所有输入框
+        [_addTableHeaderView.nameTextField resignFirstResponder];
+        [_addTableHeaderView.remarkTextField resignFirstResponder];
+        [_addDefaultCell.textField resignFirstResponder];
+        [_pickerViewCell.textField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -304,15 +288,11 @@
     [self presentViewController:actionSheet animated:YES completion:nil];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (void)setGoodsInfo:(NSMutableArray *)muArray{
+- (void)setGoodsInfo:(ZDGoods *)goods{
     
-    _muArray = [NSMutableArray array];
-    _muArray = muArray;
+    _goods = [[ZDGoods alloc]init];
+    _goods = goods;
 }
 
 #pragma mark - 拍照和相册

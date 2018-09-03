@@ -9,6 +9,8 @@
 #import "ZDTextRecognitionView.h"
 #import "ocrSDK/OCRSDK.h"
 #import "YDImageView.h"
+#import "ZDGoods.h"
+#import "ZDStringSaveByNumber.h"
 
 @interface ZDTextRecognitionView()
 
@@ -20,6 +22,7 @@
     if (self = [super initWithFrame:frame]) {
         
         self.imgView  = [[YDImageView alloc]init];
+        self.goods = [[ZDGoods alloc]init];
        
     }
     return self;
@@ -28,6 +31,7 @@
     self.imgView.image = image;
 }
 - (void)recognitionForText{
+    
     YDTranslateInstance *yd = [YDTranslateInstance sharedInstance];
     yd.appKey = @"2b1c202a7b52cbd6";
     YDOCRRequest *request = [YDOCRRequest request];
@@ -45,7 +49,8 @@
         }else {
             //成功
             [self showText:result];
-            //            NSLog(@"result = %@",result);
+            
+            [self.delegate jumpToAddVC];
         }
     }];
 }
@@ -74,11 +79,27 @@
     
     return [imageData base64EncodedStringWithOptions:0];
 }
-- (void)showText:(YDOCRResult *)result {
+- (void )showText:(YDOCRResult *)result {
     if (result) {
+
         for (YDOCRRegion *region in result.regions) {
             for (YDOCRLine *line in region.lines) {
-                NSLog(@"%@",line.text);
+
+                if ([line.text rangeOfString:@"名称" options:NSCaseInsensitiveSearch].length >0) {
+                    
+                    _goods.name = line.text;
+                    
+                }
+                
+                if ([line.text rangeOfString:@"保质" options:NSCaseInsensitiveSearch].length >0) {
+                    
+                    NSString *str = [ZDStringSaveByNumber charactersString:line.text];
+                    _goods.saveTime = str;
+                }
+                if (([line.text rangeOfString:@"2018" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2016" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2017" options:NSCaseInsensitiveSearch].length >0)) {
+                    
+                    NSLog(@"%@",line.text);
+                }
             }
         }
     }

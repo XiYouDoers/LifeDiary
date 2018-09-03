@@ -9,7 +9,7 @@
 #import "ZDExpireViewController.h"
 #import "ZDExpireDataBase.h"
 #import "ZDAllDataBase.h"
-#import "ZDAllCell.h"
+#import "ZDRepertoryCell.h"
 
 @interface ZDExpireViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -43,7 +43,7 @@
     _expireTableView.tableHeaderView=[[UIView alloc]initWithFrame:CGRectZero];
     _expireTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_expireTableView];
-    [_expireTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"expireCell"];
+    [_expireTableView registerClass:[ZDRepertoryCell class] forCellReuseIdentifier:@"expireCell"];
     
     //允许table在编辑的时候多选
     self.expireTableView.allowsMultipleSelectionDuringEditing = YES;
@@ -145,7 +145,7 @@
 
 // 改变选中时最左边对勾的背景颜色
 - (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
-    ZDAllCell *cell = [self.expireTableView cellForRowAtIndexPath:indexPath];
+    ZDRepertoryCell *cell = [self.expireTableView cellForRowAtIndexPath:indexPath];
     NSArray *subviews = cell.subviews;
     for (id obj in subviews) {
         if ([obj isKindOfClass:[UIControl class]]) {

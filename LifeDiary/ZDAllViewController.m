@@ -271,10 +271,8 @@
                 //                NSString *pinyin = [self transformToPinyin:searchText];
                 
                 if ([tempStr rangeOfString:searchText options:NSCaseInsensitiveSearch].length >0 ) {
-                    NSLog(@"succeed");
                     //把搜索结果存放self.resultArray数组
                     [self.resultMutableArray addObject:goods];
-                    NSLog(@" = %@",self.resultMutableArray);
                 }
             }
             
@@ -373,9 +371,12 @@
         BOOL isSelected = ![self cellIsSelected:lastIndexPath];
         NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
         [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
-        [self.allTableView reloadRowsAtIndexPaths:@[lastIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
         [UIView animateWithDuration:0.3 animations:^{
            _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
+        }];
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.allTableView reloadRowsAtIndexPaths:@[lastIndexPath] withRowAnimation:UITableViewRowAnimationNone];
         }];
         
         
@@ -390,13 +391,13 @@
         if ([self cellIsSelected:indexPath]) {
             isReclickCell = 1;
             lastIndexPath = indexPath;
+            [NSThread sleepForTimeInterval:0.1];
+            
             [self.allTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             [UIView animateWithDuration:0.3 animations:^{
                 _allCell.manageView.frame = CGRectMake(87.5, 140, 200, 40);
             }];
             
-            
-         
         }else{
             isReclickCell = 0;
             [self.allTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -404,13 +405,14 @@
                 _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
             }];
             
-            
         }
     
 
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 5.f;
+}
 /**
  cell是否可以左滑删除
  

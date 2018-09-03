@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YDImageView;
+
+@protocol ZDTextRecognitionViewDelegate<NSObject>
+- (void)jumpToAddVC;
+@end
+
+@class YDImageView,ZDRecognitionData,ZDGoods;
 @interface ZDTextRecognitionView : UIView
 @property (nonatomic, strong) YDImageView *imgView;
-
+@property (nonatomic, strong) ZDGoods *goods;
+@property (nonatomic, weak) id <ZDTextRecognitionViewDelegate> delegate;
 - (void)recognitionForText;
 - (void)setData:(UIImage *)image;
 @end

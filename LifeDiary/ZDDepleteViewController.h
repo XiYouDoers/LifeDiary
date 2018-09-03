@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDAllCell;
+@class ZDRepertoryCell;
 
 @interface ZDDepleteViewController : UIViewController
 
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) UITableView *depleteTableView;
-@property(nonatomic,strong) ZDAllCell *depleteCell;
+@property(nonatomic,strong) ZDRepertoryCell *depleteCell;
 
 @end

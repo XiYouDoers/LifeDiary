@@ -8,12 +8,14 @@
 
 #import "ZDSetViewController.h"
 #import "ZDMeDefaultCell.h"
+#import "ZDMeSwitchCell.h"
 
 @interface ZDSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *setTableView;
 @property(nonatomic,copy) NSArray *cellLabelDataArray;
 @property(nonatomic,copy) NSArray *cellImageDataArray;
-@property(nonatomic,strong) ZDMeDefaultCell *meCell;
+@property(nonatomic,strong) ZDMeDefaultCell *defaultCell;
+@property(nonatomic,strong) ZDMeSwitchCell *switchCell;
 @end
 
 @implementation ZDSetViewController
@@ -24,19 +26,27 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _setTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
+    _setTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _setTableView.dataSource = self;
     _setTableView.delegate = self;
-    _setTableView.sectionHeaderHeight = 0.01f;
-    _setTableView.sectionFooterHeight = 0.01f;
     _setTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
-    _setTableView.tableHeaderView = [UIView new];
+    _setTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
     _setTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_setTableView];
     [_setTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
-    
-    _cellLabelDataArray = [NSArray arrayWithObjects:@"夜间模式",@"主题",@"清除缓存",@"退出账号", nil];
+    [_setTableView registerClass:[ZDMeSwitchCell class] forCellReuseIdentifier:@"meSwitchCell"];
+    _cellLabelDataArray = [NSArray arrayWithObjects:@"夜间模式",@"主题",@"清除缓存", nil];
 
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+
+{
+    
+    return 0.1;
+    
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
 }
 - (void)viewWillAppear:(BOOL)animated{
     //隐藏tabBar
@@ -55,7 +65,7 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return 3;
 }
 
 /**
@@ -78,9 +88,16 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
-    _meCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
-    return _meCell;
+    if (indexPath.row == 0) {
+        _switchCell = [tableView dequeueReusableCellWithIdentifier:@"meSwitchCell" forIndexPath:indexPath];
+        _switchCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
+        return _switchCell;
+
+    }else{
+    _defaultCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell" forIndexPath:indexPath];
+    _defaultCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
+    return _defaultCell;
+    }
 }
 /**
  cell点击方法

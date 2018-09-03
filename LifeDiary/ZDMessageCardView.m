@@ -89,7 +89,6 @@ static NSString *const cellId = @"collectionViewCellId";
     _messageCollectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     ZDGoods *goods = _messageDataMutableArray[indexPath.item];
     [_messageCollectionViewCell setData:goods];
-    
     return _messageCollectionViewCell;
 }
 

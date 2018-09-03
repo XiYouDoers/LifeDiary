@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDAddTableHeaderView,ZDAddDefaultCell,ZDPickerViewCell;
+@class ZDAddTableHeaderView,ZDAddDefaultCell,ZDPickerViewCell,ZDGoods;
 
 @interface ZDAddViewController : UIViewController
 
@@ -16,6 +16,6 @@
 @property(nonatomic,strong) UITableView *addTableView;
 @property(nonatomic,strong) ZDAddDefaultCell *addDefaultCell;
 @property(nonatomic,strong) ZDPickerViewCell *pickerViewCell;
-- (void)setGoodsInfo:(NSMutableArray *)muArray;
+- (void)setGoodsInfo:(ZDGoods *)goods;
 
 @end

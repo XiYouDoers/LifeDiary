@@ -1,14 +1,14 @@
 //
-//  ZDMeDefaultCell.m
+//  ZDMeSwitchCell.m
 //  LifeDiary
 //
-//  Created by JACK on 2018/5/20.
+//  Created by Jack on 2018/9/2.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDMeDefaultCell.h"
+#import "ZDMeSwitchCell.h"
 
-@implementation ZDMeDefaultCell
+@implementation ZDMeSwitchCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,32 +19,29 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
         
-
-        //_tabImageView
-        _tabImageView = [[UIImageView alloc]init];
-        _tabImageView.image = [UIImage imageNamed:@"arrow"];
-        [self addSubview:_tabImageView];
-        [_tabImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-17);
-            make.size.mas_equalTo(CGSizeMake(8, 15));
-            make.right.mas_equalTo(-40);
+        
+        //_nightModeSwitch
+        _nightModeSwitch = [[UISwitch alloc]init];
+        [self.contentView addSubview:_nightModeSwitch];
+        [_nightModeSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.contentView.mas_centerY);
+            make.right.mas_equalTo(-20);
         }];
         
         
         //_tabLabel
         _tabLabel = [[UILabel alloc]init];
-        [self addSubview:_tabLabel];
+        [self.contentView addSubview:_tabLabel];
         [_tabLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-10 );
             make.size.mas_equalTo(CGSizeMake(100, 30));
             make.left.mas_equalTo(40);
         }];
         
-
+        
     }
     return self;
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

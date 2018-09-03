@@ -9,7 +9,7 @@
 #import "ZDRecycleViewController.h"
 #import "ZDRecycleDataBase.h"
 #import "ZDAllDataBase.h"
-#import "ZDAllCell.h"
+#import "ZDRepertoryCell.h"
 
 @interface ZDRecycleViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -45,7 +45,7 @@
     _recycleTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
     _recycleTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_recycleTableView];
-    [_recycleTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"recycleCell"];
+    [_recycleTableView registerClass:[ZDRepertoryCell class] forCellReuseIdentifier:@"recycleCell"];
     
     //允许table在编辑的时候多选
     self.recycleTableView.allowsMultipleSelectionDuringEditing = YES;
@@ -91,7 +91,7 @@
     //上移删除button
     [UIView animateWithDuration:0.5 animations:^{
         _deleteButton.frame = CGRectMake(0,HEIGHT*8/9, WIDTH,HEIGHT/9);
-        NSLog(@"%@   %f",NSStringFromCGRect(_deleteButton.frame),HEIGHT);
+     
     }];
        
     }else{
@@ -145,7 +145,7 @@
 }
 // 改变选中时最左边对勾的背景颜色
 - (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
-    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    ZDRepertoryCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
     NSArray *subviews = cell.subviews;
     for (id obj in subviews) {
         if ([obj isKindOfClass:[UIControl class]]) {
@@ -172,9 +172,7 @@
 
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
 
-//    [self shallowCellSelectedImageView:indexPath];
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
@@ -183,7 +181,8 @@
  
  */
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
-    ZDAllCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+    
+    ZDRepertoryCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
     cell.editing = NO;
     [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
@@ -203,6 +202,7 @@
   
     return 1;
 }
+
 /**
  cell的高度
  */

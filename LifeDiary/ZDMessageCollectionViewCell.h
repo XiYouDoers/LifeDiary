@@ -26,7 +26,7 @@
  *
  @param ratio   a rate of remainder/all
  */
-//- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;
+- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;
 
 
 /**
