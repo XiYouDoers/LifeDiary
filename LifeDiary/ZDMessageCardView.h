@@ -13,7 +13,7 @@ extern NSDateFormatter const *_formatter;
 @protocol ZDMessageCardViewDelegate
 @optional
 - (void) hiddenDetailView;
-- (void) notHiddenDetailView:(ZDMessageCollectionViewCell *)messageCell;
+- (void) notHiddenDetailView:(ZDMessageCollectionViewCell *)messageCell selectedIndexPath:(NSIndexPath *)indexPath;
 @end
 @interface ZDMessageCardView : UIView
 @property(nonatomic,strong) NSMutableArray *messageDataMutableArray;

@@ -80,7 +80,12 @@ static NSString *const footerId = @"footerId";
     }];
     
     // Do any additional setup after loading the view.
+    
+    
+
 }
+
+
 - (void)setNavigationBar{
     
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];

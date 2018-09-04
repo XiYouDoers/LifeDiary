@@ -39,7 +39,7 @@
         _stepper = [[UIStepper alloc] init];
         _stepper.tintColor = [UIColor whiteColor];
         _stepper.backgroundColor = NAVIGATIONCOLOR;
-        _stepper.layer.cornerRadius = 15.f;
+        _stepper.layer.cornerRadius = 5.f;
         _stepper.layer.masksToBounds = YES;
         //设置步进器的最小值
         _stepper.minimumValue = 0;

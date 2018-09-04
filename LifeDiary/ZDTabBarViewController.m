@@ -157,11 +157,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
             textReView.delegate = self;
             [textReView setData:info[@"UIImagePickerControllerOriginalImage"]];
             [textReView recognitionForText];
-
-          
-            
-            
-            
+  
         }
     }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
         NSLog(@"文字识别");

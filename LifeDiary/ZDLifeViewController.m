@@ -38,6 +38,7 @@
     [self getData];
     [self addImageView];
     [self addCardView];
+   
 }
 - (void)setNavigationBar{
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];

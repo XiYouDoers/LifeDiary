@@ -44,7 +44,35 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)shareToOther{
+    //分享的标题
+
+        NSString *textToShare = [NSString stringWithFormat:@"%@",_contentlistModel.title];
+        UIImage *imageToShare;
+        if (_contentlistModel.imageurls.count) {
+            ZDPicModel *picModel = _contentlistModel.imageurls[0];
+            NSData *imageData = [NSData dataWithContentsOfURL:picModel.url];
+            //分享的图片
+            imageToShare = [UIImage imageWithData:imageData];
+        }
     
+    
+        //分享的url
+        NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_contentlistModel.link]];
+    
+//    在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
+    NSArray *activityItems = @[textToShare,imageToShare, urlToShare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+    //不出现在活动项目
+    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+    [self presentViewController:activityVC animated:YES completion:nil];
+    // 分享之后的回调
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        if (completed) {
+            //分享 成功
+        } else  {
+            //分享 取消
+        }
+    };
 }
 - (void)viewWillAppear:(BOOL)animated{
     

@@ -24,9 +24,9 @@ extern NSDateFormatter const *_formatter;
         self.contentView.backgroundColor = [UIColor clearColor];
 
         
-        [self.contentView addSubview:self.exhibitView];
+        [self.contentView addSubview:self.shadowView];
         
-//        [self.shadowView addSubview:self.exhibitView];
+        [self.shadowView addSubview:self.exhibitView];
         
         [self.exhibitView addSubview:self.nameLabel];
         
@@ -90,7 +90,7 @@ extern NSDateFormatter const *_formatter;
         _shadowView.layer.shadowOffset = CGSizeMake(0, 10);
         _shadowView.layer.shadowRadius = 10;
         _shadowView.layer.shadowOpacity = 1;
-        _shadowView.layer.shouldRasterize = YES;
+        _shadowView.layer.shouldRasterize = NO;
     }
     return _shadowView;
 }
@@ -101,6 +101,7 @@ extern NSDateFormatter const *_formatter;
         _exhibitView.backgroundColor = [UIColor whiteColor];
         _exhibitView.layer.cornerRadius = 15;
         _exhibitView.layer.masksToBounds = YES;
+        
     }
     return _exhibitView;
 }

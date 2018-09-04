@@ -38,11 +38,13 @@
 }
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+
     return self.attributesMutableArray;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     CGFloat widthForBigItem = self.collectionView.frame.size.width;
     CGFloat widthForSmallItem = self.collectionView.frame.size.width/2;
     CGFloat heightForBigItem = widthForBigItem * 0.9;

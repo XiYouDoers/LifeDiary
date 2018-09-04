@@ -48,7 +48,7 @@ static NSString *const cellIdForLife = @"collectionViewForLifeCellId";
     if (@available(iOS 11.0, *)) {
         _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:_rgcardViewLayout];
     }else{
-        _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
+//        _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
     }
     _collectionView.backgroundColor = [UIColor clearColor];
     _collectionView.delegate = self;
@@ -57,13 +57,16 @@ static NSString *const cellIdForLife = @"collectionViewForLifeCellId";
     _collectionView.pagingEnabled = YES;
     // 隐藏水平滚动条
     _collectionView.showsHorizontalScrollIndicator = NO;
-    // 取消弹簧效果
+    // 设置弹簧效果
     _collectionView.bounces = YES;
     [self addSubview:_collectionView];
     
     // 注册cell、sectionHeader、sectionFooter
     [_collectionView registerClass:[ZDCollectionViewCell class] forCellWithReuseIdentifier:cellIdForLife];
     
+}
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+   
 }
 - (void)setContentlistArray:(NSMutableArray<ZDContentlistModel> *)contentlistArray{
     _contentlistArray = contentlistArray;

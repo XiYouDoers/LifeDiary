@@ -111,7 +111,7 @@ static NSString *const cellId = @"collectionViewCellId";
             }
         }
         cell.alpha = 0.6;
-        [self.delegate notHiddenDetailView:cell];
+        [self.delegate notHiddenDetailView:cell selectedIndexPath:indexPath];
     }else{
         cell.alpha = 1;
         [self.delegate hiddenDetailView];

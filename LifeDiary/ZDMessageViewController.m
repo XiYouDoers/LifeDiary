@@ -23,6 +23,7 @@
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
     ZDMessageCollectionViewCell *_tempCell;
+    NSIndexPath *lastIndexPath;
 }
 
 @property(nonatomic,strong) UISegmentedControl *segmentControl;
@@ -56,18 +57,44 @@ NSDateFormatter const *_formatter;
     
 }
 - (void)addMessageCardView{
+    
     _messageCardView = [[ZDMessageCardView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _messageCardView.delegate = self;
     [self.view addSubview:_messageCardView];
 }
 - (void)valueChanged:(UIStepper *)stepper{
     
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:stepper.tag - 200 inSection:0];
-//    ZDMessageCollectionViewCell *cell = (ZDMessageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    //当数量为0时直接删除物品
+    if (!stepper.value) {
+        UIAlertController *actionAlert = [UIAlertController alertControllerWithTitle:@"是否确认删除" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *rightToDeleteAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [_tempCell.sumLabel setText:@"数量：1"];
+            [_detailView.sumLabel setText:@"数量：1"];
+            ZDGoods *goods = _messageDataMutableArray[lastIndexPath.item];
+            goods.sum = @"1";
+            [[ZDAllDataBase sharedDataBase]updateGoods:goods];
+            
+        }];
+        
+        UIAlertAction *cancaelToDeleteAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            
+        }];
+        
+        [actionAlert addAction:rightToDeleteAction];
+        [actionAlert addAction:cancaelToDeleteAction];
+        [self presentViewController:actionAlert animated:YES completion:nil];
+    }else{
+     //否则改变数量
     [_tempCell.sumLabel setText:[NSString stringWithFormat:@"数量：%d",(int)stepper.value ]];
-//    ZDGoods *goods = _messageDataMutableArray[indexPath.item];
-//    goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
-//    [[ZDAllDataBase sharedDataBase]updateGoods:goods];
+    [_detailView.sumLabel setText:[NSString stringWithFormat:@"数量：%d",(int)stepper.value ]];
+    ZDGoods *goods = _messageDataMutableArray[lastIndexPath.item];
+    goods.sum = [NSString stringWithFormat:@"%d",(int)stepper.value ];
+    [[ZDAllDataBase sharedDataBase]updateGoods:goods];
+    }
     
 }
 
@@ -75,7 +102,7 @@ NSDateFormatter const *_formatter;
     
     //backBarButtonItem
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-//    [backBtnItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR } forState:UIControlStateNormal];
+
     backBtnItem.title = @"消息";
     self.navigationItem.backBarButtonItem = backBtnItem;
     //改变BarButtonItem图片颜色
@@ -83,26 +110,24 @@ NSDateFormatter const *_formatter;
     //allBarButtonItem
     UIBarButtonItem *allBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"全部" style:UIBarButtonItemStylePlain target:self action:@selector(openAll)];
 
-//    [allBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
+
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
-    
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR}];
-    
+
     //rightBarButtonItem
     UIImage *image = [UIImage imageNamed:@"me"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *meBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(openMe)];
 
     
-//    [addBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:BUTTONITEMCOLOR} forState:UIControlStateNormal];
+
     
     self.navigationItem.rightBarButtonItem = meBarButtonItem;
     
     if (@available(iOS 11.0, *)) {
         self.navigationController.navigationBar.prefersLargeTitles = YES;
     } else {
-        // Fallback on earlier versions
+       
     }
     self.navigationItem.title = @"消息";
 }
@@ -185,7 +210,9 @@ NSDateFormatter const *_formatter;
     //显示tabBar
     [self setTabBarHidden:NO];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [self hiddenDetailView];
+}
 //设置tabBar
 - (void)setTabBarHidden:(BOOL)hidden
 {
@@ -204,7 +231,7 @@ NSDateFormatter const *_formatter;
         
     }];
 }
-- (void) notHiddenDetailView:(ZDMessageCollectionViewCell *)messageCell{
+- (void) notHiddenDetailView:(ZDMessageCollectionViewCell *)messageCell selectedIndexPath:(NSIndexPath *)indexPath{
     [UIView animateWithDuration:0.3 animations:^{
         _detailView.frame = CGRectMake(0, HEIGHT-49-49, WIDTH, 49);
     }];
@@ -214,6 +241,7 @@ NSDateFormatter const *_formatter;
     _detailView.stepper.value = [str intValue];
     _detailView.remainderTimeLabel.text = messageCell.remainderTimeLabel.text;
     _tempCell = messageCell;
+    lastIndexPath = indexPath;
 }
 - (void)hiddenDetailView{
     
