@@ -95,22 +95,22 @@
     _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
     _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     
-    UIButton *continueToRecognizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    continueToRecognizeButton.frame = CGRectMake(125, 580, 125, 50);
-    continueToRecognizeButton.layer.cornerRadius = 10.f;
-    continueToRecognizeButton.layer.masksToBounds = YES;
-    [continueToRecognizeButton setTitle:@"继续识别" forState:UIControlStateNormal];
-    [continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [continueToRecognizeButton setBackgroundColor:[UIColor blueColor]];
-    [continueToRecognizeButton addTarget:self action:@selector(continueToRecognize) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:continueToRecognizeButton];
+    _continueToRecognizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _continueToRecognizeButton.frame = CGRectMake(125, 580, 125, 50);
+    _continueToRecognizeButton.layer.cornerRadius = 10.f;
+    _continueToRecognizeButton.layer.masksToBounds = YES;
+    [_continueToRecognizeButton setTitle:@"继续识别" forState:UIControlStateNormal];
+    [_continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [_continueToRecognizeButton setBackgroundColor:[UIColor blueColor]];
+    [_continueToRecognizeButton addTarget:self action:@selector(continueToRecognize) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_continueToRecognizeButton];
 
 }
 - (void)continueToRecognize{
     ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]init];
     photoManagerVC.delegate = self;
-    [photoManagerVC selectedWay];
+    [photoManagerVC selectedWayToRecognize];
 }
 - (void)backToBeforeVC{
     //回收所有输入框

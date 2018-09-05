@@ -74,17 +74,14 @@ static NSString *const footerId = @"footerId";
     [_segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
         
     
-        make.top.mas_equalTo(30);
-        make.size.mas_equalTo(CGSizeMake(WIDTH/3, 30));
+        make.top.mas_equalTo(5);
+        make.size.mas_equalTo(CGSizeMake(WIDTH/3, 28));
         make.left.mas_equalTo(WIDTH/3);
     }];
     
     // Do any additional setup after loading the view.
-    
-    
 
 }
-
 
 - (void)setNavigationBar{
     
@@ -95,19 +92,18 @@ static NSString *const footerId = @"footerId";
     if (@available(iOS 11.0, *)) {
         self.navigationController.navigationBar.prefersLargeTitles = YES;
         
-        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
     } else {
         // Fallback on earlier versions
     }
     self.navigationItem.title = @"发现";
     
-//    _titleLabel = [[UILabel alloc]init];
-//    _titleLabel.textAlignment = NSTextAlignmentLeft;
-//    _titleLabel.frame = CGRectMake(10, 10, 100, 40);
-//    _titleLabel.text = @"发现";
-//    _titleLabel.font = [UIFont systemFontOfSize:34];
-//    [self.navigationController.navigationBar addSubview:_titleLabel];
-    
+    _titleLabel = [[UILabel alloc]init];
+    _titleLabel.textAlignment = NSTextAlignmentLeft;
+    _titleLabel.frame = CGRectMake(15, 10, 100, 25);
+    _titleLabel.text = @"发现";
+    _titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    [self.navigationController.navigationBar addSubview:_titleLabel];
     
     //改变BarButtonItem图片颜色
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;

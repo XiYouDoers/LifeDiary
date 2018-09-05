@@ -14,4 +14,5 @@
 @property(nonatomic,strong) UIButton *button;
 @property(nonatomic,weak)   UIViewController <ZDPhotoManagerViewControllerDelegate> *delegate;
 - (void)selectedWay;
+- (void)selectedWayToRecognize;
 @end

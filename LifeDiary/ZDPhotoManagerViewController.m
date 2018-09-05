@@ -30,6 +30,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+- (void)selectedWayToRecognize{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"选择方式" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *openCameraAction = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self openCamera];
+    }];
+    
+    UIAlertAction *openPhotoLibraryAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self openPhotoLibrary];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    //把action添加到actionSheet里
+    [actionSheet addAction:openCameraAction];
+    [actionSheet addAction:openPhotoLibraryAction];
+    [actionSheet addAction:cancelAction];
+    
+    
+    [self.delegate presentViewController:actionSheet animated:YES completion:nil];
+}
 - (void)selectedWay{
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"选择方式" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -63,6 +84,7 @@
 - (void)openAddVC{
     ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
     [self.delegate presentViewController:addVC animated:YES completion:nil];
+     addVC.continueToRecognizeButton.hidden = YES;
 }
 /**
  *  调用照相机

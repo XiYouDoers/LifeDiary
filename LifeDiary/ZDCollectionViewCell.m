@@ -42,7 +42,7 @@
         
         [self.exhibitView addSubview:self.sourceLabel];
         [_sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(1);
+            make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(5);
             make.left.mas_equalTo(15);
             make.size.mas_equalTo(CGSizeMake(100,30));
         }];
@@ -116,7 +116,7 @@
         _nameLabel = [[UILabel alloc]init];
         _nameLabel.numberOfLines = 0;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.font = [UIFont systemFontOfSize:14];
+        _nameLabel.font = [UIFont systemFontOfSize:17];
     }
     return _nameLabel;
 }
@@ -126,7 +126,7 @@
         
         _sourceLabel = [[UILabel alloc]init];
         _sourceLabel.textColor = [UIColor lightGrayColor];
-        _sourceLabel.font = [UIFont systemFontOfSize:13];
+        _sourceLabel.font = [UIFont systemFontOfSize:15];
         _sourceLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _sourceLabel;

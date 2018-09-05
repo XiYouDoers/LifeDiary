@@ -82,7 +82,7 @@
 
 - (void)addCardView{
     
-    _cardView = [[ZDCardView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    _cardView = [[ZDCardView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64)];
     _cardView.delegate = self;
     [self.view addSubview:_cardView];
 
@@ -103,6 +103,7 @@
     }
     
 }
+
 - (void)pushToNextViewController:(NSInteger)index{
     
     ZDContentlistModel *contentlist = [[ZDContentlistModel alloc]init];

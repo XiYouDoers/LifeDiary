@@ -92,7 +92,7 @@
         
         //设置左边按钮
         self.navigationItem.leftBarButtonItem = _allSelectedBarButtonItem;
-        //下移删除button
+        //上移删除button
         [UIView animateWithDuration:0.5 animations:^{
             _deleteButton.frame = CGRectMake(0, HEIGHT*8/9, WIDTH, HEIGHT/9);
         }];
@@ -109,7 +109,7 @@
             [self.expireTableView deselectRowAtIndexPath:indexPath animated:YES];
         }
         self.navigationItem.leftBarButtonItem = nil;
-        //上移删除button
+        //下移删除button
         [UIView animateWithDuration:0.5 animations:^{
             _deleteButton.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT/9);
         }];
@@ -136,7 +136,7 @@
     
     //下移删除button
     [UIView animateWithDuration:0.5 animations:^{
-        _deleteButton.frame = CGRectMake(0, HEIGHT/9*8, WIDTH, HEIGHT/9);
+        _deleteButton.frame = CGRectMake(0, HEIGHT*8/9, WIDTH, HEIGHT/9);
     }];
     //删除后回归原状态
     [self manageCell:_manageCellBarButtonItem];
@@ -153,8 +153,8 @@
             for (id subview in [obj subviews]) {
                 if ([subview isKindOfClass:[UIImageView class]]) {
                     
-                    //                    [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
-                    [subview setValue:[UIColor redColor] forKey:@"tintColor"];
+                                        [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
+//                    [subview setValue:[UIColor redColor] forKey:@"tintColor"];
                     break;
                 }
                 
@@ -216,7 +216,7 @@
     
     _expireCell = [tableView dequeueReusableCellWithIdentifier:@"expireCell"];
     //去除选中时渲染的蓝色背景
-    _expireCell.selectedBackgroundView = [[UIView alloc] init];
+//    _expireCell.selectedBackground View = [[UIView alloc] init];
     ZDGoods *goods = [[ZDGoods alloc]init];
     goods = _dataMutableArray[indexPath.row];
     

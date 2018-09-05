@@ -14,7 +14,7 @@
 - (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock maxResult:(NSString *)maxResult{
     
     NSString *urlString = @"https://route.showapi.com/109-35";
-    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"71372",@"showapi_appid",@"348a376e09b04e5daccd93d19c7ba7ce",@"showapi_sign",@"1",@"needHtml",@"2", @"page",@"健康养生", @"channelName",maxResult,@"maxResult",nil];
+    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"74299",@"showapi_appid",@"e5302823acb34081a1324151a4dc2914",@"showapi_sign",@"1",@"needHtml",@"2", @"page",@"健康养生", @"channelName",maxResult,@"maxResult",nil];
     AFHTTPSessionManager *sessionManger = [AFHTTPSessionManager manager];
     sessionManger.requestSerializer = [AFHTTPRequestSerializer serializer];
     [sessionManger GET:urlString parameters:paraDictionary progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

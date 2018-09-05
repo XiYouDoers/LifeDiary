@@ -48,7 +48,7 @@
     [_recycleTableView registerClass:[ZDRepertoryCell class] forCellReuseIdentifier:@"recycleCell"];
     
     //允许table在编辑的时候多选
-    self.recycleTableView.allowsMultipleSelectionDuringEditing = YES;
+//    _recycleTableView.allowsMultipleSelectionDuringEditing = YES;
     
     _rightBarButtonItemIsSeleted = NO;
     _deletedCellArray = [NSMutableArray array];
@@ -62,7 +62,7 @@
     [_deleteButton addTarget:self action:@selector(deleteSelectedCells) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_deleteButton];
     
-    // Do any additional setup after loading the view.
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -102,7 +102,7 @@
         for (int i = 0; i < self.dataMutableArray.count; i++) {
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            [self shallowCellSelectedImageView:indexPath];
+//            [self shallowCellSelectedImageView:indexPath];
             [self.recycleTableView deselectRowAtIndexPath:indexPath animated:YES];
         }
         self.navigationItem.leftBarButtonItem = nil;
@@ -119,7 +119,7 @@
     for (int i = 0; i < self.dataMutableArray.count; i++) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        [self shallowCellSelectedImageView:indexPath];
+//        [self shallowCellSelectedImageView:indexPath];
         [self.recycleTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
     _deletedCellArray = [NSMutableArray arrayWithArray:self.dataMutableArray];
@@ -139,30 +139,32 @@
     [self manageCell:_manageCellBarButtonItem];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-// 改变选中时最左边对勾的背景颜色
-- (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
-    ZDRepertoryCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
-    NSArray *subviews = cell.subviews;
-    for (id obj in subviews) {
-        if ([obj isKindOfClass:[UIControl class]]) {
 
-            for (id subview in [obj subviews]) {
-                if ([subview isKindOfClass:[UIImageView class]]) {
+//// 改变选中时最左边对勾的背景颜色
+//- (void)shallowCellSelectedImageView: (NSIndexPath *)indexPath{
+//    ZDRepertoryCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
+//    NSArray *subviews = cell.subviews;
+//    for (id obj in subviews) {
+//        if ([obj isKindOfClass:[UIControl class]]) {
+//
+//            for (id subview in [obj subviews]) {
+//                if ([subview isKindOfClass:[UIImageView class]]) {
+//
+//                    [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
+//
+//                    break;
+//                }
+//
+//            }
+//        }
+//    }
+//
+//
+//}
 
-                    [subview setValue:[UIColor colorWithRed:0.0 green:165.0/255 blue:237.0/255 alpha:1] forKey:@"tintColor"];
-                    [subview setValue:[UIColor redColor] forKey:@"tintColor"];
-                    break;
-                }
-
-            }
-        }
-    }
-
-
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
 }
 
 
@@ -172,21 +174,21 @@
 
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
-/**
- cell取消选中时执行的方法
- 
- */
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
-    
-    ZDRepertoryCell *cell = [self.recycleTableView cellForRowAtIndexPath:indexPath];
-    cell.editing = NO;
-    [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
-    
-}
+///**
+// cell取消选中时执行的方法
+//
+// */
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
+//
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
+//
+//}
 
 /**
  section中cell的数量
@@ -234,41 +236,41 @@
     
 }
 
-/**
- 　tableView左滑编辑
-
- */
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+///**
+// 　tableView左滑编辑
+//
+// */
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
 
    
-    // 添加一个删除按钮
-    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-
-        ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
-        // 从数据库中删除
-        [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
-        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
-        [self.recycleTableView reloadData];
-
-    }];
-    // 添加一个恢复按钮
-    UITableViewRowAction *recoveryRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"恢复"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-
-        ZDGoods *recoveryGoods = self.dataMutableArray[indexPath.row];
-        // 从数据库中删除
-        [[ZDRecycleDataBase sharedDataBase]deleteGoods:recoveryGoods];
-        [[ZDAllDataBase sharedDataBase]addGoods:recoveryGoods];
-        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
-        [self.recycleTableView reloadData];
-
-
-
-    }];
-    recoveryRowAction.backgroundColor = [UIColor colorWithRed:249.0/255 green:160.0/255 blue:8.0/255 alpha:1];
-    // 将设置好的按钮放到数组中返回
-    return @[deleteRowAction, recoveryRowAction];
-}
+//    // 添加一个删除按钮
+//    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//
+//        ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
+//        // 从数据库中删除
+//        [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
+//        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+//        [self.recycleTableView reloadData];
+//
+//    }];
+//    // 添加一个恢复按钮
+//    UITableViewRowAction *recoveryRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"恢复"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//
+//        ZDGoods *recoveryGoods = self.dataMutableArray[indexPath.row];
+//        // 从数据库中删除
+//        [[ZDRecycleDataBase sharedDataBase]deleteGoods:recoveryGoods];
+//        [[ZDAllDataBase sharedDataBase]addGoods:recoveryGoods];
+//        self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
+//        [self.recycleTableView reloadData];
+//
+//
+//
+//    }];
+//    recoveryRowAction.backgroundColor = [UIColor colorWithRed:249.0/255 green:160.0/255 blue:8.0/255 alpha:1];
+//    // 将设置好的按钮放到数组中返回
+//    return @[deleteRowAction, recoveryRowAction];
+//}
 
 /**
  cell是否可以左滑删除
@@ -285,8 +287,6 @@
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-
-
         ZDGoods *deletedGoods = self.dataMutableArray[indexPath.row];
         // 从数据库中删除
         [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
