@@ -43,8 +43,10 @@
     _meTableView.scrollEnabled = YES;
     _meTableView.sectionHeaderHeight = 0.01f;
     _meTableView.sectionFooterHeight = 0.01f;
-    _meTableView.backgroundColor = [UIColor whiteColor];
+    _meTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _meTableView.tableHeaderView= self.tableHeaderView;
+    //消除cell间细线
+    _meTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //是否展示竖直滚动条
     _meTableView.showsVerticalScrollIndicator = NO;
     self.tableHeaderView.degegate = self;
@@ -161,7 +163,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 60;
 }
 
 /**

@@ -48,7 +48,6 @@
         [self addSubview:_htmlLabel];
 
         
-        
         //_footImageView
         _footImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 900, WIDTH-SPACING*2, 200)];
         [self addSubview:_footImageView];

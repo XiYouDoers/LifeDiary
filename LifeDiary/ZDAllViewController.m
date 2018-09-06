@@ -49,7 +49,7 @@
     _allTableView.delegate = self;
     //是否展示竖直滚动条
     _allTableView.showsVerticalScrollIndicator = YES;
-    _allTableView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+    _allTableView.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _allTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
@@ -124,7 +124,7 @@
                     
                     
                     UITextField *textField = [subView.subviews objectAtIndex:0];
-                    textField.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
+                    textField.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
                     textField.layer.masksToBounds = YES;
                     textField.layer.cornerRadius = 20.f;
                     
@@ -247,6 +247,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if ([self cellIsSelected:indexPath]) {
+        ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.manageView.frame = CGRectMake(87.5, 140, 200, 40);
+        }];
         return 160+50;
     }
     return 160;
@@ -351,42 +355,50 @@
     _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
     _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
     _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+    if ([goods.family isEqualToString:@"食品"]) {
+        _allCell.classificationLabel.text = @"食";
+    }else  if ([goods.family isEqualToString:@"日用品"]) {
+        _allCell.classificationLabel.text = @"日";
+    }else if ([goods.family isEqualToString:@"药品"]) {
+        _allCell.classificationLabel.text = @"药";
+    }else{
+        _allCell.classificationLabel.text = @"其";
+    }
+    
     //计算出保质期的时间戳
     //    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
     //    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
     //    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
     //    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
     //    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+
+    
     
     return _allCell;
     
 }
+
 /**
  cell点击方法
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
     if (isReclickCell && (lastIndexPath.row != indexPath.row)) {
 
         BOOL isSelected = ![self cellIsSelected:lastIndexPath];
         NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
         [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
-        
-        [UIView animateWithDuration:0.3 animations:^{
            _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.allTableView layoutIfNeeded];
         }];
-        [UIView animateWithDuration:0.2 animations:^{
-            [self.allTableView reloadRowsAtIndexPaths:@[lastIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-        }];
-        
         
     }
 
     BOOL isSelected = ![self cellIsSelected:indexPath];
     NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
     [selectedIndexes setObject:selectedIndex forKey:indexPath];
-    
-  
     
         if ([self cellIsSelected:indexPath]) {
             isReclickCell = 1;
@@ -406,8 +418,6 @@
             }];
             
         }
-    
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -504,9 +514,8 @@
 }
 - (void)editButtonWasClicked{
 
-        ZDAllCell *cell = [self.allTableView cellForRowAtIndexPath:lastIndexPath];
+
         ZDGoods *goods =  _dataMutableArray[lastIndexPath.row];
-        cell.selected = !cell.selected;
         ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
         editVC.goods = goods;
         [self.navigationController pushViewController:editVC animated:YES];

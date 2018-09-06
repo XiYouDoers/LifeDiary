@@ -113,15 +113,11 @@ NSDateFormatter const *_formatter;
 
     self.navigationItem.leftBarButtonItem = allBarButtonItem;
     
-
     //rightBarButtonItem
     UIImage *image = [UIImage imageNamed:@"me"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *meBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(openMe)];
 
-    
-
-    
     self.navigationItem.rightBarButtonItem = meBarButtonItem;
     
     if (@available(iOS 11.0, *)) {

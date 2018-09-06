@@ -30,6 +30,8 @@
     _setTableView.dataSource = self;
     _setTableView.delegate = self;
     _setTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    //消除cell间细线
+    _setTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _setTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
     _setTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_setTableView];
@@ -80,7 +82,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 60;
 }
 
 /**

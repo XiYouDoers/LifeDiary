@@ -14,7 +14,7 @@
 - (id)initWithFrame:(CGRect)frame{
     if(self=[super initWithFrame:frame]){
         
-        self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:244.0/255 alpha:1];
+        self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
 //        //_backgroundImageView
 //        _backgroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backgroundImage"]];
 //        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -38,13 +38,15 @@
         
         //_repertoryView
         _repertoryView = [[UIView alloc]init];
+        _repertoryView.layer.cornerRadius = 15.f;
+        _repertoryView.layer.masksToBounds = YES;
         _repertoryView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_repertoryView];
         [_repertoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(frame.size.height*0.9);
-            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.bottom.mas_equalTo(-15);
+            make.top.mas_equalTo(15);
         }];
         
         
@@ -54,8 +56,8 @@
         [_repertoryView addSubview:_depleteButton];
         [_depleteButton addTarget:self.degegate action:@selector(clickDepleteButton) forControlEvents:UIControlEventTouchUpInside];
         [_depleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(WIDTH/9);
-            make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
+            make.left.mas_equalTo((WIDTH-20)/9);
+            make.size.mas_equalTo(CGSizeMake((WIDTH-20)/9, (WIDTH-20)/9));
             make.bottom.mas_equalTo(-50);
         }];
         
@@ -80,8 +82,8 @@
         [_recycleButton addTarget:self.degegate action:@selector(clickRecycleButton) forControlEvents:UIControlEventTouchUpInside];
         [_repertoryView addSubview:_recycleButton];
         [_recycleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_depleteButton.mas_right).with.offset(WIDTH/9*2);
-            make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
+            make.left.mas_equalTo(_depleteButton.mas_right).with.offset((WIDTH-20)/9*2);
+            make.size.mas_equalTo(CGSizeMake((WIDTH-20)/9, (WIDTH-20)/9));
             make.bottom.mas_equalTo(-50);
         }];
         //_recycleLabel
@@ -105,8 +107,8 @@
         [_expireButton addTarget:self.degegate action:@selector(clickExpireButton) forControlEvents:UIControlEventTouchUpInside];
         [_repertoryView addSubview:_expireButton];
         [_expireButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_recycleButton.mas_right).with.offset(WIDTH/9*2);
-            make.size.mas_equalTo(CGSizeMake(WIDTH/9, WIDTH/9));
+            make.left.mas_equalTo(_recycleButton.mas_right).with.offset((WIDTH-20)/9*2);
+            make.size.mas_equalTo(CGSizeMake((WIDTH-20)/9, (WIDTH-20)/9));
             make.bottom.mas_equalTo(-50);
         }];
         

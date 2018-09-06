@@ -33,11 +33,11 @@
 
 - (void)setupLayout
 {
-    CGFloat inset  = self.collectionView.bounds.size.width * (8/64.0f);
+    CGFloat inset  = self.collectionView.bounds.size.width * (5/64.0f);
     inset = floor(inset);
     
-    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 4/5);
-    self.sectionInset = UIEdgeInsetsMake(-60,inset, 0,inset);
+    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width - (2 *inset), self.collectionView.bounds.size.height * 5/7);
+    self.sectionInset = UIEdgeInsetsMake(0,inset, 0,inset);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 

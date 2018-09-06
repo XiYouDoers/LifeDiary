@@ -91,16 +91,16 @@ static NSString *const cellIdForLife = @"collectionViewForLifeCellId";
     
     _collectionViewCell = [_collectionView dequeueReusableCellWithReuseIdentifier:cellIdForLife forIndexPath:indexPath];
     ZDContentlistModel *contentlistModel = _contentlistArray[indexPath.section];
+    [_collectionViewCell.imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"life%ld",indexPath.section]]];
     [_collectionViewCell updateCell:contentlistModel];
 
     return _collectionViewCell;
 }
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     _selectedIndex = scrollView.contentOffset.x / WIDTH;
     [self setSelectedIndex:_selectedIndex];
-    
 }
+
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     
     [self.delegate changeBackgroundImageView:_selectedIndex];

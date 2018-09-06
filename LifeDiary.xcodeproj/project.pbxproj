@@ -61,6 +61,8 @@
 		045E8AB6210ECAE800CC861A /* ZDAllFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E8AB5210ECAE800CC861A /* ZDAllFlowLayout.m */; };
 		046E40CA20DF6CC900CEA199 /* ZDUserDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */; };
 		046E40CD20DF766100CEA199 /* ZDAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E40CC20DF766100CEA199 /* ZDAllCell.m */; };
+		046E890A2140ECC000CF3FCC /* ZDClassPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E89092140ECC000CF3FCC /* ZDClassPickerTableViewCell.m */; };
+		046E890E2141168000CF3FCC /* ZDTranslateDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E890D2141168000CF3FCC /* ZDTranslateDataManager.m */; };
 		047667B1213D2F92007DB119 /* ZDStringSaveByNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 047667B0213D2F92007DB119 /* ZDStringSaveByNumber.m */; };
 		047CCA282136816000987EE1 /* ZDTextRecognitionView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047CCA272136816000987EE1 /* ZDTextRecognitionView.mm */; };
 		047CCA2B2138E95900987EE1 /* ZDPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047CCA2A2138E95900987EE1 /* ZDPickerViewController.m */; };
@@ -264,6 +266,10 @@
 		046E40C920DF6CC900CEA199 /* ZDUserDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDUserDataBase.m; sourceTree = "<group>"; };
 		046E40CB20DF766100CEA199 /* ZDAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAllCell.h; sourceTree = "<group>"; };
 		046E40CC20DF766100CEA199 /* ZDAllCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAllCell.m; sourceTree = "<group>"; };
+		046E89082140ECC000CF3FCC /* ZDClassPickerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDClassPickerTableViewCell.h; sourceTree = "<group>"; };
+		046E89092140ECC000CF3FCC /* ZDClassPickerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDClassPickerTableViewCell.m; sourceTree = "<group>"; };
+		046E890C2141168000CF3FCC /* ZDTranslateDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDTranslateDataManager.h; sourceTree = "<group>"; };
+		046E890D2141168000CF3FCC /* ZDTranslateDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDTranslateDataManager.m; sourceTree = "<group>"; };
 		047667AF213D2F92007DB119 /* ZDStringSaveByNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDStringSaveByNumber.h; sourceTree = "<group>"; };
 		047667B0213D2F92007DB119 /* ZDStringSaveByNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDStringSaveByNumber.m; sourceTree = "<group>"; };
 		047CCA262136816000987EE1 /* ZDTextRecognitionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDTextRecognitionView.h; sourceTree = "<group>"; };
@@ -756,6 +762,7 @@
 				047667AF213D2F92007DB119 /* ZDStringSaveByNumber.h */,
 				047667B0213D2F92007DB119 /* ZDStringSaveByNumber.m */,
 				044F02AC20A8116F00406D65 /* Message */,
+				046E890B2141165800CF3FCC /* Add */,
 				044F02AD20A8117500406D65 /* Find */,
 				044F02AE20A8117E00406D65 /* Me */,
 			);
@@ -814,6 +821,8 @@
 				04BD722020A9B0F000A14ADF /* ZDAddDefaultCell.m */,
 				04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */,
 				04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */,
+				046E89082140ECC000CF3FCC /* ZDClassPickerTableViewCell.h */,
+				046E89092140ECC000CF3FCC /* ZDClassPickerTableViewCell.m */,
 				04D8B64420B133A200055018 /* ZDDateCell.h */,
 				04D8B64520B133A300055018 /* ZDDateCell.m */,
 				04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */,
@@ -865,6 +874,15 @@
 				04BD722D20A9BA3200A14ADF /* Deplete */,
 			);
 			name = Me;
+			sourceTree = "<group>";
+		};
+		046E890B2141165800CF3FCC /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				046E890C2141168000CF3FCC /* ZDTranslateDataManager.h */,
+				046E890D2141168000CF3FCC /* ZDTranslateDataManager.m */,
+			);
+			name = Add;
 			sourceTree = "<group>";
 		};
 		047CCA35213BFE3600987EE1 /* Repertory */ = {
@@ -1320,6 +1338,7 @@
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
 				04FF836320B94C9800EECE24 /* MJRefreshNormalHeader.m in Sources */,
+				046E890A2140ECC000CF3FCC /* ZDClassPickerTableViewCell.m in Sources */,
 				04C5DC852101FA44003835E3 /* ZDTimerView.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
 				04FF836A20B94C9800EECE24 /* UIView+MJExtension.m in Sources */,
@@ -1405,6 +1424,7 @@
 				040CE67A20ADABC800A30442 /* MASViewConstraint.m in Sources */,
 				04B8369220A871870050D568 /* FMDatabaseQueue.m in Sources */,
 				041823222111B5F30012C355 /* ZDHtmlScrollView.m in Sources */,
+				046E890E2141168000CF3FCC /* ZDTranslateDataManager.m in Sources */,
 				04FF836420B94C9800EECE24 /* MJRefreshStateHeader.m in Sources */,
 				04284482213005680043B27B /* Resnet50.mlmodel in Sources */,
 			);

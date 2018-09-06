@@ -5,9 +5,9 @@
 //  Created by JACK on 2018/5/20.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
-#define WIDTH [UIScreen mainScreen].bounds.size.width
-#define HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "ZDPickerViewCell.h"
+
 @interface ZDPickerViewCell()<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @end
@@ -64,7 +64,7 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     
-    return 10;
+    return 30;
     
 }
 
@@ -72,7 +72,7 @@
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     
-    return 30.f;
+    return 40.f;
 }
 
 //返回指定列的宽度
@@ -90,10 +90,10 @@
         view = [[UIView alloc]init];
         
     }
-    UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 20)];
+    UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, WIDTH, 20)];
     
     textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.font = [UIFont systemFontOfSize:16];
+    textLabel.font = [UIFont systemFontOfSize:20];
     textLabel.text = [_pickerViewDataArray objectAtIndex:row];
     
     [view addSubview:textLabel];

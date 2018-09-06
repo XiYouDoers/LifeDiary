@@ -197,6 +197,15 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
             }
             ZDGoods *goods = [[ZDGoods alloc]init];
             ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+            //翻译
+            
+            
+            ///
+            
+            
+            
+            
+            ///
             goods.imageData = UIImagePNGRepresentation(image);
             goods.name = tempClassification.identifier;
             [addVC setGoodsInfo:goods];

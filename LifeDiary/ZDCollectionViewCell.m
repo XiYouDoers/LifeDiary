@@ -22,31 +22,24 @@
 
         //_imageView
         [self.exhibitView addSubview:self.imageView];
-        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-16);
-            make.height.mas_equalTo(self.frame.size.height/5*3);
-            make.left.mas_equalTo(14);
-            make.right.mas_equalTo(-14);
-        }];
+        self.imageView.frame = self.exhibitView.frame;
         
-        
-        //_nameLabel
-        [self.exhibitView addSubview:self.nameLabel];
-        [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(31);
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 12));
-            make.left.mas_equalTo(15);
-        }];
         
         //_sourceLabel
         
         [self.exhibitView addSubview:self.sourceLabel];
         [_sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_nameLabel.mas_bottom).with.offset(5);
+            make.top.mas_equalTo(15);
             make.left.mas_equalTo(15);
-            make.size.mas_equalTo(CGSizeMake(100,30));
+            make.size.mas_equalTo(CGSizeMake(100,15));
         }];
-        
+        //_nameLabel
+        [self.exhibitView addSubview:self.nameLabel];
+        [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_sourceLabel.mas_bottom).with.offset(5);
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width-80, 80));
+            make.left.mas_equalTo(15);
+        }];
         //messageLabel
         [self.exhibitView addSubview:self.messageLabel];
         [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,10 +97,22 @@
         //_exhibitView
         _exhibitView = [[UIView alloc]init];
         _exhibitView.backgroundColor = [UIColor whiteColor];
-        _exhibitView.layer.cornerRadius = 10;
+        _exhibitView.layer.cornerRadius = 15;
         _exhibitView.layer.masksToBounds = YES;
     }
     return _exhibitView;
+}
+
+- (UILabel *)sourceLabel{
+    if (_sourceLabel == nil) {
+        //_sourceLabel
+        
+        _sourceLabel = [[UILabel alloc]init];
+        _sourceLabel.textColor = [UIColor colorWithRed:241/255.0 green:242/255.0 blue:234/255.0 alpha:1];
+        _sourceLabel.font = [UIFont systemFontOfSize:15];
+        _sourceLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    return _sourceLabel;
 }
 - (UILabel *)nameLabel{
     if (_nameLabel == nil) {
@@ -116,20 +121,10 @@
         _nameLabel = [[UILabel alloc]init];
         _nameLabel.numberOfLines = 0;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.font = [UIFont systemFontOfSize:17];
+        _nameLabel.textColor = [UIColor whiteColor];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:28];
     }
     return _nameLabel;
-}
-- (UILabel *)sourceLabel{
-    if (_sourceLabel == nil) {
-        //_sourceLabel
-        
-        _sourceLabel = [[UILabel alloc]init];
-        _sourceLabel.textColor = [UIColor lightGrayColor];
-        _sourceLabel.font = [UIFont systemFontOfSize:15];
-        _sourceLabel.textAlignment = NSTextAlignmentLeft;
-    }
-    return _sourceLabel;
 }
 - (UIImageView *)messageImageView {
     if (_messageImageView ==  nil) {
@@ -202,31 +197,18 @@
 - (void)updateCell:(ZDContentlistModel *)contentlistModel{
     
     
-    NSInteger value;
-    value = arc4random_uniform(50);
-    while (value < 20) {
-        value = arc4random_uniform(50);
-    }
-    _zanLabel.text = [NSString stringWithFormat:@"%ld",value] ;
-    value = arc4random_uniform(50);
-    while (value < 20) {
-        value = arc4random_uniform(50);
-    }
-    _saveLabel.text = [NSString stringWithFormat:@"%ld",value] ;
-    
-    value = arc4random_uniform(50);
-    while (value < 20) {
-        value = arc4random_uniform(50);
-    }
-    _messageLabel.text = [NSString stringWithFormat:@"%ld",value] ;
+  
+    self.nameLabel.text = contentlistModel.title;
+    self.sourceLabel.text = contentlistModel.channelName;
+      //添加图片
     if (contentlistModel) {
-        //添加图片
-        if (contentlistModel.imageurls.count) {
-            ZDPicModel *picModel = [contentlistModel.imageurls objectAtIndex:0];
-            [_imageView sd_setImageWithURL:picModel.url placeholderImage:[UIImage imageNamed:@"LifePlaceholderImage"]];
-        }
-        self.nameLabel.text = contentlistModel.title;
-        self.sourceLabel.text = contentlistModel.channelName;
+      
+//        if (contentlistModel.imageurls.count) {
+//            ZDPicModel *picModel = [contentlistModel.imageurls objectAtIndex:0];
+//            [_imageView sd_setImageWithURL:picModel.url placeholderImage:[UIImage imageNamed:@"LifePlaceholderImage"]];
+//        }
+        
+        
     }
 }
 @end

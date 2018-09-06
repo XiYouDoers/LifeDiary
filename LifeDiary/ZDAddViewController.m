@@ -16,6 +16,7 @@
 #import "ZDPickerViewCell.h"
 #import "ZDRecognitionData.h"
 #import "ZDPhotoManagerViewController.h"
+#import "ZDClassPickerTableViewCell.h"
 
 
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate,ZDPhotoManagerViewControllerDelegate>{
@@ -23,7 +24,8 @@
     NSDateFormatter *_dateFormatter;
     NSDateFormatter *_saveTimeFormatter;
     NSDateFormatter *_countFormatter;
-    NSArray *_pickerViewDataArray;
+    NSArray *_sumPickerViewDataArray;
+    NSArray *_classPickerViewDataArray;
     ZDGoods *_goods;
 }
 
@@ -90,10 +92,12 @@
     [self.view addSubview:_addTableView];
     [_addTableView registerClass:[ZDAddDefaultCell class] forCellReuseIdentifier:@"addDefaultCell"];
     [_addTableView registerClass:[ZDPickerViewCell class] forCellReuseIdentifier:@"pickerViewCell"];
+    [_addTableView registerClass:[ZDClassPickerTableViewCell class] forCellReuseIdentifier:@"classPickerViewCell"];
     [self setInfo];
     
-    _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
-    _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
+    _sumPickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
+    _classPickerViewDataArray = [NSArray arrayWithObjects:@"食品", @"日用品",@"药品",@"其他",nil];
+    _cellTabArray = [NSArray arrayWithObjects:@"分类",@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     
     _continueToRecognizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _continueToRecognizeButton.frame = CGRectMake(125, 580, 125, 50);
@@ -114,10 +118,7 @@
 }
 - (void)backToBeforeVC{
     //回收所有输入框
-    [_addTableHeaderView.nameTextField resignFirstResponder];
-    [_addTableHeaderView.remarkTextField resignFirstResponder];
-    [_addDefaultCell.textField resignFirstResponder];
-    [_pickerViewCell.textField resignFirstResponder];
+    [self.addTableView endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)setInfo{
@@ -197,20 +198,24 @@
     newGoods.imageData = UIImagePNGRepresentation(image);
     
     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
-    ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
-    newGoods.dateOfStart = cellForZero.textField.text;
+    ZDClassPickerTableViewCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
+    newGoods.family = cellForZero.textField.text;
     
     NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
     ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
-    newGoods.dateOfEnd = cellForOne.textField.text;
+    newGoods.dateOfStart = cellForOne.textField.text;
     
     NSIndexPath *indexpathForTwo = [NSIndexPath indexPathForRow:2 inSection:0];
     ZDAddDefaultCell *cellForTwo = [_addTableView cellForRowAtIndexPath:indexpathForTwo];
-    newGoods.saveTime = cellForTwo.textField.text;
+    newGoods.dateOfEnd = cellForTwo.textField.text;
     
     NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
     ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
-    newGoods.sum = cellForThree.textField.text;
+    newGoods.saveTime = cellForThree.textField.text;
+    
+    NSIndexPath *indexpathForFour = [NSIndexPath indexPathForRow:4 inSection:0];
+    ZDPickerViewCell *cellForFour = [_addTableView cellForRowAtIndexPath:indexpathForFour];
+    newGoods.sum = cellForFour.textField.text;
     
 
     bool value1 = ![newGoods.dateOfStart isEqualToString:@""];
@@ -268,10 +273,7 @@
         newGoods.ratio = ratio;
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
         //回收所有输入框
-        [_addTableHeaderView.nameTextField resignFirstResponder];
-        [_addTableHeaderView.remarkTextField resignFirstResponder];
-        [_addDefaultCell.textField resignFirstResponder];
-        [_pickerViewCell.textField resignFirstResponder];
+        [self.addTableView endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -387,7 +389,7 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 /**
  TableView中section的数量
@@ -408,27 +410,36 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //单独实现row=3的cell
-    if (indexPath.row==3) {
-       _pickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"pickerViewCell"];
-        _pickerViewCell.pickerViewDataArray = _pickerViewDataArray;
+    //单独实现row=0和row=4的cell
+    if (indexPath.row==0 ) {
+       _classPickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"classPickerViewCell"];
+        _classPickerViewCell.pickerViewDataArray = _classPickerViewDataArray;
+        
+        [_classPickerViewCell.pickerView reloadAllComponents];
+        _classPickerViewCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
+        _classPickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
+        return _classPickerViewCell;
+    }else if (indexPath.row==4) {
+        _pickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"pickerViewCell"];
+        _pickerViewCell.pickerViewDataArray = _sumPickerViewDataArray;
+        
         [_pickerViewCell.pickerView reloadAllComponents];
         _pickerViewCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
         _pickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
         return _pickerViewCell;
-    }
+    }else{
 
     
     _addDefaultCell = [tableView dequeueReusableCellWithIdentifier:@"addDefaultCell"];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         
         _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
         [_addDefaultCell.datePicker addTarget:self action:@selector(indexZeroDateChanged:) forControlEvents:UIControlEventValueChanged];
-    }else if (indexPath.row==1){
+    }else if (indexPath.row == 2){
         
         _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
         [_addDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 3){
         
         NSDate *maxDate = [_dateFormatter dateFromString:@"4-12-31"];
         _addDefaultCell.datePicker.maximumDate = maxDate;
@@ -438,6 +449,8 @@
     _addDefaultCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
     _addDefaultCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
     return _addDefaultCell;
+        
+    }
     
 }
 /**
@@ -452,7 +465,7 @@
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
     string = [_dateFormatter stringFromDate:date];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
 }
@@ -461,7 +474,7 @@
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
     string = [_dateFormatter stringFromDate:date];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
 }
@@ -470,7 +483,7 @@
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
     string = [_saveTimeFormatter stringFromDate:date];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
     
