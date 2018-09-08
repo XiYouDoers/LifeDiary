@@ -17,6 +17,7 @@
 #import "ZDRecognitionData.h"
 #import "ZDPhotoManagerViewController.h"
 #import "ZDClassPickerTableViewCell.h"
+#import "ZDStringManager.h"
 
 
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate,ZDPhotoManagerViewControllerDelegate>{
@@ -136,12 +137,26 @@
             _addTableHeaderView.nameTextField.text = str;
         }
 
-        if (_goods.dateOfStart != nil) {
+        if (![_goods.dateOfStart isEqualToString:@""]) {
             
             NSString *str = _goods.dateOfStart;
-            NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
-            ZDAddDefaultCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
-            cellForZero.textField.text = str;
+            NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
+            ZDAddDefaultCell *cellForOne = [_addTableView cellForRowAtIndexPath:indexpathForOne];
+            cellForOne.textField.text = str;
+        }
+        if (![_goods.dateOfEnd isEqualToString:@""]) {
+            
+            NSString *str = _goods.dateOfEnd;
+            NSIndexPath *indexpathForTwo = [NSIndexPath indexPathForRow:2 inSection:0];
+            ZDAddDefaultCell *cellForTwo = [_addTableView cellForRowAtIndexPath:indexpathForTwo];
+            cellForTwo.textField.text = str;
+        }
+        if (![_goods.saveTime isEqualToString:@""]) {
+            
+            NSString *str = _goods.saveTime;
+            NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
+            ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
+            cellForThree.textField.text = str;
         }
     }
         
@@ -217,7 +232,6 @@
     ZDPickerViewCell *cellForFour = [_addTableView cellForRowAtIndexPath:indexpathForFour];
     newGoods.sum = cellForFour.textField.text;
     
-
     bool value1 = ![newGoods.dateOfStart isEqualToString:@""];
     bool value2 = ![newGoods.dateOfEnd isEqualToString:@""];
     bool value3 = ![newGoods.saveTime isEqualToString:@""];
@@ -232,20 +246,27 @@
         NSCalendarUnit unitsave = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
     //计算出另一个日期
         if([newGoods.dateOfStart isEqualToString:@""]){
-
+            
+            NSLog(@"dateOfStart = nil");
             NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
             NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
             NSDateComponents *dateComponentsOfStart =[calender components:unitsave fromDate:dateOfSaveTime toDate:dateOfEnd options:0];
             NSString *stringOfStart = [NSString stringWithFormat:@"%ld-%ld-%ld",dateComponentsOfStart.year,dateComponentsOfStart.month,dateComponentsOfStart.day];
             newGoods.dateOfStart = stringOfStart;
         }else if([newGoods.dateOfEnd isEqualToString:@""]){
+
             NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
-            NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
-            NSDateComponents *dateComponentsOfSaveTime = [calender components: unitsave fromDate:dateOfSaveTime];
-            NSDate *dateOfEnd = [calender dateByAddingComponents:dateComponentsOfSaveTime toDate:dateOfStart options:0];
-            NSString *stringOfEnd = [_dateFormatter stringFromDate:dateOfEnd];
-            newGoods.dateOfEnd = stringOfEnd;
+            NSLog(@"dateOfStart=%@",newGoods.dateOfStart);
+            NSString *str = [ZDStringManager addDate:newGoods.dateOfStart str:newGoods.saveTime];
+            NSLog(@"str = %@",str);
+//            newGoods.dateOfEnd = str;
+
+//            NSDateComponents *dateComponentsOfSaveTime = [calender components: unitsave fromDate:dateOfSaveTime];
+//            NSDate *dateOfEnd = [calender dateByAddingComponents:dateComponentsOfSaveTime toDate:dateOfStart options:0];
+//            NSString *stringOfEnd = [_dateFormatter stringFromDate:dateOfEnd];
+//            newGoods.dateOfEnd = stringOfEnd;
         }else{
+            NSLog(@"saveTime==nil");
             //newGoods.saveTime==nil
             NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
             NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
@@ -271,6 +292,8 @@
         NSInteger secondsOfStartToEnd = [dateOfEnd timeIntervalSinceDate:dateOfStart];
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
+        
+
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
         //回收所有输入框
         [self.addTableView endEditing:YES];
@@ -434,17 +457,19 @@
     if (indexPath.row == 1) {
         
         _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
-        [_addDefaultCell.datePicker addTarget:self action:@selector(indexZeroDateChanged:) forControlEvents:UIControlEventValueChanged];
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
     }else if (indexPath.row == 2){
         
         _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
-        [_addDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexTwoDateChanged:) forControlEvents:UIControlEventValueChanged];
     }else if (indexPath.row == 3){
         
-        NSDate *maxDate = [_dateFormatter dateFromString:@"4-12-31"];
+        NSDate *maxDate = [_saveTimeFormatter dateFromString:@"4-12-31"];
+        NSDate *minDate = [_saveTimeFormatter dateFromString:@"1-1-1"];
         _addDefaultCell.datePicker.maximumDate = maxDate;
+        _addDefaultCell.datePicker.minimumDate = minDate;
         _addDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
-        [_addDefaultCell.datePicker addTarget:self action:@selector(indexTwoDateChanged:) forControlEvents:UIControlEventValueChanged];
+        [_addDefaultCell.datePicker addTarget:self action:@selector(indexThreeDateChanged:) forControlEvents:UIControlEventValueChanged];
     }
     _addDefaultCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
     _addDefaultCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
@@ -460,7 +485,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
-- (void)indexZeroDateChanged:(UIDatePicker *)datePicker{
+- (void)indexOneDateChanged:(UIDatePicker *)datePicker{
     
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
@@ -469,7 +494,7 @@
     ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
 }
-- (void)indexOneDateChanged:(UIDatePicker *)datePicker{
+- (void)indexTwoDateChanged:(UIDatePicker *)datePicker{
     
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
@@ -478,7 +503,7 @@
     ZDAddDefaultCell *cell = [_addTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
 }
-- (void)indexTwoDateChanged:(UIDatePicker *)datePicker{
+- (void)indexThreeDateChanged:(UIDatePicker *)datePicker{
     
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];

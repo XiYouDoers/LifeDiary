@@ -39,19 +39,19 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "图标1024x1024.-2.png",
+      "filename" : "logo4-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "图标1024x1024.-1.png",
+      "filename" : "logo4.png",
       "scale" : "3x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "图标1024x1024..png",
+      "filename" : "logo5.png",
       "scale" : "1x"
     }
   ],

@@ -65,7 +65,10 @@
 }
 - (void)setNavigationBar{
    
-
+    //backBarButtonItem
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
+    backBtnItem.title = @"全部";
+    self.navigationItem.backBarButtonItem = backBtnItem;
     if (@available(iOS 11.0, *)) {
         self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
     } else {
@@ -355,6 +358,7 @@
     _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
     _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
     _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
+
     if ([goods.family isEqualToString:@"食品"]) {
         _allCell.classificationLabel.text = @"食";
     }else  if ([goods.family isEqualToString:@"日用品"]) {
@@ -513,7 +517,6 @@
     
 }
 - (void)editButtonWasClicked{
-
 
         ZDGoods *goods =  _dataMutableArray[lastIndexPath.row];
         ZDEditViewController *editVC = [[ZDEditViewController alloc]init];

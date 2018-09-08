@@ -17,13 +17,15 @@
 #import "ZDGoods.h"
 #import "ZDAddTableHeaderView.h"
 #import "ZDUnderLineTextField.h"
+#import "ZDEditClassPickerViewCell.h"
 
 @interface ZDEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
     NSArray *_cellTabArray;
     NSDateFormatter *_dateFormatter;
     NSDateFormatter *_saveTimeFormatter;
     NSDateFormatter *_countFormatter;
-    NSArray *_pickerViewDataArray;
+    NSArray *_sumPickerViewDataArray;
+    NSArray *_classPickerViewDataArray;
 }
 
 @end
@@ -61,9 +63,11 @@
     [self.view addSubview:_editTableView];
     [_editTableView registerClass:[ZDEditDefaultCell class] forCellReuseIdentifier:@"editDefaultCell"];
     [_editTableView registerClass:[ZDEditPickerViewCell class] forCellReuseIdentifier:@"editPickerViewCell"];
+    [_editTableView registerClass:[ZDEditClassPickerViewCell class] forCellReuseIdentifier:@"editClassPickerViewCell"];
     
-    _pickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
-    _cellTabArray = [NSArray arrayWithObjects:@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
+    _sumPickerViewDataArray = [NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"28",@"30",nil];
+    _classPickerViewDataArray = [NSArray arrayWithObjects:@"食品", @"日用品",@"药品",@"其他",nil];
+    _cellTabArray = [NSArray arrayWithObjects:@"分类",@"生产日期",@"截止日期", @"保质期", @"数量",  nil];
     
     // Do any additional setup after loading the view.
 }
@@ -88,7 +92,11 @@
         
     }];
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //回收所有输入框
+    [self.editTableView endEditing:YES];
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     [_editTableHeaderView.nameTextField resignFirstResponder];
@@ -111,25 +119,30 @@
     newGoods.identifier = _goods.identifier;
     newGoods.name = _editTableHeaderView.nameTextField.text;
     newGoods.remark = _editTableHeaderView.remarkTextField.text;
-    int index = arc4random_uniform(9);
+    
+    int index = arc4random_uniform(22);
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
     newGoods.imageData = UIImagePNGRepresentation(image);
     
     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
-    ZDAddDefaultCell *cellForZero = [_editTableView cellForRowAtIndexPath:indexpathForZero];
-    newGoods.dateOfStart = cellForZero.textField.text;
+    ZDClassPickerTableViewCell *cellForZero = [_editTableView cellForRowAtIndexPath:indexpathForZero];
+    newGoods.family = cellForZero.textField.text;
     
     NSIndexPath *indexpathForOne = [NSIndexPath indexPathForRow:1 inSection:0];
     ZDAddDefaultCell *cellForOne = [_editTableView cellForRowAtIndexPath:indexpathForOne];
-    newGoods.dateOfEnd = cellForOne.textField.text;
+    newGoods.dateOfStart = cellForOne.textField.text;
     
     NSIndexPath *indexpathForTwo = [NSIndexPath indexPathForRow:2 inSection:0];
     ZDAddDefaultCell *cellForTwo = [_editTableView cellForRowAtIndexPath:indexpathForTwo];
-    newGoods.saveTime = cellForTwo.textField.text;
+    newGoods.dateOfEnd = cellForTwo.textField.text;
     
     NSIndexPath *indexpathForThree = [NSIndexPath indexPathForRow:3 inSection:0];
     ZDAddDefaultCell *cellForThree = [_editTableView cellForRowAtIndexPath:indexpathForThree];
-    newGoods.sum = cellForThree.textField.text;
+    newGoods.saveTime = cellForThree.textField.text;
+    
+    NSIndexPath *indexpathForFour = [NSIndexPath indexPathForRow:4 inSection:0];
+    ZDPickerViewCell *cellForFour = [_editTableView cellForRowAtIndexPath:indexpathForFour];
+    newGoods.sum = cellForFour.textField.text;
     
     
     bool value1 = ![newGoods.dateOfStart isEqualToString:@""];
@@ -186,6 +199,7 @@
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
         [[ZDAllDataBase sharedDataBase]updateGoods:newGoods];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -272,19 +286,18 @@
 }
 
 
-// 拍照完成回调
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0){
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         
-        //图片存入相册
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        [_editTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
+    }else if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
+        
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
+
 
 //进入拍摄页面点击取消按钮
 
@@ -297,7 +310,7 @@
  section中cell的数量
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 /**
  TableView中section的数量
@@ -322,40 +335,50 @@
     _editTableHeaderView.remarkTextField.text = _goods.remark;
     _editTableHeaderView.headPictureSetButton.imageView.image = [UIImage imageWithData:_goods.imageData];
     
-    //单独实现row=3的cell
-    if (indexPath.row==3) {
+    //单独实现row=0和row=4的cell
+    if (indexPath.row==0 ) {
+        _editClassPickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"editClassPickerViewCell"];
+        _editClassPickerViewCell.pickerViewDataArray = _classPickerViewDataArray;
+        
+        [_editClassPickerViewCell.pickerView reloadAllComponents];
+        _editClassPickerViewCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
+        _editClassPickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
+         _editClassPickerViewCell.textField.text = _goods.family;
+        return _editClassPickerViewCell;
+    }else if (indexPath.row==4) {
         _editPickerViewCell = [tableView dequeueReusableCellWithIdentifier:@"editPickerViewCell"];
-        _editPickerViewCell.pickerViewDataArray = _pickerViewDataArray;
+        _editPickerViewCell.pickerViewDataArray = _sumPickerViewDataArray;
+        
         [_editPickerViewCell.pickerView reloadAllComponents];
         _editPickerViewCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
-        _editPickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
         _editPickerViewCell.textField.text = _goods.sum;
+        _editPickerViewCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
         return _editPickerViewCell;
-    }
+    }else{
     
     
     _editDefaultCell = [tableView dequeueReusableCellWithIdentifier:@"editDefaultCell"];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         
         _editDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
         _editDefaultCell.textField.text = _goods.dateOfStart;
-        [_editDefaultCell.datePicker addTarget:self action:@selector(indexZeroDateChanged:) forControlEvents:UIControlEventValueChanged];
-    }else if (indexPath.row==1){
+        [_editDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
+    }else if (indexPath.row==2){
         
         _editDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
         _editDefaultCell.textField.text = _goods.dateOfEnd;
-        [_editDefaultCell.datePicker addTarget:self action:@selector(indexOneDateChanged:) forControlEvents:UIControlEventValueChanged];
-    }else if (indexPath.row == 2){
+        [_editDefaultCell.datePicker addTarget:self action:@selector(indexTwoDateChanged:) forControlEvents:UIControlEventValueChanged];
+    }else if (indexPath.row == 3){
         
         NSDate *maxDate = [_dateFormatter dateFromString:@"4-12-31"];
         _editDefaultCell.datePicker.maximumDate = maxDate;
         _editDefaultCell.datePicker.datePickerMode = UIDatePickerModeDate;
-        _editDefaultCell.textField.text = _goods.saveTime;
-        [_editDefaultCell.datePicker addTarget:self action:@selector(indexTwoDateChanged:) forControlEvents:UIControlEventValueChanged];
+        [_editDefaultCell.datePicker addTarget:self action:@selector(indexThreeDateChanged:) forControlEvents:UIControlEventValueChanged];
     }
     _editDefaultCell.tabLabel.text = [_cellTabArray objectAtIndex:indexPath.row];
     _editDefaultCell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",[_cellTabArray objectAtIndex:indexPath.row]];
     return _editDefaultCell;
+    }
     
 }
 /**
@@ -364,15 +387,6 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-}
-- (void)indexZeroDateChanged:(UIDatePicker *)datePicker{
-    
-    NSDate *date = datePicker.date;
-    NSString  *string = [[NSString alloc]init];
-    string = [_dateFormatter stringFromDate:date];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    ZDAddDefaultCell *cell = [_editTableView cellForRowAtIndexPath:indexPath];
-    cell.textField.text = string;
 }
 - (void)indexOneDateChanged:(UIDatePicker *)datePicker{
     
@@ -387,20 +401,22 @@
     
     NSDate *date = datePicker.date;
     NSString  *string = [[NSString alloc]init];
-    string = [_saveTimeFormatter stringFromDate:date];
+    string = [_dateFormatter stringFromDate:date];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    ZDAddDefaultCell *cell = [_editTableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = string;
+}
+- (void)indexThreeDateChanged:(UIDatePicker *)datePicker{
+    
+    NSDate *date = datePicker.date;
+    NSString  *string = [[NSString alloc]init];
+    string = [_saveTimeFormatter stringFromDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     ZDAddDefaultCell *cell = [_editTableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = string;
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

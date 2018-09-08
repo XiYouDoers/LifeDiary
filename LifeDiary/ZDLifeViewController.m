@@ -92,15 +92,9 @@
 #pragma mark ZDCardViewDelegate 代理方法
 - (void)changeBackgroundImageView:(NSInteger)index{
 
-    ZDContentlistModel *contentlistModel= [[ZDContentlistModel alloc]init];
-    contentlistModel = _contentlistArray[index];
-    if (contentlistModel.imageurls.count) {
-        ZDPicModel *picModel = contentlistModel.imageurls[0];
-        [_imageView sd_setImageWithURL:picModel.url];
-    }else{
-        NSInteger index = arc4random_uniform(20);
-        [_imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"goods%ld",index]]];
-    }
+
+
+        [_imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"life%ld",index]]];
     
 }
 

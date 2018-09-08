@@ -10,9 +10,11 @@
 #import "ocrSDK/OCRSDK.h"
 #import "YDImageView.h"
 #import "ZDGoods.h"
-#import "ZDStringSaveByNumber.h"
+#import "ZDStringManager.h"
 
-@interface ZDTextRecognitionView()
+@interface ZDTextRecognitionView(){
+
+}
 
 @end
 
@@ -20,7 +22,7 @@
 
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        
+
         self.imgView  = [[YDImageView alloc]init];
         self.goods = [[ZDGoods alloc]init];
        
@@ -86,19 +88,27 @@
             for (YDOCRLine *line in region.lines) {
 
                 if ([line.text rangeOfString:@"名称" options:NSCaseInsensitiveSearch].length >0) {
-                    
-                    _goods.name = line.text;
-                    
+
+                    _goods.name=  [ZDStringManager separateInfo:line.text];
                 }
                 
                 if ([line.text rangeOfString:@"保质" options:NSCaseInsensitiveSearch].length >0) {
                     
-                    NSString *str = [ZDStringSaveByNumber charactersString:line.text];
+                    NSString *str =  [ZDStringManager separateInfo:line.text];
+                    if ([str rangeOfString:@"年" options:NSCaseInsensitiveSearch].length >0 ||[str rangeOfString:@"月" options:NSCaseInsensitiveSearch].length >0 || [str rangeOfString:@"日" options:NSCaseInsensitiveSearch].length >0 ) {
+                        //计算日期
+                        str = [ZDStringManager caculateDate:str];
+                    }
+                    
+                    NSLog(@"%@",str);
                     _goods.saveTime = str;
+
                 }
                 if (([line.text rangeOfString:@"2018" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2016" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2017" options:NSCaseInsensitiveSearch].length >0)) {
                     
-                    NSLog(@"%@",line.text);
+                    NSString *str = [ZDStringManager deleteSpace:line.text];
+                    str = [ZDStringManager addGangToDateString:str];
+                    _goods.dateOfStart = str;
                 }
             }
         }

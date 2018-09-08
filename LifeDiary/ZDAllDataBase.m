@@ -94,6 +94,7 @@ static ZDAllDataBase *_allDataBase = nil;
     [_db executeUpdate:@"UPDATE allGoods SET dateOfEnd = ? WHERE identifier = ?",goods.dateOfEnd,goods.identifier];
     [_db executeUpdate:@"UPDATE allGoods SET saveTime = ? WHERE identifier = ?",goods.saveTime,goods.identifier];
     [_db executeUpdate:@"UPDATE allGoods SET sum = ? WHERE identifier = ?",goods.sum,goods.identifier];
+    [_db executeUpdate:@"UPDATE allGoods SET family = ? WHERE identifier = ?",goods.family,goods.identifier];
     
     [_db close];
 }
@@ -121,8 +122,6 @@ static ZDAllDataBase *_allDataBase = nil;
     }
     
     [_db close];
-    
-    
     
     return dataArray;
     

@@ -18,7 +18,8 @@
 #import "ZDDetailView.h"
 #import "ZDMessageCardView.h"
 #import "ZDMeViewController.h"
-#import "ZDStringSaveByNumber.h"
+#import "ZDTranslateDataManager.h"
+#import "ZDStringManager.h"
 
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
@@ -54,8 +55,16 @@ NSDateFormatter const *_formatter;
     [_detailView.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_detailView];
     
+//    ZDTranslateDataManager *mange = [[ZDTranslateDataManager alloc]init];
+//    [mange getData_sucessBlock:^{
+//        NSLog(@"!!!succeed");
+//    } faliure:^{
+//
+//    } sourceString:@"world"];
+
     
 }
+
 - (void)addMessageCardView{
     
     _messageCardView = [[ZDMessageCardView alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -233,7 +242,7 @@ NSDateFormatter const *_formatter;
     }];
 
     _detailView.sumLabel.text = messageCell.sumLabel.text;
-    NSString *str = [ZDStringSaveByNumber charactersString:messageCell.sumLabel.text];
+    NSString *str = [ZDStringManager switchToNumberString:messageCell.sumLabel.text];
     _detailView.stepper.value = [str intValue];
     _detailView.remainderTimeLabel.text = messageCell.remainderTimeLabel.text;
     _tempCell = messageCell;

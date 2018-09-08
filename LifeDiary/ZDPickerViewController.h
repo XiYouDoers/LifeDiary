@@ -15,7 +15,7 @@
 
 @interface ZDPickerViewController : UIImagePickerController
 @property(nonatomic,weak) id <ZDImageRecognitionDelegate> imageRecognitionDelegate;
-
+@property(nonatomic,assign) BOOL isHiddenMode;
 /**
  隐藏mode选项
  */

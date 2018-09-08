@@ -11,7 +11,7 @@
 #import "ZDAddViewController.h"
 
 @interface ZDPhotoManagerViewController ()< UIScrollViewDelegate>{
-    ZDPickerViewController *imagePicker;
+    
 }
 
 @end
@@ -91,11 +91,11 @@
  */
 - (void)openCamera{
     
-    imagePicker = [[ZDPickerViewController alloc] init];
+    ZDPickerViewController *imagePicker = [[ZDPickerViewController alloc] init];
     imagePicker.delegate = self.delegate;
     imagePicker.imageRecognitionDelegate = self.delegate;
     imagePicker.allowsEditing = YES; //可编辑
-
+    imagePicker.isHiddenMode = NO;
     //判断是否可以打开照相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         
@@ -123,12 +123,12 @@
     // 进入相册
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         
-        imagePicker = [[ZDPickerViewController alloc]init];
-        imagePicker.allowsEditing = YES;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.delegate = self.delegate;
-//        [imagePicker setHiddenMode];
-        [self.delegate presentViewController:imagePicker animated:YES completion:^{
+        ZDPickerViewController *photoPicker = [[ZDPickerViewController alloc]init];
+        photoPicker.allowsEditing = YES;
+        photoPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        photoPicker.delegate = self.delegate;
+        photoPicker.isHiddenMode = YES;
+        [self.delegate presentViewController:photoPicker animated:YES completion:^{
             
             NSLog(@"打开相册");
         }];

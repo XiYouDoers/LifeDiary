@@ -49,17 +49,17 @@
     content.sound = sound;
     
     //第三步：通知触发机制。（重复提醒，时间间隔要大于60s）
-    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:3600  repeats:YES];
+    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:62  repeats:NO];
     
     //第四步：创建UNNotificationRequest通知请求对象
-//    NSString *requertIdentifier = @"RequestIdentifier";
-//    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger1];
+    NSString *requertIdentifier = @"RequestIdentifier";
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger1];
     
     //第五步：将通知加到通知中心
-//    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-//        NSLog(@"Error:%@",error);
-//        
-//    }];
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
     
     
     

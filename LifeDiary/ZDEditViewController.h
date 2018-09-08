@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDAddTableHeaderView,ZDEditDefaultCell,ZDEditPickerViewCell,ZDGoods;
+@class ZDAddTableHeaderView,ZDEditDefaultCell,ZDEditPickerViewCell,ZDGoods,ZDEditClassPickerViewCell;
 
 @interface ZDEditViewController : UIViewController
 
@@ -19,6 +19,6 @@
 @property(nonatomic,strong) ZDGoods *goods;
 @property(nonatomic,strong) UITableView *editTableView;
 @property(nonatomic,strong) ZDEditDefaultCell *editDefaultCell;
-@property(nonatomic,strong)  ZDEditPickerViewCell *editPickerViewCell;
-
+@property(nonatomic,strong) ZDEditPickerViewCell *editPickerViewCell;
+@property(nonatomic,strong) ZDEditClassPickerViewCell *editClassPickerViewCell;
 @end

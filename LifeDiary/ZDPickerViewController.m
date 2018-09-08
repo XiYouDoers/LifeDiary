@@ -45,7 +45,22 @@
     
     
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_isHiddenMode) {
+        [self setHiddenMode];
+    }else{
+        [self setNotHiddenMode];
+    }
+}
+- (void)setHiddenMode{
+    textRecognitionButton.hidden = YES;
+    imageRecognitionButton.hidden = YES;
+}
+- (void)setNotHiddenMode{
+    textRecognitionButton.hidden = NO;
+    imageRecognitionButton.hidden = NO;
+}
 - (void)clickTextRecognitionButton:(UIButton *)button{
     
         imageRecognitionButton.selected = NO;

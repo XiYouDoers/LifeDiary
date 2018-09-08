@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
    
     //kvo形式添加自定义的 UITabBar
     ZDHighTabBar *tabar = [ZDHighTabBar instanceCustomTabBarWithType:SamItemUIType_Three];
-    tabar.centerBtnIcon = @"addTabBarItemSelectedImage";
+    tabar.centerBtnIcon = @"fff";
     tabar.tabDelegate = self;
     tabar.selectedItem = 0;
     [self setValue:tabar forKey:@"tabBar"];
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context,
-                                   [UIColor whiteColor].CGColor);
+                                   [UIColor clearColor].CGColor);
     CGContextFillRect(context, rect);
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -86,7 +86,8 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     
 
     self.viewControllers = @[messageNavigationController,findNavigationController];
-    [[UITabBar appearance]setBarTintColor:[UIColor whiteColor]];
+//    [[UITabBar appearance]setBarTintColor:[UIColor colorWithRed:236/255.0 green:235/255.0 blue:241/255.0 alpha:1]];
+    [[UITabBar appearance]setBackgroundColor:[UIColor whiteColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
     
 }
@@ -162,7 +163,8 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     }else  if(picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary){
         NSLog(@"文字识别");
         //文字识别
-        ZDTextRecognitionView *textReView = [[ZDTextRecognitionView alloc]init];
+        textReView = [[ZDTextRecognitionView alloc]init];
+        textReView.delegate = self;
         [textReView setData:info[@"UIImagePickerControllerOriginalImage"]];
         [textReView recognitionForText];
         
@@ -170,6 +172,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
 
 }
 - (void)jumpToAddVC{
+
     ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
     [addVC setGoodsInfo:textReView.goods];
     [self presentViewController:addVC animated:YES completion:nil];

@@ -220,7 +220,7 @@
         _cosmeticButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _cosmeticButton.layer.masksToBounds = YES;
         _cosmeticButton.layer.cornerRadius = 15.f;
-        [_cosmeticButton setTitle:@"化妆品" forState:UIControlStateNormal];
+        [_cosmeticButton setTitle:@"日用品" forState:UIControlStateNormal];
         [_cosmeticButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_cosmeticButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_cosmeticButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
@@ -236,7 +236,7 @@
         _commodityButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commodityButton.layer.masksToBounds = YES;
         _commodityButton.layer.cornerRadius = 15.f;
-        [_commodityButton setTitle:@"日用品" forState:UIControlStateNormal];
+        [_commodityButton setTitle:@"其他" forState:UIControlStateNormal];
         [_commodityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_commodityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_commodityButton setBackgroundImage:_buttonOfClassImage forState:UIControlStateSelected];
