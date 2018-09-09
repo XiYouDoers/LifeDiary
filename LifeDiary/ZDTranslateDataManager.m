@@ -15,24 +15,27 @@
 - (void)getData_sucessBlock:(requestSuccess )sucessBlock faliure:(requestFailure )failureBlock sourceString:(NSString *)string{
 
     
-    NSString *urlString= [NSString stringWithFormat:@"https://openapi.youdao.com/ocrapi"];
+    NSString *urlString= [NSString stringWithFormat:@"http://openapi.youdao.com/api"];
      NSString *q = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *salt = [NSString stringWithFormat:@"%d",arc4random_uniform(100)];
     NSString *appKey = @"6ad071e8b3555f9c";
     NSString *appSerect = @"ShMqlh8BlJy1LKeuMwqmCGmWgt40zdrP";
-    NSString *signForString = [NSString stringWithFormat:@"%@+%@+%@+%@",appKey,q,salt,appSerect];
+    NSString *signForString = [NSString stringWithFormat:@"%@%@%@%@",appKey,q,salt,appSerect];
     NSMutableString *sign = [self MD5With:signForString];
-    NSLog(@"=====     %@",sign);
     salt = [self URLEncodedString:salt];
     appKey = [self URLEncodedString:appKey];
-    q = [self URLEncodedString:q];
+    q = [self URLEncodedString:string];
     NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:q,@"q",@"EN",@"from",@"zh-CHS",@"to",appKey, @"appKey",salt, @"salt",sign,@"sign",nil];
     AFHTTPSessionManager *sessionManger = [AFHTTPSessionManager manager];
     sessionManger.requestSerializer = [AFHTTPRequestSerializer serializer];
     
     [sessionManger POST:urlString parameters:paraDictionary progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"111111  %@",responseObject);
-        sucessBlock();
+       
+        NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+        NSArray *strArray = [dic objectForKey:@"translation"];
+        NSString *str = [strArray objectAtIndex:0];
+        str = [str stringByRemovingPercentEncoding];
+        sucessBlock(str);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"22222222 %@",error);
     }];
@@ -68,7 +71,7 @@
     
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
         
-        [result appendFormat:@"%02X", digest[i]];
+        [result appendFormat:@"%02x", digest[i]];
     
     return result;
     

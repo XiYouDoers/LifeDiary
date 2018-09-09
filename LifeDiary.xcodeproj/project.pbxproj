@@ -73,6 +73,9 @@
 		047F345F210C8EC000D84ADD /* ZDEditPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F345E210C8EC000D84ADD /* ZDEditPickerViewCell.m */; };
 		04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */; };
 		0497786F2143CDE7007CDD7D /* ZDStringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497786E2143CDE7007CDD7D /* ZDStringManager.m */; };
+		0497788521450D44007CDD7D /* ZDLinkForShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497788421450D44007CDD7D /* ZDLinkForShoppingViewController.m */; };
+		0497788821451252007CDD7D /* HUDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497788621451251007CDD7D /* HUDUtil.m */; };
+		0497789521451A11007CDD7D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497789321451A10007CDD7D /* MBProgressHUD.m */; };
 		04A304CF2134284F0011412C /* ocrSDK in Resources */ = {isa = PBXBuildFile; fileRef = 04A304CE2134284F0011412C /* ocrSDK */; };
 		04A304D121342AA20011412C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A304D021342AA20011412C /* AdSupport.framework */; };
 		04A304D321342AC50011412C /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A304D221342AC50011412C /* libstdc++.6.0.9.tbd */; };
@@ -108,7 +111,6 @@
 		04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C4F20AC6F5700060741 /* ZDMessageViewController.m */; };
 		04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7C5820AC71DC00060741 /* ZDAllViewController.m */; };
 		04CF7F632132AF240039A356 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 04CF7F612132AEC90039A356 /* tessdata */; };
-		04CF7F652132B05C0039A356 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CF7F642132B05C0039A356 /* TesseractOCR.framework */; };
 		04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91EE21225DF600113E09 /* ZDCardView.m */; };
 		04CF91F22122C71500113E09 /* ZDMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91F12122C71500113E09 /* ZDMessageCardView.m */; };
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
@@ -291,6 +293,12 @@
 		04934B2320AFE1B700FE1E17 /* ZDPhotoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPhotoManagerViewController.m; sourceTree = "<group>"; };
 		0497786D2143CDE7007CDD7D /* ZDStringManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDStringManager.h; sourceTree = "<group>"; };
 		0497786E2143CDE7007CDD7D /* ZDStringManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDStringManager.m; sourceTree = "<group>"; };
+		0497788321450D44007CDD7D /* ZDLinkForShoppingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDLinkForShoppingViewController.h; sourceTree = "<group>"; };
+		0497788421450D44007CDD7D /* ZDLinkForShoppingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDLinkForShoppingViewController.m; sourceTree = "<group>"; };
+		0497788621451251007CDD7D /* HUDUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDUtil.m; sourceTree = "<group>"; };
+		0497788721451251007CDD7D /* HUDUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDUtil.h; sourceTree = "<group>"; };
+		0497789321451A10007CDD7D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		0497789421451A11007CDD7D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		04A304CE2134284F0011412C /* ocrSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ocrSDK; sourceTree = "<group>"; };
 		04A304D021342AA20011412C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		04A304D221342AC50011412C /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -426,7 +434,6 @@
 				04A304D521342C3A0011412C /* libbase.a in Frameworks */,
 				04A304D321342AC50011412C /* libstdc++.6.0.9.tbd in Frameworks */,
 				04A304D121342AA20011412C /* AdSupport.framework in Frameworks */,
-				04CF7F652132B05C0039A356 /* TesseractOCR.framework in Frameworks */,
 				04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */,
 				04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */,
 				35398D4042297F9EA3E40A8A /* Pods_LifeDiary.framework in Frameworks */,
@@ -563,6 +570,8 @@
 				0428447C212FF4170043B27B /* ZDHighTabBar.m */,
 				047CCA262136816000987EE1 /* ZDTextRecognitionView.h */,
 				047CCA272136816000987EE1 /* ZDTextRecognitionView.mm */,
+				0497788721451251007CDD7D /* HUDUtil.h */,
+				0497788621451251007CDD7D /* HUDUtil.m */,
 				044F029B20A8104E00406D65 /* Controller */,
 				044F02A620A8112200406D65 /* View */,
 				044F02A720A8112D00406D65 /* Model */,
@@ -605,6 +614,7 @@
 		044F021820A80E6D00406D65 /* ThirdCodes */ = {
 			isa = PBXGroup;
 			children = (
+				0497788C21451892007CDD7D /* MBProgressHUd */,
 				04A304E3213435440011412C /* Utils */,
 				04A304CE2134284F0011412C /* ocrSDK */,
 				042844802130028A0043B27B /* Core ML */,
@@ -671,6 +681,8 @@
 				04ED0EFC2106012C00A97667 /* ZDShoppingViewController.m */,
 				0438385620FF7EF8002C2561 /* ZDLinkViewController.h */,
 				0438385720FF7EF8002C2561 /* ZDLinkViewController.m */,
+				0497788321450D44007CDD7D /* ZDLinkForShoppingViewController.h */,
+				0497788421450D44007CDD7D /* ZDLinkForShoppingViewController.m */,
 			);
 			name = Find;
 			sourceTree = "<group>";
@@ -895,6 +907,15 @@
 				047CCA37213BFE6300987EE1 /* ZDRepertoryCell.m */,
 			);
 			name = Repertory;
+			sourceTree = "<group>";
+		};
+		0497788C21451892007CDD7D /* MBProgressHUd */ = {
+			isa = PBXGroup;
+			children = (
+				0497789421451A11007CDD7D /* MBProgressHUD.h */,
+				0497789321451A10007CDD7D /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUd;
 			sourceTree = "<group>";
 		};
 		04A1B3F22111A96E002D960A /* Life */ = {
@@ -1303,7 +1324,6 @@
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1311,7 +1331,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1342,10 +1361,12 @@
 				0428447F213002220043B27B /* MobileNet.mlmodel in Sources */,
 				04934B2420AFE1B700FE1E17 /* ZDPhotoManagerViewController.m in Sources */,
 				04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */,
+				0497788821451252007CDD7D /* HUDUtil.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
 				04FF836320B94C9800EECE24 /* MJRefreshNormalHeader.m in Sources */,
 				046E890A2140ECC000CF3FCC /* ZDClassPickerTableViewCell.m in Sources */,
+				0497789521451A11007CDD7D /* MBProgressHUD.m in Sources */,
 				04C5DC852101FA44003835E3 /* ZDTimerView.m in Sources */,
 				044F01ED20A80DB500406D65 /* ViewController.m in Sources */,
 				04FF836A20B94C9800EECE24 /* UIView+MJExtension.m in Sources */,
@@ -1410,6 +1431,7 @@
 				047F345F210C8EC000D84ADD /* ZDEditPickerViewCell.m in Sources */,
 				04FF835E20B94C9800EECE24 /* MJRefreshAutoStateFooter.m in Sources */,
 				044F02B720A811F200406D65 /* ZDMeViewController.m in Sources */,
+				0497788521450D44007CDD7D /* ZDLinkForShoppingViewController.m in Sources */,
 				04FF836220B94C9800EECE24 /* MJRefreshGifHeader.m in Sources */,
 				04BD723320A9BA8D00A14ADF /* ZDExpireDataBase.m in Sources */,
 				043BD6DF20BFEFE50067F06E /* RGCardViewLayout.m in Sources */,

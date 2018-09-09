@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^requestSuccess) (void);
+typedef void (^requestSuccess) (NSString *result);
 typedef void (^requestFailure) (void);
 
 @interface ZDTranslateDataManager : NSObject

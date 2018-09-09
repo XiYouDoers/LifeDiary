@@ -79,7 +79,7 @@
         [self addSubview:_sumLabel];
         [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(5);
-            make.left.mas_equalTo(20);
+            make.left.mas_equalTo(15);
             make.width.mas_equalTo(150);
             make.bottom.mas_equalTo(-5);
             

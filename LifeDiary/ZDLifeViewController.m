@@ -92,9 +92,7 @@
 #pragma mark ZDCardViewDelegate 代理方法
 - (void)changeBackgroundImageView:(NSInteger)index{
 
-
-
-        [_imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"life%ld",index]]];
+    [_imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"life%ld",index]]];
     
 }
 

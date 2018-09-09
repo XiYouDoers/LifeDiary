@@ -18,6 +18,7 @@
 #import "ZDAddTableHeaderView.h"
 #import "ZDUnderLineTextField.h"
 #import "ZDEditClassPickerViewCell.h"
+#import "HUDUtil.h"
 
 @interface ZDEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>{
     NSArray *_cellTabArray;
@@ -199,8 +200,9 @@
         double ratio = (double)secondsOfNowToEnd/secondsOfStartToEnd;
         newGoods.ratio = ratio;
         [[ZDAllDataBase sharedDataBase]updateGoods:newGoods];
-        
+        [self.delegate exhibitSucceed];
         [self.navigationController popViewControllerAnimated:YES];
+        
     }
 }
 - (void)displayWrongIntput{

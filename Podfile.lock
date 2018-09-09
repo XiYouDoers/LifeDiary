@@ -25,7 +25,6 @@ PODS:
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
-  - TesseractOCRiOS (4.0.0)
   - WechatOpenSDK (1.8.2)
 
 DEPENDENCIES:
@@ -33,7 +32,6 @@ DEPENDENCIES:
   - JSONModel
   - ReactiveCocoa (~> 2.0)
   - SDWebImage
-  - TesseractOCRiOS (~> 4.0.0)
   - WechatOpenSDK (~> 1.8.2)
 
 SPEC REPOS:
@@ -42,7 +40,6 @@ SPEC REPOS:
     - JSONModel
     - ReactiveCocoa
     - SDWebImage
-    - TesseractOCRiOS
     - WechatOpenSDK
 
 SPEC CHECKSUMS:
@@ -50,9 +47,8 @@ SPEC CHECKSUMS:
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
-  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
 
-PODFILE CHECKSUM: 956874d8f4639eb012492712c6287e4ade0a4253
+PODFILE CHECKSUM: f7560f44e17849979e591fcb5c3afb1473466f41
 
 COCOAPODS: 1.5.3

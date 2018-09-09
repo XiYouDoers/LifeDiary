@@ -16,8 +16,10 @@
 #import "ZDMessageCell.h"
 #import "ZDAllCollectionViewCell.h"
 #import "ZDSortView.h"
+#import "HUDUtil.h"
 
-@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,ZDAllCellDelegate,ZDSortViewDelegate>{
+
+@interface ZDAllViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,ZDAllCellDelegate,ZDSortViewDelegate,ZDEditVCDelegate>{
     NSDateFormatter *_dateFormatter;
     ZDSortView *_sortView;
     NSMutableDictionary *selectedIndexes;
@@ -61,7 +63,11 @@
     _sortView.delegate = self;
     _sortView.hidden = YES;
     [self.view addSubview:_sortView];
-
+    
+    
+   
+    
+    
 }
 - (void)setNavigationBar{
    
@@ -97,6 +103,10 @@
     }completion:^(BOOL finished) {
         
     }];
+   
+    
+    
+    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -248,7 +258,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+NSLog(@"%s",__func__);
     if ([self cellIsSelected:indexPath]) {
         ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [UIView animateWithDuration:0.3 animations:^{
@@ -339,7 +349,6 @@
  cell数据源
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     _allCell = [tableView dequeueReusableCellWithIdentifier:@"allCell" forIndexPath:indexPath];
     _allCell.delegate = self;
     ZDGoods *goods = [[ZDGoods alloc]init];
@@ -368,16 +377,14 @@
     }else{
         _allCell.classificationLabel.text = @"其";
     }
-    
+
+
     //计算出保质期的时间戳
     //    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
     //    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
     //    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
     //    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
     //    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
-
-    
-    
     return _allCell;
     
 }
@@ -483,10 +490,15 @@
         if (self.sortButton.selected) {
             [self sortTouched:self.sortButton];
         }
-        
     }
 }
 - (void)deleteButtonWasClicked{
+    
+    //折叠cell
+    BOOL isSelected = ![self cellIsSelected:lastIndexPath];
+    NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+    [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
+    //push
     ZDGoods *deletedGoods = [[ZDGoods alloc]init];
     if (self.resultMutableArray.count) {
         //计算在搜索结果中要删除的cell在总数据序列
@@ -514,12 +526,23 @@
     [[ZDRecycleDataBase sharedDataBase]addGoods:deletedGoods];
     self.dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     [self.allTableView reloadData];
+    [HUDUtil show:self.view text:@"删除成功"];
+
     
+}
+- (void)exhibitSucceed{
+    [HUDUtil show:self.view text:@"修改成功"];
 }
 - (void)editButtonWasClicked{
 
+    //折叠cell
+    BOOL isSelected = ![self cellIsSelected:lastIndexPath];
+    NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+    [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
+    //push
         ZDGoods *goods =  _dataMutableArray[lastIndexPath.row];
         ZDEditViewController *editVC = [[ZDEditViewController alloc]init];
+        editVC.delegate = self;
         editVC.goods = goods;
         [self.navigationController pushViewController:editVC animated:YES];
 }

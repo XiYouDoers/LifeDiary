@@ -16,18 +16,21 @@
 #import "Resnet50.h"
 #import <CoreML/CoreML.h>
 #import <Vision/Vision.h>
-#import <TesseractOCR/TesseractOCR.h>
+
 #import "ZDAddViewController.h"
 #import "ZDAddTableHeaderView.h"
 #import "ZDTextRecognitionView.h"
 #import "ZDPickerViewController.h"
 #import "ZDGoods.h"
+#import "ZDTranslateDataManager.h"
+#import "ZDStringManager.h"
+#import "HUDUtil.h"
 
 typedef NS_ENUM(NSInteger,RECOgnitionMode){
     RECOgnitionForTextMode,
     RECOgnitionForImageMode,
 };
-@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate,ZDImageRecognitionDelegate,ZDTextRecognitionViewDelegate>{
+@interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate,ZDImageRecognitionDelegate,ZDTextRecognitionViewDelegate,ZDAddVCDelegate>{
     RECOgnitionMode recognitionMode;
     ZDTextRecognitionView *textReView;
 }
@@ -146,9 +149,11 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         if (recognitionMode == RECOgnitionForImageMode)
         {
+            [HUDUtil show:self.view text:@"正在识别..."];
             //图像识别
-            [self GoToCoreML:info[@"UIImagePickerControllerOriginalImage"]];
+            [self GoToCoreML:info[@"UIImagePickerControllerEditedImage"]];
             NSLog(@"图像识别");
+            recognitionMode = RECOgnitionForTextMode;
             
         }else  if (recognitionMode == RECOgnitionForTextMode){
             
@@ -156,7 +161,8 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
             //文字识别
             textReView = [[ZDTextRecognitionView alloc]init];
             textReView.delegate = self;
-            [textReView setData:info[@"UIImagePickerControllerOriginalImage"]];
+            [textReView setData:info[@"UIImagePickerControllerEditedImage"]];
+            [HUDUtil show:self.view text:@"正在识别..."];
             [textReView recognitionForText];
   
         }
@@ -165,17 +171,23 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
         //文字识别
         textReView = [[ZDTextRecognitionView alloc]init];
         textReView.delegate = self;
-        [textReView setData:info[@"UIImagePickerControllerOriginalImage"]];
+        [textReView setData:info[@"UIImagePickerControllerEditedImage"]];
+        [HUDUtil show:self.view text:@"正在识别..."];
         [textReView recognitionForText];
         
     }
 
 }
+- (void)exhibitSucceed{
+    [HUDUtil show:self.view text:@"添加成功"];
+}
 - (void)jumpToAddVC{
 
     ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+    addVC.delegate = self;
     [addVC setGoodsInfo:textReView.goods];
     [self presentViewController:addVC animated:YES completion:nil];
+    [HUDUtil show:addVC.view text:@"识别成功"];
 }
 - (void)textButtonWasClicked{
      recognitionMode = RECOgnitionForTextMode;
@@ -200,22 +212,21 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
             }
             ZDGoods *goods = [[ZDGoods alloc]init];
             ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+            //去除空格
+            NSString *sourceString = [ZDStringManager deleteSpace:tempClassification.identifier];
             //翻译
-            
-            
-            ///
-            
-            
-            
-            
-            ///
-            goods.imageData = UIImagePNGRepresentation(image);
-            goods.name = tempClassification.identifier;
-            [addVC setGoodsInfo:goods];
-            [self presentViewController:addVC animated:YES completion:nil];
-            
-            NSLog(@"%@",[NSString stringWithFormat:@"识别结果:%@",tempClassification.identifier]);
-            NSLog(@"%@",[NSString stringWithFormat:@"匹配率:%@",@(tempClassification.confidence)]);
+            ZDTranslateDataManager *mange = [[ZDTranslateDataManager alloc]init];
+            [mange getData_sucessBlock:^(NSString *result) {
+                goods.imageData = UIImagePNGRepresentation(image);
+                goods.name = result;
+                [addVC setGoodsInfo:goods];
+                [self presentViewController:addVC animated:YES completion:nil];
+                [HUDUtil show:addVC.view text:@"识别成功"];
+            } faliure:^{
+                [HUDUtil show:addVC.view text:@"识别失败"];
+            } sourceString:sourceString];
+        
+
         }];
         
         VNImageRequestHandler *vnImageRequestHandler = [[VNImageRequestHandler alloc] initWithCGImage:image.CGImage options:nil];

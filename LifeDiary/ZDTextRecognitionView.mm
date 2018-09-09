@@ -12,6 +12,7 @@
 #import "ZDGoods.h"
 #import "ZDStringManager.h"
 
+
 @interface ZDTextRecognitionView(){
 
 }
@@ -33,7 +34,7 @@
     self.imgView.image = image;
 }
 - (void)recognitionForText{
-    
+//    [HUDUtil show:self.view text:@"正在识别..."];
     YDTranslateInstance *yd = [YDTranslateInstance sharedInstance];
     yd.appKey = @"2b1c202a7b52cbd6";
     YDOCRRequest *request = [YDOCRRequest request];
@@ -50,6 +51,7 @@
             NSLog(@"!!!!!!!!!");
         }else {
             //成功
+
             [self showText:result];
             
             [self.delegate jumpToAddVC];

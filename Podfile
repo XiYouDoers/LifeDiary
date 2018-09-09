@@ -8,5 +8,4 @@ pod 'ReactiveCocoa','~>2.0', :inhibit_warnings => true
 pod 'JSONModel'
 pod 'SDWebImage'
 pod 'WechatOpenSDK', '~> 1.8.2'
-pod 'TesseractOCRiOS', '~> 4.0.0'
 end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ZDAddVCDelegate<NSObject>
+- (void)exhibitSucceed;
+@end
 @class ZDAddTableHeaderView,ZDAddDefaultCell,ZDPickerViewCell,ZDClassPickerTableViewCell,ZDGoods;
 
 @interface ZDAddViewController : UIViewController
@@ -18,6 +20,10 @@
 @property(nonatomic,strong) ZDPickerViewCell *pickerViewCell;
 @property(nonatomic,strong) ZDClassPickerTableViewCell *classPickerViewCell;
 @property(nonatomic,strong) UIButton *continueToRecognizeButton;
+@property(nonatomic,weak) id <ZDAddVCDelegate> delegate;
+
+
+
 - (void)setGoodsInfo:(ZDGoods *)goods;
 
 @end

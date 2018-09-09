@@ -170,7 +170,7 @@
         
         if(months > 12) {
             year  = [NSString stringWithFormat:@"%d",months/12];
-            months = months/12;
+            months = months%12;
         }else{
             year = @"0";
         }
@@ -202,38 +202,32 @@
 
 + (NSString *)addDate:(NSString *)date str:(NSString *)str{
     
-    NSMutableArray *charactersForDate = [NSMutableArray array];
+
     NSMutableArray *charactersForStr = [NSMutableArray array];
 
     
     int yearForDate=0,monthForDate=0,dayForDate=0;
-    for (int i = 0; i < date.length; i ++) {
-        NSString *subString = [str substringToIndex:i + 1];
-        
-        subString = [subString substringFromIndex:i];
-        
-        [charactersForDate addObject:subString];
-    }
+
     // 分离出字符串中的所有数字，并存储到数组charactersForDate中
-    if (charactersForDate.count >=4) {
+    if (date.length >=4) {
         NSString *subString0 = [date substringToIndex:4];
-        subString0 = [subString0 substringFromIndex:1];
+        subString0 = [subString0 substringFromIndex:0];
         yearForDate = [subString0 intValue];
     }
-    if (charactersForDate.count >=8) {
-        NSString *subString1 = [date substringToIndex:8];
+    if (date.length >=8) {
+        NSString *subString1 = [date substringToIndex:7];
         NSLog(@"substring1ToIndex 8 %@",subString1);
-        subString1 = [subString1 substringFromIndex:6];
+        subString1 = [subString1 substringFromIndex:5];
         NSLog(@"substring1ToIndex 6 %@",subString1);
         monthForDate = [subString1 intValue];
     }
     
-    if (charactersForDate.count >=10) {
+    if (date.length >=10) {
         NSString *subString2 = [date substringToIndex:10];
         subString2 = [subString2 substringFromIndex:8];
         dayForDate = [subString2 intValue];
     }
-    NSLog(@"%d %d %d",yearForDate,monthForDate,dayForDate);
+
     
     
     // 分离出字符串中的所有数字，并存储到数组charactersForStr中
@@ -247,7 +241,7 @@
         [charactersForStr addObject:subString];
     }
     //截取str的年份
-    NSMutableString *strForYear = [NSMutableString string];
+    NSMutableString *mustrForYear = [NSMutableString string];
     int j=0;
     for (int i = 0; i < charactersForStr.count; i ++) {
         NSString *str = [charactersForStr objectAtIndex:i];
@@ -255,12 +249,12 @@
             j=i+1;
             break;
         }
-        [strForYear appendString:str];
+        [mustrForYear appendString:str];
         
     }
-    yearForStr = [strForYear intValue];
+    yearForStr = [mustrForYear intValue];
     //截取str的月份
-    NSMutableString *strForMonth = [NSMutableString string];
+    NSMutableString *mustrForMonth = [NSMutableString string];
     int k=0;
     for (; j < charactersForStr.count; j ++) {
         NSString *str = [charactersForStr objectAtIndex:j];
@@ -268,20 +262,20 @@
             k=j+1;
             break;
         }
-        [strForMonth appendString:str];
+        [mustrForMonth appendString:str];
     }
-    monthForStr = [strForMonth intValue];
+    monthForStr = [mustrForMonth intValue];
     //截取str的日份
-    NSMutableString *strForDay= [NSMutableString string];
+    NSMutableString *mustrForDay= [NSMutableString string];
     for (; k < charactersForStr.count; k ++) {
         NSString *str = [charactersForStr objectAtIndex:j];
         if ([str isEqualToString:@"-"]) {
             break;
         }
-        [strForDay appendString:str];
+        [mustrForDay appendString:str];
     }
     //模拟日期加减
-    dayForStr = [strForDay intValue];
+    dayForStr = [mustrForDay intValue];
     int yearInt =0,monthInt = 0,dayInt = 0;
     dayInt = dayForDate+dayForStr;
     if (dayInt>60) {
@@ -294,8 +288,22 @@
         monthInt = monthInt-12;
     }
     yearInt = yearInt + yearForDate + yearForStr;
+    NSString *strForMonth;
+    NSString *strForDay;
+    //格式化
+    if (monthInt<10) {
+        strForMonth = [NSString stringWithFormat:@"0%d",monthInt];
+    }else{
+        strForMonth = [NSString stringWithFormat:@"%d",monthInt];
+    }
+    if (dayInt<10) {
+        strForDay = [NSString stringWithFormat:@"0%d",dayInt];
+    }else{
+        strForDay = [NSString stringWithFormat:@"%d",dayInt];
+    }
     
-    NSString *finalDate = [NSString stringWithFormat:@"%d-%d-%d",yearInt,monthInt,dayInt];
+
+    NSString *finalDate = [NSString stringWithFormat:@"%d-%@-%@",yearInt,strForMonth,strForDay];
     
     return finalDate;
     

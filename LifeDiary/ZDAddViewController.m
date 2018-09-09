@@ -18,7 +18,7 @@
 #import "ZDPhotoManagerViewController.h"
 #import "ZDClassPickerTableViewCell.h"
 #import "ZDStringManager.h"
-
+#import "HUDUtil.h"
 
 @interface ZDAddViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate,ZDPhotoManagerViewControllerDelegate>{
     NSArray *_cellTabArray;
@@ -76,6 +76,7 @@
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.frame = CGRectMake(150,20+10, 75, 24);
     titleLabel.text = @"添加物品";
+    titleLabel.font = [UIFont boldSystemFontOfSize:17];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleLabel];
     
@@ -104,6 +105,7 @@
     _continueToRecognizeButton.frame = CGRectMake(125, 580, 125, 50);
     _continueToRecognizeButton.layer.cornerRadius = 10.f;
     _continueToRecognizeButton.layer.masksToBounds = YES;
+    _continueToRecognizeButton.hidden = YES;
     [_continueToRecognizeButton setTitle:@"继续识别" forState:UIControlStateNormal];
     [_continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_continueToRecognizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -208,9 +210,15 @@
     ZDGoods *newGoods = [[ZDGoods alloc]init];
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;
-    int index = arc4random_uniform(22);
-    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
-    newGoods.imageData = UIImagePNGRepresentation(image);
+   
+    if (_addTableHeaderView.headPictureSetButton.imageView.image == [UIImage imageNamed:@"addPicture"]) {
+        int index = arc4random_uniform(22);
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
+        newGoods.imageData = UIImagePNGRepresentation(image);
+    }else{
+        newGoods.imageData = UIImagePNGRepresentation(_addTableHeaderView.headPictureSetButton.imageView.image);
+    }
+    
     
     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
     ZDClassPickerTableViewCell *cellForZero = [_addTableView cellForRowAtIndexPath:indexpathForZero];
@@ -255,11 +263,8 @@
             newGoods.dateOfStart = stringOfStart;
         }else if([newGoods.dateOfEnd isEqualToString:@""]){
 
-            NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
-            NSLog(@"dateOfStart=%@",newGoods.dateOfStart);
             NSString *str = [ZDStringManager addDate:newGoods.dateOfStart str:newGoods.saveTime];
-            NSLog(@"str = %@",str);
-//            newGoods.dateOfEnd = str;
+            newGoods.dateOfEnd = str;
 
 //            NSDateComponents *dateComponentsOfSaveTime = [calender components: unitsave fromDate:dateOfSaveTime];
 //            NSDate *dateOfEnd = [calender dateByAddingComponents:dateComponentsOfSaveTime toDate:dateOfStart options:0];
@@ -297,7 +302,9 @@
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
         //回收所有输入框
         [self.addTableView endEditing:YES];
+        [self.delegate exhibitSucceed];
     [self dismissViewControllerAnimated:YES completion:nil];
+        
     }
 }
 - (void)displayWrongIntput{
@@ -392,7 +399,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
-        UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+        UIImage *image = info[@"UIImagePickerControllerEditedImage"];
         //图片存入相册
 //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];

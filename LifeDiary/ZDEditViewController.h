@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ZDEditVCDelegate<NSObject>
+- (void)exhibitSucceed;
+@end
 @class ZDAddTableHeaderView,ZDEditDefaultCell,ZDEditPickerViewCell,ZDGoods,ZDEditClassPickerViewCell;
 
 @interface ZDEditViewController : UIViewController
@@ -21,4 +23,5 @@
 @property(nonatomic,strong) ZDEditDefaultCell *editDefaultCell;
 @property(nonatomic,strong) ZDEditPickerViewCell *editPickerViewCell;
 @property(nonatomic,strong) ZDEditClassPickerViewCell *editClassPickerViewCell;
+@property(nonatomic,weak) id <ZDEditVCDelegate> delegate;
 @end

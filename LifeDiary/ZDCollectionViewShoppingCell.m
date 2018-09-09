@@ -18,8 +18,8 @@
     if (self) {
         
         
-        [self.contentView addSubview:self.shadowView];
-        [self.shadowView addSubview:self.exhibitView];
+
+        [self.contentView addSubview:self.exhibitView];
         self.contentView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
         
@@ -36,8 +36,8 @@
         //_nameLabel
         [self.exhibitView addSubview:self.nameLabel];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(31);
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 12));
+            make.top.mas_equalTo(15);
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width-30, 80));
             make.left.mas_equalTo(15);
         }];
         
@@ -101,21 +101,7 @@
     }
     return self;
 }
-- (UIView *)shadowView{
-    if (_shadowView == nil) {
-        
-        //_shadowView
-        _shadowView = [[UIView alloc]init];
-        _shadowView.backgroundColor = [UIColor purpleColor];
-        //        _shadowView.layer.shadowColor =  [UIColor colorWithRed:97.0/255 green:191.0/255 blue:246.0/255 alpha:1].CGColor;
-        _shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-        _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-        _shadowView.layer.shadowRadius = 0 ;
-        _shadowView.layer.shadowOpacity = 1;
-        _shadowView.layer.shouldRasterize = YES;
-    }
-    return _shadowView;
-}
+
 - (UIView *)exhibitView{
     if (_exhibitView == nil) {
         //_exhibitView
@@ -133,7 +119,7 @@
         _nameLabel = [[UILabel alloc]init];
         _nameLabel.numberOfLines = 0;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.font = [UIFont systemFontOfSize:14];
+        _nameLabel.font = [UIFont systemFontOfSize:16];
     }
     return _nameLabel;
 }

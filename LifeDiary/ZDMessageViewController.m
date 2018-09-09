@@ -18,8 +18,12 @@
 #import "ZDDetailView.h"
 #import "ZDMessageCardView.h"
 #import "ZDMeViewController.h"
-#import "ZDTranslateDataManager.h"
 #import "ZDStringManager.h"
+#import <UserNotifications/UNUserNotificationCenter.h>
+#import <UserNotifications/UNNotificationContent.h>
+#import <UserNotifications/UNNotificationSound.h>
+#import <UserNotifications/UNNotificationTrigger.h>
+#import <UserNotifications/UNNotificationRequest.h>
 
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
@@ -33,6 +37,7 @@ NSDateFormatter const *_formatter;
 @property(nonatomic,strong) ZDDetailView *detailView;
 @property(nonatomic,strong) NSMutableArray *allDataMutableArray;
 @property(nonatomic,assign) bool isHiddenTabBar;
+@property(nonatomic,strong) UIImageView *imageView;
 @end
 
 @implementation ZDMessageViewController
@@ -47,7 +52,7 @@ NSDateFormatter const *_formatter;
 
     
     _tempCell = [[ZDMessageCollectionViewCell alloc]init];
-    
+
     [self addMessageCardView];
     //_detailView
     _detailView = [[ZDDetailView alloc]init];
@@ -55,13 +60,22 @@ NSDateFormatter const *_formatter;
     [_detailView.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_detailView];
     
-//    ZDTranslateDataManager *mange = [[ZDTranslateDataManager alloc]init];
-//    [mange getData_sucessBlock:^{
-//        NSLog(@"!!!succeed");
-//    } faliure:^{
-//
-//    } sourceString:@"world"];
-
+    //每天检测到期
+    [NSTimer scheduledTimerWithTimeInterval:3600*24 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+        NSDate *dateNow = [[NSDate alloc]init];
+        for (ZDGoods *goods in _allDataMutableArray) {
+            
+            NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+            NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+            if (seconds<100 ) {
+                [self sendNotifition:goods timeInterval:seconds*24*3600];
+            }
+        }
+       
+    }];
+    
+    
     
 }
 
@@ -254,6 +268,40 @@ NSDateFormatter const *_formatter;
         _detailView.frame = CGRectMake(0, HEIGHT, WIDTH,49);
     }];
 }
-
+- (void)sendNotifition:(ZDGoods *)goods timeInterval:(NSTimeInterval)timeInterval{
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter  currentNotificationCenter];
+    //请求获取通知权限（角标，声音，弹框）
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //获取用户是否同意开启通知
+            NSLog(@"request authorization successed!");
+        }
+    }];
+    
+    //第二步：新建通知内容对象
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"物品过期通知";
+    content.subtitle = @"您有新的物品即将到期";
+    content.body = [NSString stringWithFormat:@"您添加的%@距离到期还有3个月，赶快使用吧",goods.name];
+    NSNumber *number = [NSNumber numberWithInteger:1];
+    content.badge = number;
+    UNNotificationSound *sound = [UNNotificationSound soundNamed:@"wakeup.caf"];
+    content.sound = sound;
+    
+    //第三步：通知触发机制。（重复提醒，时间间隔要大于60s）
+    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeInterval  repeats:NO];
+    
+    //第四步：创建UNNotificationRequest通知请求对象
+    NSString *requertIdentifier = @"RequestIdentifier";
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger1];
+    
+    //第五步：将通知加到通知中心
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
+    
+}
 
 @end

@@ -24,15 +24,15 @@
 
     animationImageView.image = [UIImage imageNamed:@"animationImageView"];
     animationImageView.contentMode =  UIViewContentModeScaleAspectFill;
-    ZDTimerView *timerView = [[ZDTimerView alloc]init];
-    timerView.frame = CGRectMake(WIDTH/2.0-25, HEIGHT/6*5, 50, 50);
-    [animationImageView addSubview:timerView];
+//    ZDTimerView *timerView = [[ZDTimerView alloc]init];
+//    timerView.frame = CGRectMake(WIDTH/2.0-25, HEIGHT/6*5, 50, 50);
+//    [animationImageView addSubview:timerView];
     
     [self.view addSubview:animationImageView];
     self.navigationController.navigationBar.hidden = YES;
     
-    //jump to main VC after 3.0s
-    [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+    //jump to main VC after 2.0s
+    [NSTimer scheduledTimerWithTimeInterval:2 repeats:NO block:^(NSTimer * _Nonnull timer) {
         ZDTabBarViewController *tabBarVC = [[ZDTabBarViewController alloc]init];
         [self presentViewController:tabBarVC animated:YES completion:nil];
     }];

@@ -13,7 +13,7 @@
 @implementation ZDShoppingDataManger
 - (void)getData_sucessBlock:(requestForShoppingSuccess )sucessBlock faliure:(requestForShoppingFailure )failureBlock {
     
-    NSString *urlString = @"http://sunxiaozhe.natapp1.cc/search";
+    NSString *urlString = @"http://120.79.189.62:8888/search";
     NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"短裤",@"key",@"1",@"page",nil];
     AFHTTPSessionManager *sessionManger = [AFHTTPSessionManager manager];
     sessionManger.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -21,7 +21,7 @@
         ZDShoppingModel *model = [[ZDShoppingModel alloc]initWithDictionary:responseObject error:nil];
          sucessBlock(model);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"fffffff  %@",error);
     }];
    
     

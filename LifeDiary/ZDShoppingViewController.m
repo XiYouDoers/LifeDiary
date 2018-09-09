@@ -18,6 +18,7 @@
 #import "ZDCardForShoppingView.h"
 #import "ZDShoppingDataManger.h"
 #import "ZDShoppingModel.h"
+#import "ZDLinkForShoppingViewController.h"
 
 @interface ZDShoppingViewController ()<ZDCardForShoppingViewDelegate>{
     
@@ -82,31 +83,18 @@
 
 - (void)addCardForShoppingView{
     
-    _cardForShoppingView = [[ZDCardForShoppingView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    _cardForShoppingView = [[ZDCardForShoppingView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64)];
     _cardForShoppingView.delegate = self;
     
     [self.view addSubview:_cardForShoppingView];
     
 }
 
-//UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
 
-    ZDLinkViewController *linkVC = [[ZDLinkViewController alloc]init];
-    WKWebView *webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    [linkVC.view addSubview:webView];
-    NSArray *arrayOfHtml = [NSArray arrayWithObjects:@"https://item.jd.com/1304924.html", @"https://item.jd.com/1975749.html",@"https://item.jd.com/964416.html",nil];
-    NSURL *url = [NSURL URLWithString:[arrayOfHtml objectAtIndex:indexPath.section]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
-    [webView loadRequest:request];//加载
-    
-    [self.navigationController pushViewController:linkVC animated:YES];
-    
-}
 
 
 #pragma mark ZDCardViewDelegate 代理方法
+
 - (void)changeBackgroundImageView:(NSInteger)index{
     
     if (_dataMutableArray.count >= index) {
@@ -118,8 +106,9 @@
 - (void)pushToNextViewController:(NSInteger)index{
     
     ZDProductInfo *productInfo = _dataMutableArray[index];
-    UIViewController *linkVC = [[UIViewController alloc]init];
-    WKWebView* webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 96, WIDTH, HEIGHT-96)];
+    ZDLinkForShoppingViewController *linkVC = [[ZDLinkForShoppingViewController alloc]init];
+    linkVC.productInfo = productInfo;
+    WKWebView* webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-14)];
     //    webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
     [linkVC.view addSubview:webView];
     NSURL* url = productInfo.url;//创建URL

@@ -1,23 +1,24 @@
 //
-//  ZDLinkViewController.m
+//  ZDLinkForShoppingViewController.m
 //  LifeDiary
 //
-//  Created by Jack on 2018/7/18.
+//  Created by Jack on 2018/9/9.
 //  Copyright © 2018年 JACK. All rights reserved.
 //
 
-#import "ZDLinkViewController.h"
+#import "ZDLinkForShoppingViewController.h"
 #import "ZDHtmlScrollView.h"
-#import "ZDOrderModel.h"
+#import "ZDShoppingModel.h"
 
-@interface ZDLinkViewController ()
+
+@interface ZDLinkForShoppingViewController ()
 
 @end
 
-@implementation ZDLinkViewController
+@implementation ZDLinkForShoppingViewController
 
 - (void)viewDidLoad {
-
+    
     [super viewDidLoad];
     //rightBarButtonItem
     UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareToOther)];
@@ -32,10 +33,7 @@
     self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor whiteColor];
-    _htmlScrollView = [[ZDHtmlScrollView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-20)];
     
-    [_htmlScrollView updateHtmlView:_contentlistModel];
-    [self.view addSubview: _htmlScrollView];
     
     
 }
@@ -43,21 +41,20 @@
 
 - (void)shareToOther{
     //分享的标题
-
-        NSString *textToShare = [NSString stringWithFormat:@"%@",_contentlistModel.title];
-        UIImage *imageToShare;
-        if (_contentlistModel.imageurls.count) {
-            ZDPicModel *picModel = _contentlistModel.imageurls[0];
-            NSData *imageData = [NSData dataWithContentsOfURL:picModel.url];
-            //分享的图片
-            imageToShare = [UIImage imageWithData:imageData];
-        }
+    
+    NSString *textToShare = [NSString stringWithFormat:@"%@",_productInfo.name];
+    UIImage *imageToShare;
+    if (_productInfo.imageUrl) {
+        NSData *imageData = [NSData dataWithContentsOfURL:_productInfo.imageUrl];
+        //分享的图片
+        imageToShare = [UIImage imageWithData:imageData];
+    }
     
     
-        //分享的url
-        NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_contentlistModel.link]];
+    //分享的url
+    NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_productInfo.url]];
     
-//    在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
+    //    在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
     NSArray *activityItems = @[textToShare,imageToShare, urlToShare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
     //不出现在活动项目
@@ -98,21 +95,9 @@
     }completion:^(BOOL finished) {
         
     }];
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

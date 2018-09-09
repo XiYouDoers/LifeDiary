@@ -105,7 +105,7 @@
         for (int i = 0; i < self.dataMutableArray.count; i++) {
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            [self shallowCellSelectedImageView:indexPath];
+//            [self shallowCellSelectedImageView:indexPath];
             [self.expireTableView deselectRowAtIndexPath:indexPath animated:YES];
         }
         self.navigationItem.leftBarButtonItem = nil;
@@ -172,8 +172,10 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self shallowCellSelectedImageView:indexPath];
+//    ZDRepertoryCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    cell.editing = YES;
+    NSLog(@"1111");
+//    [self shallowCellSelectedImageView:indexPath];
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
@@ -184,7 +186,7 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
     
     [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /**
@@ -214,7 +216,7 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    _expireCell = [tableView dequeueReusableCellWithIdentifier:@"expireCell"];
+    _expireCell = [tableView dequeueReusableCellWithIdentifier:@"expireCell" forIndexPath:indexPath];
     //去除选中时渲染的蓝色背景
 //    _expireCell.selectedBackground View = [[UIView alloc] init];
     ZDGoods *goods = [[ZDGoods alloc]init];

@@ -11,6 +11,7 @@
 @class ZDGoods;
 @interface ZDMessageCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *remarkLabel;
 @property(nonatomic,strong) UIImageView *pictureImageView;
