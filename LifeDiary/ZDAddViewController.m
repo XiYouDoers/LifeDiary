@@ -28,6 +28,7 @@
     NSArray *_sumPickerViewDataArray;
     NSArray *_classPickerViewDataArray;
     ZDGoods *_goods;
+    BOOL isTakePhoto;
 }
 
 
@@ -211,12 +212,14 @@
     newGoods.name = _addTableHeaderView.nameTextField.text;
     newGoods.remark = _addTableHeaderView.remarkTextField.text;
    
-    if (_addTableHeaderView.headPictureSetButton.imageView.image == [UIImage imageNamed:@"addPicture"]) {
+    if (isTakePhoto) {
+         newGoods.imageData = UIImagePNGRepresentation(_addTableHeaderView.headPictureSetButton.imageView.image);
+        isTakePhoto = NO;
+       
+    }else{
         int index = arc4random_uniform(22);
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
         newGoods.imageData = UIImagePNGRepresentation(image);
-    }else{
-        newGoods.imageData = UIImagePNGRepresentation(_addTableHeaderView.headPictureSetButton.imageView.image);
     }
     
     
@@ -255,7 +258,7 @@
     //计算出另一个日期
         if([newGoods.dateOfStart isEqualToString:@""]){
             
-            NSLog(@"dateOfStart = nil");
+
             NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
             NSDate *dateOfSaveTime = [_saveTimeFormatter dateFromString:newGoods.saveTime];
             NSDateComponents *dateComponentsOfStart =[calender components:unitsave fromDate:dateOfSaveTime toDate:dateOfEnd options:0];
@@ -271,7 +274,7 @@
 //            NSString *stringOfEnd = [_dateFormatter stringFromDate:dateOfEnd];
 //            newGoods.dateOfEnd = stringOfEnd;
         }else{
-            NSLog(@"saveTime==nil");
+  
             //newGoods.saveTime==nil
             NSDate *dateOfStart = [_dateFormatter dateFromString:newGoods.dateOfStart];
             NSDate *dateOfEnd = [_dateFormatter dateFromString:newGoods.dateOfEnd];
@@ -302,8 +305,9 @@
     [[ZDAllDataBase sharedDataBase]addGoods:newGoods];
         //回收所有输入框
         [self.addTableView endEditing:YES];
-        [self.delegate exhibitSucceed];
+        
     [self dismissViewControllerAnimated:YES completion:nil];
+        [self.delegate exhibitSucceed];
         
     }
 }
@@ -401,8 +405,9 @@
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
         UIImage *image = info[@"UIImagePickerControllerEditedImage"];
         //图片存入相册
-//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         [_addTableHeaderView.headPictureSetButton setImage:image forState:UIControlStateNormal];
+        isTakePhoto = YES;
+               
     }
     [self dismissViewControllerAnimated:YES completion:nil];
     

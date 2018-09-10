@@ -58,9 +58,7 @@
     } faliure:^{
         
     }];
-//    NSDictionary *dic0 = @{@"name":@"长城（GreatWall）红酒",@"price":@"168.00",@"image":@"shopping0"};
-//     NSDictionary *dic1 = @{@"name":@"蒙牛 纯甄 常温酸牛奶",@"price":@"89.90",@"image":@"shopping1"};
-//     NSDictionary *dic2 = @{@"name":@"鲁花 5S 压榨一级 花生油 4L",@"price":@"109.90",@"image":@"shopping2"};
+
 
 }
 - (void)setNavigationBar{

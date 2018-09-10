@@ -24,6 +24,7 @@
 #import <UserNotifications/UNNotificationSound.h>
 #import <UserNotifications/UNNotificationTrigger.h>
 #import <UserNotifications/UNNotificationRequest.h>
+ #import <EventKit/EventKit.h>
 
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
@@ -219,10 +220,18 @@ NSDateFormatter const *_formatter;
                 [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
                 _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
             }
-        }else if (seconds<100 ) {
-            [_messageDataMutableArray addObject:goods];
+        }else{
+            //分类提醒
+            if (seconds<100 && [goods.family isEqualToString:@"日用品"]) {
+                [_messageDataMutableArray addObject:goods];
+            }else if (seconds<200 &&[goods.family isEqualToString:@"药品"]) {
+                [_messageDataMutableArray addObject:goods];
+            }else if (seconds<60 &&[goods.family isEqualToString:@"食品"]) {
+                [_messageDataMutableArray addObject:goods];
+            }else if (seconds<80 && [goods.family isEqualToString:@"其他"]){
+                [_messageDataMutableArray addObject:goods];
+            }
         }
-        
         
     }
     _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
@@ -301,7 +310,61 @@ NSDateFormatter const *_formatter;
         NSLog(@"Error:%@",error);
         
     }];
+    //日历事件
+    [self addEKEventStore:goods];
     
 }
-
+// 添加日历事件
+-(void)addEKEventStore:(ZDGoods *)goods{
+    //创建事件市场
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    // the selector is available, so we must be on iOS 6 or newer
+    [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error)
+            {
+                //当发生了错误会
+                NSLog(@"发生了错误:%@",error);
+            }
+            else if (!granted)
+            {
+                //被用户拒绝，不允许访问日历
+            }
+            else
+            {
+                //创建事件
+                EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+                //给事件添加标题
+                event.title  = @"LifeDiary";
+                //设置地点
+                event.location = @"";
+                //创建测试时间，这里可以改为任意时间
+                NSDate *date = [NSDate date];
+                //开始时间(必须传)
+//                event.startDate = [_formatter dateFromString:date];
+                //结束时间(必须传)
+                event.endDate = date;
+                //全天的事件
+                event.allDay = YES;
+                //添加提醒
+                //第一次提醒 设置事件开始之前1分钟提醒
+                [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f *60]];
+                //第二次提醒 设置事件开始之前2分钟提醒
+                //                [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f * -2.0f]];
+                //第N次提醒 设置事件提醒
+                //                [event addAlarm:[EKAlarm alarmWithRelativeOffset:秒]];
+                //事件类容备注
+                NSString * str = @"您有物品即将到期，请打开LifeDiary查看";
+                event.notes = [NSString stringWithFormat:@"%@",str];
+                //添加事件到日历中
+                [event setCalendar:[eventStore defaultCalendarForNewEvents]];
+                NSError *err;
+                [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
+                //保存事件id，方便查询和删除
+                [[NSUserDefaults standardUserDefaults]setObject:event.eventIdentifier forKey:[NSString stringWithFormat:@"lifeDiaryEvent%@%@",goods.name,goods.identifier]];
+            }
+        });
+    }];
+    
+}
 @end

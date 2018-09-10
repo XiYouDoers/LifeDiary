@@ -57,17 +57,21 @@ extern NSDateFormatter const *_formatter;
         _remainderTimeLabel.frame = CGRectMake(self.frame.size.width-55, 10, 30, 30);
         _remainderTimeLabel.font = [UIFont systemFontOfSize:12];
     }
-    
+   
     _outsideArc.path = [pathOfOutsideArc CGPath];
     //外面圆弧的strokeColor
     if (ratio<0.25) {
         _outsideArc.strokeColor = [UIColor colorWithRed:255/255.0 green:117/255.0 blue:163/255.0 alpha:1].CGColor;
+         _remainderTimeLabel.textColor = [UIColor colorWithRed:255/255.0 green:117/255.0 blue:163/255.0 alpha:1];
     }else if(ratio<0.5){
         _outsideArc.strokeColor = [UIColor yellowColor].CGColor;
+        _remainderTimeLabel.textColor = [UIColor yellowColor];
     }else if(ratio<0.75){
         _outsideArc.strokeColor = [UIColor orangeColor].CGColor;
+        _remainderTimeLabel.textColor = [UIColor orangeColor];
     }else{
         _outsideArc.strokeColor = [UIColor greenColor].CGColor;
+        _remainderTimeLabel.textColor = [UIColor greenColor];
     }
 }
 - (void)layoutSubviews{
@@ -77,7 +81,7 @@ extern NSDateFormatter const *_formatter;
     self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     _imageView.frame =  _exhibitView.frame;
-    _nameLabel.frame = CGRectMake( 15, 10, self.frame.size.width-80, 30);
+    _nameLabel.frame = CGRectMake( 15, 10, self.frame.size.width-90, 30);
     _remarkLabel.frame = CGRectMake(15,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+5, self.frame.size.width-20-10, 15);
     _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-10-10*4);
     

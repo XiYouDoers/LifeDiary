@@ -144,6 +144,23 @@
         }];
         
         
+        //cancelButton
+        [self addSubview:self.cancelButton];
+        [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.sumDownSortButton.mas_bottom).with.offset(20);
+            make.right.mas_equalTo(-20);
+            make.size.mas_equalTo(CGSizeMake(80, 40));
+        }];
+        
+        //confirmButton
+        [self addSubview:self.confirmButton];
+        [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.sumDownSortButton.mas_bottom).with.offset(20);
+            make.right.mas_equalTo(self.cancelButton.mas_left).with.offset(-10);
+            make.size.mas_equalTo(CGSizeMake(80, 40));
+        }];
+        
+        
     }
     return self;
 }
@@ -251,6 +268,7 @@
         button.selected = NO;
     }
     button.selected = !button.selected;
+    _classString = button.titleLabel.text;
 }
 - (UILabel *)sortLabel{
     
@@ -310,7 +328,7 @@
         _timeDownSortButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _timeDownSortButton.layer.masksToBounds = YES;
         _timeDownSortButton.layer.cornerRadius = 15.f;
-        [_timeDownSortButton setTitle:@"时间升序" forState:UIControlStateNormal];
+        [_timeDownSortButton setTitle:@"时间降序" forState:UIControlStateNormal];
         [_timeDownSortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_timeDownSortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_timeDownSortButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
@@ -352,12 +370,47 @@
     return _sumDownSortButton;
 }
 - (void)clickButtonOfSort:(UIButton *)button{
-    
     for (UIButton *button in _sortMuArray) {
         button.selected = NO;
     }
     button.selected = !button.selected;
-    [self.delegate clickbuttonOfSort:button.titleLabel.text];
+    _sortString = button.titleLabel.text;
+}
+- (UIButton *)confirmButton{
+    
+    if (_confirmButton == nil) {
+        _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _confirmButton.layer.masksToBounds = YES;
+        _confirmButton.layer.cornerRadius = 15.f;
+        [_confirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [_confirmButton setBackgroundColor:LIGHTBLUE];
+        [_confirmButton setBackgroundImage:_buttonOfSortImage forState:UIControlStateSelected];
+        [_confirmButton addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _confirmButton;
+}
+- (void)confirmButtonClicked{
+
+    [self.delegate confirmToSort:_classString sort:_sortString];
+}
+- (UIButton *)cancelButton{
+    
+    if (_cancelButton == nil) {
+        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelButton.layer.masksToBounds = YES;
+        _cancelButton.layer.cornerRadius = 15.f;
+        [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[UIColor whiteColor ] forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [_cancelButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:117/255.0 blue:163/255.0 alpha:1]];
+        [_cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelButton;
+}
+- (void)cancelButtonClicked{
+    [self.delegate hiddenSortView];
 }
 
 @end

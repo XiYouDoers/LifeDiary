@@ -10,6 +10,7 @@
 #import "ZDExpireDataBase.h"
 #import "ZDAllDataBase.h"
 #import "ZDRepertoryCell.h"
+#import "HUDUtil.h"
 
 @interface ZDExpireViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -102,12 +103,7 @@
         //取消table进入编辑状态
         self.expireTableView.editing = NO;
         [sender setTitle:@"管理"];
-        for (int i = 0; i < self.dataMutableArray.count; i++) {
-            
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-//            [self shallowCellSelectedImageView:indexPath];
-            [self.expireTableView deselectRowAtIndexPath:indexPath animated:YES];
-        }
+        [_deletedCellArray removeAllObjects];
         self.navigationItem.leftBarButtonItem = nil;
         //下移删除button
         [UIView animateWithDuration:0.5 animations:^{
@@ -121,7 +117,7 @@
     for (int i = 0; i < self.dataMutableArray.count; i++) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        [self shallowCellSelectedImageView:indexPath];
+//        [self shallowCellSelectedImageView:indexPath];
         [self.expireTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
     _deletedCellArray = [NSMutableArray arrayWithArray:self.dataMutableArray];
@@ -133,7 +129,13 @@
     }
     self.dataMutableArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
     [self.expireTableView reloadData];
-    
+    //移除删除数组数据
+    if (_deletedCellArray.count) {
+        [_deletedCellArray removeAllObjects];
+        [HUDUtil show:self.view text:@"删除成功"];
+    }else{
+        
+    }
     //下移删除button
     [UIView animateWithDuration:0.5 animations:^{
         _deleteButton.frame = CGRectMake(0, HEIGHT*8/9, WIDTH, HEIGHT/9);
@@ -172,10 +174,7 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ZDRepertoryCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    cell.editing = YES;
-    NSLog(@"1111");
-//    [self shallowCellSelectedImageView:indexPath];
+
     [_deletedCellArray addObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
     
 }
@@ -186,7 +185,7 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
     
     [_deletedCellArray removeObject:[self.dataMutableArray objectAtIndex:indexPath.row]];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /**
@@ -218,7 +217,9 @@
     
     _expireCell = [tableView dequeueReusableCellWithIdentifier:@"expireCell" forIndexPath:indexPath];
     //去除选中时渲染的蓝色背景
-//    _expireCell.selectedBackground View = [[UIView alloc] init];
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _expireCell.selectedBackgroundView = view;
     ZDGoods *goods = [[ZDGoods alloc]init];
     goods = _dataMutableArray[indexPath.row];
     

@@ -59,7 +59,10 @@
     _editTableHeaderView.remarkTextField.delegate = self;
     
     [_editTableHeaderView.headPictureSetButton addTarget:self action:@selector(selectWhichStyle) forControlEvents:UIControlEventTouchUpInside];
+    [_editTableHeaderView.headPictureSetButton setImage:[UIImage imageWithData:_goods.imageData] forState:UIControlStateNormal];
     _editTableView.tableHeaderView = _editTableHeaderView;
+
+    
     _editTableView.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_editTableView];
     [_editTableView registerClass:[ZDEditDefaultCell class] forCellReuseIdentifier:@"editDefaultCell"];
@@ -121,9 +124,7 @@
     newGoods.name = _editTableHeaderView.nameTextField.text;
     newGoods.remark = _editTableHeaderView.remarkTextField.text;
     
-    int index = arc4random_uniform(22);
-    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"goods%d",index]];
-    newGoods.imageData = UIImagePNGRepresentation(image);
+    newGoods.imageData = UIImagePNGRepresentation(_editTableHeaderView.headPictureSetButton.imageView.image);
     
     NSIndexPath *indexpathForZero = [NSIndexPath indexPathForRow:0 inSection:0];
     ZDClassPickerTableViewCell *cellForZero = [_editTableView cellForRowAtIndexPath:indexpathForZero];

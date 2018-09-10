@@ -9,6 +9,7 @@
 #import "ZDSetViewController.h"
 #import "ZDMeDefaultCell.h"
 #import "ZDMeSwitchCell.h"
+#import "HUDUtil.h"
 
 @interface ZDSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *setTableView;
@@ -106,7 +107,12 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    if (indexPath.row == 1) {
+        
+        
+    }else if (indexPath.row == 2) {
+        [HUDUtil show:self.view text:@"清除缓存成功"];
+    }
 }
 
 

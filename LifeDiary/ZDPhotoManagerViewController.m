@@ -10,7 +10,7 @@
 #import "ZDPickerViewController.h"
 #import "ZDAddViewController.h"
 
-@interface ZDPhotoManagerViewController ()< UIScrollViewDelegate>{
+@interface ZDPhotoManagerViewController ()< UIScrollViewDelegate,ZDAddVCDelegate>{
     
 }
 
@@ -83,6 +83,7 @@
  */
 - (void)openAddVC{
     ZDAddViewController *addVC = [[ZDAddViewController alloc]init];
+    addVC.delegate = self.delegate;
     [self.delegate presentViewController:addVC animated:YES completion:nil];
      addVC.continueToRecognizeButton.hidden = YES;
 }

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @protocol ZDSortViewDelegate <NSObject>
-- (void) clickbuttonOfSort:(NSString *)str;
+- (void)confirmToSort:(NSString *)classString sort:(NSString *)sortString;
+- (void)hiddenSortView;
 @end
 
 @interface ZDSortView : UIView
@@ -28,6 +29,12 @@
 @property(nonatomic,strong) UIButton *timeDownSortButton;
 @property(nonatomic,strong) UIButton *sumUpSortButton;
 @property(nonatomic,strong) UIButton *sumDownSortButton;
+
+//select
+@property(nonatomic,strong) UIButton *confirmButton;
+@property(nonatomic,strong) UIButton *cancelButton;
+@property(nonatomic,copy) NSString *classString;
+@property(nonatomic,copy) NSString *sortString;
 /**
  代理
  */

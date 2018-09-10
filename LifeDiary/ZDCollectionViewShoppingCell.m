@@ -149,7 +149,7 @@
         _imageView = [[UIImageView alloc]init];
         _imageView.layer.cornerRadius = 10.f;
         _imageView.layer.masksToBounds = YES;
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+//        _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
     }
     return _imageView;
@@ -207,6 +207,10 @@
     [_imageView sd_setImageWithURL:productInfo.imageUrl];
     self.nameLabel.text = productInfo.name;
     self.priceLabel.text = productInfo.price;
-
+    int index = arc4random_uniform(1000);
+    _messageLabel.text = [NSString stringWithFormat:@"%d",index];
+    _zanLabel.text = [NSString stringWithFormat:@"99"];
+    index = arc4random_uniform(1000);
+    _priceLabel.text = [NSString stringWithFormat:@"%d",index];
 }
 @end

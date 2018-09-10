@@ -58,6 +58,7 @@
         UIView *backgroundView =[[ UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
    
         UILabel *noViewLabel = [[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-50,[UIScreen mainScreen].bounds.size.height/2-40, 100, 20)];
+        noViewLabel.textAlignment = NSTextAlignmentCenter;
         noViewLabel.text = @"空空如也...";
         noViewLabel.textColor = [UIColor lightGrayColor];
         [backgroundView addSubview:noViewLabel];

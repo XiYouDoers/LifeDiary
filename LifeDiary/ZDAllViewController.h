@@ -15,6 +15,7 @@
 @property(nonatomic,strong) ZDMessageCell *messageCell;
 @property(nonatomic,strong) NSMutableArray *dataMutableArray;
 @property(nonatomic,strong) NSMutableArray *resultMutableArray;
+@property(nonatomic,strong) NSMutableArray *sortMutableArray;
 @property(nonatomic,strong) UITableView *allTableView;
 @property(nonatomic,strong) ZDAllCell *allCell;
 @property(nonatomic,strong) UISearchBar *searchBar;

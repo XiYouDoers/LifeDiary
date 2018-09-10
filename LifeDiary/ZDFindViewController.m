@@ -86,7 +86,7 @@ static NSString *const footerId = @"footerId";
 - (void)setNavigationBar{
     
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
-    backBtnItem.title = @"生活";
+    backBtnItem.title = @"发现";
     self.navigationItem.backBarButtonItem = backBtnItem;
     
     if (@available(iOS 11.0, *)) {

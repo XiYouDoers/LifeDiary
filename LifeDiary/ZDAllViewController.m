@@ -25,6 +25,7 @@
     NSMutableDictionary *selectedIndexes;
     NSIndexPath *lastIndexPath;
     BOOL isReclickCell;
+    BOOL isSorted;
 }
 @property(nonatomic,strong) UIView *sortView;
 
@@ -59,13 +60,10 @@
     
     
     //sortView
-    _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155)];
+    _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155+50)];
     _sortView.delegate = self;
     _sortView.hidden = YES;
     [self.view addSubview:_sortView];
-    
-    
-   
     
     
 }
@@ -94,6 +92,7 @@
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
     _resultMutableArray = [NSMutableArray array];
+    _sortMutableArray = [NSMutableArray array];
     [self.allTableView reloadData];
     //隐藏tabBar
     CGRect  tabRect = self.tabBarController.tabBar.frame;
@@ -194,14 +193,43 @@
     searchBar.frame = CGRectMake(10, 5, WIDTH-54-10, 44);
     _sortButton.hidden = NO;
 }
+// 滑动收起键盘
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.allTableView) {
+        [self.searchBar resignFirstResponder];
+    }
+}
+#pragma SortViewDelegte
+- (void)confirmToSort:(NSString *)classString sort:(NSString *)sortString{
+    isSorted = NO;
+    [_sortMutableArray removeAllObjects];
+    if ([classString isEqualToString:@"全部"]) {
+        [_sortMutableArray removeAllObjects];
+    }else{
+    for (ZDGoods *goods in _dataMutableArray) {
+        isSorted = YES;
+        if ([goods.family isEqualToString:classString]) {
+            NSLog(@"family = %@",goods.family);
+            NSLog(@"name = %@",goods.name);
+            [_sortMutableArray addObject:goods];
+        }
+    }
+    }
 
+    [self sortTouched:_sortButton];
+    [self.allTableView reloadData];
+}
+- (void)hiddenSortView{
+    [self sortTouched:_sortButton];
+}
+#pragma sortButton点击事件
 - (void)sortTouched:(UIButton *)sender
 {
     sender.selected = !sender.selected;
     if (sender.selected) {
         [UIView animateWithDuration:0.3 animations:^{
 
-            self.allTableView.frame = CGRectMake(0, 64+54+180, WIDTH, HEIGHT-(64+54+180));
+            self.allTableView.frame = CGRectMake(0, 64+54+180+50, WIDTH, HEIGHT-(64+54+180));
         }];
         [NSTimer scheduledTimerWithTimeInterval:0.3 repeats:NO block:^(NSTimer * _Nonnull timer) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -234,6 +262,9 @@
     
     if (self.resultMutableArray.count) {
         return [self.resultMutableArray count];
+    }else if (isSorted){
+        
+        return [self.sortMutableArray count];
     }else{
         return [self.dataMutableArray count];
     }
@@ -258,7 +289,7 @@
  cell的高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-NSLog(@"%s",__func__);
+
     if ([self cellIsSelected:indexPath]) {
         ZDAllCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [UIView animateWithDuration:0.3 animations:^{
@@ -353,11 +384,13 @@ NSLog(@"%s",__func__);
     _allCell.delegate = self;
     ZDGoods *goods = [[ZDGoods alloc]init];
     if (self.resultMutableArray.count) {
-        
+
         goods = _resultMutableArray[indexPath.row];
+    }else  if (isSorted){
+
+        goods = _sortMutableArray[indexPath.row];
     }else{
-        
-        
+
         goods = _dataMutableArray[indexPath.row];
     }
     _allCell.nameLabel.text = goods.name;
@@ -395,10 +428,9 @@ NSLog(@"%s",__func__);
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if (isReclickCell && (lastIndexPath.row != indexPath.row)) {
+    if (isReclickCell && (lastIndexPath.row != indexPath.row) && [self cellIsSelected:lastIndexPath]) {
 
-        BOOL isSelected = ![self cellIsSelected:lastIndexPath];
-        NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+        NSNumber *selectedIndex = [NSNumber numberWithBool:NO];
         [selectedIndexes setObject:selectedIndex forKey:lastIndexPath];
            _allCell.manageView.frame = CGRectMake(87.5, 100, 200, 40);
         [UIView animateWithDuration:0.4 animations:^{
@@ -479,19 +511,8 @@ NSLog(@"%s",__func__);
         
     }
 }
-- (void)clickbuttonOfSort:(NSString *)str{
-    if ([str isEqualToString:@""]) {
-    
-    }
-}
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (scrollView == self.allTableView) {
-        [self.searchBar resignFirstResponder];
-        if (self.sortButton.selected) {
-            [self sortTouched:self.sortButton];
-        }
-    }
-}
+
+
 - (void)deleteButtonWasClicked{
     
     //折叠cell
