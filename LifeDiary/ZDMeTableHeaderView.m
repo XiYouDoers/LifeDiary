@@ -42,12 +42,7 @@
         _repertoryView.layer.masksToBounds = YES;
         _repertoryView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_repertoryView];
-        [_repertoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
-            make.bottom.mas_equalTo(-15);
-            make.top.mas_equalTo(15);
-        }];
+        
         
         
         //_depleteButton
@@ -194,14 +189,25 @@
     }
     return self;
 }
-
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [_repertoryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-15);
+        make.top.mas_equalTo(15);
+    }];
+    
+    
+    
+}
 - (UIView *)shadowViewForUserInfoView{
     if (_shadowViewForUserInfoView == nil) {
         
         //_shadowViewForRepertoryView
         _shadowViewForUserInfoView = [[UIView alloc]init];
         _shadowViewForUserInfoView.frame = CGRectMake(0, 0, WIDTH, HEIGHT/2);
-//        _shadowViewForRepertoryView = [UIColor purpleColor];
         _shadowViewForUserInfoView.layer.shadowColor =  [UIColor colorWithRed:203.0/255 green:231.0/255 blue:247.0/255 alpha:1].CGColor;
         _shadowViewForUserInfoView.layer.shadowOffset = CGSizeMake(0, 8);
         _shadowViewForUserInfoView.layer.shadowRadius = 20 ;

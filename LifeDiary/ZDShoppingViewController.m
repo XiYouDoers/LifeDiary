@@ -19,6 +19,9 @@
 #import "ZDShoppingDataManger.h"
 #import "ZDShoppingModel.h"
 #import "ZDLinkForShoppingViewController.h"
+#import "ZDExpireDataBase.h"
+#import "ZDDepleteDataBase.h"
+#import "ZDGoods.h"
 
 @interface ZDShoppingViewController ()<ZDCardForShoppingViewDelegate>{
     
@@ -26,7 +29,7 @@
     CGFloat _dragEndX;
     
 }
-@property(nonatomic,strong) NSMutableArray <ZDProductInfo>*dataMutableArray ;
+@property(nonatomic,strong) NSMutableArray *dataMutableArray ;
 @property(nonatomic,strong)  UISegmentedControl *segmentControl;
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) ZDCardForShoppingView *cardForShoppingView;
@@ -47,19 +50,40 @@
     
 }
 - (void)getData{
+    _dataMutableArray = [[NSMutableArray alloc]init];
+    NSMutableArray *sourceMuArray = [NSMutableArray array];
+    //从过期物品获取关键词
+    sourceMuArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
     ZDShoppingDataManger *shoppingManger= [[ZDShoppingDataManger alloc]init];
-    [shoppingManger getData_sucessBlock:^(ZDShoppingModel *shoppingModel){
-        _dataMutableArray = [[NSMutableArray<ZDProductInfo> alloc]initWithArray:shoppingModel.productInfo];
-
-        //初始化数据源
-        [_cardForShoppingView setDataMutableArray:_dataMutableArray];
-        [_cardForShoppingView setSelectedIndex:0];
-        
-    } faliure:^{
-        
-    }];
-
-
+    for (ZDGoods * goods in sourceMuArray) {
+        [shoppingManger getData_sucessBlock:^(ZDShoppingModel *shoppingModel) {
+            [_dataMutableArray addObject:shoppingModel.productInfo[0]];
+            [_dataMutableArray addObject:shoppingModel.productInfo[1]];
+            [_dataMutableArray addObject:shoppingModel.productInfo[2]];
+            NSArray *dataArray = @[shoppingModel.productInfo[0],shoppingModel.productInfo[1],shoppingModel.productInfo[2]];
+            //添加数据源
+            [_cardForShoppingView addDataMutableArray:dataArray];
+        } faliure:^{
+            
+        } keyString:goods.name];
+    }
+     //从耗尽物品获取关键词
+    sourceMuArray = [[ZDDepleteDataBase sharedDataBase]getAllGoods];
+    for (ZDGoods * goods in sourceMuArray) {
+        [shoppingManger getData_sucessBlock:^(ZDShoppingModel *shoppingModel) {
+            [_dataMutableArray addObject:shoppingModel.productInfo[0]];
+            [_dataMutableArray addObject:shoppingModel.productInfo[1]];
+            [_dataMutableArray addObject:shoppingModel.productInfo[2]];
+            NSArray *dataArray = @[shoppingModel.productInfo[0],shoppingModel.productInfo[1],shoppingModel.productInfo[2]];
+            //添加数据源
+            [_cardForShoppingView addDataMutableArray:dataArray];
+            
+        } faliure:^{
+            
+        } keyString:goods.name];
+    }
+    [_cardForShoppingView setSelectedIndex:0];
+    
 }
 - (void)setNavigationBar{
     
@@ -68,6 +92,7 @@
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
+
 - (void)addImageView {
      
     _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -91,7 +116,7 @@
 
 
 
-#pragma mark ZDCardViewDelegate 代理方法
+#pragma mark ZDCardForShoppingViewDelegate 代理方法
 
 - (void)changeBackgroundImageView:(NSInteger)index{
     
@@ -102,6 +127,7 @@
     
 }
 - (void)pushToNextViewController:(NSInteger)index{
+    
     
     ZDProductInfo *productInfo = _dataMutableArray[index];
     ZDLinkForShoppingViewController *linkVC = [[ZDLinkForShoppingViewController alloc]init];

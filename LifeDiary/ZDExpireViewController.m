@@ -29,7 +29,7 @@
     
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"耗尽物品";
+    self.navigationItem.title = @"过期物品";
     _manageCellBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStylePlain target:self action:@selector(manageCell:)];
     self.navigationItem.rightBarButtonItem =  _manageCellBarButtonItem;
     
@@ -37,6 +37,7 @@
     
     //_expireTableView
     _expireTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _expireTableView.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _expireTableView.dataSource = self;
     _expireTableView.delegate = self;
     //消除cell间细线

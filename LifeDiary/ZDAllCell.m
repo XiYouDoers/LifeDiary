@@ -7,6 +7,8 @@
 //
 
 #import "ZDAllCell.h"
+#import "ZDGoods.h"
+extern NSDateFormatter const *_formatter;
 
 @implementation ZDAllCell{
     CAShapeLayer *_outsideArc;
@@ -46,7 +48,7 @@
         
         [self.exhibitView addSubview: self.dateOfEndLabel];
         
-        [self.exhibitView addSubview: self.saveTimeLabel];
+        [self.exhibitView addSubview: self.remainderTimeLabel];
         
         [self.exhibitView addSubview: self.sumLabel];
         
@@ -149,11 +151,11 @@
         make.height.mas_equalTo(20);
     }];
     
-    [self.saveTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.remainderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_dateOfEndLabel.mas_bottom).mas_offset(10);
         make.bottom.mas_offset(-10);
         make.left.equalTo(_pictureImageView.mas_right).mas_offset(10);
-        make.width.mas_equalTo(WIDTH/3);
+        make.width.mas_equalTo(WIDTH/2);
     }];
     [self.classificationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
@@ -230,14 +232,14 @@
     }
     return _dateOfEndLabel;
 }
-- (UILabel *)saveTimeLabel{
+- (UILabel *)remainderTimeLabel{
     
-    if (!_saveTimeLabel) {
-        _saveTimeLabel = [[UILabel alloc]init];
-        _saveTimeLabel.textColor = LIGHTBLUE;
+    if (!_remainderTimeLabel) {
+        _remainderTimeLabel = [[UILabel alloc]init];
+        _remainderTimeLabel.textColor = LIGHTBLUE;
         
     }
-    return _saveTimeLabel;
+    return _remainderTimeLabel;
 }
 - (UILabel *)sumLabel{
     if (!_sumLabel) {
@@ -294,4 +296,45 @@
      self.manageView.frame = CGRectMake(87.5, 160, 200, 40);
 }
 
+/**
+ 数据源方法
+ 
+ */
+- (void)setData:(ZDGoods *)goods{
+    self.nameLabel.text = goods.name;
+    self.remarkLabel.text = goods.remark;
+    self.pictureImageView.image = [UIImage imageWithData:goods.imageData];
+    self.dateOfstartLabel.text = [NSString stringWithFormat:@"起始 %@",goods.dateOfStart];
+    self.dateOfEndLabel.text = [NSString stringWithFormat:@"截止 %@",goods.dateOfEnd];
+    
+    NSDate *dateNow = [[NSDate alloc]init];
+    NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+    NSInteger seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+    
+    NSMutableString *remainderDateMustring = [NSMutableString string];
+    if (seconds>=365) {
+        [remainderDateMustring appendString:[NSString stringWithFormat:@"%ld年",seconds/365]];
+        seconds = seconds % 365;
+    }
+    if (seconds>=30) {
+        [remainderDateMustring appendString:[NSString stringWithFormat:@"%ld个月",seconds/30]];
+        seconds = seconds %30;
+    }
+    if (seconds>0) {
+        [remainderDateMustring appendString:[NSString stringWithFormat:@"%ld天",seconds]];
+    }
+    
+    self.remainderTimeLabel.text = [NSString stringWithFormat:@"剩余 %@",remainderDateMustring];
+    self.sumLabel.text = [NSString stringWithFormat:@"数量 %@",goods.sum];
+    
+    if ([goods.family isEqualToString:@"食品"]) {
+        self.classificationLabel.text = @"食";
+    }else  if ([goods.family isEqualToString:@"日用品"]) {
+        self.classificationLabel.text = @"日";
+    }else if ([goods.family isEqualToString:@"药品"]) {
+        self.classificationLabel.text = @"药";
+    }else{
+        self.classificationLabel.text = @"其";
+    }
+}
 @end

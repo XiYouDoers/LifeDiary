@@ -18,9 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor grayColor];
     UIImageView *animationImageView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-
 
     animationImageView.image = [UIImage imageNamed:@"animationImageView"];
     animationImageView.contentMode =  UIViewContentModeScaleAspectFill;

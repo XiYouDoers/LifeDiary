@@ -22,4 +22,6 @@
 @property(nonatomic,strong) UIView *searchView;
 @property(nonatomic,strong) UIButton *sortButton;
 
+
+
 @end

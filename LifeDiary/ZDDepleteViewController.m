@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"过期物品";
+    self.navigationItem.title = @"耗尽物品";
     
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
@@ -41,6 +41,7 @@
     
     //_depleteTableView
     _depleteTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _depleteTableView.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _depleteTableView.dataSource = self;
     _depleteTableView.delegate = self;
     //消除cell间细线

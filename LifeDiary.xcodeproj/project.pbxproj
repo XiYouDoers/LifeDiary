@@ -1020,9 +1020,9 @@
 		04C907A721240F5C0081B37A /* Repertory */ = {
 			isa = PBXGroup;
 			children = (
-				044F02A420A810ED00406D65 /* Expire */,
-				044F02A320A810E600406D65 /* Recycle */,
 				044F02A220A810DE00406D65 /* Deplete */,
+				044F02A320A810E600406D65 /* Recycle */,
+				044F02A420A810ED00406D65 /* Expire */,
 			);
 			name = Repertory;
 			sourceTree = "<group>";

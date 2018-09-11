@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class  ZDGoods;
+
+/**
+ 协议
+ */
 @protocol ZDAllCellDelegate<NSObject>
 @optional
 - (void)deleteButtonWasClicked;
 - (void)editButtonWasClicked;
 @end
+
 @interface ZDAllCell : UITableViewCell
 
 @property(nonatomic,strong) UILabel *nameLabel;
@@ -19,7 +25,7 @@
 @property(nonatomic,strong) UIImageView *pictureImageView;
 @property(nonatomic,strong) UILabel *dateOfstartLabel;
 @property(nonatomic,strong) UILabel *dateOfEndLabel;
-@property(nonatomic,strong) UILabel *saveTimeLabel;
+@property(nonatomic,strong) UILabel *remainderTimeLabel;
 @property(nonatomic,strong) UILabel *sumLabel;
 @property (nonatomic,strong) UIView *shadowView;
 @property (nonatomic,strong) UIView *exhibitView;
@@ -30,9 +36,9 @@
 
 @property(nonatomic,weak) id <ZDAllCellDelegate> delegate;
 /**
- setting arc's startAngle and endAngle
+ 数据源方法
  
- @param ratio   a rate of remainder/all
  */
-//- (void)setArc:(double )ratio saveTimeTimeInterval:(NSTimeInterval)timeInterval;
+- (void)setData:(ZDGoods *)goods;
+
 @end

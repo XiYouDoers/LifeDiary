@@ -12,5 +12,5 @@ typedef void (^requestForShoppingSuccess) (ZDShoppingModel *shoppingModel);
 typedef void (^requestForShoppingFailure) (void);
 @interface ZDShoppingDataManger : NSObject
 //请求方法
-- (void)getData_sucessBlock:(requestForShoppingSuccess )sucessBlock faliure:(requestForShoppingFailure )failureBlock;
+- (void)getData_sucessBlock:(requestForShoppingSuccess )sucessBlock faliure:(requestForShoppingFailure )failureBlock keyString:(NSString *)keyString;
 @end

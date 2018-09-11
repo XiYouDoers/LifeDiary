@@ -11,10 +11,10 @@
 #import "ZDShoppingModel.h"
 
 @implementation ZDShoppingDataManger
-- (void)getData_sucessBlock:(requestForShoppingSuccess )sucessBlock faliure:(requestForShoppingFailure )failureBlock {
+- (void)getData_sucessBlock:(requestForShoppingSuccess )sucessBlock faliure:(requestForShoppingFailure )failureBlock keyString:(NSString *)keyString{
     
     NSString *urlString = @"http://120.79.189.62:8888/search";
-    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:@"洗发水",@"key",@"1",@"page",nil];
+    NSDictionary *paraDictionary =  [NSDictionary dictionaryWithObjectsAndKeys:keyString,@"key",@"1",@"page",nil];
     AFHTTPSessionManager *sessionManger = [AFHTTPSessionManager manager];
     sessionManger.requestSerializer = [AFHTTPRequestSerializer serializer];
     [sessionManger POST:urlString parameters:paraDictionary progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

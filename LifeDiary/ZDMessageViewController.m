@@ -62,19 +62,29 @@ NSDateFormatter const *_formatter;
     [self.view addSubview:_detailView];
     
     //每天检测到期
-    [NSTimer scheduledTimerWithTimeInterval:3600*24 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//    [NSTimer scheduledTimerWithTimeInterval:3600*24 repeats:YES block:^(NSTimer * _Nonnull timer) {
         _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
         NSDate *dateNow = [[NSDate alloc]init];
-        for (ZDGoods *goods in _allDataMutableArray) {
-            
+//        for (ZDGoods *goods in _allDataMutableArray) {
+            ZDGoods *goods = _allDataMutableArray[0];
             NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
             NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-            if (seconds<100 ) {
-                [self sendNotifition:goods timeInterval:seconds*24*3600];
-            }
-        }
-       
-    }];
+            [self sendNotifition:goods timeInterval:seconds];
+        [self addEKEventStore:goods];
+            //分类提醒
+//            if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
+//                [self sendNotifition:goods timeInterval:seconds];
+//            }else if (seconds<200 &&[goods.family isEqualToString:@"药品"]) {
+//                [self sendNotifition:goods timeInterval:seconds];
+//            }else if (seconds<90 &&[goods.family isEqualToString:@"食品"]) {
+//                [self sendNotifition:goods timeInterval:seconds];
+//            }else if (seconds<70 && [goods.family isEqualToString:@"其他"]){
+//                [self sendNotifition:goods timeInterval:seconds];
+//            }
+    
+//        }
+    
+//    }];
     
     
     
@@ -179,16 +189,16 @@ NSDateFormatter const *_formatter;
         if ([goods.sum isEqualToString:@"0"]||[goods.sum isEqualToString:@""]) {
             int key=0;
             //根据identifier判断是否存在于全部数据库中
-            for (ZDGoods *expireGoods in _allDataMutableArray) {
+            for (ZDGoods *depleteGoods in _allDataMutableArray) {
                 
-                if (goods == expireGoods) {
+                if (goods == depleteGoods) {
                     key=1;
                 }
             }
             
             if (key) {
                 //耗尽数据库中添加物品
-                [[ZDExpireDataBase sharedDataBase]addGoods:goods];
+                [[ZDDepleteDataBase sharedDataBase]addGoods:goods];
                 //全部物品数据库中删除物品
                 [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
                 _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
@@ -205,9 +215,9 @@ NSDateFormatter const *_formatter;
             int key=0;
             //根据identifier判断是否存在于全部数据库中
             
-            for (ZDGoods *depleteGoods in _allDataMutableArray) {
+            for (ZDGoods *expireGoods in _allDataMutableArray) {
                 
-                if (goods == depleteGoods) {
+                if (goods == expireGoods) {
                     
                     key = 1;
                 }
@@ -215,20 +225,20 @@ NSDateFormatter const *_formatter;
             
             if (key) {
                 //过期数据库中添加物品
-                [[ZDDepleteDataBase sharedDataBase]addGoods:goods];
+                [[ZDExpireDataBase sharedDataBase]addGoods:goods];
                 //全部物品数据库中删除物品
                 [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
                 _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
             }
         }else{
             //分类提醒
-            if (seconds<100 && [goods.family isEqualToString:@"日用品"]) {
+            if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
                 [_messageDataMutableArray addObject:goods];
             }else if (seconds<200 &&[goods.family isEqualToString:@"药品"]) {
                 [_messageDataMutableArray addObject:goods];
-            }else if (seconds<60 &&[goods.family isEqualToString:@"食品"]) {
+            }else if (seconds<90 &&[goods.family isEqualToString:@"食品"]) {
                 [_messageDataMutableArray addObject:goods];
-            }else if (seconds<80 && [goods.family isEqualToString:@"其他"]){
+            }else if (seconds<70 && [goods.family isEqualToString:@"其他"]){
                 [_messageDataMutableArray addObject:goods];
             }
         }
@@ -292,14 +302,14 @@ NSDateFormatter const *_formatter;
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"物品过期通知";
     content.subtitle = @"您有新的物品即将到期";
-    content.body = [NSString stringWithFormat:@"您添加的%@距离到期还有3个月，赶快使用吧",goods.name];
+    content.body = [NSString stringWithFormat:@"您添加的%@距离到期还有%f个月，赶快使用吧",goods.name,timeInterval];
     NSNumber *number = [NSNumber numberWithInteger:1];
     content.badge = number;
     UNNotificationSound *sound = [UNNotificationSound soundNamed:@"wakeup.caf"];
     content.sound = sound;
     
     //第三步：通知触发机制。（重复提醒，时间间隔要大于60s）
-    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeInterval  repeats:NO];
+    UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:65  repeats:YES];
     
     //第四步：创建UNNotificationRequest通知请求对象
     NSString *requertIdentifier = @"RequestIdentifier";
@@ -311,7 +321,7 @@ NSDateFormatter const *_formatter;
         
     }];
     //日历事件
-    [self addEKEventStore:goods];
+//    [self addEKEventStore:goods];
     
 }
 // 添加日历事件

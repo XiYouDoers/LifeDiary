@@ -159,16 +159,17 @@
     
 }
 
-+ (NSString *)caculateDate:(NSString *)str{
++ (NSString *) caculateDate:(NSString *)str{
     
     NSString *year = @"0";
     NSString *month = @"0";
     NSString *day = @"0";
+    NSLog(@"%@",str);
     if ([str rangeOfString:@"月" options:NSCaseInsensitiveSearch].length >0) {
         NSString *sumOfMonth = [self switchToNumberString:str];
         int months = [sumOfMonth intValue];
         
-        if(months > 12) {
+        if(months >= 12) {
             year  = [NSString stringWithFormat:@"%d",months/12];
             months = months%12;
         }else{

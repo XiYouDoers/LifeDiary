@@ -62,9 +62,24 @@ static NSString *const cellIdForShopping = @"collectionViewForShoppingCellId";
     [_collectionView registerClass:[ZDCollectionViewShoppingCell class] forCellWithReuseIdentifier:cellIdForShopping];
     
 }
-- (void)setDataMutableArray:(NSMutableArray<ZDProductInfo> *)dataMutableArray{
+- (NSMutableArray *)dataMutableArray{
+    if (_dataMutableArray == nil) {
+        _dataMutableArray = [NSMutableArray array];
+    }
+    return _dataMutableArray;
+}
+- (void)addDataMutableArray:(NSArray *)productInfoArray{
     
-    _dataMutableArray = dataMutableArray;
+    if (productInfoArray.count>=1) {
+        [self.dataMutableArray addObject:productInfoArray[0]];
+    }
+    if (productInfoArray.count>=2) {
+        [self.dataMutableArray addObject:productInfoArray[1]];
+    }
+    if (productInfoArray.count>=3) {
+        [self.dataMutableArray addObject:productInfoArray[2]];
+    }
+
     [_collectionView reloadData];
 }
 #pragma mark collectionViewDataSource

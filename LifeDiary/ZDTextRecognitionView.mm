@@ -51,7 +51,6 @@
             NSLog(@"!!!!!!!!!");
         }else {
             //成功
-
             [self showText:result];
             
             [self.delegate jumpToAddVC];

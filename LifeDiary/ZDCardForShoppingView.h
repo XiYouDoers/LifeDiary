@@ -18,4 +18,6 @@
 @property (nonatomic, assign, readwrite) NSInteger selectedIndex;
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,weak) id<ZDCardForShoppingViewDelegate> delegate;
+
+- (void)addDataMutableArray:(NSArray *)productInfoArray;
 @end

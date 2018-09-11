@@ -27,6 +27,7 @@
 #define NAVIGATIONCOLOR [UIColor colorWithRed:0.0/255 green:138.0/255 blue:223.0/255 alpha:1]
 #define GOLDCOLOR [UIColor colorWithRed:249.0/255 green:156.0/255 blue:8.0/255 alpha:1]
 #define TITLECOLOR [UIColor blackColor]
+#define BACKGROUNDCOLOR [UIColor colorWithRed:240.0/255 green:238.0/255 blue:244.0/255 alpha:1]
 #define BARBUTTONITEMCOLOR [UIColor colorWithRed:97.0/255 green:191.0/255 blue:246.0/255 alpha:1]
 #define kSCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
 #define kSCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)

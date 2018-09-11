@@ -209,8 +209,6 @@
     for (ZDGoods *goods in _dataMutableArray) {
         isSorted = YES;
         if ([goods.family isEqualToString:classString]) {
-            NSLog(@"family = %@",goods.family);
-            NSLog(@"name = %@",goods.name);
             [_sortMutableArray addObject:goods];
         }
     }
@@ -393,31 +391,8 @@
 
         goods = _dataMutableArray[indexPath.row];
     }
-    _allCell.nameLabel.text = goods.name;
-    _allCell.remarkLabel.text = goods.remark;
-    _allCell.pictureImageView.image = [UIImage imageWithData:goods.imageData];
-    _allCell.dateOfstartLabel.text = [NSString stringWithFormat:@"起始%@",goods.dateOfStart];
-    _allCell.dateOfEndLabel.text = [NSString stringWithFormat:@"截止%@",goods.dateOfEnd];
-    _allCell.saveTimeLabel.text = [NSString stringWithFormat:@"保质期%@",goods.saveTime];
-    _allCell.sumLabel.text = [NSString stringWithFormat:@"数量：%@",goods.sum];
-
-    if ([goods.family isEqualToString:@"食品"]) {
-        _allCell.classificationLabel.text = @"食";
-    }else  if ([goods.family isEqualToString:@"日用品"]) {
-        _allCell.classificationLabel.text = @"日";
-    }else if ([goods.family isEqualToString:@"药品"]) {
-        _allCell.classificationLabel.text = @"药";
-    }else{
-        _allCell.classificationLabel.text = @"其";
-    }
-
-
-    //计算出保质期的时间戳
-    //    NSDate *dateOfStart = [_dateFormatter dateFromString:goods.dateOfStart];
-    //    NSDate *dateOfEnd = [_dateFormatter dateFromString:goods.dateOfEnd];
-    //    NSTimeInterval timeIntervalOfStart = [dateOfStart timeIntervalSince1970];
-    //    NSTimeInterval timeIntervalOfEnd = [dateOfEnd timeIntervalSince1970];
-    //    [_allCell setArc:goods.ratio saveTimeTimeInterval:timeIntervalOfEnd-timeIntervalOfStart];
+    
+    [_allCell setData:goods];
     return _allCell;
     
 }
@@ -567,5 +542,7 @@
         editVC.goods = goods;
         [self.navigationController pushViewController:editVC animated:YES];
 }
+
+
 
 @end

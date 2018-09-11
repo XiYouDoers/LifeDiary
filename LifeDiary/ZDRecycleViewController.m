@@ -39,6 +39,7 @@
 
     //_recycleTableView
     _recycleTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    _recycleTableView.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     _recycleTableView.dataSource = self;
     _recycleTableView.delegate = self;
     //消除cell间细线
