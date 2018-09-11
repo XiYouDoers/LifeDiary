@@ -41,6 +41,7 @@ static NSString *const cellId = @"collectionViewCellId";
     //    SquareLayout *layout = [[SquareLayout alloc]init];
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake( 0, 0, WIDTH, HEIGHT) collectionViewLayout:messageLayout];
     _collectionView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+    [_collectionView NightWithType:UIViewColorTypeNormal];
     //    _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;

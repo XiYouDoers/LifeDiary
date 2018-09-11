@@ -19,6 +19,7 @@
 #import "ZDFeedbackViewController.h"
 #import "ZDSaveViewController.h"
 
+
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate>{
     NSUserDefaults *_userDefaults;
     
@@ -36,6 +37,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBar];
+    
     _meTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
     _meTableView.dataSource = self;
     _meTableView.delegate = self;
@@ -44,6 +46,7 @@
     _meTableView.sectionHeaderHeight = 0.01f;
     _meTableView.sectionFooterHeight = 0.01f;
     _meTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    [_meTableView NightWithType:UIViewColorTypeNormal];
     _meTableView.tableHeaderView= self.tableHeaderView;
     //消除cell间细线
     _meTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -73,7 +76,7 @@
     UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] init];
     backBtnItem.title = @"我的";
     self.navigationItem.backBarButtonItem = backBtnItem;
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+
     //改变BarButtonItem图片颜色
     self.navigationController.navigationBar.tintColor = BARBUTTONITEMCOLOR;
 }

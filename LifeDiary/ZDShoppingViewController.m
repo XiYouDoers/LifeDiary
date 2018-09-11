@@ -91,6 +91,7 @@
     backBtnItem.title = @"商品";
     self.navigationItem.backBarButtonItem = backBtnItem;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar NightWithType:UIViewColorTypeNormal];
 }
 
 - (void)addImageView {

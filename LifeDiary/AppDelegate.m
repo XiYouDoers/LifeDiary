@@ -22,12 +22,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
-
+    
+    // 获取夜间模式状态
+    [ThemeManage shareThemeManage].isNight = [[NSUserDefaults standardUserDefaults] boolForKey:@"night"];
+    
     ViewController *vc = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     self.window.rootViewController = nav;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }

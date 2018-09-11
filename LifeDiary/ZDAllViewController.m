@@ -28,11 +28,9 @@
     BOOL isSorted;
 }
 @property(nonatomic,strong) UIView *sortView;
-
 @end
 
 @implementation ZDAllViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,10 +38,11 @@
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
-    
+
+    [self.view NightWithType:UIViewColorTypeNormal];
     selectedIndexes = [NSMutableDictionary dictionary];
     self.view.backgroundColor = [UIColor whiteColor];
-
+   
     //_allTableView
     _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, HEIGHT-(64+54)) style:UITableViewStylePlain];
     //取消cell间的分割线
@@ -53,6 +52,7 @@
     //是否展示竖直滚动条
     _allTableView.showsVerticalScrollIndicator = YES;
     _allTableView.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    [_allTableView NightWithType:UIViewColorTypeNormal];
     _allTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
@@ -119,7 +119,7 @@
     if (!_searchView) {
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 54)];
         _searchView.backgroundColor = [UIColor whiteColor];
-        
+        [_searchView NightWithType:UIViewColorTypeNormal];
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 7, WIDTH-20, 40)];
         _searchBar.backgroundColor = [UIColor clearColor];
 //        _searchBar.layer.masksToBounds = YES;

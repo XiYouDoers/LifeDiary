@@ -8,6 +8,7 @@
 
 #import "ZDMeDefaultCell.h"
 
+
 @implementation ZDMeDefaultCell
 
 - (void)awakeFromNib {
@@ -23,6 +24,7 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.contentView.layer.cornerRadius = 15.f;
         self.contentView.layer.masksToBounds = YES;
+        [self NightWithType:UIViewColorTypeNormal];
        
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];

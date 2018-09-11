@@ -8,6 +8,7 @@
 
 #import "ZDRepertoryCell.h"
 
+
 @implementation ZDRepertoryCell
 
 - (void)awakeFromNib {
@@ -55,6 +56,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
+
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 140);
     
     self.manageView.frame = CGRectMake(87.5, 100, 200, 40);

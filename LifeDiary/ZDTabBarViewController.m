@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
   
 }
 - (void)setupUI{
-   
+    
     //kvo形式添加自定义的 UITabBar
     ZDHighTabBar *tabar = [ZDHighTabBar instanceCustomTabBarWithType:SamItemUIType_Three];
     tabar.centerBtnIcon = @"fff";
@@ -70,28 +70,38 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     [self.tabBar setShadowImage:img];
 
     [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
-
+    
+    [self.tabBar NightWithType:UIViewColorTypeNormal];
+    
 }
 
 - (void)setupVC{
+    
+    
     //“消息”界面
     ZDMessageViewController *messageViewController = [[ZDMessageViewController alloc]init];
+
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
+     [messageNavigationController.navigationBar NightWithType:UIViewColorTypeNormal];
     [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
     messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);
+    
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
-            UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
+    UINavigationController *findNavigationController = [[UINavigationController alloc]initWithRootViewController:findViewController];
+     [findNavigationController.navigationBar NightWithType:UIViewColorTypeNormal];
     [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
     findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);
     
-
+    
     self.viewControllers = @[messageNavigationController,findNavigationController];
 //    [[UITabBar appearance]setBarTintColor:[UIColor colorWithRed:236/255.0 green:235/255.0 blue:241/255.0 alpha:1]];
     [[UITabBar appearance]setBackgroundColor:[UIColor whiteColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
+//    [self.tabBar NightWithType:UIViewColorTypeNormal];
+    
     
 }
 
@@ -106,6 +116,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
  */
 - (void)wsf_settingController:(UINavigationController *)controller tabBarTitle:(NSString *)title tabBarItemImageName:(NSString *)imageName tabBarItemSelectedImageName:(NSString *)selectedImageName{
     
+   
     controller.tabBarItem.title = title;
 
     // 设置 tabbarItem 静态图片(不被系统默认渲染,显示图像原始颜色)
@@ -128,7 +139,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     //改变navigationBar中间title的颜色
     
     [controller.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: TITLECOLOR}];
-
+    
     //改变navigationBar.barButtonItem的颜色
     
     [[UIBarButtonItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: BARBUTTONITEMCOLOR} forState:UIControlStateNormal];

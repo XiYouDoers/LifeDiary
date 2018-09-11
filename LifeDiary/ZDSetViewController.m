@@ -10,6 +10,9 @@
 #import "ZDMeDefaultCell.h"
 #import "ZDMeSwitchCell.h"
 #import "HUDUtil.h"
+#import "NightModeTheme/ThemeManage.h"
+#import "NightModeTheme/UIView+ThemeChange.h"
+#import "NightModeTheme/UILabel+ThemeChange.h"
 
 @interface ZDSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *setTableView;
@@ -24,13 +27,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"设置";
-    
+    [self.view NightWithType:UIViewColorTypeNormal];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _setTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
     _setTableView.dataSource = self;
     _setTableView.delegate = self;
     _setTableView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+     [self.setTableView NightWithType:UIViewColorTypeNormal];
+    [_defaultCell NightWithType:UIViewColorTypeNormal];
+    [_switchCell NightWithType:UIViewColorTypeNormal];
     //消除cell间细线
     _setTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _setTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -39,6 +45,7 @@
     [_setTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
     [_setTableView registerClass:[ZDMeSwitchCell class] forCellReuseIdentifier:@"meSwitchCell"];
     _cellLabelDataArray = [NSArray arrayWithObjects:@"夜间模式",@"主题",@"清除缓存", nil];
+    
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -94,6 +101,7 @@
     if (indexPath.row == 0) {
         _switchCell = [tableView dequeueReusableCellWithIdentifier:@"meSwitchCell" forIndexPath:indexPath];
         _switchCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
+        [_switchCell.nightModeSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
         return _switchCell;
 
     }else{
@@ -107,13 +115,26 @@
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.row == 1) {
-        
         
     }else if (indexPath.row == 2) {
         [HUDUtil show:self.view text:@"清除缓存成功"];
     }
 }
 
+- (void)switchAction:(UISwitch *)switch1{
 
+    if (switch1.isOn == YES) {
+        [ThemeManage shareThemeManage].isNight = ![ThemeManage shareThemeManage].isNight;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeColor" object:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:[ThemeManage shareThemeManage].isNight forKey:@"night"];
+       
+    }else{
+        [ThemeManage shareThemeManage].isNight = ![ThemeManage shareThemeManage].isNight;
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"changeColor" object:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:[ThemeManage shareThemeManage].isNight forKey:@"day"];
+        
+    }
+}
 @end

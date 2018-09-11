@@ -15,7 +15,8 @@
 #endif /* PrefixHeader_pch */
 #ifdef __OBJC__
 #import "Masonry.h"
-
+#import "UIView+ThemeChange.h"
+#import "ThemeManage.h"
 #endif
 //宏定义屏幕长、宽
 #define WIDTH [UIScreen mainScreen].bounds.size.width

@@ -29,9 +29,8 @@ static NSString *const footerId = @"footerId";
     
     [self setNavigationBar];
     self.view.backgroundColor = [UIColor whiteColor];
-
-    
-    
+    [self.view NightWithType:UIViewColorTypeNormal];
+    [self.navigationController.navigationBar NightWithType:UIViewColorTypeNormal];
     ZDShoppingViewController *shoppingViewController = [[ZDShoppingViewController alloc]init];
     ZDLifeViewController *lifeViewController = [[ZDLifeViewController alloc]init];
     self.containerView = [[UIView alloc] init];

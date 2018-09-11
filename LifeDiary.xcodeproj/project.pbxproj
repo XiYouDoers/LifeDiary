@@ -38,6 +38,17 @@
 		04473E262130FC9200B453A4 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E252130FC9100B453A4 /* CoreImage.framework */; };
 		04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E272130FC9E00B453A4 /* libstdc++.tbd */; };
 		04473E2D2131118800B453A4 /* ZDSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473E2C2131118800B453A4 /* ZDSortView.m */; };
+		044BE58F21481E2700552354 /* DKNightVersion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044BE58E21481E2700552354 /* DKNightVersion.framework */; };
+		044BE5A62148303700552354 /* day@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5962148303700552354 /* day@2x.png */; };
+		044BE5A72148303700552354 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5972148303700552354 /* home@2x.png */; };
+		044BE5A82148303700552354 /* night@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5982148303700552354 /* night@2x.png */; };
+		044BE5A92148303700552354 /* schema@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5992148303700552354 /* schema@2x.png */; };
+		044BE5AA2148303700552354 /* ThemeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59B2148303700552354 /* ThemeManage.m */; };
+		044BE5AB2148303700552354 /* UIButton+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59D2148303700552354 /* UIButton+ThemeChange.m */; };
+		044BE5AC2148303700552354 /* UILabel+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59F2148303700552354 /* UILabel+ThemeChange.m */; };
+		044BE5AD2148303700552354 /* UINavigationBar+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE5A12148303700552354 /* UINavigationBar+ThemeChange.m */; };
+		044BE5AE2148303700552354 /* UITabBar+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE5A32148303700552354 /* UITabBar+ThemeChange.m */; };
+		044BE5AF2148303700552354 /* UIView+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE5A52148303700552354 /* UIView+ThemeChange.m */; };
 		044F01E720A80DB500406D65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E620A80DB500406D65 /* main.m */; };
 		044F01EA20A80DB500406D65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01E920A80DB500406D65 /* AppDelegate.m */; };
 		044F01ED20A80DB500406D65 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F01EC20A80DB500406D65 /* ViewController.m */; };
@@ -225,6 +236,23 @@
 		04473E292130FCA800B453A4 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04473E2B2131118800B453A4 /* ZDSortView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSortView.h; sourceTree = "<group>"; };
 		04473E2C2131118800B453A4 /* ZDSortView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSortView.m; sourceTree = "<group>"; };
+		044BE58E21481E2700552354 /* DKNightVersion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DKNightVersion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		044BE5962148303700552354 /* day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "day@2x.png"; sourceTree = "<group>"; };
+		044BE5972148303700552354 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		044BE5982148303700552354 /* night@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night@2x.png"; sourceTree = "<group>"; };
+		044BE5992148303700552354 /* schema@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "schema@2x.png"; sourceTree = "<group>"; };
+		044BE59A2148303700552354 /* ThemeManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManage.h; sourceTree = "<group>"; };
+		044BE59B2148303700552354 /* ThemeManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManage.m; sourceTree = "<group>"; };
+		044BE59C2148303700552354 /* UIButton+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ThemeChange.h"; sourceTree = "<group>"; };
+		044BE59D2148303700552354 /* UIButton+ThemeChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ThemeChange.m"; sourceTree = "<group>"; };
+		044BE59E2148303700552354 /* UILabel+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ThemeChange.h"; sourceTree = "<group>"; };
+		044BE59F2148303700552354 /* UILabel+ThemeChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ThemeChange.m"; sourceTree = "<group>"; };
+		044BE5A02148303700552354 /* UINavigationBar+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ThemeChange.h"; sourceTree = "<group>"; };
+		044BE5A12148303700552354 /* UINavigationBar+ThemeChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ThemeChange.m"; sourceTree = "<group>"; };
+		044BE5A22148303700552354 /* UITabBar+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+ThemeChange.h"; sourceTree = "<group>"; };
+		044BE5A32148303700552354 /* UITabBar+ThemeChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+ThemeChange.m"; sourceTree = "<group>"; };
+		044BE5A42148303700552354 /* UIView+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ThemeChange.h"; sourceTree = "<group>"; };
+		044BE5A52148303700552354 /* UIView+ThemeChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ThemeChange.m"; sourceTree = "<group>"; };
 		044F01E220A80DB500406D65 /* LifeDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F01E620A80DB500406D65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		044F01E820A80DB500406D65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -426,6 +454,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044BE58F21481E2700552354 /* DKNightVersion.framework in Frameworks */,
 				04A304E221342CDC0011412C /* libocronline.a in Frameworks */,
 				04A304DD21342C670011412C /* libsqlite3.tbd in Frameworks */,
 				04A304DB21342C5E0011412C /* libz.tbd in Frameworks */,
@@ -531,6 +560,37 @@
 			path = "Core ML";
 			sourceTree = "<group>";
 		};
+		044BE5942148303700552354 /* NightModeTheme */ = {
+			isa = PBXGroup;
+			children = (
+				044BE5952148303700552354 /* Resource */,
+				044BE59A2148303700552354 /* ThemeManage.h */,
+				044BE59B2148303700552354 /* ThemeManage.m */,
+				044BE59C2148303700552354 /* UIButton+ThemeChange.h */,
+				044BE59D2148303700552354 /* UIButton+ThemeChange.m */,
+				044BE59E2148303700552354 /* UILabel+ThemeChange.h */,
+				044BE59F2148303700552354 /* UILabel+ThemeChange.m */,
+				044BE5A02148303700552354 /* UINavigationBar+ThemeChange.h */,
+				044BE5A12148303700552354 /* UINavigationBar+ThemeChange.m */,
+				044BE5A22148303700552354 /* UITabBar+ThemeChange.h */,
+				044BE5A32148303700552354 /* UITabBar+ThemeChange.m */,
+				044BE5A42148303700552354 /* UIView+ThemeChange.h */,
+				044BE5A52148303700552354 /* UIView+ThemeChange.m */,
+			);
+			path = NightModeTheme;
+			sourceTree = "<group>";
+		};
+		044BE5952148303700552354 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				044BE5962148303700552354 /* day@2x.png */,
+				044BE5972148303700552354 /* home@2x.png */,
+				044BE5982148303700552354 /* night@2x.png */,
+				044BE5992148303700552354 /* schema@2x.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		044F01D920A80DB500406D65 = {
 			isa = PBXGroup;
 			children = (
@@ -557,6 +617,7 @@
 		044F01E420A80DB500406D65 /* LifeDiary */ = {
 			isa = PBXGroup;
 			children = (
+				044BE5942148303700552354 /* NightModeTheme */,
 				044F021820A80E6D00406D65 /* ThirdCodes */,
 				044F01E820A80DB500406D65 /* AppDelegate.h */,
 				044F01E920A80DB500406D65 /* AppDelegate.m */,
@@ -628,6 +689,7 @@
 		044F028220A80F7E00406D65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				044BE58E21481E2700552354 /* DKNightVersion.framework */,
 				04A304E121342CDC0011412C /* libocronline.a */,
 				04A304DC21342C670011412C /* libsqlite3.tbd */,
 				04A304DA21342C5E0011412C /* libz.tbd */,
@@ -1268,13 +1330,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044BE5A92148303700552354 /* schema@2x.png in Resources */,
 				04A304CF2134284F0011412C /* ocrSDK in Resources */,
 				04CF7F632132AF240039A356 /* tessdata in Resources */,
 				044F01F520A80DB500406D65 /* LaunchScreen.storyboard in Resources */,
 				044F01F220A80DB500406D65 /* Assets.xcassets in Resources */,
 				04FF836520B94C9800EECE24 /* MJRefresh.bundle in Resources */,
+				044BE5A62148303700552354 /* day@2x.png in Resources */,
 				04A304E4213435450011412C /* Utils in Resources */,
 				044F01F020A80DB500406D65 /* Main.storyboard in Resources */,
+				044BE5A72148303700552354 /* home@2x.png in Resources */,
+				044BE5A82148303700552354 /* night@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,6 +1387,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LifeDiary/Pods-LifeDiary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/DKNightVersion/DKNightVersion.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1328,6 +1395,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKNightVersion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -1350,6 +1418,8 @@
 				04FF835C20B94C9800EECE24 /* MJRefreshAutoGifFooter.m in Sources */,
 				04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */,
 				047CCA31213BC81E00987EE1 /* ZDRecognitionData.m in Sources */,
+				044BE5AC2148303700552354 /* UILabel+ThemeChange.m in Sources */,
+				044BE5AD2148303700552354 /* UINavigationBar+ThemeChange.m in Sources */,
 				047CCA2B2138E95900987EE1 /* ZDPickerViewController.m in Sources */,
 				047F3459210C8B6900D84ADD /* ZDEditViewController.m in Sources */,
 				0497786F2143CDE7007CDD7D /* ZDStringManager.m in Sources */,
@@ -1364,6 +1434,7 @@
 				0497788821451252007CDD7D /* HUDUtil.m in Sources */,
 				04CF7C5920AC71DC00060741 /* ZDAllViewController.m in Sources */,
 				040CE67520ADABC800A30442 /* MASCompositeConstraint.m in Sources */,
+				044BE5AA2148303700552354 /* ThemeManage.m in Sources */,
 				04FF836320B94C9800EECE24 /* MJRefreshNormalHeader.m in Sources */,
 				046E890A2140ECC000CF3FCC /* ZDClassPickerTableViewCell.m in Sources */,
 				0497789521451A11007CDD7D /* MBProgressHUD.m in Sources */,
@@ -1384,6 +1455,7 @@
 				04FF836820B94C9800EECE24 /* UIScrollView+MJExtension.m in Sources */,
 				044F02C020A8121C00406D65 /* ZDExpireViewController.m in Sources */,
 				0422845121251375003FB619 /* ZDShoppingModel.m in Sources */,
+				044BE5AF2148303700552354 /* UIView+ThemeChange.m in Sources */,
 				047CCA34213BD7A400987EE1 /* ZDMeSwitchCell.m in Sources */,
 				04D8B64620B133A300055018 /* ZDDateCell.m in Sources */,
 				040CE67C20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -1410,6 +1482,7 @@
 				04592281211AFDF800AF75B8 /* ZDDetailView.m in Sources */,
 				04BD722120A9B0F000A14ADF /* ZDAddDefaultCell.m in Sources */,
 				0422845621253345003FB619 /* ZDSetViewController.m in Sources */,
+				044BE5AB2148303700552354 /* UIButton+ThemeChange.m in Sources */,
 				04CF7C5020AC6F5700060741 /* ZDMessageViewController.m in Sources */,
 				044F02C320A8122700406D65 /* ZDDepleteViewController.m in Sources */,
 				04B8369020A871870050D568 /* FMDatabaseAdditions.m in Sources */,
@@ -1427,6 +1500,7 @@
 				044F01E720A80DB500406D65 /* main.m in Sources */,
 				04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */,
 				04B836B320A886C20050D568 /* UITableView+UITableView_reload.m in Sources */,
+				044BE5AE2148303700552354 /* UITabBar+ThemeChange.m in Sources */,
 				04B8369620A874750050D568 /* ZDGoods.m in Sources */,
 				047F345F210C8EC000D84ADD /* ZDEditPickerViewCell.m in Sources */,
 				04FF835E20B94C9800EECE24 /* MJRefreshAutoStateFooter.m in Sources */,

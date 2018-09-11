@@ -24,7 +24,10 @@ extern NSDateFormatter const *_formatter;
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+        [self NightWithType:UIViewColorTypeNormal];
         self.contentView.backgroundColor = [UIColor clearColor];
+        
+        
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -36,7 +39,7 @@ extern NSDateFormatter const *_formatter;
         
         [self.contentView addSubview:self.exhibitView];
         
-//        [self.shadowView addSubview:self.exhibitView];
+        [self.exhibitView NightWithType:UIViewColorTypeNormal];
         
         [self.exhibitView addSubview: self.nameLabel];
         
@@ -190,7 +193,7 @@ extern NSDateFormatter const *_formatter;
 - (UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        
+        [_nameLabel NightWithType:UIViewColorTypeNormal];
     }
     return _nameLabel;
 }

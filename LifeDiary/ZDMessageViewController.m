@@ -26,6 +26,8 @@
 #import <UserNotifications/UNNotificationRequest.h>
  #import <EventKit/EventKit.h>
 
+static dispatch_once_t onceToken;
+
 NSDateFormatter const *_formatter;
 @interface ZDMessageViewController () <ZDMessageCardViewDelegate>{
     ZDMessageCollectionViewCell *_tempCell;
@@ -50,10 +52,10 @@ NSDateFormatter const *_formatter;
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     self.view.backgroundColor = [UIColor whiteColor];
-
-    
+    [self.navigationController.navigationBar NightWithType:UIViewColorTypeNormal];
+    [self.view NightWithType:UIViewColorTypeNormal];
     _tempCell = [[ZDMessageCollectionViewCell alloc]init];
-
+    
     [self addMessageCardView];
     //_detailView
     _detailView = [[ZDDetailView alloc]init];
@@ -61,40 +63,43 @@ NSDateFormatter const *_formatter;
     [_detailView.stepper addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_detailView];
     
-    //每天检测到期
-//    [NSTimer scheduledTimerWithTimeInterval:3600*24 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-        NSDate *dateNow = [[NSDate alloc]init];
-//        for (ZDGoods *goods in _allDataMutableArray) {
-            ZDGoods *goods = _allDataMutableArray[0];
-            NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
-            NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
-            [self sendNotifition:goods timeInterval:seconds];
-        [self addEKEventStore:goods];
-            //分类提醒
-//            if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
-//                [self sendNotifition:goods timeInterval:seconds];
-//            }else if (seconds<200 &&[goods.family isEqualToString:@"药品"]) {
-//                [self sendNotifition:goods timeInterval:seconds];
-//            }else if (seconds<90 &&[goods.family isEqualToString:@"食品"]) {
-//                [self sendNotifition:goods timeInterval:seconds];
-//            }else if (seconds<70 && [goods.family isEqualToString:@"其他"]){
-//                [self sendNotifition:goods timeInterval:seconds];
-//            }
-    
-//        }
-    
-//    }];
-    
-    
+    [self addDetectToExpiredGoods];
+
     
 }
 
 - (void)addMessageCardView{
     
     _messageCardView = [[ZDMessageCardView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [_messageCardView NightWithType:UIViewColorTypeNormal];
     _messageCardView.delegate = self;
     [self.view addSubview:_messageCardView];
+}
+- (void)addDetectToExpiredGoods{
+    //代码执行一次每天检测到期,
+    dispatch_once(&onceToken, ^{
+
+        [NSTimer scheduledTimerWithTimeInterval:3600*24 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+            NSDate *dateNow = [[NSDate alloc]init];
+            for (ZDGoods *goods in _allDataMutableArray) {
+                NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
+                NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+                //分类提醒
+                if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
+                    [self sendNotifition:goods timeInterval:seconds];
+                }else if (seconds<200 &&[goods.family isEqualToString:@"药品"]) {
+                    [self sendNotifition:goods timeInterval:seconds];
+                }else if (seconds<90 &&[goods.family isEqualToString:@"食品"]) {
+                    [self sendNotifition:goods timeInterval:seconds];
+                }else if (seconds<70 && [goods.family isEqualToString:@"其他"]){
+                    [self sendNotifition:goods timeInterval:seconds];
+                }
+                
+            }
+            
+        }];
+    });
 }
 - (void)valueChanged:(UIStepper *)stepper{
     
@@ -156,6 +161,7 @@ NSDateFormatter const *_formatter;
     
     if (@available(iOS 11.0, *)) {
         self.navigationController.navigationBar.prefersLargeTitles = YES;
+
     } else {
        
     }
@@ -176,7 +182,7 @@ NSDateFormatter const *_formatter;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+
     _messageDataMutableArray = [NSMutableArray array];
     
     _allDataMutableArray = [NSMutableArray array];
@@ -302,7 +308,7 @@ NSDateFormatter const *_formatter;
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"物品过期通知";
     content.subtitle = @"您有新的物品即将到期";
-    content.body = [NSString stringWithFormat:@"您添加的%@距离到期还有%f个月，赶快使用吧",goods.name,timeInterval];
+    content.body = [NSString stringWithFormat:@"您添加的“%@”距离到期还有%d个月，赶快使用吧",goods.name,(int)timeInterval];
     NSNumber *number = [NSNumber numberWithInteger:1];
     content.badge = number;
     UNNotificationSound *sound = [UNNotificationSound soundNamed:@"wakeup.caf"];
@@ -321,7 +327,7 @@ NSDateFormatter const *_formatter;
         
     }];
     //日历事件
-//    [self addEKEventStore:goods];
+    [self addEKEventStore:goods];
     
 }
 // 添加日历事件
@@ -342,6 +348,7 @@ NSDateFormatter const *_formatter;
             }
             else
             {
+                NSLog(@"创建事件");
                 //创建事件
                 EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
                 //给事件添加标题
@@ -351,9 +358,9 @@ NSDateFormatter const *_formatter;
                 //创建测试时间，这里可以改为任意时间
                 NSDate *date = [NSDate date];
                 //开始时间(必须传)
-//                event.startDate = [_formatter dateFromString:date];
+                event.startDate = date;
                 //结束时间(必须传)
-                event.endDate = date;
+                event.endDate = [_formatter dateFromString:goods.dateOfEnd];
                 //全天的事件
                 event.allDay = YES;
                 //添加提醒

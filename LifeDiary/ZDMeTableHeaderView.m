@@ -15,6 +15,7 @@
     if(self=[super initWithFrame:frame]){
         
         self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+        [self NightWithType:UIViewColorTypeNormal];
 //        //_backgroundImageView
 //        _backgroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backgroundImage"]];
 //        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;

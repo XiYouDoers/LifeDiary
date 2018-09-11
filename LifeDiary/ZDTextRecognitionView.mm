@@ -12,7 +12,6 @@
 #import "ZDGoods.h"
 #import "ZDStringManager.h"
 
-
 @interface ZDTextRecognitionView(){
 
 }
