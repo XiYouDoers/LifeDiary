@@ -13,7 +13,7 @@
 - (id)init{
     if (self = [super init]) {
         
-        self.backgroundColor = [UIColor whiteColor];
+        [self NightWithType:UIViewColorTypeBlue];
         self.layer.cornerRadius = 13.f;
         self.layer.masksToBounds = YES;
         
