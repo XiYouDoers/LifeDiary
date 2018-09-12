@@ -14,6 +14,7 @@
 @property(nonatomic,strong) UIImage *buttonOfClassImage;
 @property(nonatomic,strong) UIImage *buttonOfSortImage;
 @end
+
 @implementation ZDSortView
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -161,6 +162,8 @@
         }];
         
         
+        [self NightWithType:UIViewColorTypeBlue];
+        
     }
     return self;
 }
@@ -180,6 +183,7 @@
         _classScrollView = [[UIScrollView alloc]init];
         _classScrollView.contentSize = CGSizeMake(WIDTH*1.2, 40);
         _classScrollView.showsHorizontalScrollIndicator = NO;
+        [_classScrollView NightWithType:UIViewColorTypeBlue];
     }
     return _classScrollView;
 }
@@ -286,6 +290,7 @@
         _sortScrollView = [[UIScrollView alloc]init];
         _sortScrollView.contentSize = CGSizeMake(WIDTH*1.5,40);
         _sortScrollView.showsHorizontalScrollIndicator = NO;
+        [_sortScrollView NightWithType:UIViewColorTypeBlue];
     }
     return _sortScrollView;
 }

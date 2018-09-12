@@ -18,6 +18,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self NightWithType:UIViewColorTypeBlue];
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];

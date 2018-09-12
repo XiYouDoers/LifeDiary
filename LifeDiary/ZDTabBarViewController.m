@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
 
     [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
     
-    [self.tabBar NightWithType:UIViewColorTypeNormal];
+    [self.tabBar NightWithType:UIViewColorType2];
     
 }
 
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     ZDMessageViewController *messageViewController = [[ZDMessageViewController alloc]init];
 
     UINavigationController *messageNavigationController = [[UINavigationController alloc]initWithRootViewController:messageViewController];
-     [messageNavigationController.navigationBar NightWithType:UIViewColorTypeNormal];
+//     [messageNavigationController.navigationBar NightWithType:UIViewColorTypeNormal];
     [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
     messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);

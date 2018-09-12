@@ -18,8 +18,9 @@
 @property(nonatomic, retain) UIColor *textColor;
 @property(nonatomic, retain) UIColor *textColorGray;
 @property(nonatomic, retain) UIColor *navBarColor;
+@property(nonatomic, retain) UIColor *tabBarColor;
 @property(nonatomic, retain) UIColor *colorClear;
-
+@property(nonatomic, retain) UIColor *cellColor;
 #pragma mark -
 
 // 是否是夜间 YES表示夜间, NO为正常

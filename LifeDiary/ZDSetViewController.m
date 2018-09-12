@@ -10,9 +10,7 @@
 #import "ZDMeDefaultCell.h"
 #import "ZDMeSwitchCell.h"
 #import "HUDUtil.h"
-#import "NightModeTheme/ThemeManage.h"
-#import "NightModeTheme/UIView+ThemeChange.h"
-#import "NightModeTheme/UILabel+ThemeChange.h"
+
 
 @interface ZDSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *setTableView;

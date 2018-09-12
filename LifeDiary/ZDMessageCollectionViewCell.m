@@ -28,8 +28,6 @@ extern NSDateFormatter const *_formatter;
         
         [self.shadowView addSubview:self.exhibitView];
         
-        
-        
         [self.exhibitView addSubview:self.nameLabel];
         
         [self.exhibitView addSubview:self.pictureImageView];
@@ -107,7 +105,7 @@ extern NSDateFormatter const *_formatter;
         _exhibitView.backgroundColor = [UIColor whiteColor];
         _exhibitView.layer.cornerRadius = 15;
         _exhibitView.layer.masksToBounds = YES;
-        [_exhibitView NightWithType:UIViewColorTypeNormal];
+        [_exhibitView NightWithType:UIViewColorTypeBlue];
     }
     return _exhibitView;
 }
@@ -131,7 +129,7 @@ extern NSDateFormatter const *_formatter;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [UIFont boldSystemFontOfSize:18];
         _nameLabel.textColor = [UIColor blackColor];
-        [_nameLabel NightWithType:UIViewColorTypeNormal];
+//        [_nameLabel NightWithType:UIViewColorTypeNormal];
     }
     return _nameLabel;
 }

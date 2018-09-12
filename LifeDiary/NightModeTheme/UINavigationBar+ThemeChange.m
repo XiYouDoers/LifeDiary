@@ -17,16 +17,16 @@
     
     [super changeColor];
     
-    [self setBarTintColor:[ThemeManage shareThemeManage].bgColor];
+    [self setBarTintColor:[ThemeManage shareThemeManage].navBarColor];
 //    [self setBackgroundColor:[UIColor clearColor]];
-    [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [ThemeManage shareThemeManage].textColor}];
     
     // 改变电池栏Style
-//    if ([ThemeManage shareThemeManage].isNight) {
-//        [self setBarStyle:UIBarStyleBlackTranslucent];
-//    } else{
-//        [self setBarStyle:UIBarStyleDefault];
-//    }
+    if ([ThemeManage shareThemeManage].isNight) {
+        [self setBarStyle:UIBarStyleBlackTranslucent];
+    } else{
+        [self setBarStyle:UIBarStyleDefault];
+    }
 }
 
 @end

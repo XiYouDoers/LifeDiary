@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZDMeDefaultCell;
+@class ZDMeDefaultCell,ZDMeSwitchCell;
 
 @interface ZDMeViewController : UIViewController
 
 @property(nonatomic,strong) UITableView *meTableView;
 @property(nonatomic,strong) ZDMeDefaultCell *meCell;
+@property(nonatomic,strong) ZDMeSwitchCell *switchCell;
 
 @end

@@ -32,20 +32,25 @@ static ThemeManage *themeManage; // 单例
     
     if (self.isNight) { // 夜间模式改变相关颜色
  
-        self.bgColor = [UIColor colorWithRed:1.0/255 green:0.08 blue:0.1 alpha:1];
-        self.textColor = [UIColor grayColor];
-        self.color1 = [UIColor colorWithRed:0.08 green:0.11 blue:0.13 alpha:1];
-        self.navBarColor = [UIColor whiteColor];
-        self.color2 = [UIColor colorWithRed:0.2 green:0.31 blue:0.43 alpha:1];
+        self.bgColor = [UIColor colorWithRed:18/255.0 green:27/255.0 blue:66/255.0 alpha:1];
+        self.textColor = [UIColor whiteColor];
+        self.color1 = [UIColor colorWithRed:18/255.0 green:27/255.0 blue:66/255.0 alpha:1];
+        self.navBarColor = [UIColor colorWithRed:13/255.0 green:7/255.0 blue:75.0/255 alpha:1];
+        self.color2 = [UIColor colorWithRed:18/255.0 green:27/255.0 blue:66/255.0 alpha:1];
         self.textColorGray = [UIColor whiteColor];
+        self.tabBarColor = [UIColor colorWithRed:18/255.0 green:27/255.0 blue:66/255.0 alpha:1];
+        self.cellColor = [UIColor colorWithRed:42/255.0 green:0/255.0 blue:85/255.0 alpha:1];
     } else{
     
-        self.bgColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+        self.bgColor = [UIColor colorWithDisplayP3Red:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
         self.textColor = [UIColor blackColor];
-        self.color1 = [UIColor colorWithRed:0.06 green:0.25 blue:0.48 alpha:1];
+        self.color1 = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
+        
         self.navBarColor = [UIColor whiteColor];
-        self.color2 = [UIColor colorWithRed:0.57 green:0.66 blue:0.77 alpha:1];
+        self.color2 = [UIColor whiteColor];
         self.textColorGray = [UIColor grayColor];
+        self.tabBarColor = [UIColor whiteColor];
+        self.cellColor = [UIColor whiteColor];
     }
     
     static dispatch_once_t onceToken;

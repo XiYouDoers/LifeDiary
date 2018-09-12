@@ -22,6 +22,7 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
+        [self NightWithType:UIViewColorTypeBlue];
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];
         _tabImageView.frame = CGRectMake(10, 13, 19, 19);

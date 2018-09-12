@@ -19,9 +19,10 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
         self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:244.0/255 alpha:1];
+               
+        [self.contentView NightWithType:UIViewColorTypeBlue];
         [self NightWithType:UIViewColorTypeNormal];
-        self.contentView.backgroundColor = [UIColor whiteColor];
-        [self NightWithType:UIViewColorTypeNormal];
+
         self.contentView.layer.cornerRadius = 15.f;
         self.contentView.layer.masksToBounds = YES;
         [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -34,6 +35,7 @@
         
         //_nightModeSwitch
         _nightModeSwitch = [[UISwitch alloc]init];
+        _nightModeSwitch.on   = [ThemeManage shareThemeManage].isNight;
         [self.contentView addSubview:_nightModeSwitch];
         [_nightModeSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.contentView.mas_centerY);

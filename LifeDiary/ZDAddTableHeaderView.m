@@ -13,6 +13,8 @@
 - (id)init{
     self= [super init];
     if (self) {
+        
+        [self NightWithType:UIViewColorTypeBlue];
         //_headPictureSetButton
         _headPictureSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _headPictureSetButton.frame = CGRectMake(WIDTH/16, WIDTH/16, WIDTH/8, WIDTH/8);

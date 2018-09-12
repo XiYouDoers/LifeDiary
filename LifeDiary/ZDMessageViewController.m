@@ -52,7 +52,7 @@ NSDateFormatter const *_formatter;
     _formatter = [[NSDateFormatter alloc]init];
     [_formatter setDateFormat:@"yyyy-MM-dd"];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar NightWithType:UIViewColorTypeNormal];
+    [self.navigationController.navigationBar NightWithType:UIViewColorType2];
     [self.view NightWithType:UIViewColorTypeNormal];
     _tempCell = [[ZDMessageCollectionViewCell alloc]init];
     

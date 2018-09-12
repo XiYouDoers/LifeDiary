@@ -18,7 +18,8 @@
 #import "ZDSetViewController.h"
 #import "ZDFeedbackViewController.h"
 #import "ZDSaveViewController.h"
-
+#import "ZDMeSwitchCell.h"
+#import "HUDUtil.h"
 
 @interface ZDMeViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,ZDMeTableHeaderViewDelegate>{
     NSUserDefaults *_userDefaults;
@@ -56,8 +57,8 @@
     _meTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_meTableView];
     [_meTableView registerClass:[ZDMeDefaultCell class] forCellReuseIdentifier:@"meDefaultCell"];
-
-    _cellLabelDataArray = [NSArray arrayWithObjects:@"设置",@"反馈",@"收藏",@"关于", nil];
+    [_meTableView registerClass:[ZDMeSwitchCell class] forCellReuseIdentifier:@"meSwitchCell"];
+    _cellLabelDataArray = [NSArray arrayWithObjects:@"夜间模式",@"清除缓存",@"关于", nil];
     _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete",@"about", nil];
     
 
@@ -139,11 +140,7 @@
     [_userDefaults setObject:_tableHeaderView.personalitySignatureTextField.text forKey:@"user_personalitySignature"];
     [_userDefaults synchronize];
 }
-- (void)willChangeHeadPicture{
-    ZDPhotoManagerViewController *photoManagerVC = [[ZDPhotoManagerViewController alloc]init];
-    photoManagerVC.delegate = self;
-    [photoManagerVC selectedWay];
-}
+
 
 #pragma mark tableView 代理方法
 /**
@@ -151,7 +148,7 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
-    return 4;
+    return 3;
 }
 
 /**
@@ -173,43 +170,45 @@
  cell数据源
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  
-    _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
-    _meCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
-    return _meCell;
+    if (indexPath.row == 0) {
+        _switchCell = [tableView dequeueReusableCellWithIdentifier:@"meSwitchCell" forIndexPath:indexPath];
+        _switchCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
+        [_switchCell.nightModeSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+        return _switchCell;
+        
+    }else{
+        _meCell = [tableView dequeueReusableCellWithIdentifier:@"meDefaultCell"];
+        _meCell.tabLabel.text = [_cellLabelDataArray objectAtIndex:indexPath.row];
+        return _meCell;
+    }
+   
+}
+- (void)switchAction:(UISwitch *)switch1{
+    
+    if (switch1.isOn == YES) {
+        [ThemeManage shareThemeManage].isNight = ![ThemeManage shareThemeManage].isNight;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeColor" object:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:[ThemeManage shareThemeManage].isNight forKey:@"night"];
+        
+    }else{
+        [ThemeManage shareThemeManage].isNight = ![ThemeManage shareThemeManage].isNight;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeColor" object:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:[ThemeManage shareThemeManage].isNight forKey:@"day"];
+        
+    }
 }
 /**
  cell点击方法
  
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    switch (indexPath.row) {
-        case 0:{
-            ZDSetViewController *setVC = [[ZDSetViewController alloc]init];
-            [self.navigationController pushViewController:setVC animated:YES];
-            break;
-        }
-        case 1:{
-            ZDFeedbackViewController *feedbackVC = [[ZDFeedbackViewController alloc]init];
-            [self.navigationController pushViewController:feedbackVC animated:YES];
-            break;
-        }
-        case 2:{
-            ZDSaveViewController *saveVC = [[ZDSaveViewController alloc]init];
-            [self.navigationController pushViewController:saveVC animated:YES];
-            break;
-        }
-      
-        case 3:{
+    if (indexPath.row == 1) {
+        [HUDUtil show:self.view text:@"清除缓存成功"];
+    }else if (indexPath.row==2) {
             ZDAboutViewController *aboutVC = [[ZDAboutViewController alloc]init];
             [self.navigationController pushViewController:aboutVC animated:YES];
-            break;
-
-        }
-        default:
-            break;
     }
+
 }
 
 @end

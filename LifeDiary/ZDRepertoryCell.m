@@ -134,6 +134,7 @@
         _exhibitView.backgroundColor = [UIColor whiteColor];
         _exhibitView.layer.cornerRadius = 13;
         _exhibitView.layer.masksToBounds = YES;
+        [_exhibitView NightWithType:UIViewColorTypeBlue];
     }
     return _exhibitView;
 }

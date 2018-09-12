@@ -52,9 +52,10 @@
     _editTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     _editTableView.dataSource = self;
     _editTableView.delegate = self;
-    //    _addTableView.sectionHeaderHeight = 16.0f;
     _editTableHeaderView  = [[ZDAddTableHeaderView alloc]init];
     _editTableHeaderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,150);
+    [_editTableView NightWithType:UIViewColorTypeBlue];
+    [_editTableHeaderView NightWithType:UIViewColorTypeBlue];
     _editTableHeaderView.nameTextField.delegate = self;
     _editTableHeaderView.remarkTextField.delegate = self;
     

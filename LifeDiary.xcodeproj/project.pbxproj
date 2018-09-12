@@ -125,7 +125,6 @@
 		04CF91EF21225DF600113E09 /* ZDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91EE21225DF600113E09 /* ZDCardView.m */; };
 		04CF91F22122C71500113E09 /* ZDMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF91F12122C71500113E09 /* ZDMessageCardView.m */; };
 		04D8B64320B12CE200055018 /* ZDMeDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */; };
-		04D8B64620B133A300055018 /* ZDDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64520B133A300055018 /* ZDDateCell.m */; };
 		04D8B64C20B14B1900055018 /* ZDPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */; };
 		04EC47A721155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC47A621155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.m */; };
 		04ED0EFA2106005400A97667 /* ZDLifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EF92106005400A97667 /* ZDLifeViewController.m */; };
@@ -394,8 +393,6 @@
 		04CF91F12122C71500113E09 /* ZDMessageCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDMessageCardView.m; sourceTree = "<group>"; };
 		04D8B64120B12CE200055018 /* ZDMeDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMeDefaultCell.h; sourceTree = "<group>"; };
 		04D8B64220B12CE200055018 /* ZDMeDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMeDefaultCell.m; sourceTree = "<group>"; };
-		04D8B64420B133A200055018 /* ZDDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDDateCell.h; sourceTree = "<group>"; };
-		04D8B64520B133A300055018 /* ZDDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDDateCell.m; sourceTree = "<group>"; };
 		04D8B64A20B14B1900055018 /* ZDPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPickerViewCell.h; sourceTree = "<group>"; };
 		04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPickerViewCell.m; sourceTree = "<group>"; };
 		04EC47A521155D8F0020D100 /* ZDMessageCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDMessageCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -900,8 +897,6 @@
 				04D8B64B20B14B1900055018 /* ZDPickerViewCell.m */,
 				046E89082140ECC000CF3FCC /* ZDClassPickerTableViewCell.h */,
 				046E89092140ECC000CF3FCC /* ZDClassPickerTableViewCell.m */,
-				04D8B64420B133A200055018 /* ZDDateCell.h */,
-				04D8B64520B133A300055018 /* ZDDateCell.m */,
 				04BD723A20A9C24600A14ADF /* ZDAddTableHeaderView.h */,
 				04BD723B20A9C24600A14ADF /* ZDAddTableHeaderView.m */,
 				040CE67F20ADC2CC00A30442 /* ZDUnderLineTextField.h */,
@@ -1457,7 +1452,6 @@
 				0422845121251375003FB619 /* ZDShoppingModel.m in Sources */,
 				044BE5AF2148303700552354 /* UIView+ThemeChange.m in Sources */,
 				047CCA34213BD7A400987EE1 /* ZDMeSwitchCell.m in Sources */,
-				04D8B64620B133A300055018 /* ZDDateCell.m in Sources */,
 				040CE67C20ADABC800A30442 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				04C76C2820AE84750094A5B0 /* ZDMeTableHeaderView.m in Sources */,
 				04FF836020B94C9800EECE24 /* MJRefreshBackNormalFooter.m in Sources */,

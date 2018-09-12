@@ -39,7 +39,6 @@ extern NSDateFormatter const *_formatter;
         
         [self.contentView addSubview:self.exhibitView];
         
-        [self.exhibitView NightWithType:UIViewColorTypeNormal];
         
         [self.exhibitView addSubview: self.nameLabel];
         
@@ -187,13 +186,13 @@ extern NSDateFormatter const *_formatter;
         _exhibitView.backgroundColor = [UIColor whiteColor];
         _exhibitView.layer.cornerRadius = 13;
         _exhibitView.layer.masksToBounds = YES;
+        [_exhibitView NightWithType:UIViewColorTypeBlue];
     }
     return _exhibitView;
 }
 - (UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        [_nameLabel NightWithType:UIViewColorTypeNormal];
     }
     return _nameLabel;
 }

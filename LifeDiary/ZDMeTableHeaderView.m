@@ -42,6 +42,7 @@
         _repertoryView.layer.cornerRadius = 15.f;
         _repertoryView.layer.masksToBounds = YES;
         _repertoryView.backgroundColor = [UIColor whiteColor];
+        [_repertoryView NightWithType:UIViewColorTypeBlue];
         [self addSubview:_repertoryView];
         
         

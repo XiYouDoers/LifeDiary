@@ -24,8 +24,8 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.contentView.layer.cornerRadius = 15.f;
         self.contentView.layer.masksToBounds = YES;
+        [self.contentView NightWithType:UIViewColorTypeBlue];
         [self NightWithType:UIViewColorTypeNormal];
-       
         //_tabImageView
         _tabImageView = [[UIImageView alloc]init];
         _tabImageView.image = [UIImage imageNamed:@"arrow"];

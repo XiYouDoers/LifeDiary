@@ -13,10 +13,10 @@
  */
 typedef NS_ENUM(NSInteger, UIViewColorType) {
 
-    UIViewColorTypeNormal, // 白天白色, 夜间黑色
-    UIViewColorType1, // 白天蓝色, 夜间深灰
-    UIViewColorType2, // 白天浅蓝, 夜间浅蓝
-    UIViewColorTypeClear // 透明状态
+    UIViewColorTypeNormal, 
+    UIViewColorType1,
+    UIViewColorType2,
+    UIViewColorTypeBlue
 };
 
 @interface UIView (ThemeChange)

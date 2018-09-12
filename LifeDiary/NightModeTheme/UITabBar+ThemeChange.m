@@ -16,8 +16,8 @@
 - (void)changeColor {
     [super changeColor];
     
-    [self setBarTintColor:[ThemeManage shareThemeManage].bgColor];
-    [self setTintColor:[ThemeManage shareThemeManage].navBarColor];
+    [self setBarTintColor:[ThemeManage shareThemeManage].tabBarColor];
+//    [self setTintColor:[ThemeManage shareThemeManage].navBarColor];
 }
 
 @end

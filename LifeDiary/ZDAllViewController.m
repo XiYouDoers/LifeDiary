@@ -38,10 +38,9 @@
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self setNavigationBar];
-
-    [self.view NightWithType:UIViewColorTypeNormal];
+    
+    [self.view NightWithType:UIViewColorTypeBlue];
     selectedIndexes = [NSMutableDictionary dictionary];
-    self.view.backgroundColor = [UIColor whiteColor];
    
     //_allTableView
     _allTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, HEIGHT-(64+54)) style:UITableViewStylePlain];
@@ -60,7 +59,7 @@
     
     
     //sortView
-    _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155+50)];
+    _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155+75)];
     _sortView.delegate = self;
     _sortView.hidden = YES;
     [self.view addSubview:_sortView];
@@ -119,7 +118,7 @@
     if (!_searchView) {
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 54)];
         _searchView.backgroundColor = [UIColor whiteColor];
-        [_searchView NightWithType:UIViewColorTypeNormal];
+        [_searchView NightWithType:UIViewColorTypeBlue];
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 7, WIDTH-20, 40)];
         _searchBar.backgroundColor = [UIColor clearColor];
 //        _searchBar.layer.masksToBounds = YES;
@@ -137,6 +136,7 @@
                     
                     UITextField *textField = [subView.subviews objectAtIndex:0];
                     textField.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+                    [textField NightWithType:UIViewColorTypeNormal];
                     textField.layer.masksToBounds = YES;
                     textField.layer.cornerRadius = 20.f;
                     

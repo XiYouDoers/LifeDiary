@@ -21,7 +21,7 @@
     self.navigationItem.title = @"关于";
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    [self.view NightWithType:UIViewColorTypeBlue];
     UIImageView *appHeadPictureImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"appHeadPictureImageView"]];
         [self.view addSubview:appHeadPictureImageView];
     [appHeadPictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {

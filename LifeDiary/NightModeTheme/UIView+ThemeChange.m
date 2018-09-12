@@ -44,8 +44,8 @@
         case UIViewColorType2:
             self.backgroundColor = [ThemeManage shareThemeManage].color2;
             break;
-        case UIViewColorTypeClear:
-            self.backgroundColor = [ThemeManage shareThemeManage].colorClear;
+        case UIViewColorTypeBlue:
+            self.backgroundColor = [ThemeManage shareThemeManage].cellColor;
             break;
             
         default:
