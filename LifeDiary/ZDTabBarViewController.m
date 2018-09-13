@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
 //     [messageNavigationController.navigationBar NightWithType:UIViewColorTypeNormal];
     [self wsf_settingController:messageNavigationController tabBarTitle:nil tabBarItemImageName:@"messageTabBarItemImage" tabBarItemSelectedImageName:@"messageTabBarItemSelectedImage"
      ];
-    messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
+    messageNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,-5,-6,5);
     
     //“发现”页面
     ZDFindViewController *findViewController = [[ZDFindViewController alloc]init];
