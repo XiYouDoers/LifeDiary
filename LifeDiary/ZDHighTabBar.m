@@ -49,7 +49,7 @@
 // 调整子视图的布局
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
+
     CGFloat width = self.frame.size.width/self.type;
     Class class = NSClassFromString(@"UITabBarButton");
     for (UIView *view in self.subviews) {
@@ -63,13 +63,15 @@
         }else if ([view isKindOfClass:class]){//system button
             CGRect frame = view.frame;
             int indexFromOrign = view.frame.origin.x/width;//防止UIView *view in self.subviews 获取到的不是有序的
+           
             if (indexFromOrign >= (self.type - 1) / 2) {
                 indexFromOrign++;
             }
+            
             CGFloat x = indexFromOrign * width;
             //如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
             if(indexFromOrign == 0){
-            view.frame = CGRectMake(x+15, view.frame.origin.y, width, frame.size.height);
+            view.frame = CGRectMake(x-100, view.frame.origin.y, width, frame.size.height);
             }else if(indexFromOrign == 1){
             view.frame = CGRectMake(x-15, view.frame.origin.y, width, frame.size.height);
             }

@@ -18,7 +18,7 @@
     UIBarButtonItem *_manageCellBarButtonItem;
     bool _rightBarButtonItemIsSeleted;
     NSMutableArray *_deletedCellArray;
-    UIButton *_deleteButton; 
+    UIButton *_deleteButton;
 }
 @property(nonatomic,strong) NSMutableArray *allDataMutableArray;
 @end
