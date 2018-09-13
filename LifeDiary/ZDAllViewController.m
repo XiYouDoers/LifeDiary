@@ -37,6 +37,9 @@
     
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    _resultMutableArray = [NSMutableArray array];
+    _sortMutableArray = [NSMutableArray array];
+    _dataMutableArray = [NSMutableArray array];
     [self setNavigationBar];
     
     [self.view NightWithType:UIViewColorTypeBlue];
@@ -65,6 +68,8 @@
     [self.view addSubview:_sortView];
     
     
+    
+    
 }
 - (void)setNavigationBar{
    
@@ -88,10 +93,9 @@
     //隐藏顶部tabbar分割线
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
-    _dataMutableArray = [NSMutableArray array];
+    
     _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-    _resultMutableArray = [NSMutableArray array];
-    _sortMutableArray = [NSMutableArray array];
+
     [self.allTableView reloadData];
     //隐藏tabBar
     CGRect  tabRect = self.tabBarController.tabBar.frame;
