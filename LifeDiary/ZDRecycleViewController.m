@@ -255,6 +255,7 @@
         [[ZDRecycleDataBase sharedDataBase]deleteGoods:deletedGoods];
         self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
         [self.recycleTableView reloadData];
+        [HUDUtil show:self.view text:@"删除成功"];
 
     }];
     // 添加一个恢复按钮
@@ -266,7 +267,7 @@
         [[ZDAllDataBase sharedDataBase]addGoods:recoveryGoods];
         self.dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
         [self.recycleTableView reloadData];
-
+        [HUDUtil show:self.view text:@"恢复成功"];
 
 
     }];

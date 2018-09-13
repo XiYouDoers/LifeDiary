@@ -256,7 +256,7 @@
         [[ZDDepleteDataBase sharedDataBase]deleteGoods:deletedGoods];
         self.dataMutableArray = [[ZDDepleteDataBase sharedDataBase]getAllGoods];
         [self.depleteTableView reloadData];
-        
+        [HUDUtil show:self.view text:@"删除成功"];
     }
 }
 @end

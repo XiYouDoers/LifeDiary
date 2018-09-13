@@ -18,7 +18,7 @@
     UIBarButtonItem *_manageCellBarButtonItem;
     bool _rightBarButtonItemIsSeleted;
     NSMutableArray *_deletedCellArray;
-    UIButton *_deleteButton;
+    UIButton *_deleteButton; 
 }
 @property(nonatomic,strong) NSMutableArray *allDataMutableArray;
 @end
@@ -256,6 +256,7 @@
         [[ZDExpireDataBase sharedDataBase]deleteGoods:deletedGoods];
         self.dataMutableArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
         [self.expireTableView reloadData];
+        [HUDUtil show:self.view text:@"删除成功"];
         
     }
 }
