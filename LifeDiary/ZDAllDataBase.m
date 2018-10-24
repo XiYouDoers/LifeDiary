@@ -71,9 +71,11 @@ static ZDAllDataBase *_allDataBase = nil;
     NSNumber *ratioNumber = @(goods.ratio);
     [_db executeUpdate:@"INSERT INTO allGoods(identifier,name,remark,imageData,dateOfStart,dateOfEnd,saveTime,sum,ratio,family)VALUES(?,?,?,?,?,?,?,?,?,?)",maxID,goods.name,goods.remark,goods.imageData,goods.dateOfStart,goods.dateOfEnd,goods.saveTime,goods.sum, ratioNumber,goods.family];
     
- 
     [_db close];
-    
+    //创建一个消息对象
+    NSNotification * notice = [NSNotification notificationWithName:@"updateData" object:nil userInfo:@{@"1":@"123"}];
+    //发送消息
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 
 - (void)deleteGoods:(ZDGoods *)goods{
@@ -82,6 +84,10 @@ static ZDAllDataBase *_allDataBase = nil;
     [_db executeUpdate:@"DELETE FROM allGoods WHERE identifier = ?",goods.identifier];
     
     [_db close];
+    //创建一个消息对象
+    NSNotification * notice = [NSNotification notificationWithName:@"updateData" object:nil userInfo:@{@"1":@"123"}];
+    //发送消息
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 //修改数据
 -(void)updateGoods:(ZDGoods*)goods
@@ -97,6 +103,10 @@ static ZDAllDataBase *_allDataBase = nil;
     [_db executeUpdate:@"UPDATE allGoods SET family = ? WHERE identifier = ?",goods.family,goods.identifier];
     
     [_db close];
+    //创建一个消息对象
+    NSNotification * notice = [NSNotification notificationWithName:@"updateData" object:nil userInfo:@{@"1":@"123"}];
+    //发送消息
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 - (NSMutableArray *)getAllGoods{
     [_db open];

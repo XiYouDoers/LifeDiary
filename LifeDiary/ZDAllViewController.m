@@ -59,7 +59,7 @@
     [self.view addSubview:_allTableView];
     [_allTableView registerClass:[ZDAllCell class] forCellReuseIdentifier:@"allCell"];
     [self.view addSubview: self.searchView];
-    
+    [self updateData];
     
     //sortView
     _sortView = [[ZDSortView alloc]initWithFrame:CGRectMake(0, 64+54, WIDTH, 155+75)];
@@ -67,9 +67,15 @@
     _sortView.hidden = YES;
     [self.view addSubview:_sortView];
     
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(updateData) name:@"updateData" object:nil];
     
     
-    
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateData" object:nil];
 }
 - (void)setNavigationBar{
    
@@ -86,6 +92,11 @@
 - (void)openRepertory{
     
 }
+- (void)updateData{
+    _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+    
+    [self.allTableView reloadData];
+}
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -94,9 +105,7 @@
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     
-    _dataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-
-    [self.allTableView reloadData];
+    
     //隐藏tabBar
     CGRect  tabRect = self.tabBarController.tabBar.frame;
     tabRect.origin.y = [[UIScreen mainScreen] bounds].size.height+self.tabBarController.tabBar.frame.size.height;

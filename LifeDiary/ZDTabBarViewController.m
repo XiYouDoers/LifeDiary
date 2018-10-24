@@ -16,7 +16,6 @@
 #import "Resnet50.h"
 #import <CoreML/CoreML.h>
 #import <Vision/Vision.h>
-
 #import "ZDAddViewController.h"
 #import "ZDAddTableHeaderView.h"
 #import "ZDTextRecognitionView.h"

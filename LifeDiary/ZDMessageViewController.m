@@ -57,6 +57,7 @@ NSDateFormatter const *_formatter;
     _tempCell = [[ZDMessageCollectionViewCell alloc]init];
     
     [self addMessageCardView];
+    [self updateData];
     //_detailView
     _detailView = [[ZDDetailView alloc]init];
     _detailView.frame = CGRectMake(0, HEIGHT-49, WIDTH, 49);
@@ -64,6 +65,11 @@ NSDateFormatter const *_formatter;
     [self.view addSubview:_detailView];
     
     [self addDetectToExpiredGoods];
+    
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(updateData) name:@"updateData" object:nil];
 
     
 }
@@ -85,6 +91,14 @@ NSDateFormatter const *_formatter;
             for (ZDGoods *goods in _allDataMutableArray) {
                 NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
                 NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
+                if(seconds <= 0){
+                    //过期数据库中添加物品
+                    [[ZDExpireDataBase sharedDataBase]addGoods:goods];
+                    //全部物品数据库中删除物品
+                    [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
+                    _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
+                    _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
+                }else{
                 //分类提醒
                 if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
                     [self sendNotifition:goods timeInterval:seconds];
@@ -94,6 +108,7 @@ NSDateFormatter const *_formatter;
                     [self sendNotifition:goods timeInterval:seconds];
                 }else if (seconds<70 && [goods.family isEqualToString:@"其他"]){
                     [self sendNotifition:goods timeInterval:seconds];
+                }
                 }
                 
             }
@@ -179,10 +194,7 @@ NSDateFormatter const *_formatter;
     ZDMeViewController *meVC = [[ZDMeViewController alloc]init];
     [self.navigationController pushViewController:meVC animated:YES];
 }
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-
+- (void)updateData{
     _messageDataMutableArray = [NSMutableArray array];
     
     _allDataMutableArray = [NSMutableArray array];
@@ -251,6 +263,16 @@ NSDateFormatter const *_formatter;
         
     }
     _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
+    
+   
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateData" object:nil];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    
     //显示tabBar
     [self setTabBarHidden:NO];
 }

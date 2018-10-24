@@ -109,6 +109,12 @@ extern NSDateFormatter const *_formatter;
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.contentView.frame = CGRectMake(10, 10, self.frame.size.width-10*2, self.frame.size.height-10*2);
+//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(10);
+//        make.left.mas_equalTo(10);
+//        make.size.mas_equalTo(CGSizeMake(self.frame.size.width-10*2, self.frame.size.height-10*2));
+//
+//    }];
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 140);
 
     self.manageView.frame = CGRectMake(87.5, 100, 200, 40);
@@ -118,7 +124,6 @@ extern NSDateFormatter const *_formatter;
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);
         make.left.mas_equalTo(_pictureImageView.mas_right).with.offset(10);
-        
         make.right.mas_offset(-50);
         make.height.mas_equalTo(20);
         

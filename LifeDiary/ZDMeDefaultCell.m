@@ -18,7 +18,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
         self.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:244.0/255 alpha:1];
         self.contentView.backgroundColor = [UIColor whiteColor];
@@ -43,7 +43,6 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
     self.contentView.frame = CGRectMake(5, 5, self.frame.size.width-10, self.frame.size.height-10);
 
     

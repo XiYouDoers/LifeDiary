@@ -17,6 +17,7 @@
 +(instancetype)instanceCustomTabBarWithType:(SamItemUIType)type{
     ZDHighTabBar *tabBar = [[ZDHighTabBar alloc] init];
     tabBar.type = type;
+   
     return tabBar;
 }
 
@@ -50,7 +51,7 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
 
-    CGFloat width = self.frame.size.width/self.type;
+    CGFloat width = self.frame.size.width/2;
     Class class = NSClassFromString(@"UITabBarButton");
     for (UIView *view in self.subviews) {
         if ([view isEqual:self.centerTitle]) {//self.centerButton
@@ -63,17 +64,16 @@
         }else if ([view isKindOfClass:class]){//system button
             CGRect frame = view.frame;
             int indexFromOrign = view.frame.origin.x/width;//防止UIView *view in self.subviews 获取到的不是有序的
-           
-            if (indexFromOrign >= (self.type - 1) / 2) {
-                indexFromOrign++;
-            }
-            
+
+
             CGFloat x = indexFromOrign * width;
             //如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
             if(indexFromOrign == 0){
-            view.frame = CGRectMake(x-100, view.frame.origin.y, width, frame.size.height);
+            
+            view.frame = CGRectMake(x, view.frame.origin.y, width, frame.size.height);
             }else if(indexFromOrign == 1){
-            view.frame = CGRectMake(x-15, view.frame.origin.y, width, frame.size.height);
+                
+            view.frame = CGRectMake(x, view.frame.origin.y, width, frame.size.height);
             }
 //            //调整badge postion
 //            for (UIView *badgeView in view.subviews){

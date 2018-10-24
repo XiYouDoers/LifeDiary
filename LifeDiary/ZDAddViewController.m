@@ -239,10 +239,10 @@
     ZDAddDefaultCell *cellForThree = [_addTableView cellForRowAtIndexPath:indexpathForThree];
     newGoods.saveTime = cellForThree.textField.text;
     
-    NSIndexPath *indexpathForFour = [NSIndexPath indexPathForRow:4 inSection:0];
-    ZDPickerViewCell *cellForFour = [_addTableView cellForRowAtIndexPath:indexpathForFour];
-    newGoods.sum = cellForFour.textField.text;
-    
+//    ZDPickerViewCell *cellForFour = [_addTableView cellForRowAtIndexPath:indexpathForFour];
+    //newGoods.sum = cellForFour.textField.text;
+        //默认为1
+    newGoods.sum = @"1";
     bool value1 = ![newGoods.dateOfStart isEqualToString:@""];
     bool value2 = ![newGoods.dateOfEnd isEqualToString:@""];
     bool value3 = ![newGoods.saveTime isEqualToString:@""];

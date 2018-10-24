@@ -107,7 +107,9 @@
                 if (([line.text rangeOfString:@"2018" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2016" options:NSCaseInsensitiveSearch].length >0)||([line.text rangeOfString:@"2017" options:NSCaseInsensitiveSearch].length >0)) {
                     
                     NSString *str = [ZDStringManager deleteSpace:line.text];
+                    if(!([line.text rangeOfString:@"-" options:NSCaseInsensitiveSearch].length >0)){
                     str = [ZDStringManager addGangToDateString:str];
+                    }
                     _goods.dateOfStart = str;
                 }
             }

@@ -52,10 +52,10 @@ static NSString *const cellId = @"collectionViewCellId";
     _collectionView.showsHorizontalScrollIndicator = NO;
     // 设置弹簧效果
     _collectionView.bounces = YES;
-    [self addSubview:_collectionView];
     
     // 注册cell、sectionHeader、sectionFooter
     [_collectionView registerClass:[ZDMessageCollectionViewCell class] forCellWithReuseIdentifier:cellId];
+    [self addSubview:_collectionView];
     
 }
 - (void)setMessageDataMutableArray:(NSMutableArray *)messageDataMutableArray{

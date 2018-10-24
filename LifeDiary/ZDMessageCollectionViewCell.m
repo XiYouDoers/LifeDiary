@@ -19,11 +19,10 @@ extern NSDateFormatter const *_formatter;
 -(instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
-        
+   
 //         self.contentView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
         self.contentView.backgroundColor = [UIColor clearColor];
 
-        
         [self.contentView addSubview:self.shadowView];
         
         [self.shadowView addSubview:self.exhibitView];
@@ -109,17 +108,17 @@ extern NSDateFormatter const *_formatter;
     }
     return _exhibitView;
 }
-- (UIImageView *)imageView{
-    
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]initWithFrame:self.frame];
-        UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
-        UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-        effectView.frame = _imageView.bounds;
-        [_imageView addSubview:effectView];
-    }
-    return _imageView;
-}
+//- (UIImageView *)imageView{
+//    
+//    if (_imageView == nil) {
+//        _imageView = [[UIImageView alloc]initWithFrame:self.frame];
+//        UIBlurEffect* effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
+//        UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//        effectView.frame = _imageView.bounds;
+//        [_imageView addSubview:effectView];
+//    }
+//    return _imageView;
+//}
 - (UILabel *)nameLabel{
     
     if (_nameLabel==nil) {
