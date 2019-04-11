@@ -71,7 +71,21 @@
     [super viewWillAppear:animated];
     _dataMutableArray = [NSMutableArray array];
     _dataMutableArray = [[ZDRecycleDataBase sharedDataBase]getAllGoods];
-
+    [self.recycleTableView reloadData];
+    //出场动画
+    NSArray<__kindof UITableViewCell *> *cells = self.recycleTableView.visibleCells;
+    CGFloat tableHeight = self.recycleTableView.bounds.size.height;
+    for (UITableViewCell *cell in cells){
+        cell.transform = CGAffineTransformMakeTranslation(0, tableHeight);
+    }
+    
+    NSInteger index = 0;
+    for(UITableViewCell *cell in cells){
+        [UIView animateKeyframesWithDuration:1 delay:0.05 * index options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+            cell.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:nil];
+        index++;
+    }
 
 }
 - (void)viewWillDisappear:(BOOL)animated{

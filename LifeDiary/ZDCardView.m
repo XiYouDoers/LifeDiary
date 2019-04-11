@@ -41,11 +41,7 @@ static NSString *const cellIdForLife = @"collectionViewForLifeCellId";
 - (void)addCollectionView{
     
     _rgcardViewLayout = [[RGCardViewLayout alloc]init];
-    if (@available(iOS 11.0, *)) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:_rgcardViewLayout];
-    }else{
-//        _collectionView = [[UICollectionView alloc]initWithFrame:[UIScreen mainScreen].bounds collectionViewLayout:_rgcardViewLayout];
-    }
+    _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:_rgcardViewLayout];
     _collectionView.backgroundColor = [UIColor clearColor];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;

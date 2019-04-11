@@ -23,7 +23,6 @@ static ZDAllDataBase *_allDataBase = nil;
     return _allDataBase;
 }
 
-
 - (void)initDataBase{
     
     NSString *filepath = [[NSString alloc]init];

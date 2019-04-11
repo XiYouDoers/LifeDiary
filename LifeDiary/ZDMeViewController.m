@@ -61,7 +61,6 @@
     _cellLabelDataArray = [NSArray arrayWithObjects:@"夜间模式",@"清除缓存",@"关于", nil];
     _cellImageDataArray = [NSArray arrayWithObjects:@"recycle",@"expire", @"deplete",@"about", nil];
     
-
 }
 
 
@@ -102,7 +101,7 @@
         }
         _tableHeaderView.nameTextField.delegate = self;
         _tableHeaderView.personalitySignatureTextField.delegate = self;
-        [_tableHeaderView.headPictureButton addTarget:self action:@selector(willChangeHeadPicture) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _tableHeaderView;
 }

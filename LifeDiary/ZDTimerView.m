@@ -29,8 +29,6 @@
 }
 
 
-
-
 - (void)drawRect:(CGRect)rect{
     
     CGContextRef context = UIGraphicsGetCurrentContext();//获取上下文对象  只要是用了 CoreGraPhics  就必须创建他

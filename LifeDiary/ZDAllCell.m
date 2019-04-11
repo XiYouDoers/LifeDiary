@@ -116,7 +116,7 @@ extern NSDateFormatter const *_formatter;
 //
 //    }];
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 140);
-
+    
     self.manageView.frame = CGRectMake(87.5, 100, 200, 40);
     self.deleteButton.frame = CGRectMake(0, 0, 100, 40);
     self.editButton.frame = CGRectMake(100, 0, 100, 40);
@@ -189,8 +189,14 @@ extern NSDateFormatter const *_formatter;
         //_exhibitView
         _exhibitView = [[UIView alloc]init];
         _exhibitView.backgroundColor = [UIColor whiteColor];
-        _exhibitView.layer.cornerRadius = 13;
-        _exhibitView.layer.masksToBounds = YES;
+        _exhibitView.layer.cornerRadius = 13.f;
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect: _exhibitView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(13, 13)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+//        //设置大小
+//        maskLayer.frame = _exhibitView.bounds;
+//        //设置图形样子
+//        maskLayer.path = maskPath.CGPath;
+//        _exhibitView.layer.mask = maskLayer;
         [_exhibitView NightWithType:UIViewColorTypeBlue];
     }
     return _exhibitView;
@@ -204,7 +210,7 @@ extern NSDateFormatter const *_formatter;
 - (UILabel *)remarkLabel{
     if (!_remarkLabel) {
         _remarkLabel = [[UILabel alloc]init];
-        _remarkLabel.font = [UIFont systemFontOfSize:11];
+        _remarkLabel.font = [UIFont systemFontOfSize:13];
         _remarkLabel.textColor = [UIColor lightGrayColor];
         
 

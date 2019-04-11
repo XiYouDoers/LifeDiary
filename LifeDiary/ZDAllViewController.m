@@ -71,8 +71,6 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(updateData) name:@"updateData" object:nil];
-    
-    
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateData" object:nil];
@@ -114,7 +112,20 @@
     }completion:^(BOOL finished) {
         
     }];
-   
+   //出场动画
+    NSArray<__kindof UITableViewCell *> *cells = self.allTableView.visibleCells;
+    CGFloat tableHeight = self.allTableView.bounds.size.height;
+    for (UITableViewCell *cell in cells){
+        cell.transform = CGAffineTransformMakeTranslation(0, tableHeight);
+    }
+
+    NSInteger index = 0;
+    for(UITableViewCell *cell in cells){
+        [UIView animateKeyframesWithDuration:1 delay:0.05 * index options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+           cell.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:nil];
+        index++;
+    }
     
     
     

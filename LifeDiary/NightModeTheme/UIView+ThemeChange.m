@@ -16,7 +16,7 @@
 #pragma mark - 添加type的set,get方法
 
 - (void)setType:(id)type {
-    
+
     objc_setAssociatedObject(self, @selector(type), type, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

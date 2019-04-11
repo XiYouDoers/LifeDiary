@@ -76,6 +76,21 @@
     _dataMutableArray = [[ZDExpireDataBase sharedDataBase]getAllGoods];
     [self.expireTableView reloadData];
     
+    //出场动画
+    NSArray<__kindof UITableViewCell *> *cells = self.expireTableView.visibleCells;
+    CGFloat tableHeight = self.expireTableView.bounds.size.height;
+    for (UITableViewCell *cell in cells){
+        cell.transform = CGAffineTransformMakeTranslation(0, tableHeight);
+    }
+    
+    NSInteger index = 0;
+    for(UITableViewCell *cell in cells){
+        [UIView animateKeyframesWithDuration:1 delay:0.05 * index options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+            cell.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:nil];
+        index++;
+    }
+    
     
 }
 - (void)viewWillDisappear:(BOOL)animated{

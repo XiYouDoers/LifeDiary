@@ -39,10 +39,6 @@
 		04473E282130FC9E00B453A4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04473E272130FC9E00B453A4 /* libstdc++.tbd */; };
 		04473E2D2131118800B453A4 /* ZDSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473E2C2131118800B453A4 /* ZDSortView.m */; };
 		044BE58F21481E2700552354 /* DKNightVersion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044BE58E21481E2700552354 /* DKNightVersion.framework */; };
-		044BE5A62148303700552354 /* day@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5962148303700552354 /* day@2x.png */; };
-		044BE5A72148303700552354 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5972148303700552354 /* home@2x.png */; };
-		044BE5A82148303700552354 /* night@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5982148303700552354 /* night@2x.png */; };
-		044BE5A92148303700552354 /* schema@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044BE5992148303700552354 /* schema@2x.png */; };
 		044BE5AA2148303700552354 /* ThemeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59B2148303700552354 /* ThemeManage.m */; };
 		044BE5AB2148303700552354 /* UIButton+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59D2148303700552354 /* UIButton+ThemeChange.m */; };
 		044BE5AC2148303700552354 /* UILabel+ThemeChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BE59F2148303700552354 /* UILabel+ThemeChange.m */; };
@@ -236,10 +232,6 @@
 		04473E2B2131118800B453A4 /* ZDSortView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDSortView.h; sourceTree = "<group>"; };
 		04473E2C2131118800B453A4 /* ZDSortView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDSortView.m; sourceTree = "<group>"; };
 		044BE58E21481E2700552354 /* DKNightVersion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DKNightVersion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		044BE5962148303700552354 /* day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "day@2x.png"; sourceTree = "<group>"; };
-		044BE5972148303700552354 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
-		044BE5982148303700552354 /* night@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night@2x.png"; sourceTree = "<group>"; };
-		044BE5992148303700552354 /* schema@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "schema@2x.png"; sourceTree = "<group>"; };
 		044BE59A2148303700552354 /* ThemeManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManage.h; sourceTree = "<group>"; };
 		044BE59B2148303700552354 /* ThemeManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManage.m; sourceTree = "<group>"; };
 		044BE59C2148303700552354 /* UIButton+ThemeChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ThemeChange.h"; sourceTree = "<group>"; };
@@ -580,10 +572,6 @@
 		044BE5952148303700552354 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				044BE5962148303700552354 /* day@2x.png */,
-				044BE5972148303700552354 /* home@2x.png */,
-				044BE5982148303700552354 /* night@2x.png */,
-				044BE5992148303700552354 /* schema@2x.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -846,6 +834,8 @@
 		044F02A820A8113600406D65 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				04B836B120A886C20050D568 /* UITableView+UITableView_reload.h */,
+				04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */,
 				04BD721320A9A21100A14ADF /* ZDMessageCell.h */,
 				04BD721420A9A21100A14ADF /* ZDMessageCell.m */,
 				0459227F211AFDF800AF75B8 /* ZDDetailView.h */,
@@ -918,8 +908,6 @@
 				04B8369820A874EA0050D568 /* ZDUser.m */,
 				04B8369A20A875610050D568 /* ZDMessageDataBase.h */,
 				04B8369B20A875610050D568 /* ZDMessageDataBase.m */,
-				04B836B120A886C20050D568 /* UITableView+UITableView_reload.h */,
-				04B836B220A886C20050D568 /* UITableView+UITableView_reload.m */,
 				047CCA2F213BC81E00987EE1 /* ZDRecognitionData.h */,
 				047CCA30213BC81E00987EE1 /* ZDRecognitionData.m */,
 				04B836A020A87DD60050D568 /* All */,
@@ -1325,17 +1313,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				044BE5A92148303700552354 /* schema@2x.png in Resources */,
 				04A304CF2134284F0011412C /* ocrSDK in Resources */,
 				04CF7F632132AF240039A356 /* tessdata in Resources */,
 				044F01F520A80DB500406D65 /* LaunchScreen.storyboard in Resources */,
 				044F01F220A80DB500406D65 /* Assets.xcassets in Resources */,
 				04FF836520B94C9800EECE24 /* MJRefresh.bundle in Resources */,
-				044BE5A62148303700552354 /* day@2x.png in Resources */,
 				04A304E4213435450011412C /* Utils in Resources */,
 				044F01F020A80DB500406D65 /* Main.storyboard in Resources */,
-				044BE5A72148303700552354 /* home@2x.png in Resources */,
-				044BE5A82148303700552354 /* night@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1704,7 +1688,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LifeDiary/ocrSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1727,7 +1711,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LifeDiary/ocrSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = LifeDiary3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

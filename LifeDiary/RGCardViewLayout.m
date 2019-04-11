@@ -8,8 +8,6 @@
 
 #import "RGCardViewLayout.h"
 
-
-
 @implementation RGCardViewLayout
 {
     CGFloat previousOffset;
@@ -27,8 +25,9 @@
 }
 - (void)prepareLayout
 {
-    [self setupLayout];
     [super prepareLayout];
+    [self setupLayout];
+    
 }
 
 - (void)setupLayout

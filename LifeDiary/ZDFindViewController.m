@@ -26,7 +26,6 @@ static NSString *const footerId = @"footerId";
     
     [super viewDidLoad];
     
-    
     [self setNavigationBar];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view NightWithType:UIViewColorTypeNormal];
@@ -121,6 +120,7 @@ static NSString *const footerId = @"footerId";
 //SegmentControl点击事件
 -(void)doSomethingInSegment:(UISegmentedControl *)Seg
 {
+    NSLog(@"selectedSegmentIndex=%ld",Seg.selectedSegmentIndex);
     NSInteger index = Seg.selectedSegmentIndex;
     UIViewController *selectedController = self.childViewControllers[index];
     selectedController.view.frame = self.containerView.bounds;

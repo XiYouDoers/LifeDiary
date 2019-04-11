@@ -36,6 +36,7 @@ static NSString *const cellId = @"collectionViewCellId";
 }
 
 - (void)addCollectionView {
+    self.backgroundColor = [UIColor whiteColor];
     //_collectionView
     ZDMessageCollectionViewFlowLayout *messageLayout = [[ZDMessageCollectionViewFlowLayout alloc]init];
     //    SquareLayout *layout = [[SquareLayout alloc]init];
@@ -93,7 +94,23 @@ static NSString *const cellId = @"collectionViewCellId";
     return _messageCollectionViewCell;
 }
 
+- (void)displayEnterAnmiation{
+    //出场动画
+    NSArray<__kindof UICollectionViewCell *> *cells = self.collectionView.visibleCells;
+    NSLog(@"%@",cells);
+    CGFloat tableHeight = self.collectionView.bounds.size.height;
+    CGFloat tableWidth = self.collectionView.bounds.size.width;
+    for (UICollectionViewCell *cell in cells){
+            cell.transform = CGAffineTransformMakeTranslation(-20, 0);
+    }
+    
 
+    for(UITableViewCell *cell in cells){
+        [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+            cell.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:nil];
+    }
+}
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     RECOgnitionForTextMode,
     RECOgnitionForImageMode,
 };
+
 @interface ZDTabBarViewController ()<ZDHighTabBarDelegate,ZDPhotoManagerViewControllerDelegate,UIImagePickerControllerDelegate,ZDImageRecognitionDelegate,ZDTextRecognitionViewDelegate,ZDAddVCDelegate>{
     RECOgnitionMode recognitionMode;
     ZDTextRecognitionView *textReView;
@@ -93,7 +94,6 @@ typedef NS_ENUM(NSInteger,RECOgnitionMode){
     [self wsf_settingController:findNavigationController tabBarTitle:nil tabBarItemImageName:@"findTabBarItemImage" tabBarItemSelectedImageName:@"findTabBarItemSelectedImage"
      ];
     findNavigationController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,5,-6,-5);
-    
     
     self.viewControllers = @[messageNavigationController,findNavigationController];
 //    [[UITabBar appearance]setBarTintColor:[UIColor colorWithRed:236/255.0 green:235/255.0 blue:241/255.0 alpha:1]];

@@ -20,18 +20,17 @@ extern NSDateFormatter const *_formatter;
     self=[super initWithFrame:frame];
     if (self) {
    
-//         self.contentView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
-        self.contentView.backgroundColor = [UIColor clearColor];
+        self.contentView.backgroundColor = [UIColor colorWithDisplayP3Red:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
 
         [self.contentView addSubview:self.shadowView];
         
         [self.shadowView addSubview:self.exhibitView];
         
-        [self.exhibitView addSubview:self.nameLabel];
+        [self.contentView addSubview:self.nameLabel];
         
-        [self.exhibitView addSubview:self.pictureImageView];
+        [self.contentView addSubview:self.pictureImageView];
         
-        [self.exhibitView addSubview:self.remarkLabel];
+        [self.contentView addSubview:self.remarkLabel];
         
         //_outsideArc
         _outsideArc =  [CAShapeLayer layer];
@@ -80,7 +79,7 @@ extern NSDateFormatter const *_formatter;
     _exhibitView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     _imageView.frame =  _exhibitView.frame;
     _nameLabel.frame = CGRectMake( 15, 10, self.frame.size.width-90, 30);
-    _remarkLabel.frame = CGRectMake(15,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+5, self.frame.size.width-40, 15);
+    _remarkLabel.frame = CGRectMake(15,  _nameLabel.frame.origin.y+ _nameLabel.frame.size.height+5, self.frame.size.width-40, 20);
     _pictureImageView.frame = CGRectMake(10, _remarkLabel.frame.origin.y+ _remarkLabel.frame.size.height+10, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-30-10-10*4);
     
 }
@@ -93,7 +92,7 @@ extern NSDateFormatter const *_formatter;
         _shadowView.layer.shadowOffset = CGSizeMake(0, 10);
         _shadowView.layer.shadowRadius = 10;
         _shadowView.layer.shadowOpacity = 1;
-        _shadowView.layer.shouldRasterize = NO;
+        _shadowView.layer.shouldRasterize = YES;
     }
     return _shadowView;
 }
@@ -103,7 +102,9 @@ extern NSDateFormatter const *_formatter;
         _exhibitView = [[UIView alloc]init];
         _exhibitView.backgroundColor = [UIColor whiteColor];
         _exhibitView.layer.cornerRadius = 15;
-        _exhibitView.layer.masksToBounds = YES;
+            //体用光栅化技术将圆角保存
+        _exhibitView.layer.shouldRasterize = YES;
+//        _exhibitView.layer.masksToBounds = YES;
         [_exhibitView NightWithType:UIViewColorTypeBlue];
     }
     return _exhibitView;
@@ -125,6 +126,7 @@ extern NSDateFormatter const *_formatter;
         
         //_nameLabel
         _nameLabel = [[UILabel alloc]init];
+//        _nameLabel.backgroundColor = [UIColor whiteColor];
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [UIFont boldSystemFontOfSize:18];
         _nameLabel.textColor = [UIColor blackColor];
@@ -137,6 +139,7 @@ extern NSDateFormatter const *_formatter;
     if (_pictureImageView == nil) {
         //_pictureImageView
         _pictureImageView = [[UIImageView alloc]init];
+        _pictureImageView.backgroundColor = [UIColor whiteColor];
         _pictureImageView.layer.cornerRadius = 5;
         _pictureImageView.layer.masksToBounds = true;
         //        _pictureImageView.contentMode = UIViewContentModeScaleToFill;
@@ -147,6 +150,7 @@ extern NSDateFormatter const *_formatter;
     if (_remarkLabel == nil) {
         //_remarkLabel
         _remarkLabel = [[UILabel alloc]init];
+        _remarkLabel.backgroundColor = [UIColor whiteColor];
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
         _remarkLabel.numberOfLines = 0;
         _remarkLabel.font = [UIFont systemFontOfSize:17];
@@ -158,6 +162,7 @@ extern NSDateFormatter const *_formatter;
     if (_sumLabel == nil) {
         //_sumLabel
         _sumLabel = [[UILabel alloc]init];
+        _sumLabel.backgroundColor = [UIColor whiteColor];
     }
     return _sumLabel;
 }

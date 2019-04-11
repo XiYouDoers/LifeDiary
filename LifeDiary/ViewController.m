@@ -29,6 +29,7 @@
 //    [animationImageView addSubview:timerView];
     
     [self.view addSubview:animationImageView];
+
     self.navigationController.navigationBar.hidden = YES;
     
     //jump to main VC after 2.0s

@@ -24,7 +24,8 @@
 #import <UserNotifications/UNNotificationSound.h>
 #import <UserNotifications/UNNotificationTrigger.h>
 #import <UserNotifications/UNNotificationRequest.h>
- #import <EventKit/EventKit.h>
+#import <EventKit/EventKit.h>
+
 
 static dispatch_once_t onceToken;
 
@@ -72,6 +73,7 @@ NSDateFormatter const *_formatter;
     [center addObserver:self selector:@selector(updateData) name:@"updateData" object:nil];
 
     
+    
 }
 
 - (void)addMessageCardView{
@@ -92,12 +94,7 @@ NSDateFormatter const *_formatter;
                 NSDate *resDate = [_formatter dateFromString:goods.dateOfEnd];
                 NSTimeInterval seconds = [resDate timeIntervalSinceDate:dateNow]/(60*60*24);
                 if(seconds <= 0){
-                    //过期数据库中添加物品
-                    [[ZDExpireDataBase sharedDataBase]addGoods:goods];
-                    //全部物品数据库中删除物品
-                    [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
-                    _allDataMutableArray = [[ZDAllDataBase sharedDataBase]getAllGoods];
-                    _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
+                    [self updateData];
                 }else{
                 //分类提醒
                 if (seconds<150 && [goods.family isEqualToString:@"日用品"]) {
@@ -121,25 +118,28 @@ NSDateFormatter const *_formatter;
     //当数量为0时直接删除物品
     if (!stepper.value) {
         UIAlertController *actionAlert = [UIAlertController alertControllerWithTitle:@"是否确认删除" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *rightToDeleteAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        UIAlertAction *rightToDeleteAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            _tempCell.isChangeAlpha = NO;
+            ZDGoods *goods = _messageDataMutableArray[lastIndexPath.item];
+            [[ZDAllDataBase sharedDataBase]deleteGoods:goods];
+            [self updateData];
+            [self hiddenDetailView];
             
+        }];
+        
+        UIAlertAction *cancaelToDeleteAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [_tempCell.sumLabel setText:@"数量：1"];
             [_detailView.sumLabel setText:@"数量：1"];
             ZDGoods *goods = _messageDataMutableArray[lastIndexPath.item];
             goods.sum = @"1";
             [[ZDAllDataBase sharedDataBase]updateGoods:goods];
             
-        }];
-        
-        UIAlertAction *cancaelToDeleteAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            
             
         }];
-        
-        [actionAlert addAction:rightToDeleteAction];
         [actionAlert addAction:cancaelToDeleteAction];
+        [actionAlert addAction:rightToDeleteAction];
+       
         [self presentViewController:actionAlert animated:YES completion:nil];
     }else{
      //否则改变数量
@@ -264,17 +264,16 @@ NSDateFormatter const *_formatter;
     }
     _messageCardView.messageDataMutableArray = self.messageDataMutableArray;
     
-   
+                      
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateData" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
-    
     //显示tabBar
     [self setTabBarHidden:NO];
+    [self.messageCardView displayEnterAnmiation];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self hiddenDetailView];
